@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms.server
+﻿﻿namespace AAEmu.DBEditor.forms.server
 {
     partial class AccountChangeUsernameForm
     {
@@ -40,7 +40,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(89, 16);
             label1.TabIndex = 0;
-            label1.Text = "New Username:";
+            label1.Text = "新用户名:";
             // 
             // tNewUsername
             // 
@@ -48,7 +48,7 @@
             tNewUsername.Location = new System.Drawing.Point(105, 6);
             tNewUsername.MaxLength = 32;
             tNewUsername.Name = "tNewUsername";
-            tNewUsername.PlaceholderText = "new username";
+            tNewUsername.PlaceholderText = "新用户名";
             tNewUsername.Size = new System.Drawing.Size(307, 23);
             tNewUsername.TabIndex = 1;
             tNewUsername.TextChanged += tNewPassword_TextChanged;
@@ -60,7 +60,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(400, 23);
             btnSave.TabIndex = 3;
-            btnSave.Text = "Save and copy to clipboard";
+            btnSave.Text = "保存并复制到剪贴板";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -76,7 +76,7 @@
             Name = "AccountChangeUsernameForm";
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Change Username";
+            Text = "修改用户名";
             Load += AccountChangePasswordForm_Load;
             ResumeLayout(false);
             PerformLayout();

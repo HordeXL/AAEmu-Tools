@@ -118,14 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AhBotTextBoxInfo.Text" xml:space="preserve">
-    <value>To use the Auction Bot, you will first need to create a character to use on your server.
-Make sure to have this character on it's own account (not required, but recommended)
+    <value>使用拍卖机器人前，需先在服务器创建游戏角色.
+建议将该角色单独置于独立账号（非必需但推荐）
 
-When done come back here and select that character to be used as the AH Bot as well as the server you want it to run on.
+操作完成后返回此处，选择用于拍卖机器人的角色及运行服务器.
 
-Use the AH tab to set up your items you want the bot to list for people at what price and how many.
+使用「拍卖行」标签页配置.
 
-When done, press the Start button here to start running the bot. It will remain active until it encounters a error, you stop it, or you close this window or program.
+完成配置后点击(开始)按钮运行机器人，将持续运行直至服务器关闭.
 </value>
   </data>
   <metadata name="bgwAhCheckLoop.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

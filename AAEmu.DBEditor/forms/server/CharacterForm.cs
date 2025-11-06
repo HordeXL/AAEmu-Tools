@@ -49,7 +49,7 @@ namespace AAEmu.DBEditor.forms.server
             {
                 if (lvCharacterList.Items.Count > 25)
                 {
-                    var endOfList = lvCharacterList.Items.Add($"Too many results");
+                    var endOfList = lvCharacterList.Items.Add($"结果过多,请优化搜索条件");
                     endOfList.ImageIndex = 0;
                     endOfList.ForeColor = Color.DarkRed;
                     break;
@@ -80,10 +80,10 @@ namespace AAEmu.DBEditor.forms.server
             lvItems.Items.Clear();
             if (itemContainer == null)
             {
-                lContainer.Text = $"Container not found {slotType}";
+                lContainer.Text = $"未找到容器 {slotType}";
                 return;
             }
-            lContainer.Text = $@"{itemContainer.SlotType}:{itemContainer.ContainerType} ({itemContainer.ContainerId}), Size: {itemContainer.ContainerSize}";
+            lContainer.Text = $@"{itemContainer.SlotType}:{itemContainer.ContainerType} ({itemContainer.ContainerId}), 大小: {itemContainer.ContainerSize}";
 
             var containerItems = Data.MySqlDb.Game.Items.Where(x => x.ContainerId == itemContainer.ContainerId).OrderBy(x => x.Slot);
             var lastSlot = -2;
@@ -157,7 +157,7 @@ namespace AAEmu.DBEditor.forms.server
         private void PopulateItemsTab(Characters character)
         {
             rbEquipement.Checked = true;
-            gbContainerSelect.Text = $"Containers of {character.Name} ({character.Id})";
+            gbContainerSelect.Text = $"编号:({character.Id})  {character.Name}";
             rbContainers_CheckedChanged(rbEquipement, null);
         }
 
@@ -175,28 +175,28 @@ namespace AAEmu.DBEditor.forms.server
             rootNode.Nodes.Add($"{Data.Server.GetText("system_factions", "name", character.FactionId, "<" + character.FactionId + ">")} ({character.FactionId})");
 
             // Class
-            var classNode = rootNode.Nodes.Add($"Lv {character.Level} - {AbilityNames.GetClassName(character.Ability1, character.Ability2, character.Ability3)} ({character.GetClassName()})");
+            var classNode = rootNode.Nodes.Add($"等级 {character.Level} - {AbilityNames.GetClassName(character.Ability1, character.Ability2, character.Ability3)} ({character.GetClassName()})");
             var abilities = Data.MySqlDb.Game.Abilities.Where(x => x.Owner == character.Id);
             foreach (var ability in abilities)
             {
                 var abilityName = AbilityNames.GetClassName((sbyte)ability.Id);
-                var abilityNode = classNode.Nodes.Add($"Lv {GetLevel(ability.Exp)} {abilityName} ({ability.Id}), Exp {ability.Exp}");
+                var abilityNode = classNode.Nodes.Add($"等级 {GetLevel(ability.Exp)} {abilityName} ({ability.Id}), 经验值 {ability.Exp}");
                 if ((ability.Id == character.Ability1) || (ability.Id == character.Ability2) || (ability.Id == character.Ability3))
                     abilityNode.NodeFont = new Font(tvStats.Font, FontStyle.Bold);
             }
 
             // Inventory
-            var inventoryNode = rootNode.Nodes.Add("Inventory");
-            inventoryNode.Nodes.Add($"Size: {character.NumInvSlot}");
-            inventoryNode.Nodes.Add($"Money: {AaTextHelper.CopperToString(character.Money)}");
+            var inventoryNode = rootNode.Nodes.Add("背包");
+            inventoryNode.Nodes.Add($"大小: {character.NumInvSlot}");
+            inventoryNode.Nodes.Add($"金钱: {AaTextHelper.CopperToString(character.Money)}");
 
             // Warehouse
-            var warehouseNode = rootNode.Nodes.Add("Warehouse"); // Bank
-            warehouseNode.Nodes.Add($"Size: {character.NumBankSlot}");
-            warehouseNode.Nodes.Add($"Money: {AaTextHelper.CopperToString(character.Money2)}");
+            var warehouseNode = rootNode.Nodes.Add("仓库"); // Bank
+            warehouseNode.Nodes.Add($"大小: {character.NumBankSlot}");
+            warehouseNode.Nodes.Add($"金钱: {AaTextHelper.CopperToString(character.Money2)}");
 
             // Vocation Skills
-            var vocationNode = rootNode.Nodes.Add($"Vocation ({character.VocationPoint} badges)");
+            var vocationNode = rootNode.Nodes.Add($"职业 ({character.VocationPoint} 勋章)");
             var actAbilities = Data.MySqlDb.Game.Actabilities.Where(x => x.Owner == character.Id).OrderBy(x => x.Id);
             foreach (var actAbility in actAbilities)
             {
@@ -204,11 +204,11 @@ namespace AAEmu.DBEditor.forms.server
                     continue;
 
                 var abilityName = Data.Server.GetText("actability_groups", "name", actAbility.Id, "<" + actAbility.Id + ">");
-                var abilityNode = vocationNode.Nodes.Add($"{abilityName}, {actAbility.Point} (Rank {actAbility.Step})");
+                var abilityNode = vocationNode.Nodes.Add($"{abilityName}, {actAbility.Point} (排名 {actAbility.Step})");
             }
 
             // Honor
-            rootNode.Nodes.Add($"Honor {character.HonorPoint}, PvP {character.PvpHonor}");
+            rootNode.Nodes.Add($"荣誉 {character.HonorPoint}, PvP {character.PvpHonor}");
 
             // Default expand layout
             tvStats.CollapseAll();
@@ -223,7 +223,7 @@ namespace AAEmu.DBEditor.forms.server
 
             // Housing
             #region houses
-            var housingNode = tvOwned.Nodes.Add($"Houses and Farms");
+            var housingNode = tvOwned.Nodes.Add($"房屋与农田");
             List<Housings> houses;
             if (cbIncludeAccountHouses.Checked)
                 houses = Data.MySqlDb.Game.Housings.Where(x => x.AccountId == character.AccountId).ToList();
@@ -239,13 +239,13 @@ namespace AAEmu.DBEditor.forms.server
                 else
                 {
                     var ownerCharacter = Data.MySqlDb.Game.Characters.FirstOrDefault(x => x.Id == house.Owner);
-                    houseNode.Nodes.Add($"Owner: {ownerCharacter?.Name ?? "<none>"} ({ownerCharacter?.Id ?? 0})");
+                    houseNode.Nodes.Add($"所有者: {ownerCharacter?.Name ?? "<none>"} ({ownerCharacter?.Id ?? 0})");
                 }
 
                 if (house.CoOwner != house.Owner)
                 {
                     var coOwnerCharacter = Data.MySqlDb.Game.Characters.FirstOrDefault(x => x.Id == house.CoOwner);
-                    houseNode.Nodes.Add($"Co-Owner: {coOwnerCharacter?.Name ?? "<none>"} ({coOwnerCharacter?.Id ?? 0})");
+                    houseNode.Nodes.Add($"共同所有者: {coOwnerCharacter?.Name ?? "<none>"} ({coOwnerCharacter?.Id ?? 0})");
                 }
 
                 houseNode.Nodes.Add($"Pos: {house.X:F0}, {house.Y:F0}, {house.Z:F0}");
@@ -254,27 +254,27 @@ namespace AAEmu.DBEditor.forms.server
 
             // Pets
             #region pets
-            var petsNode = tvOwned.Nodes.Add("Pets");
+            var petsNode = tvOwned.Nodes.Add("宠物");
             var pets = Data.MySqlDb.Game.Mates.Where(x => x.Owner == character.Id).ToList();
             foreach (var pet in pets)
             {
-                var petNode = petsNode.Nodes.Add($"{pet.Name} ({pet.Id}) Lv {pet.Level} ");
+                var petNode = petsNode.Nodes.Add($"{pet.Name} ({pet.Id})  等级{pet.Level} ");
 
                 var petItem = Data.MySqlDb.Game.Items.FirstOrDefault(x => x.Id == pet.ItemId);
                 if (petItem == null)
                 {
-                    petNode.Nodes.Add($"Item {pet.ItemId} - Orphaned").ForeColor = Color.Red;
+                    petNode.Nodes.Add($"物品 {pet.ItemId} - 无主状态").ForeColor = Color.Red;
                     petNode.ForeColor = Color.Red;
                 }
                 else
                 {
                     var item = Data.Server.GetItem(petItem.TemplateId);
-                    petNode.Nodes.Add($"({petItem.Id}) {Data.Server.GetText("items", "name", (long)item.Id, item.Name)} ({item.Id})");
+                    petNode.Nodes.Add($"({petItem.Id}) {Data.Server.GetText("物品", "名称", (long)item.Id, item.Name)} ({item.Id})");
                 }
 
-                petNode.Nodes.Add($"Exp {pet.Xp}");
+                petNode.Nodes.Add($"经验值 {pet.Xp}");
 
-                var gearNode = petNode.Nodes.Add($"Equipment");
+                var gearNode = petNode.Nodes.Add($"装备");
                 var petGearContainer = Data.MySqlDb.Game.ItemContainers.FirstOrDefault(x => x.MateId == pet.Id);
                 if (petGearContainer != null)
                 {
@@ -284,12 +284,12 @@ namespace AAEmu.DBEditor.forms.server
                         foreach (var petGear in petGears)
                         {
                             var item = Data.Server.GetItem(petGear.TemplateId);
-                            gearNode.Nodes.Add($"Item {Data.Server.GetText("items", "name", (long)item.Id, item.Name)} ({petGear.Id})");
+                            gearNode.Nodes.Add($"物品 {Data.Server.GetText("物品", "名称", (long)item.Id, item.Name)} ({petGear.Id})");
                         }
                     }
                     else
                     {
-                        gearNode.Text = "No equipment";
+                        gearNode.Text = "未装备";
                     }
                 }
                 else
@@ -304,7 +304,7 @@ namespace AAEmu.DBEditor.forms.server
 
             // Vehicles
             #region vehicles
-            var vehiclesNode = tvOwned.Nodes.Add($"Vehicles");
+            var vehiclesNode = tvOwned.Nodes.Add($"载具");
             var vehicles = Data.MySqlDb.Game.Slaves.Where(x => x.OwnerId == character.Id && x.OwnerType == 0 && x.Summoner == character.Id).ToList();
             foreach (var vehicle in vehicles)
             {
@@ -312,7 +312,7 @@ namespace AAEmu.DBEditor.forms.server
                 var vehicleItem = Data.MySqlDb.Game.Items.FirstOrDefault(x => x.Id == vehicle.ItemId);
                 if (vehicleItem == null)
                 {
-                    vehicleNode.Nodes.Add($"Item {vehicle.ItemId} - Orphaned").ForeColor = Color.Red;
+                    vehicleNode.Nodes.Add($"物品 {vehicle.ItemId} - 无主状态").ForeColor = Color.Red;
                     vehicleNode.ForeColor = Color.Red;
                 }
                 else

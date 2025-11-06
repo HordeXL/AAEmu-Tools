@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms
+﻿﻿namespace AAEmu.DBEditor.forms
 {
     partial class MySqlSettingsForm
     {
@@ -48,7 +48,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(90, 16);
             label1.TabIndex = 0;
-            label1.Text = "MySQL ServerIP";
+            label1.Text = "MySQL服务器IP";
             // 
             // tbServerIP
             // 
@@ -73,7 +73,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(59, 16);
             label2.TabIndex = 2;
-            label2.Text = "Username";
+            label2.Text = "用户名";
             // 
             // tbPassword
             // 
@@ -90,7 +90,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(57, 16);
             label3.TabIndex = 4;
-            label3.Text = "Password";
+            label3.Text = "密码";
             // 
             // tbLoginSchema
             // 
@@ -107,7 +107,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(146, 16);
             label4.TabIndex = 6;
-            label4.Text = "Login server schema name";
+            label4.Text = "登录服务器架构名称";
             // 
             // tbGameSchema
             // 
@@ -124,7 +124,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(146, 16);
             label5.TabIndex = 8;
-            label5.Text = "Game server schema name";
+            label5.Text = "游戏服务器架构名称";
             // 
             // btnSave
             // 
@@ -132,7 +132,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(95, 23);
             btnSave.TabIndex = 10;
-            btnSave.Text = "Save";
+            btnSave.Text = "保存";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -156,7 +156,7 @@
             MaximizeBox = false;
             Name = "MySqlSettingsForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "MySql Settings";
+            Text = "MySql设置";
             Load += MySqlSettingsForm_Load;
             ResumeLayout(false);
             PerformLayout();

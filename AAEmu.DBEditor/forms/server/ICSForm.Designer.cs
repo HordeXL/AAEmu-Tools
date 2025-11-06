@@ -174,7 +174,7 @@
             tpInfo.Padding = new System.Windows.Forms.Padding(3);
             tpInfo.Size = new System.Drawing.Size(879, 484);
             tpInfo.TabIndex = 3;
-            tpInfo.Text = "Information";
+            tpInfo.Text = "商城说明";
             tpInfo.UseVisualStyleBackColor = true;
             // 
             // IcsTextBoxInfo
@@ -256,7 +256,7 @@
             tFilterSku.Dock = System.Windows.Forms.DockStyle.Top;
             tFilterSku.Location = new System.Drawing.Point(0, 0);
             tFilterSku.Name = "tFilterSku";
-            tFilterSku.PlaceholderText = "<enter text here to filter skus>";
+            tFilterSku.PlaceholderText = "<输入SKU编号筛选>";
             tFilterSku.Size = new System.Drawing.Size(451, 23);
             tFilterSku.TabIndex = 1;
             tFilterSku.TextChanged += tFilterSku_TextChanged;
@@ -282,12 +282,12 @@
             // 
             // columnHeader2
             // 
-            columnHeader2.Text = "Item";
+            columnHeader2.Text = "物品名称";
             columnHeader2.Width = 150;
             // 
             // columnHeader3
             // 
-            columnHeader3.Text = "Count";
+            columnHeader3.Text = "数量";
             // 
             // btnSkuItemSearch
             // 
@@ -303,7 +303,7 @@
             // 
             cbSKUSelectType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbSKUSelectType.FormattingEnabled = true;
-            cbSKUSelectType.Items.AddRange(new object[] { "Default (amount+event)", "Unused", "Event-Type only", "Item Name + Event-Type" });
+            cbSKUSelectType.Items.AddRange(new object[] { "默认(限量+活动)", "未启用", "活动专属", "商品+活动" });
             cbSKUSelectType.Location = new System.Drawing.Point(98, 123);
             cbSKUSelectType.Name = "cbSKUSelectType";
             cbSKUSelectType.Size = new System.Drawing.Size(229, 23);
@@ -314,7 +314,7 @@
             // 
             cbSKUEventType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbSKUEventType.FormattingEnabled = true;
-            cbSKUEventType.Items.AddRange(new object[] { "None", "Event", "Hot", "Bonus", "New" });
+            cbSKUEventType.Items.AddRange(new object[] { "常规", "活动商品", "热销爆款", "加赠福利", "新品首发" });
             cbSKUEventType.Location = new System.Drawing.Point(98, 149);
             cbSKUEventType.Name = "cbSKUEventType";
             cbSKUEventType.Size = new System.Drawing.Size(132, 23);
@@ -328,7 +328,7 @@
             label24.Name = "label24";
             label24.Size = new System.Drawing.Size(407, 15);
             label24.TabIndex = 37;
-            label24.Text = "(*) Leave Shop Entry Id blank to create a new shop item with default settings";
+            label24.Text = "(*)不填写商品编号将新建默认商品";
             // 
             // btnSKUGetNewId
             // 
@@ -336,7 +336,7 @@
             btnSKUGetNewId.Name = "btnSKUGetNewId";
             btnSKUGetNewId.Size = new System.Drawing.Size(43, 22);
             btnSKUGetNewId.TabIndex = 36;
-            btnSKUGetNewId.Text = "New";
+            btnSKUGetNewId.Text = "新增";
             btnSKUGetNewId.UseVisualStyleBackColor = true;
             btnSKUGetNewId.Click += btnSKUGetNewId_Click;
             // 
@@ -357,7 +357,7 @@
             btnSKUNew.Name = "btnSKUNew";
             btnSKUNew.Size = new System.Drawing.Size(104, 22);
             btnSKUNew.TabIndex = 34;
-            btnSKUNew.Text = "Add as new";
+            btnSKUNew.Text = "新增";
             btnSKUNew.UseVisualStyleBackColor = true;
             btnSKUNew.Click += btnSKUNew_Click;
             // 
@@ -369,7 +369,7 @@
             btnSKUUpdate.Name = "btnSKUUpdate";
             btnSKUUpdate.Size = new System.Drawing.Size(83, 22);
             btnSKUUpdate.TabIndex = 33;
-            btnSKUUpdate.Text = "Save";
+            btnSKUUpdate.Text = "保存";
             btnSKUUpdate.UseVisualStyleBackColor = true;
             btnSKUUpdate.Click += btnSKUUpdate_Click;
             // 
@@ -398,7 +398,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(40, 15);
             label2.TabIndex = 30;
-            label2.Text = "Count";
+            label2.Text = "数量";
             // 
             // label11
             // 
@@ -407,7 +407,7 @@
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(81, 15);
             label11.TabIndex = 29;
-            label11.Text = "Bonus Item ID";
+            label11.Text = "赠品编码";
             // 
             // tSKUDiscountPrice
             // 
@@ -440,7 +440,7 @@
             // 
             tSKUItemId.Location = new System.Drawing.Point(98, 87);
             tSKUItemId.Name = "tSKUItemId";
-            tSKUItemId.PlaceholderText = "item template id";
+            tSKUItemId.PlaceholderText = "商品模板编码";
             tSKUItemId.Size = new System.Drawing.Size(119, 23);
             tSKUItemId.TabIndex = 23;
             tSKUItemId.TextChanged += tSKU_Changed;
@@ -467,7 +467,7 @@
             // 
             tSKUSKU.Location = new System.Drawing.Point(98, 7);
             tSKUSKU.Name = "tSKUSKU";
-            tSKUSKU.PlaceholderText = "<new sku>";
+            tSKUSKU.PlaceholderText = "<新增sku>";
             tSKUSKU.ReadOnly = true;
             tSKUSKU.Size = new System.Drawing.Size(180, 23);
             tSKUSKU.TabIndex = 20;
@@ -480,7 +480,7 @@
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(83, 15);
             label10.TabIndex = 17;
-            label10.Text = "Discount Price";
+            label10.Text = "促销价";
             // 
             // rbSKUCurrencyCoins
             // 
@@ -490,7 +490,7 @@
             rbSKUCurrencyCoins.Size = new System.Drawing.Size(55, 19);
             rbSKUCurrencyCoins.TabIndex = 16;
             rbSKUCurrencyCoins.Tag = "3";
-            rbSKUCurrencyCoins.Text = "Coins";
+            rbSKUCurrencyCoins.Text = "金币";
             rbSKUCurrencyCoins.UseVisualStyleBackColor = true;
             rbSKUCurrencyCoins.CheckedChanged += tSKU_Changed;
             // 
@@ -502,7 +502,7 @@
             rbSKUCurrencyLoyalty.Size = new System.Drawing.Size(63, 19);
             rbSKUCurrencyLoyalty.TabIndex = 15;
             rbSKUCurrencyLoyalty.Tag = "2";
-            rbSKUCurrencyLoyalty.Text = "Loyalty";
+            rbSKUCurrencyLoyalty.Text = "鲁鲁币";
             rbSKUCurrencyLoyalty.UseVisualStyleBackColor = true;
             rbSKUCurrencyLoyalty.CheckedChanged += tSKU_Changed;
             // 
@@ -525,7 +525,7 @@
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(33, 15);
             label9.TabIndex = 13;
-            label9.Text = "Price";
+            label9.Text = "价格";
             // 
             // rbSKUCurrencyCredits
             // 
@@ -537,7 +537,7 @@
             rbSKUCurrencyCredits.TabIndex = 12;
             rbSKUCurrencyCredits.TabStop = true;
             rbSKUCurrencyCredits.Tag = "0";
-            rbSKUCurrencyCredits.Text = "Credits";
+            rbSKUCurrencyCredits.Text = "点券";
             rbSKUCurrencyCredits.UseVisualStyleBackColor = true;
             rbSKUCurrencyCredits.CheckedChanged += tSKU_Changed;
             // 
@@ -548,7 +548,7 @@
             cbSKUEventHasEnd.Name = "cbSKUEventHasEnd";
             cbSKUEventHasEnd.Size = new System.Drawing.Size(125, 19);
             cbSKUEventHasEnd.TabIndex = 11;
-            cbSKUEventHasEnd.Text = "Event has end date";
+            cbSKUEventHasEnd.Text = "活动结束时间";
             cbSKUEventHasEnd.UseVisualStyleBackColor = true;
             cbSKUEventHasEnd.CheckedChanged += tSKU_Changed;
             // 
@@ -566,7 +566,7 @@
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(64, 15);
             label8.TabIndex = 8;
-            label8.Text = "Event Type";
+            label8.Text = "活动类型";
             // 
             // cbSKUIsDefault
             // 
@@ -575,7 +575,7 @@
             cbSKUIsDefault.Name = "cbSKUIsDefault";
             cbSKUIsDefault.Size = new System.Drawing.Size(75, 19);
             cbSKUIsDefault.TabIndex = 7;
-            cbSKUIsDefault.Text = "Is Default";
+            cbSKUIsDefault.Text = "是否默认";
             cbSKUIsDefault.UseVisualStyleBackColor = true;
             cbSKUIsDefault.CheckedChanged += tSKU_Changed;
             // 
@@ -586,7 +586,7 @@
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(66, 15);
             label7.TabIndex = 6;
-            label7.Text = "Select Type";
+            label7.Text = "选择类型";
             // 
             // label6
             // 
@@ -595,25 +595,25 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(26, 15);
             label6.TabIndex = 5;
-            label6.Text = "Pos";
+            label6.Text = "零售";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Location = new System.Drawing.Point(3, 37);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(93, 15);
+            label5.Size = new System.Drawing.Size(45, 15);
             label5.TabIndex = 4;
-            label5.Text = "Shop Entry Id (*)";
+            label5.Text = "商品入库编号(*)";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new System.Drawing.Point(223, 90);
+            label4.Location = new System.Drawing.Point(236, 90);
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(40, 15);
             label4.TabIndex = 3;
-            label4.Text = "Count";
+            label4.Text = "数量";
             // 
             // label3
             // 
@@ -622,7 +622,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(45, 15);
             label3.TabIndex = 2;
-            label3.Text = "Item ID";
+            label3.Text = "物品编号";
             // 
             // label1
             // 
@@ -641,7 +641,7 @@
             tpShopEntries.Padding = new System.Windows.Forms.Padding(3);
             tpShopEntries.Size = new System.Drawing.Size(879, 484);
             tpShopEntries.TabIndex = 1;
-            tpShopEntries.Text = "Shop Items";
+            tpShopEntries.Text = "商城物品";
             tpShopEntries.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
@@ -672,7 +672,7 @@
             tFilterShopItem.Dock = System.Windows.Forms.DockStyle.Top;
             tFilterShopItem.Location = new System.Drawing.Point(0, 0);
             tFilterShopItem.Name = "tFilterShopItem";
-            tFilterShopItem.PlaceholderText = "<enter text here to filter shop items>";
+            tFilterShopItem.PlaceholderText = "<输入商品名称筛选>";
             tFilterShopItem.Size = new System.Drawing.Size(376, 23);
             tFilterShopItem.TabIndex = 1;
             tFilterShopItem.TextChanged += tFilterShopItem_TextChanged;
@@ -697,7 +697,7 @@
             btnShopItemNew.Name = "btnShopItemNew";
             btnShopItemNew.Size = new System.Drawing.Size(104, 22);
             btnShopItemNew.TabIndex = 50;
-            btnShopItemNew.Text = "Add as new";
+            btnShopItemNew.Text = "作为新品添加";
             btnShopItemNew.UseVisualStyleBackColor = true;
             btnShopItemNew.Click += btnShopItemNew_Click;
             // 
@@ -709,7 +709,7 @@
             btnShopItemUpdate.Name = "btnShopItemUpdate";
             btnShopItemUpdate.Size = new System.Drawing.Size(83, 22);
             btnShopItemUpdate.TabIndex = 49;
-            btnShopItemUpdate.Text = "Save";
+            btnShopItemUpdate.Text = "保存";
             btnShopItemUpdate.UseVisualStyleBackColor = true;
             btnShopItemUpdate.Click += btnShopItemUpdate_Click;
             // 
@@ -731,7 +731,7 @@
             groupBox4.Size = new System.Drawing.Size(383, 122);
             groupBox4.TabIndex = 48;
             groupBox4.TabStop = false;
-            groupBox4.Text = "Shop Settings";
+            groupBox4.Text = "商城设置";
             // 
             // btnShopItemDisplaySearch
             // 
@@ -750,7 +750,7 @@
             cbShopItemAllowCart.Name = "cbShopItemAllowCart";
             cbShopItemAllowCart.Size = new System.Drawing.Size(132, 19);
             cbShopItemAllowCart.TabIndex = 40;
-            cbShopItemAllowCart.Text = "Allow shopping cart";
+            cbShopItemAllowCart.Text = "允许使用购物车";
             cbShopItemAllowCart.UseVisualStyleBackColor = true;
             cbShopItemAllowCart.CheckedChanged += tShopItems_Changed;
             // 
@@ -761,7 +761,7 @@
             cbShopItemAllowGift.Name = "cbShopItemAllowGift";
             cbShopItemAllowGift.Size = new System.Drawing.Size(94, 19);
             cbShopItemAllowGift.TabIndex = 39;
-            cbShopItemAllowGift.Text = "Allow gifting";
+            cbShopItemAllowGift.Text = "启用赠礼功能";
             cbShopItemAllowGift.UseVisualStyleBackColor = true;
             cbShopItemAllowGift.CheckedChanged += tShopItems_Changed;
             // 
@@ -772,7 +772,7 @@
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(74, 15);
             label12.TabIndex = 0;
-            label12.Text = "Shop Item Id";
+            label12.Text = "商城物品ID";
             // 
             // tShopItemShopId
             // 
@@ -781,7 +781,7 @@
             tShopItemShopId.ReadOnly = true;
             tShopItemShopId.Size = new System.Drawing.Size(148, 23);
             tShopItemShopId.TabIndex = 1;
-            tShopItemShopId.Text = "<new shop item id>";
+            tShopItemShopId.Text = "<新增商城物品ID>";
             tShopItemShopId.TextChanged += tShopItems_Changed;
             // 
             // btnNewShopItemId
@@ -790,7 +790,7 @@
             btnNewShopItemId.Name = "btnNewShopItemId";
             btnNewShopItemId.Size = new System.Drawing.Size(51, 22);
             btnNewShopItemId.TabIndex = 2;
-            btnNewShopItemId.Text = "New";
+            btnNewShopItemId.Text = "新增";
             btnNewShopItemId.UseVisualStyleBackColor = true;
             btnNewShopItemId.Click += btnNewShopItemId_Click;
             // 
@@ -801,7 +801,7 @@
             cbShopItemIsHidden.Name = "cbShopItemIsHidden";
             cbShopItemIsHidden.Size = new System.Drawing.Size(76, 19);
             cbShopItemIsHidden.TabIndex = 38;
-            cbShopItemIsHidden.Text = "Is Hidden";
+            cbShopItemIsHidden.Text = "是否隐藏";
             cbShopItemIsHidden.UseVisualStyleBackColor = true;
             cbShopItemIsHidden.CheckedChanged += tShopItems_Changed;
             // 
@@ -812,13 +812,13 @@
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(131, 15);
             label13.TabIndex = 24;
-            label13.Text = "Override Display ItemID";
+            label13.Text = "覆盖显示商品ID";
             // 
             // tShopItemDisplayItemId
             // 
             tShopItemDisplayItemId.Location = new System.Drawing.Point(158, 42);
             tShopItemDisplayItemId.Name = "tShopItemDisplayItemId";
-            tShopItemDisplayItemId.PlaceholderText = "overrides item displayed";
+            tShopItemDisplayItemId.PlaceholderText = "覆盖显示项";
             tShopItemDisplayItemId.Size = new System.Drawing.Size(96, 23);
             tShopItemDisplayItemId.TabIndex = 25;
             tShopItemDisplayItemId.Text = "0";
@@ -828,7 +828,7 @@
             // 
             tShopItemName.Location = new System.Drawing.Point(158, 69);
             tShopItemName.Name = "tShopItemName";
-            tShopItemName.PlaceholderText = "overrides item name displayed";
+            tShopItemName.PlaceholderText = "覆盖显示的商品名称";
             tShopItemName.Size = new System.Drawing.Size(205, 23);
             tShopItemName.TabIndex = 27;
             tShopItemName.TextChanged += tShopItems_Changed;
@@ -840,7 +840,7 @@
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(141, 15);
             label14.TabIndex = 26;
-            label14.Text = "Override Displayed Name";
+            label14.Text = "覆盖显示名称";
             // 
             // groupBox3
             // 
@@ -855,7 +855,7 @@
             groupBox3.Size = new System.Drawing.Size(383, 74);
             groupBox3.TabIndex = 47;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Event Settings";
+            groupBox3.Text = "活动设置";
             // 
             // label19
             // 
@@ -863,26 +863,26 @@
             label19.Location = new System.Drawing.Point(7, 18);
             label19.Name = "label19";
             label19.Size = new System.Drawing.Size(39, 15);
-            label19.TabIndex = 36;
-            label19.Text = "Is Sale";
+            label19.TabIndex = 45;
+            label19.Text = "是否促销";
             // 
             // tShopItemIsSale
             // 
-            tShopItemIsSale.Location = new System.Drawing.Point(53, 14);
+            tShopItemIsSale.Location = new System.Drawing.Point(65, 14);
             tShopItemIsSale.Name = "tShopItemIsSale";
-            tShopItemIsSale.Size = new System.Drawing.Size(59, 23);
-            tShopItemIsSale.TabIndex = 37;
+            tShopItemIsSale.Size = new System.Drawing.Size(40, 23);
+            tShopItemIsSale.TabIndex = 30;
             tShopItemIsSale.Text = "0";
             tShopItemIsSale.TextChanged += tShopItems_Changed;
             // 
             // label22
             // 
             label22.AutoSize = true;
-            label22.Location = new System.Drawing.Point(135, 51);
+            label22.Location = new System.Drawing.Point(123, 48);
             label22.Name = "label22";
-            label22.Size = new System.Drawing.Size(18, 15);
+            label22.Size = new System.Drawing.Size(33, 15);
             label22.TabIndex = 42;
-            label22.Text = "to";
+            label22.Text = "结束";
             // 
             // dtpShopItemSaleEnd
             // 
@@ -899,7 +899,7 @@
             label21.Name = "label21";
             label21.Size = new System.Drawing.Size(33, 15);
             label21.TabIndex = 41;
-            label21.Text = "from";
+            label21.Text = "开始";
             // 
             // dtpShopItemSaleStart
             // 
@@ -921,13 +921,13 @@
             groupBox2.Size = new System.Drawing.Size(383, 81);
             groupBox2.TabIndex = 46;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Limited Sales";
+            groupBox2.Text = "限量销售";
             // 
             // cbShopItemLimitedType
             // 
             cbShopItemLimitedType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbShopItemLimitedType.FormattingEnabled = true;
-            cbShopItemLimitedType.Items.AddRange(new object[] { "No limit", "Limit per account", "Limit per character" });
+            cbShopItemLimitedType.Items.AddRange(new object[] { "不限量", "账号限购", "角色限购" });
             cbShopItemLimitedType.Location = new System.Drawing.Point(6, 18);
             cbShopItemLimitedType.Name = "cbShopItemLimitedType";
             cbShopItemLimitedType.Size = new System.Drawing.Size(140, 23);
@@ -941,13 +941,13 @@
             label23.Name = "label23";
             label23.Size = new System.Drawing.Size(251, 15);
             label23.TabIndex = 45;
-            label23.Text = "Remaining for sales when global sales limit set";
+            label23.Text = "全局限购剩余可售数量";
             // 
             // tShopItemLimitedStockMax
             // 
             tShopItemLimitedStockMax.Location = new System.Drawing.Point(264, 18);
             tShopItemLimitedStockMax.Name = "tShopItemLimitedStockMax";
-            tShopItemLimitedStockMax.PlaceholderText = "number of total items for sale";
+            tShopItemLimitedStockMax.PlaceholderText = "商品可售总量";
             tShopItemLimitedStockMax.Size = new System.Drawing.Size(99, 23);
             tShopItemLimitedStockMax.TabIndex = 29;
             tShopItemLimitedStockMax.Text = "100";
@@ -969,7 +969,7 @@
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(106, 15);
             label15.TabIndex = 30;
-            label15.Text = "maximum amount";
+            label15.Text = "限购数量";
             // 
             // groupBox1
             // 
@@ -988,7 +988,7 @@
             groupBox1.Size = new System.Drawing.Size(383, 110);
             groupBox1.TabIndex = 35;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Restrictions";
+            groupBox1.Text = "购买限制";
             // 
             // label20
             // 
@@ -998,7 +998,7 @@
             label20.Name = "label20";
             label20.Size = new System.Drawing.Size(354, 15);
             label20.TabIndex = 40;
-            label20.Text = "If above level/quest restriction is not met, it will show as unknown";
+            label20.Text = "若未满足上述等级/任务条件，将显示为未知";
             // 
             // label18
             // 
@@ -1008,7 +1008,7 @@
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(311, 15);
             label18.TabIndex = 39;
-            label18.Text = "(*) Level restriction is different from min/max level setting";
+            label18.Text = "(*) 等级限制与最小/最大等级设置不同";
             // 
             // tShopItemBuyRestrictId
             // 
@@ -1027,7 +1027,7 @@
             rbShopItemRestrictQuest.Size = new System.Drawing.Size(104, 19);
             rbShopItemRestrictQuest.TabIndex = 37;
             rbShopItemRestrictQuest.Tag = "2";
-            rbShopItemRestrictQuest.Text = "Requires Quest";
+            rbShopItemRestrictQuest.Text = "任务要求";
             rbShopItemRestrictQuest.UseVisualStyleBackColor = true;
             rbShopItemRestrictQuest.CheckedChanged += tShopItems_Changed;
             // 
@@ -1039,7 +1039,7 @@
             rbShopItemRestrictLevel.Size = new System.Drawing.Size(116, 19);
             rbShopItemRestrictLevel.TabIndex = 36;
             rbShopItemRestrictLevel.Tag = "1";
-            rbShopItemRestrictLevel.Text = "Requires Level (*)";
+            rbShopItemRestrictLevel.Text = "等级要求 (*)";
             rbShopItemRestrictLevel.UseVisualStyleBackColor = true;
             rbShopItemRestrictLevel.CheckedChanged += tShopItems_Changed;
             // 
@@ -1053,7 +1053,7 @@
             rbShopItemRestrictNone.TabIndex = 35;
             rbShopItemRestrictNone.TabStop = true;
             rbShopItemRestrictNone.Tag = "0";
-            rbShopItemRestrictNone.Text = "None";
+            rbShopItemRestrictNone.Text = "无要求";
             rbShopItemRestrictNone.UseVisualStyleBackColor = true;
             rbShopItemRestrictNone.CheckedChanged += tShopItems_Changed;
             // 
@@ -1064,7 +1064,7 @@
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(120, 15);
             label16.TabIndex = 31;
-            label16.Text = "Required Level Range";
+            label16.Text = "要求等级范围";
             // 
             // label17
             // 
@@ -1103,7 +1103,7 @@
             tpShopTabs.Padding = new System.Windows.Forms.Padding(3);
             tpShopTabs.Size = new System.Drawing.Size(879, 484);
             tpShopTabs.TabIndex = 2;
-            tpShopTabs.Text = "Shop Tab Settings";
+            tpShopTabs.Text = "标签设置";
             tpShopTabs.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -1130,7 +1130,7 @@
             btnAutoCreateTab.Name = "btnAutoCreateTab";
             btnAutoCreateTab.Size = new System.Drawing.Size(165, 22);
             btnAutoCreateTab.TabIndex = 12;
-            btnAutoCreateTab.Text = "Auto-Create this Tab";
+            btnAutoCreateTab.Text = "自动创建此标签页";
             btnAutoCreateTab.UseVisualStyleBackColor = true;
             btnAutoCreateTab.Click += btnAutoCreateTab_Click;
             // 
@@ -1141,7 +1141,7 @@
             label26.Name = "label26";
             label26.Size = new System.Drawing.Size(557, 15);
             label26.TabIndex = 11;
-            label26.Text = "Drag-and-drop items from the left to add to page. Drag in page to move, or drag to trash can to remove.";
+            label26.Text = "从左侧拖拽项目添加到页面.在页面内拖动可调整位置,拖至垃圾桶图标可删除.";
             // 
             // pTrash
             // 
@@ -1162,13 +1162,13 @@
             lPageCount.Name = "lPageCount";
             lPageCount.Size = new System.Drawing.Size(42, 15);
             lPageCount.TabIndex = 7;
-            lPageCount.Text = "1 page";
+            lPageCount.Text = "第一页";
             // 
             // tFilterMenuShopItemList
             // 
             tFilterMenuShopItemList.Location = new System.Drawing.Point(22, 42);
             tFilterMenuShopItemList.Name = "tFilterMenuShopItemList";
-            tFilterMenuShopItemList.PlaceholderText = "<enter filter by shop item text>";
+            tFilterMenuShopItemList.PlaceholderText = "<输入商品名称筛选>";
             tFilterMenuShopItemList.Size = new System.Drawing.Size(196, 23);
             tFilterMenuShopItemList.TabIndex = 6;
             tFilterMenuShopItemList.TextChanged += tFilterMenuShopItemList_TextChanged;
@@ -1241,7 +1241,7 @@
             // 
             tsmiMenuTabCancel.Name = "tsmiMenuTabCancel";
             tsmiMenuTabCancel.Size = new System.Drawing.Size(154, 22);
-            tsmiMenuTabCancel.Text = "Cancel";
+            tsmiMenuTabCancel.Text = "取消";
             // 
             // tsmiMenuTabS1
             // 
@@ -1252,7 +1252,7 @@
             // 
             tsmiMenuTabFindShopItem.Name = "tsmiMenuTabFindShopItem";
             tsmiMenuTabFindShopItem.Size = new System.Drawing.Size(154, 22);
-            tsmiMenuTabFindShopItem.Text = "Find Shop Item";
+            tsmiMenuTabFindShopItem.Text = "查找店铺商品";
             tsmiMenuTabFindShopItem.Click += tsmiMenuTabFindShopItem_Click;
             // 
             // ICSForm

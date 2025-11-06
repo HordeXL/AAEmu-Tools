@@ -105,7 +105,7 @@ namespace AAEmu.DBEditor.forms.client
                     lvItems.Items.Add(newItem);
                     if (lvItems.Items.Count > 500)
                     {
-                        MessageBox.Show($"List truncated to 500 items");
+                        MessageBox.Show($"列表已截断, 仅显示500项");
                         break;
                     }
                 }
@@ -188,7 +188,7 @@ namespace AAEmu.DBEditor.forms.client
             AaTextHelper.FormattedTextToRichText(desc, rtItemDesc);
 
             lItemIcon.ImageIndex = lvi.ImageIndex;
-            lItemIcon.Text = lItemIcon.ImageIndex > 0 ? "" : "not found";
+            lItemIcon.Text = lItemIcon.ImageIndex > 0 ? "" : "未找到";
 
             lItemGMCommand.Text = $"/item add self {item.Id}" + (item.MaxStackSize > 1 ? " " + item.MaxStackSize : "");
         }
@@ -205,7 +205,7 @@ namespace AAEmu.DBEditor.forms.client
         private void ItemsForm_Load(object sender, EventArgs e)
         {
             cbFilterImplement.Items.Clear();
-            cbFilterImplement.Items.Add("<show all>");
+            cbFilterImplement.Items.Add("<全部显示>");
             cbFilterImplement.SelectedIndex = 0;
             foreach (var impl in Enum.GetValues(typeof(ItemImplement)))
             {
@@ -215,7 +215,7 @@ namespace AAEmu.DBEditor.forms.client
             cbFilterCategory.Items.Clear();
             cbFilterCategory.DisplayMember = "Text";
             cbFilterCategory.ValueMember = "Value";
-            cbFilterCategory.Items.Add(new CBoxItem("<show all>", -1));
+            cbFilterCategory.Items.Add(new CBoxItem("<全部显示>", -1));
 
             cbFilterCategory.SelectedIndex = 0;
             foreach (var cat in Data.Server.CompactSqlite.ItemCategories)

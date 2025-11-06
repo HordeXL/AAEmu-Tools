@@ -30,20 +30,20 @@ namespace AAEmu.PassGen
         {
             Console.WriteLine("AAEmu.PassGen");
             Console.WriteLine("--------------");
-            Console.WriteLine("This tool can be used to help generate a hashed user password for your MySQL database.");
-            Console.WriteLine("It is meant to be used for the default implementation of the AAEmu servers only.");
-            Console.WriteLine("If you ever want to use passwords in a serious way, it would be best to implement");
-            Console.WriteLine("you own password hashing logarithm.");
+            Console.WriteLine("此工具可用于帮助生成MySQL数据库的哈希用户密码.");
+            Console.WriteLine("它仅用于AAEmu服务器的默认实现.");
+            Console.WriteLine("如果你想认真地使用密码，最好实现");
+            Console.WriteLine("你自己的密码哈希对数.");
             Console.WriteLine();
-            Console.WriteLine("Leave the password blank to generate a random password.");
+            Console.WriteLine("将密码留空以生成随机密码.");
             Console.WriteLine();
-            Console.Write("Password: ");
+            Console.Write("密码: ");
             var pass = Console.ReadLine();
             if (pass == string.Empty)
             {
                 pass = RandomPass(16);
                 Console.WriteLine();
-                Console.WriteLine("Generated password: {0}", pass);
+                Console.WriteLine("生成的密码: {0}", pass);
                 Console.WriteLine();
             }
             byte[] passBytes = Encoding.UTF8.GetBytes(pass);
@@ -54,7 +54,7 @@ namespace AAEmu.PassGen
                 Console.WriteLine("Hashed: {0}", passHash);
             }
             Console.WriteLine();
-            Console.Write("Tip: You can drag your mouse over this the result and press ENTER to copy the text to clipboard");
+            Console.Write("提示：您可以将鼠标拖到结果上，然后按ENTER键将文本复制到剪贴板");
             Console.WriteLine();
             Console.Write("Press a key to close ...");
             Console.ReadKey();

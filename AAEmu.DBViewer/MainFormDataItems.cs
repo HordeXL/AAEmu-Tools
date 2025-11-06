@@ -396,12 +396,12 @@ public partial class MainForm
                     }
 
                     if ((dgvItem.Rows.Count % 25) == 0)
-                        loadform.ShowInfo($"Scanning {i}/{AaDb.DbItems.Count} items");
+                        loadform.ShowInfo($"正在扫描 {i}/{AaDb.DbItems.Count} 项");
 
                     if (dgvItem.Rows.Count > 500)
                     {
                         MessageBox.Show(
-                            "Too many result items, list is cut off at 500. Try narrowing your search!");
+                            "结果项过多,列表已截断至500条。请缩小搜索范围!");
                         break;
                     }
                 }
@@ -485,7 +485,7 @@ public partial class MainForm
         {
             lItemID.Text = idx.ToString();
             lItemImplId.Text = "";
-            lItemName.Text = @"<not found>";
+            lItemName.Text = @"<未找到>";
             lItemCategory.Text = "";
             rtItemDesc.Clear();
             lItemLevel.Text = "";
@@ -524,7 +524,7 @@ public partial class MainForm
     {
         if (AaDb.DbLoots.Count <= 0)
         {
-            MessageBox.Show($"Unable to search for Item {itemId} because no loot data has been loaded");
+            MessageBox.Show($"无法搜索物品 {itemId}，因为尚未加载任何掉落数据");
             return;
         }
         var groupWeights = new Dictionary<long, long>();
@@ -580,7 +580,7 @@ public partial class MainForm
     {
         if (AaDb.DbLoots.Count <= 0)
         {
-            MessageBox.Show($"Unable to search for loot pack {lootId} because no loot data has been loaded");
+            MessageBox.Show($"无法搜索掉落包 {lootId}，因为尚未加载掉落数据");
             return;
         }
 
@@ -925,8 +925,8 @@ public partial class MainForm
             if (c >= 250)
             {
                 MessageBox.Show(
-                    "The results were cut off at " + c.ToString() + " items, please refine your search !",
-                    "Too many entries", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    "结果在显示 " + c.ToString() + " 条项目后被截断，请优化您的搜索条件 !",
+                    "条目过多", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 break;
             }
         }
@@ -937,6 +937,6 @@ public partial class MainForm
         if (packs.Count > 0)
             tcViewer.SelectedTab = tpNPCs;
         else
-            MessageBox.Show("No NPCs found");
+            MessageBox.Show("没有找到NPC");
     }
 }

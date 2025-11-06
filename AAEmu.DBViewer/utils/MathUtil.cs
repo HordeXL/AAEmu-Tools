@@ -176,7 +176,7 @@ namespace AAEmu.Game.Utils
             return result;
         }
 
-        [Obsolete("Please use the variant with float rotation")]
+        [Obsolete("请使用带浮动旋转的变体方案")]
         public static (float, float)[] GetCuboidVertices(float length, float width, float x, float y, sbyte rotZ)
         {
             var radFront = ConvertDirectionToRadian(rotZ);

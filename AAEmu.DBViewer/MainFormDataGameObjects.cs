@@ -932,8 +932,9 @@ public partial class MainForm
                 if (c >= 250)
                 {
                     MessageBox.Show(
-                        "The results were cut off at " + c.ToString() + " items, please refine your search !",
-                        "Too many entries", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        //"The results were cut off at " + c.ToString() + " items, please refine your search !",
+                        "搜索结果已截断（仅显示" + c.ToString() + "项），请优化搜索条件!",
+                        "条目过多", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 }
             }
@@ -972,7 +973,7 @@ public partial class MainForm
                 }
                 else
                 {
-                    tvNPCInfo.Nodes.Add("AI Unknown FileId: " + npc.AiFileId);
+                    tvNPCInfo.Nodes.Add("AI 未知文件ID: " + npc.AiFileId);
                 }
             }
 

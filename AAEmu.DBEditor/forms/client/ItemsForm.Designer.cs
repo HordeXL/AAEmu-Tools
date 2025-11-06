@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms.client
+﻿﻿﻿﻿namespace AAEmu.DBEditor.forms.client
 {
     partial class ItemsForm
     {
@@ -112,7 +112,7 @@
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(99, 16);
             label9.TabIndex = 10;
-            label9.Text = "Filter by Category";
+            label9.Text = "分类筛选";
             // 
             // cbFilterCategory
             // 
@@ -130,7 +130,7 @@
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(108, 16);
             label8.TabIndex = 8;
-            label8.Text = "Filter by Implement";
+            label8.Text = "实现方式筛选";
             // 
             // cbFilterImplement
             // 
@@ -150,7 +150,7 @@
             cbSearchCustom.Name = "cbSearchCustom";
             cbSearchCustom.Size = new System.Drawing.Size(66, 20);
             cbSearchCustom.TabIndex = 6;
-            cbSearchCustom.Text = "Custom";
+            cbSearchCustom.Text = "自定义";
             cbSearchCustom.UseVisualStyleBackColor = true;
             // 
             // cbSearchRegion
@@ -162,7 +162,7 @@
             cbSearchRegion.Name = "cbSearchRegion";
             cbSearchRegion.Size = new System.Drawing.Size(107, 20);
             cbSearchRegion.TabIndex = 5;
-            cbSearchRegion.Text = "Region Specific";
+            cbSearchRegion.Text = "指定范围";
             cbSearchRegion.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -172,7 +172,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(78, 16);
             label2.TabIndex = 4;
-            label2.Text = "Search range:";
+            label2.Text = "搜索范围:";
             // 
             // cbSearchVanilla
             // 
@@ -183,7 +183,7 @@
             cbSearchVanilla.Name = "cbSearchVanilla";
             cbSearchVanilla.Size = new System.Drawing.Size(60, 20);
             cbSearchVanilla.TabIndex = 3;
-            cbSearchVanilla.Text = "Vanilla";
+            cbSearchVanilla.Text = "原版";
             cbSearchVanilla.UseVisualStyleBackColor = true;
             // 
             // btnSearch
@@ -192,7 +192,7 @@
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new System.Drawing.Size(104, 25);
             btnSearch.TabIndex = 2;
-            btnSearch.Text = "Search";
+            btnSearch.Text = "搜索";
             btnSearch.UseVisualStyleBackColor = true;
             btnSearch.Click += btnSearch_Click;
             // 
@@ -212,7 +212,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(94, 16);
             label1.TabIndex = 0;
-            label1.Text = "Search Text or ID";
+            label1.Text = "搜索 文本/ID";
             // 
             // splitContainer2
             // 
@@ -252,13 +252,13 @@
             // 
             // chItemName
             // 
-            chItemName.Text = "Name";
+            chItemName.Text = "名称";
             chItemName.Width = 200;
             // 
             // chItemCategory
             // 
-            chItemCategory.Text = "Category";
-            chItemCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            chItemCategory.Text = "类别";
+            chItemCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             chItemCategory.Width = 80;
             // 
             // groupBox1
@@ -291,7 +291,7 @@
             groupBox1.Size = new System.Drawing.Size(386, 396);
             groupBox1.TabIndex = 7;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Item Info";
+            groupBox1.Text = "物品信息";
             // 
             // lItemGMCommand
             // 
@@ -311,7 +311,7 @@
             btnSelect.Name = "btnSelect";
             btnSelect.Size = new System.Drawing.Size(75, 23);
             btnSelect.TabIndex = 31;
-            btnSelect.Text = "Select";
+            btnSelect.Text = "选择";
             btnSelect.UseVisualStyleBackColor = true;
             btnSelect.Click += btnSelect_Click;
             // 
@@ -324,7 +324,7 @@
             lItemRequires.Name = "lItemRequires";
             lItemRequires.Size = new System.Drawing.Size(34, 16);
             lItemRequires.TabIndex = 30;
-            lItemRequires.Text = "none";
+            lItemRequires.Text = "无";
             // 
             // label7
             // 
@@ -335,7 +335,7 @@
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(52, 16);
             label7.TabIndex = 29;
-            label7.Text = "Requires";
+            label7.Text = "需求";
             // 
             // lItemIcon
             // 
@@ -367,7 +367,7 @@
             label140.Name = "label140";
             label140.Size = new System.Drawing.Size(63, 16);
             label140.TabIndex = 26;
-            label140.Text = "Implement";
+            label140.Text = "执行";
             // 
             // lItemTags
             // 
@@ -413,7 +413,7 @@
             lItemLevel.Name = "lItemLevel";
             lItemLevel.Size = new System.Drawing.Size(34, 16);
             lItemLevel.TabIndex = 8;
-            lItemLevel.Text = "none";
+            lItemLevel.Text = "无";
             // 
             // label6
             // 
@@ -424,7 +424,7 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(34, 16);
             label6.TabIndex = 7;
-            label6.Text = "Level";
+            label6.Text = "等级";
             // 
             // lItemCategory
             // 
@@ -444,7 +444,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(54, 16);
             label5.TabIndex = 4;
-            label5.Text = "Category";
+            label5.Text = "类别";
             // 
             // lItemName
             // 
@@ -454,7 +454,7 @@
             lItemName.Name = "lItemName";
             lItemName.Size = new System.Drawing.Size(50, 16);
             lItemName.TabIndex = 3;
-            lItemName.Text = "<none>";
+            lItemName.Text = "<无>";
             // 
             // label4
             // 
@@ -464,7 +464,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(38, 16);
             label4.TabIndex = 2;
-            label4.Text = "Name";
+            label4.Text = "名称";
             // 
             // lItemID
             // 
@@ -484,7 +484,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(36, 16);
             label3.TabIndex = 0;
-            label3.Text = "Index";
+            label3.Text = "索引";
             // 
             // cbDescriptionSearch
             // 
@@ -493,7 +493,7 @@
             cbDescriptionSearch.Name = "cbDescriptionSearch";
             cbDescriptionSearch.Size = new System.Drawing.Size(153, 20);
             cbDescriptionSearch.TabIndex = 11;
-            cbDescriptionSearch.Text = "Also search descriptions";
+            cbDescriptionSearch.Text = "相关搜索";
             cbDescriptionSearch.UseVisualStyleBackColor = true;
             // 
             // ItemsForm
@@ -503,7 +503,7 @@
             ClientSize = new System.Drawing.Size(800, 480);
             Controls.Add(splitContainer1);
             Name = "ItemsForm";
-            Text = "Items";
+            Text = "物品";
             FormClosed += ItemsForm_FormClosed;
             Load += ItemsForm_Load;
             splitContainer1.Panel1.ResumeLayout(false);

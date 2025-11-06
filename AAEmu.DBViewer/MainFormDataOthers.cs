@@ -296,14 +296,14 @@ public partial class MainForm
                         if (iconImgLabel != null)
                         {
                             iconImgLabel.Image = null;
-                            iconImgLabel.Text = "ERROR - " + iconname;
+                            iconImgLabel.Text = "错误 - " + iconname;
                         }
                     }
                 }
                 else if (iconImgLabel != null)
                 {
                     iconImgLabel.Image = null;
-                    iconImgLabel.Text = "NOT FOUND - " + iconname + " ?";
+                    iconImgLabel.Text = "未找到 - " + iconname + " ?";
                 }
             }
             else if (iconImgLabel != null)

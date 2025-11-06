@@ -380,7 +380,7 @@ namespace AAEmu.DBViewer
 
                     if (bannedTagsCount <= 0)
                     {
-                        labelZoneGroupRestrictions.Text = "(no restrictions)";
+                        labelZoneGroupRestrictions.Text = "(没有限制条件)";
                         labelZoneGroupRestrictions.ForeColor = System.Drawing.Color.DarkGray;
                         labelZoneGroupRestrictions.Tag = 0;
                         mainFormToolTip.ToolTipTitle = "";
@@ -388,7 +388,7 @@ namespace AAEmu.DBViewer
                     }
                     else
                     {
-                        labelZoneGroupRestrictions.Text = "(" + bannedTagsCount.ToString() + " restrictions)";
+                        labelZoneGroupRestrictions.Text = "(" + bannedTagsCount.ToString() + " 限制条件)";
                         labelZoneGroupRestrictions.ForeColor = System.Drawing.Color.Red;
                         labelZoneGroupRestrictions.Tag = zg.Id;
                         mainFormToolTip.ToolTipTitle = "Banned ZoneGroup Tags";
@@ -677,7 +677,7 @@ namespace AAEmu.DBViewer
                         map.Show();
 
                         if (map.GetPoICount() > 0)
-                            if (MessageBox.Show("Keep current PoI's on map ?", "Add NPC", MessageBoxButtons.YesNo,
+                            if (MessageBox.Show("保留当前地图上的 PoI's ?", "增加NPC", MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Question) == DialogResult.No)
                                 map.ClearPoI();
 
@@ -687,7 +687,7 @@ namespace AAEmu.DBViewer
                         {
                             using (var loading = new LoadingForm())
                             {
-                                loading.ShowInfo("Loading " + npcList.Count.ToString() + " NPCs");
+                                loading.ShowInfo("正在加载 " + npcList.Count.ToString() + " 个NPC");
                                 loading.Show();
 
                                 // Add to NPC list
@@ -734,9 +734,9 @@ namespace AAEmu.DBViewer
                                         c++;
                                         if ((c % 25) == 0)
                                         {
-                                            loading.ShowInfo("Loading " + c.ToString() + "/" +
+                                            loading.ShowInfo("正在加载 " + c.ToString() + "/" +
                                                              npcList.Count.ToString() +
-                                                             " NPCs");
+                                                             " 个NPC");
                                         }
 
                                         map.AddPoI(npc.x, npc.y, npc.z,
@@ -846,7 +846,7 @@ namespace AAEmu.DBViewer
                 }
             }
 
-            MessageBox.Show(bannedInfo, "Restrictions for ZoneGroup " + zoneGroupId.ToString(), MessageBoxButtons.OK,
+            MessageBox.Show(bannedInfo, "区域组的限制条件 " + zoneGroupId.ToString(), MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
 
@@ -915,7 +915,7 @@ namespace AAEmu.DBViewer
 
             using (var loading = new LoadingForm())
             {
-                loading.ShowInfo("Searching in zones: " + AaDb.DbZoneGroups.Count.ToString());
+                loading.ShowInfo("正在区域中搜索: " + AaDb.DbZoneGroups.Count.ToString());
                 loading.Show();
 
                 var zoneCount = 0;
@@ -925,7 +925,7 @@ namespace AAEmu.DBViewer
                     if (zg != null)
                     {
                         zoneCount++;
-                        loading.ShowInfo("Searching in zones: " + zoneCount.ToString() + "/" +
+                        loading.ShowInfo("正在区域中搜索: " + zoneCount.ToString() + "/" +
                                          AaDb.DbZoneGroups.Count.ToString());
                         doodadList.AddRange(GetDoodadSpawnsInZoneGroup(zg.Id, false));
                     }
@@ -969,7 +969,7 @@ namespace AAEmu.DBViewer
                 AddSubZones(ref allAreas, zv.Value);
 
             if (allAreas.Count <= 0)
-                MessageBox.Show("No subzone found ?");
+                MessageBox.Show("未找到子区域 ?");
             else
             {
                 var map = MapViewForm.GetMap();
@@ -1012,7 +1012,7 @@ namespace AAEmu.DBViewer
                     map.Show();
 
                     if (map.GetPoICount() > 0)
-                        if (MessageBox.Show("Keep current PoI's on map ?", "Add Doodad", MessageBoxButtons.YesNo,
+                        if (MessageBox.Show("保留当前地图上的 PoI's ?", "增加Doodad", MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Question) == DialogResult.No)
                             map.ClearPoI();
 
@@ -1022,7 +1022,7 @@ namespace AAEmu.DBViewer
                     {
                         using (var loading = new LoadingForm())
                         {
-                            loading.ShowInfo("Loading " + doodadList.Count.ToString() + " Doodads");
+                            loading.ShowInfo("正在加载 " + doodadList.Count.ToString() + " 个Doodads");
                             loading.Show();
 
                             // Add to NPC list
@@ -1050,14 +1050,14 @@ namespace AAEmu.DBViewer
                                         row.Cells[8].Value = string.Format("{0} , {1} = ({2})", doodad.x, doodad.y,
                                             doodad.AsSextant());
                                     else
-                                        row.Cells[8].Value = doodad.count.ToString() + " instances in zone";
+                                        row.Cells[8].Value = doodad.count.ToString() + " 区域中的实例";
 
                                     c++;
                                     if ((c % 25) == 0)
                                     {
-                                        loading.ShowInfo("Loading " + c.ToString() + "/" +
+                                        loading.ShowInfo("正在加载 " + c.ToString() + "/" +
                                                          doodadList.Count.ToString() +
-                                                         " Doodads");
+                                                         " 个Doodads");
                                     }
 
                                     map.AddPoI(doodad.x, doodad.y, doodad.z,

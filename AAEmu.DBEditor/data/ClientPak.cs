@@ -135,24 +135,24 @@ namespace AAEmu.DBEditor.data
 
             if ((Pak != null) && (Pak.IsOpen))
             {
-                MainForm.Self.UpdateProgress("Closing Client Pak ...");
+                MainForm.Self.UpdateProgress("正在关闭客户端PAK ...");
                 Pak.ClosePak();
             }
 
-            MainForm.Self.UpdateProgress("Loading Client Pak " + fileName + "...");
+            MainForm.Self.UpdateProgress("正在加载客户端PAK " + fileName + "...");
             if (Pak == null)
                 Pak = new AAPak();
 
             if (!Pak.OpenPak(fileName, true))
             {
-                MainForm.Self.UpdateProgress("Loading Client Pak failed to open " + fileName);
+                MainForm.Self.UpdateProgress("加载客户端PAK失败,无法打开文件： " + fileName);
                 Pak.ClosePak();
                 Pak = null;
                 FileName = string.Empty;
                 return false;
             }
 
-            MainForm.Self.UpdateProgress("Loading default icon ...");
+            MainForm.Self.UpdateProgress("正在加载默认图标 ...");
             Icons.Images.Clear();
             Icons16.Images.Clear();
             Icons32.Images.Clear();

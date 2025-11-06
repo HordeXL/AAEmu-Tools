@@ -1,4 +1,4 @@
-﻿
+﻿﻿
 namespace AAEmu.DBEditor
 {
     partial class MainForm
@@ -97,21 +97,21 @@ namespace AAEmu.DBEditor
             MM.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
             MM.Size = new System.Drawing.Size(856, 24);
             MM.TabIndex = 0;
-            MM.Text = "menuStrip1";
+            MM.Text = "菜单栏1";
             // 
             // MMFile
             // 
             MMFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMFileOpenServer, MMFileOpenClient, MMFileOpenMySQL, MMFileS1, MMFileSettings, MMFileS3, MMFileReload, MMFileS2, MMFileExit });
             MMFile.Name = "MMFile";
             MMFile.Size = new System.Drawing.Size(37, 20);
-            MMFile.Text = "&File";
+            MMFile.Text = "&文件";
             // 
             // MMFileOpenServer
             // 
             MMFileOpenServer.Enabled = false;
             MMFileOpenServer.Name = "MMFileOpenServer";
             MMFileOpenServer.Size = new System.Drawing.Size(183, 22);
-            MMFileOpenServer.Text = "Open Server DB ...";
+            MMFileOpenServer.Text = "打开服务器数据库 ...";
             MMFileOpenServer.Visible = false;
             MMFileOpenServer.Click += MMFileOpenServer_Click;
             // 
@@ -120,7 +120,7 @@ namespace AAEmu.DBEditor
             MMFileOpenClient.Enabled = false;
             MMFileOpenClient.Name = "MMFileOpenClient";
             MMFileOpenClient.Size = new System.Drawing.Size(183, 22);
-            MMFileOpenClient.Text = "Open Game Client ...";
+            MMFileOpenClient.Text = "打开游戏客户端 ...";
             MMFileOpenClient.Visible = false;
             MMFileOpenClient.Click += MMFileOpenClient_Click;
             // 
@@ -129,7 +129,7 @@ namespace AAEmu.DBEditor
             MMFileOpenMySQL.Enabled = false;
             MMFileOpenMySQL.Name = "MMFileOpenMySQL";
             MMFileOpenMySQL.Size = new System.Drawing.Size(183, 22);
-            MMFileOpenMySQL.Text = "Open MySQL DB ...";
+            MMFileOpenMySQL.Text = "打开MySQL数据库 ...";
             MMFileOpenMySQL.Visible = false;
             MMFileOpenMySQL.Click += MMFileOpenMySQL_Click;
             // 
@@ -143,7 +143,7 @@ namespace AAEmu.DBEditor
             // 
             MMFileSettings.Name = "MMFileSettings";
             MMFileSettings.Size = new System.Drawing.Size(183, 22);
-            MMFileSettings.Text = "Settings ...";
+            MMFileSettings.Text = "设置 ...";
             MMFileSettings.Click += MMFileSettings_Click;
             // 
             // MMFileS3
@@ -155,7 +155,7 @@ namespace AAEmu.DBEditor
             // 
             MMFileReload.Name = "MMFileReload";
             MMFileReload.Size = new System.Drawing.Size(183, 22);
-            MMFileReload.Text = "Reload";
+            MMFileReload.Text = "重新加载";
             MMFileReload.Click += MMFileReload_Click;
             // 
             // MMFileS2
@@ -168,7 +168,7 @@ namespace AAEmu.DBEditor
             MMFileExit.Name = "MMFileExit";
             MMFileExit.ShortcutKeys = System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4;
             MMFileExit.Size = new System.Drawing.Size(183, 22);
-            MMFileExit.Text = "E&xit";
+            MMFileExit.Text = "退&出";
             MMFileExit.Click += MMFileExit_Click;
             // 
             // MMClient
@@ -176,7 +176,7 @@ namespace AAEmu.DBEditor
             MMClient.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMClientMap, MMClientS1, MMClientItems, MMClientDoodads, MMClientNPCs, MMClientSkills, MMClientZones, MMClientBuffs, MMClientFactions, MMClientQuests, MMClientLoot });
             MMClient.Name = "MMClient";
             MMClient.Size = new System.Drawing.Size(50, 20);
-            MMClient.Text = "Client";
+            MMClient.Text = "客户端";
             MMClient.DropDownOpened += MMClient_DropDownOpened;
             // 
             // MMClientMap
@@ -184,7 +184,7 @@ namespace AAEmu.DBEditor
             MMClientMap.Enabled = false;
             MMClientMap.Name = "MMClientMap";
             MMClientMap.Size = new System.Drawing.Size(121, 22);
-            MMClientMap.Text = "Map";
+            MMClientMap.Text = "地图";
             MMClientMap.Click += MMClientMap_Click;
             // 
             // MMClientS1
@@ -197,7 +197,7 @@ namespace AAEmu.DBEditor
             MMClientItems.Enabled = false;
             MMClientItems.Name = "MMClientItems";
             MMClientItems.Size = new System.Drawing.Size(121, 22);
-            MMClientItems.Text = "Items";
+            MMClientItems.Text = "物品";
             MMClientItems.Click += MMClientItems_Click;
             // 
             // MMClientDoodads
@@ -205,7 +205,7 @@ namespace AAEmu.DBEditor
             MMClientDoodads.Enabled = false;
             MMClientDoodads.Name = "MMClientDoodads";
             MMClientDoodads.Size = new System.Drawing.Size(121, 22);
-            MMClientDoodads.Text = "Doodads";
+            MMClientDoodads.Text = "装饰物";
             // 
             // MMClientNPCs
             // 
@@ -219,14 +219,14 @@ namespace AAEmu.DBEditor
             MMClientSkills.Enabled = false;
             MMClientSkills.Name = "MMClientSkills";
             MMClientSkills.Size = new System.Drawing.Size(121, 22);
-            MMClientSkills.Text = "Skills";
+            MMClientSkills.Text = "技能";
             // 
             // MMClientZones
             // 
             MMClientZones.Enabled = false;
             MMClientZones.Name = "MMClientZones";
             MMClientZones.Size = new System.Drawing.Size(121, 22);
-            MMClientZones.Text = "Zones";
+            MMClientZones.Text = "区域";
             // 
             // MMClientBuffs
             // 
@@ -240,28 +240,28 @@ namespace AAEmu.DBEditor
             MMClientFactions.Enabled = false;
             MMClientFactions.Name = "MMClientFactions";
             MMClientFactions.Size = new System.Drawing.Size(121, 22);
-            MMClientFactions.Text = "Factions";
+            MMClientFactions.Text = "阵营";
             // 
             // MMClientQuests
             // 
             MMClientQuests.Enabled = false;
             MMClientQuests.Name = "MMClientQuests";
             MMClientQuests.Size = new System.Drawing.Size(121, 22);
-            MMClientQuests.Text = "Quests";
+            MMClientQuests.Text = "任务";
             // 
             // MMClientLoot
             // 
             MMClientLoot.Enabled = false;
             MMClientLoot.Name = "MMClientLoot";
             MMClientLoot.Size = new System.Drawing.Size(121, 22);
-            MMClientLoot.Text = "Loot";
+            MMClientLoot.Text = "掉落";
             // 
             // MMServer
             // 
             MMServer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMServerAccounts, MMServerCharacters, MMServerGuilds, toolStripMenuItem2, MMServerICS });
             MMServer.Name = "MMServer";
             MMServer.Size = new System.Drawing.Size(51, 20);
-            MMServer.Text = "Server";
+            MMServer.Text = "服务器";
             MMServer.DropDownOpened += serverToolStripMenuItem_DropDownOpened;
             // 
             // MMServerAccounts
@@ -269,7 +269,7 @@ namespace AAEmu.DBEditor
             MMServerAccounts.Enabled = false;
             MMServerAccounts.Name = "MMServerAccounts";
             MMServerAccounts.Size = new System.Drawing.Size(130, 22);
-            MMServerAccounts.Text = "Accounts";
+            MMServerAccounts.Text = "账号";
             MMServerAccounts.Click += MMServerAccounts_Click;
             // 
             // MMServerCharacters
@@ -277,7 +277,7 @@ namespace AAEmu.DBEditor
             MMServerCharacters.Enabled = false;
             MMServerCharacters.Name = "MMServerCharacters";
             MMServerCharacters.Size = new System.Drawing.Size(130, 22);
-            MMServerCharacters.Text = "Characters";
+            MMServerCharacters.Text = "角色";
             MMServerCharacters.Click += MMServerCharacters_Click;
             // 
             // MMServerGuilds
@@ -285,7 +285,7 @@ namespace AAEmu.DBEditor
             MMServerGuilds.Enabled = false;
             MMServerGuilds.Name = "MMServerGuilds";
             MMServerGuilds.Size = new System.Drawing.Size(130, 22);
-            MMServerGuilds.Text = "Guilds";
+            MMServerGuilds.Text = "公会";
             // 
             // toolStripMenuItem2
             // 
@@ -297,7 +297,7 @@ namespace AAEmu.DBEditor
             MMServerICS.Enabled = false;
             MMServerICS.Name = "MMServerICS";
             MMServerICS.Size = new System.Drawing.Size(130, 22);
-            MMServerICS.Text = "Cash Shop";
+            MMServerICS.Text = "商城";
             MMServerICS.Click += MMServerICS_Click;
             // 
             // MMVersion
@@ -305,21 +305,21 @@ namespace AAEmu.DBEditor
             MMVersion.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             MMVersion.Name = "MMVersion";
             MMVersion.Size = new System.Drawing.Size(57, 20);
-            MMVersion.Text = "Version";
+            MMVersion.Text = "版本";
             // 
             // MMTools
             // 
             MMTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMToolsAhBot });
             MMTools.Name = "MMTools";
             MMTools.Size = new System.Drawing.Size(47, 20);
-            MMTools.Text = "&Tools";
+            MMTools.Text = "&工具";
             MMTools.DropDownOpened += MMTools_DropDownOpened;
             // 
             // MMToolsAhBot
             // 
             MMToolsAhBot.Name = "MMToolsAhBot";
             MMToolsAhBot.Size = new System.Drawing.Size(174, 22);
-            MMToolsAhBot.Text = "Auction House Bot";
+            MMToolsAhBot.Text = "拍卖行机器人";
             MMToolsAhBot.Click += MMToolsAhBot_Click;
             // 
             // label3
@@ -330,7 +330,7 @@ namespace AAEmu.DBEditor
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(60, 15);
             label3.TabIndex = 3;
-            label3.Text = "Server DB:";
+            label3.Text = "服务器数据库:";
             // 
             // label2
             // 
@@ -340,7 +340,7 @@ namespace AAEmu.DBEditor
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(65, 15);
             label2.TabIndex = 4;
-            label2.Text = "Client PAK:";
+            label2.Text = "游戏客户端:";
             // 
             // label4
             // 
@@ -350,7 +350,7 @@ namespace AAEmu.DBEditor
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(48, 15);
             label4.TabIndex = 5;
-            label4.Text = "MySQL:";
+            label4.Text = "MySQL数据库:";
             // 
             // lMySQLServer
             // 
@@ -370,7 +370,7 @@ namespace AAEmu.DBEditor
             lClientPak.Name = "lClientPak";
             lClientPak.Size = new System.Drawing.Size(50, 15);
             lClientPak.TabIndex = 7;
-            lClientPak.Text = "<none>";
+            lClientPak.Text = "<无>";
             // 
             // lServerDB
             // 
@@ -380,22 +380,22 @@ namespace AAEmu.DBEditor
             lServerDB.Name = "lServerDB";
             lServerDB.Size = new System.Drawing.Size(50, 15);
             lServerDB.TabIndex = 6;
-            lServerDB.Text = "<none>";
+            lServerDB.Text = "<无>";
             // 
             // ofdServerDB
             // 
             ofdServerDB.DefaultExt = "sqlite3";
             ofdServerDB.FileName = "compact.sqlite3";
-            ofdServerDB.Filter = "SQLite Files|*.sqlite*|All files|*.*";
+            ofdServerDB.Filter = "SQLite 文件|*.sqlite*|所有文件|*.*";
             ofdServerDB.InitialDirectory = "Data";
             ofdServerDB.ReadOnlyChecked = true;
-            ofdServerDB.Title = "Open Server DB File";
+            ofdServerDB.Title = "打开服务器数据库文件";
             // 
             // ofdClientPak
             // 
             ofdClientPak.FileName = "game_pak";
-            ofdClientPak.Filter = "Pak Files|*pak*.*|All Files|*.*";
-            ofdClientPak.Title = "Open client game_pak";
+            ofdClientPak.Filter = "Pak 文件|*pak*.*|所有文件|*.*";
+            ofdClientPak.Title = "打开客户端 game_pak 文件";
             // 
             // TestPanel
             // 
@@ -416,13 +416,13 @@ namespace AAEmu.DBEditor
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
             statusStrip1.Size = new System.Drawing.Size(856, 22);
             statusStrip1.TabIndex = 12;
-            statusStrip1.Text = "statusStrip1";
+            statusStrip1.Text = "状态栏";
             // 
             // sbL1
             // 
             sbL1.Name = "sbL1";
             sbL1.Size = new System.Drawing.Size(28, 17);
-            sbL1.Text = "Info";
+            sbL1.Text = "信息";
             // 
             // gbLocale
             // 
@@ -439,7 +439,7 @@ namespace AAEmu.DBEditor
             gbLocale.Size = new System.Drawing.Size(260, 78);
             gbLocale.TabIndex = 13;
             gbLocale.TabStop = false;
-            gbLocale.Text = "Client Language";
+            gbLocale.Text = "切换语言";
             // 
             // rbLocaleFr
             // 
@@ -449,7 +449,7 @@ namespace AAEmu.DBEditor
             rbLocaleFr.Name = "rbLocaleFr";
             rbLocaleFr.Size = new System.Drawing.Size(33, 19);
             rbLocaleFr.TabIndex = 7;
-            rbLocaleFr.Text = "fr";
+            rbLocaleFr.Text = "法语";
             rbLocaleFr.UseVisualStyleBackColor = true;
             rbLocaleFr.CheckedChanged += rbLocale_CheckedChanged;
             // 
@@ -461,7 +461,7 @@ namespace AAEmu.DBEditor
             rbLocaleDe.Name = "rbLocaleDe";
             rbLocaleDe.Size = new System.Drawing.Size(38, 19);
             rbLocaleDe.TabIndex = 6;
-            rbLocaleDe.Text = "de";
+            rbLocaleDe.Text = "德语";
             rbLocaleDe.UseVisualStyleBackColor = true;
             rbLocaleDe.CheckedChanged += rbLocale_CheckedChanged;
             // 
@@ -473,7 +473,7 @@ namespace AAEmu.DBEditor
             rbLocaleJa.Name = "rbLocaleJa";
             rbLocaleJa.Size = new System.Drawing.Size(34, 19);
             rbLocaleJa.TabIndex = 5;
-            rbLocaleJa.Text = "ja";
+            rbLocaleJa.Text = "日语";
             rbLocaleJa.UseVisualStyleBackColor = true;
             rbLocaleJa.CheckedChanged += rbLocale_CheckedChanged;
             // 
@@ -485,19 +485,20 @@ namespace AAEmu.DBEditor
             rbLocaleZhTw.Name = "rbLocaleZhTw";
             rbLocaleZhTw.Size = new System.Drawing.Size(55, 19);
             rbLocaleZhTw.TabIndex = 4;
-            rbLocaleZhTw.Text = "zh_tw";
+            rbLocaleZhTw.Text = "繁中";
             rbLocaleZhTw.UseVisualStyleBackColor = true;
             rbLocaleZhTw.CheckedChanged += rbLocale_CheckedChanged;
             // 
             // rbLocaleZhCn
             // 
             rbLocaleZhCn.AutoSize = true;
-            rbLocaleZhCn.Enabled = false;
+            rbLocaleZhCn.Enabled = false;            
+            rbLocaleEnUs.Checked = true;
             rbLocaleZhCn.Location = new System.Drawing.Point(78, 48);
             rbLocaleZhCn.Name = "rbLocaleZhCn";
             rbLocaleZhCn.Size = new System.Drawing.Size(55, 19);
             rbLocaleZhCn.TabIndex = 3;
-            rbLocaleZhCn.Text = "zh_cn";
+            rbLocaleZhCn.Text = "简中";
             rbLocaleZhCn.UseVisualStyleBackColor = true;
             rbLocaleZhCn.CheckedChanged += rbLocale_CheckedChanged;
             // 
@@ -509,7 +510,7 @@ namespace AAEmu.DBEditor
             rbLocaleRu.Name = "rbLocaleRu";
             rbLocaleRu.Size = new System.Drawing.Size(36, 19);
             rbLocaleRu.TabIndex = 2;
-            rbLocaleRu.Text = "ru";
+            rbLocaleRu.Text = "俄语";
             rbLocaleRu.UseVisualStyleBackColor = true;
             rbLocaleRu.CheckedChanged += rbLocale_CheckedChanged;
             // 
@@ -520,21 +521,20 @@ namespace AAEmu.DBEditor
             rbLocaleKo.Name = "rbLocaleKo";
             rbLocaleKo.Size = new System.Drawing.Size(38, 19);
             rbLocaleKo.TabIndex = 1;
-            rbLocaleKo.Text = "ko";
+            rbLocaleKo.Text = "韩语";
             rbLocaleKo.UseVisualStyleBackColor = true;
             rbLocaleKo.CheckedChanged += rbLocale_CheckedChanged;
             // 
             // rbLocaleEnUs
             // 
             rbLocaleEnUs.AutoSize = true;
-            rbLocaleEnUs.Checked = true;
             rbLocaleEnUs.Enabled = false;
             rbLocaleEnUs.Location = new System.Drawing.Point(6, 48);
             rbLocaleEnUs.Name = "rbLocaleEnUs";
             rbLocaleEnUs.Size = new System.Drawing.Size(55, 19);
             rbLocaleEnUs.TabIndex = 0;
             rbLocaleEnUs.TabStop = true;
-            rbLocaleEnUs.Text = "en_us";
+            rbLocaleEnUs.Text = "英语";
             rbLocaleEnUs.UseVisualStyleBackColor = true;
             rbLocaleEnUs.CheckedChanged += rbLocale_CheckedChanged;
             // 
@@ -552,7 +552,7 @@ namespace AAEmu.DBEditor
             gbLoadingProgress.Size = new System.Drawing.Size(830, 101);
             gbLoadingProgress.TabIndex = 15;
             gbLoadingProgress.TabStop = false;
-            gbLoadingProgress.Text = "Status";
+            gbLoadingProgress.Text = "状态";
             // 
             // MainForm
             // 
@@ -568,7 +568,7 @@ namespace AAEmu.DBEditor
             MainMenuStrip = MM;
             Margin = new System.Windows.Forms.Padding(4);
             Name = "MainForm";
-            Text = "AAEmu.Editor";
+            Text = "AAEmu.Editor  ";
             Load += MainForm_Load;
             MM.ResumeLayout(false);
             MM.PerformLayout();

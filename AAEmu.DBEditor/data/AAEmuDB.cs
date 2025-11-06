@@ -36,7 +36,7 @@ namespace AAEmu.DBEditor.data
                 switch (mySqlEx.ErrorCode)
                 {
                     case MySqlErrorCode.AccessDenied:
-                        LastError = $"Access denied, check your username and password";
+                        LastError = $"访问被拒绝，请检查您的用户名和密码";
                         break;
                     default:
                         LastError = $"{mySqlEx.ErrorCode}: {mySqlEx.Message}";

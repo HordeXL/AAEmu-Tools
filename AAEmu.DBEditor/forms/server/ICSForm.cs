@@ -160,13 +160,13 @@ namespace AAEmu.DBEditor.forms.server
                     }
                     switch (subSku.Currency)
                     {
-                        case 0: currencyName = "Credits"; break;
+                        case 0: currencyName = "点券"; break;//Credits
                         case 1: currencyName = "AA Points"; break;
-                        case 2: currencyName = "Loyalty"; break;
-                        case 3: currencyName = "Coins"; break;
+                        case 2: currencyName = "鲁鲁币"; break;//Loyalty
+                        case 3: currencyName = "金币"; break;//Coins
                     }
                     var itemEntry = Data.Server.GetItem((long)subSku.ItemId);// .CompactSqlite.Items.FirstOrDefault(x => x.Id == subSku.ItemId);
-                    var subItemName = "<item:" + subSku.ItemId.ToString() + ">";
+                    var subItemName = "<物品:" + subSku.ItemId.ToString() + ">";
                     if (itemEntry != null)
                         subItemName = Data.Server.GetText("items", "name", (long)subSku.ItemId, itemEntry.Name);
 
@@ -175,7 +175,7 @@ namespace AAEmu.DBEditor.forms.server
 
                     var subNode = itemNode.Nodes.Add(subSku.ItemCount == 1 ? subItemName : subItemName + " x " + subSku.ItemCount.ToString());
                     subNode.Tag = subSku;
-                    subNode.Text += Environment.NewLine + (subSku.DiscountPrice <= 0 ? $"Price: {subSku.Price} {currencyName}" : $"Discounted Price: {subSku.DiscountPrice} {currencyName}");
+                    subNode.Text += Environment.NewLine + (subSku.DiscountPrice <= 0 ? $"价格: {subSku.Price} {currencyName}" : $"优惠价格: {subSku.DiscountPrice} {currencyName}");
                     subNode.ImageIndex = Data.Client.GetIconIndexByItemTemplateId((long)subSku.ItemId);
                     subNode.SelectedImageIndex = subNode.ImageIndex;
                     if (displayIconItemId == 0)
@@ -190,11 +190,11 @@ namespace AAEmu.DBEditor.forms.server
 
                 if (minPrice != maxPrice)
                 {
-                    itemNode.Text += Environment.NewLine + $"Price: {minPrice} ~ {maxPrice} {currencyName}";
+                    itemNode.Text += Environment.NewLine + $"价格: {minPrice} ~ {maxPrice} {currencyName}";
                 }
                 else
                 {
-                    itemNode.Text += Environment.NewLine + $"Price: {minPrice} {currencyName}";
+                    itemNode.Text += Environment.NewLine + $"价格: {minPrice} {currencyName}";
                 }
 
                 itemNode.ImageIndex = Data.Client.GetIconIndexByItemTemplateId(shopItem.DisplayItemId > 0 ? shopItem.DisplayItemId : displayIconItemId);
@@ -304,7 +304,7 @@ namespace AAEmu.DBEditor.forms.server
                 while (lvMenuItemsTab.Groups.Count < thisPage)
                 {
                     var newPage = (lvMenuItemsTab.Groups.Count + 1);
-                    lvMenuItemsTab.Groups.Add(newPage.ToString(), "Page " + newPage.ToString());
+                    lvMenuItemsTab.Groups.Add(newPage.ToString(), "页 " + newPage.ToString());
                 }
                 // item.Group = lvMenuItemsTab.Groups[thisPage.ToString()];
                 if (item.Tag is IcsMenu menuItem)
@@ -621,7 +621,7 @@ namespace AAEmu.DBEditor.forms.server
 
                 if (Data.MySqlDb.Game.SaveChanges() <= 0)
                 {
-                    MessageBox.Show("Failed to save SKU changes to DB");
+                    MessageBox.Show("SKU变更保存至数据库失败");
                     return;
                 }
                 FillSKUList();
@@ -632,7 +632,7 @@ namespace AAEmu.DBEditor.forms.server
             catch (Exception ex)
             {
                 // Error parsing or updating DB
-                MessageBox.Show("Exception: " + ex.Message);
+                MessageBox.Show("异常: " + ex.Message);
             }
         }
 
@@ -846,7 +846,7 @@ namespace AAEmu.DBEditor.forms.server
 
                 if (Data.MySqlDb.Game.SaveChanges() <= 0)
                 {
-                    MessageBox.Show("Failed to save Shop Item changes to DB");
+                    MessageBox.Show("商品变更保存至数据库失败");
                     return;
                 }
                 FillSKUList();
@@ -857,7 +857,7 @@ namespace AAEmu.DBEditor.forms.server
             catch (Exception ex)
             {
                 // Error parsing or updating DB
-                MessageBox.Show("Exception: " + ex.Message);
+                MessageBox.Show("异常: " + ex.Message);
             }
         }
 

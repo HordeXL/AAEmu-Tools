@@ -27,7 +27,7 @@ namespace AAEmu.DBViewer.utils
             var posValues = posStringBase.Split(',');
             if (posValues.Length != 3)
             {
-                MessageBox.Show("Invalid number of values inside Pos: " + posStringBase);
+                MessageBox.Show("Pos函数内的参数值数量无效: " + posStringBase);
             }
             else
                 try
@@ -40,7 +40,7 @@ namespace AAEmu.DBViewer.utils
                 }
                 catch
                 {
-                    MessageBox.Show("Invalid float inside Pos: " + posStringBase);
+                    MessageBox.Show("Pos参数包含无效浮点数值: " + posStringBase);
                 }
 
             return baseVec;

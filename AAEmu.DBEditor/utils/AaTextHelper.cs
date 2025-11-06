@@ -210,18 +210,18 @@ namespace AAEmu.DBEditor.utils
 
             var res = string.Empty;
             if (gold > 0)
-                res += $"{gold}g";
+                res += $"{gold}金";
             if (silver > 0)
             {
                 if (res.Length > 0)
                     res += " ";
-                res += $"{silver}s";
+                res += $"{silver}银";
             }
             if (copper > 0 || amount < 100)
             {
                 if (res.Length > 0)
                     res += " ";
-                res += $"{copper}c";
+                res += $"{copper}铜";
             }
 
             return res;

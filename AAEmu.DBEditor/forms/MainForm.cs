@@ -34,7 +34,7 @@ namespace AAEmu.DBEditor
         private bool CloseAllForms()
         {
             if (OwnedForms.Length > 0)
-                if (MessageBox.Show("Reloading will first close all open forms!\r\nDo you want to continue ?", "Reload", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes)
+                if (MessageBox.Show("重新加载将关闭所有已打开表单!\r\n是否继续 ?", "重新加载", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes)
                     return false;
 
             for (var i = OwnedForms.Length - 1; i >= 0; i--)
@@ -50,7 +50,7 @@ namespace AAEmu.DBEditor
 
             if (ValidateFilesTask != null)
             {
-                MessageBox.Show("Already busy loading data, cannot reload yet!", "Reload", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("数据加载中，暂无法重新加载!", "重新加载", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -97,13 +97,13 @@ namespace AAEmu.DBEditor
                 var res = true;
                 if (!Data.Server.OpenDB(ProgramSettings.Instance.ServerDb))
                 {
-                    UpdateProgress("Opening ServerDB failed");
+                    UpdateProgress("服务器数据库加载失败");
                     res = false;
-                    UpdateLabel(lServerDB, ProgramSettings.Instance.ServerDb + " <failed to load>");
+                    UpdateLabel(lServerDB, ProgramSettings.Instance.ServerDb + " <加载失败>");
                 }
                 else
                 {
-                    UpdateProgress("ServerDB loaded");
+                    UpdateProgress("服务器数据库已加载");
                     UpdateLabel(lServerDB,
                         Data.Server.FileName + " <" + Data.Server.TableNames.Count.ToString() + " tables>");
                     // AAEmu.DBEditor.Properties.Settings.Default.Save();
@@ -113,7 +113,7 @@ namespace AAEmu.DBEditor
             }
             catch (Exception e)
             {
-                UpdateLabel(lServerDB, $"<failed to load> {e.Message}");
+                UpdateLabel(lServerDB, $"<加载失败> {e.Message}");
                 return false;
             }
         }
@@ -121,23 +121,23 @@ namespace AAEmu.DBEditor
         private bool OpenClientPakTask()
         {
             var res = true;
-            UpdateProgress("Loading Client Pak File ...");
+            UpdateProgress("正在加载客户端PAK ...");
             if (string.IsNullOrWhiteSpace(ProgramSettings.Instance.ClientPak) || !File.Exists(ProgramSettings.Instance.ClientPak))
             {
-                UpdateLabel(lClientPak, "<not defined>");
+                UpdateLabel(lClientPak, "<未定义>");
                 TestPanel.BackgroundImage = null;
             }
             else
             if (File.Exists(ProgramSettings.Instance.ClientPak) && !Data.Client.Open(ProgramSettings.Instance.ClientPak))
             {
-                UpdateProgress("Loading Client Pak File failed");
+                UpdateProgress("加载客户端PAK失败");
                 res = false;
-                UpdateLabel(lClientPak, Data.Client.FileName + " <failed to load>");
+                UpdateLabel(lClientPak, Data.Client.FileName + " <加载失败>");
                 TestPanel.BackgroundImage = null;
             }
             else
             {
-                UpdateProgress("Loaded Client Pak");
+                UpdateProgress("客户端PAK已加载");
                 UpdateLabel(lClientPak, Data.Client.FileName);
                 TestPanel.BackgroundImage = Data.Client.GetIconByName(ClientPak.DefaultPakIcon);
             }
@@ -147,28 +147,28 @@ namespace AAEmu.DBEditor
 
         private bool OpenMySQlTask()
         {
-            UpdateProgress("Opening MySQL server ...");
+            UpdateProgress("正在打开MySQL服务器 ...");
             Data.MySqlDb.Initialize();
             if (Data.MySqlDb.IsValid)
             {
                 UpdateLabel(lMySQLServer, ProgramSettings.Instance.MySqlDb + " - " + ProgramSettings.Instance.MySqlLogin + " - " + ProgramSettings.Instance.MySqlGame);
                 AAEmu.DBEditor.Properties.Settings.Default.Save();
-                UpdateProgress("MySQL loaded");
+                UpdateProgress("MySQL 已经加载");
             }
             else
             {
-                UpdateLabel(lMySQLServer, "<failed> " + Data.MySqlDb.LastError);
-                UpdateProgress("MySQL failed to load");
+                UpdateLabel(lMySQLServer, "<失败> " + Data.MySqlDb.LastError);
+                UpdateProgress("MySQL 加载失败");
             }
             return Data.MySqlDb.IsValid;
         }
 
         private bool ValidateFiles()
         {
-            UpdateProgress("Loading data ...");
-            UpdateLabel(lServerDB, "Loading ...");
-            UpdateLabel(lClientPak, "Loading ...");
-            UpdateLabel(lMySQLServer, "Loading ...");
+            UpdateProgress("正在加载 data ...");
+            UpdateLabel(lServerDB, "正在加载 ...");
+            UpdateLabel(lClientPak, "正在加载 ...");
+            UpdateLabel(lMySQLServer, "正在加载 ...");
 
             var res = true;
 
@@ -187,11 +187,11 @@ namespace AAEmu.DBEditor
 
             if (res)
             {
-                UpdateProgress("Done");
+                UpdateProgress("完成");
             }
             else
             {
-                UpdateProgress("Loading failed");
+                UpdateProgress("加载失败");
             }
 
             ValidateFilesTask = null;
@@ -229,7 +229,7 @@ namespace AAEmu.DBEditor
             }
 
             MainForm.Self = this;
-            MMVersion.Text = $@"Version {Assembly.GetExecutingAssembly().GetName().Version}";
+            MMVersion.Text = $@"版本: {Assembly.GetExecutingAssembly().GetName().Version}";
 
             // Set the radio buttons for locale
             rbLocaleEnUs.Checked = ProgramSettings.Instance.ClientLanguage == "en_us";
@@ -374,17 +374,17 @@ namespace AAEmu.DBEditor
             {
                 ProgramSettings.Instance.ClientLanguage = rbLocale.Text;
                 // AAEmu.DBEditor.Properties.Settings.Default.Save();
-                UpdateProgress("Updated Locale, reloading from DB ...");
+                UpdateProgress("本地化配置已更新，正在从数据库重新加载 ...");
                 if (Data.Server.ReloadLocale(Data.Server.CompactSqlite))
                 {
-                    UpdateProgress($"Locale updated to {rbLocale.Text}.");
+                    UpdateProgress($"语言已切换至： {rbLocale.Text}");
                     // Only save settings if this button was enabled by the locale loader, otherwise ignore
                     if (rbLocale.Enabled)
                         ProgramSettings.SaveToFile(ProgramSettings.Instance, Path.Combine(ProgramSettings.GetSettingsFolder(), SettingsFile));
                 }
                 else
                 {
-                    UpdateProgress($"Failed to update locale to {rbLocale.Text}!");
+                    UpdateProgress($"本地化配置切换失败：无法切换到 {rbLocale.Text}");
                 }
             }
         }
@@ -426,11 +426,11 @@ namespace AAEmu.DBEditor
                 if (!ProgramSettings.SaveToFile(newSettings,
                         Path.Combine(ProgramSettings.GetSettingsFolder(), NewSettingsFile)))
                 {
-                    MessageBox.Show("Failed to save new setttings");
+                    MessageBox.Show("保存新设置失败");
                     return;
                 }
-                if (MessageBox.Show($"Settings have changed, a restart is required.{Environment.NewLine}" +
-                                    $"Do you want to restart now?", "Settings", MessageBoxButtons.YesNo) ==
+                if (MessageBox.Show($"设置已更改，需要重启生效.{Environment.NewLine}" +
+                                    $"需要现在就重启吗?", "设置", MessageBoxButtons.YesNo) ==
                     DialogResult.Yes)
                 {
 

@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms.server
+﻿﻿namespace AAEmu.DBEditor.forms.server
 {
     partial class AccountChangePasswordForm
     {
@@ -42,14 +42,14 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(87, 16);
             label1.TabIndex = 0;
-            label1.Text = "New Password:";
+            label1.Text = "新密码:";
             // 
             // tNewPassword
             // 
             tNewPassword.Location = new System.Drawing.Point(105, 6);
             tNewPassword.Name = "tNewPassword";
             tNewPassword.PasswordChar = '⬤';
-            tNewPassword.PlaceholderText = "new password";
+            tNewPassword.PlaceholderText = "新密码";
             tNewPassword.Size = new System.Drawing.Size(307, 23);
             tNewPassword.TabIndex = 1;
             tNewPassword.TextChanged += tNewPassword_TextChanged;
@@ -61,7 +61,7 @@
             cbShowPassword.Name = "cbShowPassword";
             cbShowPassword.Size = new System.Drawing.Size(108, 20);
             cbShowPassword.TabIndex = 2;
-            cbShowPassword.Text = "Show password";
+            cbShowPassword.Text = "查看密码";
             cbShowPassword.UseVisualStyleBackColor = true;
             cbShowPassword.CheckedChanged += cbShowPassword_CheckedChanged;
             // 
@@ -72,7 +72,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(571, 23);
             btnSave.TabIndex = 3;
-            btnSave.Text = "Save and copy to clipboard";
+            btnSave.Text = "保存并复制到剪贴板";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -83,7 +83,7 @@
             btnGenerate.Name = "btnGenerate";
             btnGenerate.Size = new System.Drawing.Size(165, 23);
             btnGenerate.TabIndex = 4;
-            btnGenerate.Text = "Generate Random";
+            btnGenerate.Text = "随机生成";
             btnGenerate.UseVisualStyleBackColor = true;
             btnGenerate.Click += btnGenerate_Click;
             // 
@@ -101,7 +101,7 @@
             Name = "AccountChangePasswordForm";
             SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Change Password";
+            Text = "修改密码";
             Load += AccountChangePasswordForm_Load;
             ResumeLayout(false);
             PerformLayout();

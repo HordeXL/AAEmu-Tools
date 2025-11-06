@@ -791,11 +791,11 @@ public partial class MainForm
                               (lbTowerDefs.Items.Count > 0);
 
         if (lbSchedulesIRL.Items.Count <= 0)
-            lbSchedulesIRL.Items.Add("Nothing loaded or incomplete data");
+            lbSchedulesIRL.Items.Add("未加载内容或数据不完整");
         if (lbSchedulesGame.Items.Count <= 0)
-            lbSchedulesGame.Items.Add("Nothing loaded or incomplete data");
+            lbSchedulesGame.Items.Add("未加载内容或数据不完整");
         if (lbTowerDefs.Items.Count <= 0)
-            lbTowerDefs.Items.Add("Nothing loaded or incomplete data");
+            lbTowerDefs.Items.Add("未加载内容或数据不完整");
 
         tcScheduleTypes.SelectedTab = tpTowerDefs;
     }

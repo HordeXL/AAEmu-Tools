@@ -70,8 +70,8 @@ namespace AAEmu.DBEditor.tools.ahbot
                     }
                 }
 
-                lAhBotName.Text = @"<error>";
-                lAhBotAccount.Text = @"<error>";
+                lAhBotName.Text = @"<错误>";
+                lAhBotAccount.Text = @"<错误>";
             }
         }
 
@@ -82,7 +82,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             SkipSaving = true;
             try
             {
-                Log("Getting game server list");
+                Log("获取服务器列表");
                 // Populate Servers
                 cbServers.Items.Clear();
                 var serverList = Data.MySqlDb.Login.GameServers.Where(s => s.Hidden == false);
@@ -91,7 +91,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                     cbServers.Items.Add(server.Name);
                 }
 
-                Log("Generating AH categories");
+                Log("生成AH类别");
                 // Populate Items List
                 var cats = new Dictionary<long, TreeNodeForAhCategory>();
 
@@ -216,7 +216,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                     ItemNodes.Add(item.Id ?? 0, itemNode);
                 }
 
-                Log("Load item grades");
+                Log("加载强化等级");
                 // Populate Grades
                 cbGrade.Items.Clear();
                 foreach (var itemGrade in Data.Server.CompactSqlite.ItemGrades.OrderBy(g => g.Id))
@@ -321,7 +321,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 var settingsFile = Path.Combine(Application.StartupPath, AhBotSettingsFileName);
                 if (File.Exists(settingsFile))
                 {
-                    Log("Loading AH Bot configuration");
+                    Log("正在加载拍卖机器人配置");
                     var settingsString = File.ReadAllText(settingsFile);
                     if (!TryDeserializeObject<AhBotSettings>(settingsString, out var newSettings, out var ex1))
                     {
@@ -340,7 +340,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                     else
                     {
                         Settings.AccountName = string.Empty;
-                        lAhBotAccount.Text = @"<no account selected>";
+                        lAhBotAccount.Text = @"<未选择任何账户>";
                     }
 
                     if (!string.IsNullOrWhiteSpace(Settings.CharacterName) &&
@@ -351,7 +351,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                     else
                     {
                         Settings.CharacterName = string.Empty;
-                        lAhBotName.Text = @"<no character selected>";
+                        lAhBotName.Text = @"<未选择任何角色>";
                     }
 
                     if (!string.IsNullOrWhiteSpace(Settings.ServerName) &&
@@ -367,13 +367,13 @@ namespace AAEmu.DBEditor.tools.ahbot
                 }
                 else
                 {
-                    Log($"AH Bot configuration file not found: {settingsFile}");
+                    Log($"未找到 AHBot 的配置文件: {settingsFile}");
                 }
 
                 var settingsListingFile = Path.Combine(Application.StartupPath, Settings.ListingsFile);
                 if (File.Exists(settingsListingFile))
                 {
-                    Log($"Loading AH listing settings from: {settingsListingFile}");
+                    Log($"正在加载 AH 列表配置: {settingsListingFile}");
                     var settingsListingString = File.ReadAllText(settingsListingFile);
                     if (!TryDeserializeObject<AhBotListingSetting>(settingsListingString, out var resListings,
                             out var ex2))
@@ -386,7 +386,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 }
                 else
                 {
-                    Log($"Defined listing file not found: {settingsListingFile}");
+                    Log($"未找到定义的列表文件: {settingsListingFile}");
                 }
 
                 UpdateFromSettings();
@@ -411,11 +411,11 @@ namespace AAEmu.DBEditor.tools.ahbot
             try
             {
                 File.WriteAllText(settingsFile, res);
-                Log($"Saved settings to: {settingsFile}");
+                Log($"设置已保存至: {settingsFile}");
             }
             catch (Exception ex)
             {
-                Log($"Failed to save: {settingsFile}");
+                Log($"保存失败: {settingsFile}");
                 MessageBox.Show(ex.Message);
             }
 
@@ -424,11 +424,11 @@ namespace AAEmu.DBEditor.tools.ahbot
             try
             {
                 File.WriteAllText(settingsListFile, resListing);
-                Log($"Saved Listing to: {settingsListFile}");
+                Log($"列表已保存至: {settingsListFile}");
             }
             catch (Exception ex)
             {
-                Log($"Failed to save: {settingsListFile}");
+                Log($"保存失败: {settingsListFile}");
                 MessageBox.Show(ex.Message);
             }
         }
@@ -491,7 +491,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                     SelectedItem = item;
                     lItemId.Text = item.Id.ToString();
                     lItemName.Text = Data.Server.LocalizedText.GetValueOrDefault(("items", "name", itemId)) ??
-                                     "<error>";
+                                     "<错误>";
                     if (item.FixedGrade >= 0)
                     {
                         cbGrade.SelectedIndex = (int)(item.FixedGrade ?? 0);
@@ -547,7 +547,7 @@ namespace AAEmu.DBEditor.tools.ahbot
 
             if (SelectedItem == null)
             {
-                MessageBox.Show(@"No item selected");
+                MessageBox.Show(@"未选择物品");
                 return;
             }
 
@@ -564,60 +564,60 @@ namespace AAEmu.DBEditor.tools.ahbot
             if (!int.TryParse(tSaleQuantity.Text, NumberStyles.Integer, CultureInfo.InvariantCulture,
                     out var newQuantity))
             {
-                MessageBox.Show(@"Invalid Quantity field");
+                MessageBox.Show(@"数量字段无效");
                 return;
             }
 
             if (!long.TryParse(tBuyOutPrice.Text, NumberStyles.Integer, CultureInfo.InvariantCulture,
                     out var newBuyOutPrice))
             {
-                MessageBox.Show(@"Invalid buy-out price");
+                MessageBox.Show(@"一口价无效");
                 return;
             }
 
             if (!long.TryParse(tStartBid.Text, NumberStyles.Integer, CultureInfo.InvariantCulture, out var newStartBid))
             {
-                MessageBox.Show(@"Invalid starting bid price");
+                MessageBox.Show(@"起拍价无效");
                 return;
             }
 
             if (!int.TryParse(tListedCount.Text, NumberStyles.Integer, CultureInfo.InvariantCulture,
                     out var newListedCount))
             {
-                MessageBox.Show(@"Invalid listing count field");
+                MessageBox.Show(@"上架数量无效");
                 return;
             }
 
             if ((newQuantity < 1) || (newQuantity > SelectedItem.MaxStackSize))
             {
-                MessageBox.Show($@"Quantity for {itemName} must be between 1 and {SelectedItem.MaxStackSize}");
+                MessageBox.Show($@"{itemName}的数量必须介于1到{SelectedItem.MaxStackSize}之间");
                 return;
             }
 
             if (newBuyOutPrice < SelectedItem.Refund)
             {
                 MessageBox.Show(
-                    $@"Buyout price for {itemName} must be at least the refund price of {SelectedItem.Refund}");
+                    $@"{itemName}的一口价不得低于回收价 {SelectedItem.Refund}");
                 return;
             }
 
             if (newStartBid >= newBuyOutPrice)
             {
-                MessageBox.Show(@"Starting bid must be lower than the buyout price");
+                MessageBox.Show(@"起拍价必须低于一口价");
                 return;
             }
 
             if (newListedCount < 1)
             {
-                MessageBox.Show(@"You must at least put up one listing");
+                MessageBox.Show(@"您至少需要上架一件商品");
                 return;
             }
 
             if (newListedCount > 5)
             {
                 if (MessageBox.Show(
-                        $@"You really need {newListedCount} entries listed for this item (max recommended is 5)",
-                        @"Add AH Listing",
+                        $@"当前需要为该物品上架 {newListedCount} 条交易(建议上限为5条)",
+                        @"添加拍卖行商品",
                         MessageBoxButtons.YesNo) != DialogResult.Yes)
                     return;
             }
@@ -640,11 +640,11 @@ namespace AAEmu.DBEditor.tools.ahbot
             if (isNewEntry)
             {
                 ListingSettings.Items.Add(thisItem);
-                Log($"Added new AH Bot entry for ItemId: {thisItem.ItemId}");
+                Log($"已增加物品编号为：{thisItem.ItemId} 的拍卖机器人数据");
             }
             else
             {
-                Log($"Updated AH Bot entry for ItemId: {thisItem.ItemId}");
+                Log($"已更新物品编号为：{thisItem.ItemId} 的拍卖机器人数据");
             }
 
             tvAhList_AfterSelect(tvAhList, new TreeViewEventArgs(tvAhList.SelectedNode));
@@ -659,7 +659,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 var server = Data.MySqlDb.Login.GameServers.FirstOrDefault(x => x.Name == Settings.ServerName);
                 if (server == null)
                 {
-                    Log($"Could not find information for server {Settings.ServerName}");
+                    Log($"无法找到服务器信息 {Settings.ServerName}");
                     return;
                 }
 
@@ -680,12 +680,12 @@ namespace AAEmu.DBEditor.tools.ahbot
                 var jsonResult = HttpHelper.SimpleGetUriAsString(url);
                 var ahListResult = JsonConvert.DeserializeObject<JsonAuctionLotList>(jsonResult);
                 ServerAhListingCache = ahListResult.Items;
-                Log($"Queried {ServerAhListingCache.Count} entries from the live server");
+                Log($"从实时服务器查询到 {ServerAhListingCache.Count} 条拍卖行数据");
             }
             catch (Exception ex)
             {
                 ServerAhListingCache.Clear();
-                Log($"Queried from the live server failed, clearing cache! : {ex.Message}");
+                Log($"实时服务器查询失败，正在清除缓存! : {ex.Message}");
                 return false;
             }
             UpdateFromSettings();
@@ -694,7 +694,7 @@ namespace AAEmu.DBEditor.tools.ahbot
 
         private bool CheckAndUpdateAhBotEntries()
         {
-            Log("Updating AH listing from live server");
+            Log("正在从实时服务器更新拍卖行列表");
             // TODO: Get this from settings
             string serverHostName;
             var serverPort = WebApiDefaultPort;
@@ -703,7 +703,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 var server = Data.MySqlDb.Login.GameServers.FirstOrDefault(x => x.Name == Settings.ServerName);
                 if (server == null)
                 {
-                    Log($"Could not find information for server {Settings.ServerName}");
+                    Log($"无法找到服务器信息 {Settings.ServerName}");
                     return false;
                 }
 
@@ -719,7 +719,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             var character = Data.MySqlDb.Game.Characters.FirstOrDefault(x => x.Name == Settings.CharacterName);
             if (character == null)
             {
-                Log($"Unable to find {Settings.CharacterName}");
+                Log($"无法找到角色 {Settings.CharacterName}");
                 return false;
             }
 
@@ -767,7 +767,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 }
 
                 if (toAdd.Count > 0)
-                    Log($"Adding {toAdd.Count} entries to live server");
+                    Log($"正在向实时服务器添加 {toAdd.Count} 条数据");
 
                 foreach (var generateItem in toAdd)
                 {
@@ -777,7 +777,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             }
             catch (Exception ex)
             {
-                var errorMsg = $"Failed to get AH data from server.\n\nURL: {queryUrl}\n\n{ex.Message}";
+                var errorMsg = $"从服务器获取拍卖行数据失败.\n\nURL: {queryUrl}\n\n{ex.Message}";
                 Log(errorMsg);
                 MessageBox.Show(errorMsg);
                 return false;
@@ -797,9 +797,9 @@ namespace AAEmu.DBEditor.tools.ahbot
             // Toggle background worker thread
             if (!bgwAhCheckLoop.IsBusy)
             {
-                Log("Starting AH worker");
+                Log("拍卖行工作正在开始");
                 btnConnect.Enabled = false;
-                btnConnect.Text = @"Starting";
+                btnConnect.Text = @"正在开始";
                 bgwAhCheckLoop.RunWorkerAsync();
                 tcAhBot.SelectedTab = tpLogs;
             }
@@ -807,8 +807,8 @@ namespace AAEmu.DBEditor.tools.ahbot
             {
                 if (!bgwAhCheckLoop.CancellationPending)
                 {
-                    Log("Stopping AH worker");
-                    btnConnect.Text = @"Stopping ...";
+                    Log("拍卖行工作正在停止");
+                    btnConnect.Text = @"正在停止 ...";
                     btnConnect.Enabled = false;
                     bgwAhCheckLoop.CancelAsync();
                 }
@@ -818,11 +818,11 @@ namespace AAEmu.DBEditor.tools.ahbot
         private void bgwAhCheckLoop_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             // Init connection
-            Log("Initializing check loop");
+            Log("正在初始化检查循环");
 
             Invoke(() =>
             {
-                btnConnect.Text = @"Stop";
+                btnConnect.Text = @"停止";
                 btnConnect.Enabled = true;
                 btnQueryServerAH.Enabled = false;
             });
@@ -856,11 +856,11 @@ namespace AAEmu.DBEditor.tools.ahbot
             }
             catch (Exception exception)
             {
-                Log($"Ah Loop Exception: {exception.Message}");
+                Log($"拍卖行循环异常: {exception.Message}");
             }
 
             // Clean up
-            Log("Ended check loop");
+            Log("检查循环已结束");
         }
 
         private void bgwAhCheckLoop_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
@@ -873,11 +873,11 @@ namespace AAEmu.DBEditor.tools.ahbot
         {
             Invoke(() =>
             {
-                btnConnect.Text = @"Start";
+                btnConnect.Text = @"开始";
                 btnConnect.Enabled = true;
                 btnQueryServerAH.Enabled = true;
             });
-            Log("AH Worker stopped");
+            Log("拍卖行工作已停止");
             if (CloseWhenDone)
                 Dispose();
         }
@@ -900,17 +900,17 @@ namespace AAEmu.DBEditor.tools.ahbot
 
         private bool TryCheckMails()
         {
-            Log("Query mails");
+            Log("查询邮件");
             if (string.IsNullOrWhiteSpace(Settings.CharacterName))
             {
-                Log("No character selected");
+                Log("未选择角色");
                 return false;
             }
 
             var character = Data.MySqlDb.Game.Characters.FirstOrDefault(x => x.Name == Settings.CharacterName);
             if (character == null)
             {
-                Log($"Unable to find {Settings.CharacterName}");
+                Log($"无法找到角色名称: {Settings.CharacterName}");
                 return false;
             }
 
@@ -921,7 +921,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 var server = Data.MySqlDb.Login.GameServers.FirstOrDefault(x => x.Name == Settings.ServerName);
                 if (server == null)
                 {
-                    Log($"Could not find information for server {Settings.ServerName}");
+                    Log($"无法找到服务器信息: {Settings.ServerName}");
                     return false;
                 }
 
@@ -949,7 +949,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 var res = JsonConvert.DeserializeObject<JsonListMailResponseItems>(jsonRes);
                 if (res == null || res.MailItems == null)
                 {
-                    Log($"Server returned invalid data for {Settings.CharacterName} ({request.CharacterId})");
+                    Log($"服务器为角色 {Settings.CharacterName} ({request.CharacterId})返回了无效数据");
                     return false;
                 }
 
@@ -965,7 +965,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                         case MailType.AucOffSuccess: // Item sold, yay!
                             // Order server to delete the mail
                             mailsRewards.Add(mail.Id, mail.CopperCoins);
-                            Log($"Mail Id:{mail.Id}, Type:{mail.MailType}, {mail.SenderName} ({mail.SenderId}) -> {mail.ReceiverName} ({mail.ReceiverId}), Title: {mail.Title}");
+                            Log($"邮件编号:{mail.Id}, 类型:{mail.MailType}, {mail.SenderName} ({mail.SenderId}) -> {mail.ReceiverName} ({mail.ReceiverId}), 标题: {mail.Title}");
                             break;
                         case MailType.AucOffFail: // Didn't sell this time T.T
                         case MailType.AucOffCancel: // Shouldn't be cancelled unless this is manually done by the server owner
@@ -983,11 +983,11 @@ namespace AAEmu.DBEditor.tools.ahbot
                 if (mailsRewards.Count > 0)
                 {
                     Log(
-                        $"Found {res.MailItems.Count} mail(s) for {Settings.CharacterName}, {mailsRewards.Count} need to be processed");
+                        $"找到 {Settings.CharacterName} 的 {res.MailItems.Count} 封邮件，其中 {mailsRewards.Count} 封需要处理奖励");
                     var totalReward = mailsRewards.Values.Sum(x => x);
                     if (totalReward > 0)
                     {
-                        Log($"Earned amount for this check: {AaTextHelper.CopperToString(totalReward)}");
+                        Log($"本次结算获得金额: {AaTextHelper.CopperToString(totalReward)}");
 
                         // Delete relevant mails
                         foreach (var (mailId, coins) in mailsRewards)
@@ -1011,7 +1011,7 @@ namespace AAEmu.DBEditor.tools.ahbot
 
                 if (mailsFailed.Count > 0)
                 {
-                    Log($"Trying to delete {mailsFailed.Count} mail(s) containing failed auction notices");
+                    Log($"正在尝试删除 {mailsFailed.Count} 封包含拍卖失败通知的邮件");
                     // Delete relevant mails when no coins earned (failed sales)
                     foreach (var (mailId, coins) in mailsFailed)
                     {
@@ -1025,7 +1025,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                         var trashItems = mailToDelete.MailType is MailType.AucOffCancel or MailType.AucOffFail;
                         TryDeleteMail(deleteMailUrl, mailToDelete.Id, mailToDelete.SenderId, mailToDelete.ReceiverId, trashItems);
                     }
-                    Log($"Done deleting {mailsFailed.Count} mail(s)");
+                    Log($"完成删除 {mailsFailed.Count} 封邮件");
                 }
             }
             catch (Exception ex)
@@ -1063,7 +1063,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 if (long.TryParse(tStartBid.Text, out var sBid) && val > 0 && sBid > 0)
                 {
                     var rate = (float)sBid / (float)val * 100f;
-                    lListingInfo.Text = $@"Starting bid is {rate:F1}% of buy-out (unit {AaTextHelper.CopperToString(sBid / count)})"";";
+                    lListingInfo.Text = $@"起拍价定为一口价的 {rate:F1}% , (单价 {AaTextHelper.CopperToString(sBid / count)})"";";
                 }
                 else
                 {
@@ -1088,7 +1088,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                 if (long.TryParse(tBuyOutPrice.Text, out var sBuy) && val > 0 && sBuy > 0)
                 {
                     var rate = (float)val / (float)sBuy * 100f;
-                    lListingInfo.Text = $@"Starting bid is {rate:F1}% of buy-out (unit {AaTextHelper.CopperToString(val / count)})";
+                    lListingInfo.Text = $@"起拍价定为一口价的 {rate:F1}% , (单价 {AaTextHelper.CopperToString(val / count)})";
                 }
                 else
                 {
@@ -1181,7 +1181,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             if (!long.TryParse(lItemId.Text, out var itemId))
                 return;
             lItemIcon.ImageIndex = Data.Client.GetIconIndexByItemTemplateId(itemId);
-            lItemIcon.Text = lItemIcon.ImageIndex > 0 ? "" : "not found";
+            lItemIcon.Text = lItemIcon.ImageIndex > 0 ? "" : "未找到";
         }
 
         private void BtnClearLog_Click(object sender, EventArgs e)

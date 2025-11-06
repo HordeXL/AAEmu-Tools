@@ -52,14 +52,14 @@ namespace AAEmu.DBEditor.data
                     var s = localize.EnUs;// localize.Ko;
                     switch (ProgramSettings.Instance.ClientLanguage.ToLower())
                     {
-                        case "ko": s = localize.Ko; break;
-                        case "en_us": s = localize.EnUs; break;
-                        case "ru": s = localize.Ru; break;
-                        case "de": s = localize.De; break;
-                        case "fr": s = localize.Fr; break;
-                        case "zh_cn": s = localize.ZhCn; break;
-                        case "zh_tw": s = localize.ZhTw; break;
-                        case "ja": s = localize.Ja; break;
+                        case "韩语": s = localize.Ko; break;
+                        case "英语": s = localize.EnUs; break;
+                        case "俄语": s = localize.Ru; break;
+                        case "德语": s = localize.De; break;
+                        case "法语": s = localize.Fr; break;
+                        case "简中": s = localize.ZhCn; break;
+                        case "繁中": s = localize.ZhTw; break;
+                        case "日语": s = localize.Ja; break;
                     }
                     LocalizedText.Add(new(localize.TblName, localize.TblColumnName, localize.Idx), s);
                 }
@@ -73,7 +73,7 @@ namespace AAEmu.DBEditor.data
 
         public bool OpenDB(string fileName)
         {
-            MainForm.Self.UpdateProgress("Opening ServerDB ...");
+            MainForm.Self.UpdateProgress("正在打开服务器数据库 ...");
 
             TableNames.Clear();
             fileName = Path.GetFullPath(fileName);
@@ -88,7 +88,7 @@ namespace AAEmu.DBEditor.data
                     if (connection == null)
                         return false;
 
-                    MainForm.Self.UpdateProgress("Opening " + fileName + "...");
+                    MainForm.Self.UpdateProgress("正在打开 " + fileName + "...");
 
 
                     using (var command = connection.CreateCommand())
@@ -98,7 +98,7 @@ namespace AAEmu.DBEditor.data
                         using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
                         {
                             TableNames.Clear();
-                            MainForm.Self.UpdateProgress("Loading " + fileName + " table names ...");
+                            MainForm.Self.UpdateProgress("正在加载 " + fileName + " 数据表名称 ...");
                             while (reader.Read())
                             {
                                 var tName = reader.GetString("name", "");

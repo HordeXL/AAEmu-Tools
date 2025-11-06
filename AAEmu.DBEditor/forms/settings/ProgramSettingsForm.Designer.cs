@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms
+﻿﻿namespace AAEmu.DBEditor.forms
 {
     partial class ProgramSettingsForm
     {
@@ -72,7 +72,7 @@
             groupBox1.Size = new System.Drawing.Size(580, 54);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = " Game Client ";
+            groupBox1.Text = " 游戏客户端 ";
             // 
             // LabelGamePakPath
             // 
@@ -90,7 +90,7 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(61, 15);
             label6.TabIndex = 1;
-            label6.Text = "game_pak";
+            label6.Text = "游戏客户端文件";
             // 
             // BtnEditGamePak
             // 
@@ -116,7 +116,7 @@
             groupBox2.Size = new System.Drawing.Size(580, 83);
             groupBox2.TabIndex = 1;
             groupBox2.TabStop = false;
-            groupBox2.Text = " Game Server (compact) ";
+            groupBox2.Text = " 游戏服务器";
             // 
             // LabelServerDataDb
             // 
@@ -134,7 +134,7 @@
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(84, 15);
             label10.TabIndex = 7;
-            label10.Text = "Server Data DB";
+            label10.Text = "服务器数据库";
             // 
             // BtnEditServerDb
             // 
@@ -164,7 +164,7 @@
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(83, 15);
             label8.TabIndex = 4;
-            label8.Text = "Client Data DB";
+            label8.Text = "客户端数据库";
             // 
             // BtnEditClientDb
             // 
@@ -195,7 +195,7 @@
             groupBox3.Size = new System.Drawing.Size(580, 173);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
-            groupBox3.Text = " MySQL server ";
+            groupBox3.Text = " MySQL服务器 ";
             // 
             // TextBoxGameSchema
             // 
@@ -213,7 +213,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(149, 15);
             label5.TabIndex = 19;
-            label5.Text = "Game server schema name";
+            label5.Text = "游戏服务器名称";
             // 
             // TextBoxLoginSchema
             // 
@@ -231,7 +231,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(148, 15);
             label4.TabIndex = 17;
-            label4.Text = "Login server schema name";
+            label4.Text = "登录服务器名称";
             // 
             // TextBoxPassword
             // 
@@ -249,7 +249,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(57, 15);
             label3.TabIndex = 15;
-            label3.Text = "Password";
+            label3.Text = "密码";
             // 
             // TextBoxUsername
             // 
@@ -267,7 +267,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(60, 15);
             label2.TabIndex = 13;
-            label2.Text = "Username";
+            label2.Text = "用户名";
             // 
             // TextBoxServerIP
             // 
@@ -285,7 +285,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(49, 15);
             label1.TabIndex = 11;
-            label1.Text = "ServerIP";
+            label1.Text = "服务器IP";
             // 
             // BtnSave
             // 
@@ -294,7 +294,7 @@
             BtnSave.Name = "BtnSave";
             BtnSave.Size = new System.Drawing.Size(95, 22);
             BtnSave.TabIndex = 21;
-            BtnSave.Text = "Save";
+            BtnSave.Text = "保存";
             BtnSave.UseVisualStyleBackColor = true;
             BtnSave.Click += BtnSave_Click;
             // 
@@ -305,7 +305,7 @@
             BtnRevert.Name = "BtnRevert";
             BtnRevert.Size = new System.Drawing.Size(95, 22);
             BtnRevert.TabIndex = 22;
-            BtnRevert.Text = "Revert";
+            BtnRevert.Text = "撤销";
             BtnRevert.UseVisualStyleBackColor = true;
             BtnRevert.Click += BtnRevert_Click;
             // 
@@ -316,33 +316,33 @@
             BtnCancel.Name = "BtnCancel";
             BtnCancel.Size = new System.Drawing.Size(95, 22);
             BtnCancel.TabIndex = 23;
-            BtnCancel.Text = "Cancel";
+            BtnCancel.Text = "取消";
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
             // 
             // ofdClientPak
             // 
             ofdClientPak.FileName = "game_pak";
-            ofdClientPak.Filter = "Pak Files|*pak*.*|All Files|*.*";
-            ofdClientPak.Title = "Open client game_pak";
+            ofdClientPak.Filter = "Pak 文件|*pak*.*|所有文件|*.*";
+            ofdClientPak.Title = "打开客户端 game_pak 文件";
             // 
             // ofdClientDb
             // 
             ofdClientDb.DefaultExt = "sqlite3";
             ofdClientDb.FileName = "compact.sqlite3";
-            ofdClientDb.Filter = "SQLite Files|*.sqlite*|All files|*.*";
+            ofdClientDb.Filter = "SQLite 文件|*.sqlite*|所有文件|*.*";
             ofdClientDb.InitialDirectory = "Data";
             ofdClientDb.ReadOnlyChecked = true;
-            ofdClientDb.Title = "Open Client DB File";
+            ofdClientDb.Title = "打开客户端 DB 文件";
             // 
             // ofdServerDb
             // 
             ofdServerDb.DefaultExt = "sqlite3";
             ofdServerDb.FileName = "compact.sqlite3";
-            ofdServerDb.Filter = "SQLite Files|*.sqlite*|All files|*.*";
+            ofdServerDb.Filter = "SQLite 文件|*.sqlite*|所有文件|*.*";
             ofdServerDb.InitialDirectory = "Data";
             ofdServerDb.ReadOnlyChecked = true;
-            ofdServerDb.Title = "Open Server DB File";
+            ofdServerDb.Title = "打开服务器 DB 文件";
             // 
             // ProgramSettingsForm
             // 
@@ -358,7 +358,7 @@
             MinimumSize = new System.Drawing.Size(620, 420);
             Name = "ProgramSettingsForm";
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            Text = "Program Settings";
+            Text = "程序设置";
             Load += ProgramSettingsForm_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();

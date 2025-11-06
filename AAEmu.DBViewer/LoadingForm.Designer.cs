@@ -39,7 +39,7 @@
             this.lInfo.Name = "lInfo";
             this.lInfo.Size = new System.Drawing.Size(487, 54);
             this.lInfo.TabIndex = 0;
-            this.lInfo.Text = "Loading ...";
+            this.lInfo.Text = "正在加载 ...";
             this.lInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LoadingForm
@@ -54,7 +54,7 @@
             this.Name = "LoadingForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AAEmu.DBViewer - Please wait ...";
+            this.Text = "AAEmu.DBViewer - 请等待 ...";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.LoadingForm_Load);
             this.ResumeLayout(false);

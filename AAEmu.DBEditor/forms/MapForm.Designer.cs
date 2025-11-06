@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms
+﻿﻿namespace AAEmu.DBEditor.forms
 {
     partial class MapForm
     {
@@ -41,7 +41,7 @@
             groupBox1.Size = new System.Drawing.Size(711, 63);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Map";
+            groupBox1.Text = "地图";
             // 
             // ViewPort
             // 
@@ -61,7 +61,7 @@
             Controls.Add(ViewPort);
             Controls.Add(groupBox1);
             Name = "MapForm";
-            Text = "Map";
+            Text = "地图";
             Load += MapForm_Load;
             ((System.ComponentModel.ISupportInitialize)ViewPort).EndInit();
             ResumeLayout(false);

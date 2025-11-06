@@ -98,51 +98,53 @@
             // 
             idDataGridViewTextBoxColumn.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn.Frozen = true;
-            idDataGridViewTextBoxColumn.HeaderText = "Id";
+            idDataGridViewTextBoxColumn.HeaderText = "编号";
             idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
             idDataGridViewTextBoxColumn.ReadOnly = true;
-            idDataGridViewTextBoxColumn.Width = 50;
+            idDataGridViewTextBoxColumn.Width = 70;
             // 
             // usernameDataGridViewTextBoxColumn
             // 
             usernameDataGridViewTextBoxColumn.DataPropertyName = "Username";
             usernameDataGridViewTextBoxColumn.Frozen = true;
-            usernameDataGridViewTextBoxColumn.HeaderText = "Username";
+            usernameDataGridViewTextBoxColumn.HeaderText = "用户名";
             usernameDataGridViewTextBoxColumn.Name = "usernameDataGridViewTextBoxColumn";
             usernameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // emailDataGridViewTextBoxColumn
             // 
             emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            emailDataGridViewTextBoxColumn.HeaderText = "Email";
+            emailDataGridViewTextBoxColumn.HeaderText = "邮箱";
             emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
             emailDataGridViewTextBoxColumn.ReadOnly = true;
+            emailDataGridViewTextBoxColumn.Width = 100;
             // 
             // lastLoginDataGridViewTextBoxColumn
             // 
             lastLoginDataGridViewTextBoxColumn.DataPropertyName = "LastLogin";
-            lastLoginDataGridViewTextBoxColumn.HeaderText = "LastLogin";
+            lastLoginDataGridViewTextBoxColumn.HeaderText = "最后登录";
             lastLoginDataGridViewTextBoxColumn.Name = "lastLoginDataGridViewTextBoxColumn";
             lastLoginDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // lastIpDataGridViewTextBoxColumn
             // 
             lastIpDataGridViewTextBoxColumn.DataPropertyName = "LastIp";
-            lastIpDataGridViewTextBoxColumn.HeaderText = "LastIp";
+            lastIpDataGridViewTextBoxColumn.HeaderText = "最后登录IP";
             lastIpDataGridViewTextBoxColumn.Name = "lastIpDataGridViewTextBoxColumn";
             lastIpDataGridViewTextBoxColumn.ReadOnly = true;
+            lastIpDataGridViewTextBoxColumn.Width = 150;
             // 
             // createdAtDataGridViewTextBoxColumn
             // 
             createdAtDataGridViewTextBoxColumn.DataPropertyName = "CreatedAt";
-            createdAtDataGridViewTextBoxColumn.HeaderText = "CreatedAt";
+            createdAtDataGridViewTextBoxColumn.HeaderText = "创建时间";
             createdAtDataGridViewTextBoxColumn.Name = "createdAtDataGridViewTextBoxColumn";
             createdAtDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // updatedAtDataGridViewTextBoxColumn
             // 
             updatedAtDataGridViewTextBoxColumn.DataPropertyName = "UpdatedAt";
-            updatedAtDataGridViewTextBoxColumn.HeaderText = "UpdatedAt";
+            updatedAtDataGridViewTextBoxColumn.HeaderText = "更新时间";
             updatedAtDataGridViewTextBoxColumn.Name = "updatedAtDataGridViewTextBoxColumn";
             updatedAtDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -200,12 +202,12 @@
             // lCharacterName
             // 
             lCharacterName.AutoSize = true;
-            lCharacterName.Font = new System.Drawing.Font("Segoe UI Variable Text", 9F, System.Drawing.FontStyle.Bold);
+            lCharacterName.Font = new System.Drawing.Font("SegoeUI动态字体", 9F, System.Drawing.FontStyle.Bold);
             lCharacterName.Location = new System.Drawing.Point(338, 21);
             lCharacterName.Name = "lCharacterName";
             lCharacterName.Size = new System.Drawing.Size(53, 16);
             lCharacterName.TabIndex = 3;
-            lCharacterName.Text = "<name>";
+            lCharacterName.Text = "<名称>";
             // 
             // lLevel
             // 
@@ -214,7 +216,7 @@
             lLevel.Name = "lLevel";
             lLevel.Size = new System.Drawing.Size(116, 15);
             lLevel.TabIndex = 4;
-            lLevel.Text = "<level/race/gender>";
+            lLevel.Text = "<等级/种族/性别>";
             // 
             // lClass
             // 
@@ -223,7 +225,7 @@
             lClass.Name = "lClass";
             lClass.Size = new System.Drawing.Size(48, 15);
             lClass.TabIndex = 5;
-            lClass.Text = "<class>";
+            lClass.Text = "<职业>";
             // 
             // lMoney
             // 
@@ -232,7 +234,7 @@
             lMoney.Name = "lMoney";
             lMoney.Size = new System.Drawing.Size(60, 15);
             lMoney.TabIndex = 6;
-            lMoney.Text = "<money>";
+            lMoney.Text = "<金钱>";
             // 
             // Menus
             // 
@@ -241,21 +243,21 @@
             Menus.Name = "Menus";
             Menus.Size = new System.Drawing.Size(858, 24);
             Menus.TabIndex = 7;
-            Menus.Text = "menuStrip1";
+            Menus.Text = "菜单栏2";
             // 
             // MenuAccount
             // 
             MenuAccount.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MenuAccountNew, AccountS1, AccountUsername, AccountPassword, AccountS2, AccountDelete });
             MenuAccount.Name = "MenuAccount";
             MenuAccount.Size = new System.Drawing.Size(64, 20);
-            MenuAccount.Text = "&Account";
+            MenuAccount.Text = "&账户";
             MenuAccount.DropDownOpening += MenuAccount_DropDownOpening;
             // 
             // MenuAccountNew
             // 
             MenuAccountNew.Name = "MenuAccountNew";
             MenuAccountNew.Size = new System.Drawing.Size(171, 22);
-            MenuAccountNew.Text = "&New";
+            MenuAccountNew.Text = "&新建";
             MenuAccountNew.Click += MenuAccountNew_Click;
             // 
             // AccountS1
@@ -267,14 +269,14 @@
             // 
             AccountUsername.Name = "AccountUsername";
             AccountUsername.Size = new System.Drawing.Size(171, 22);
-            AccountUsername.Text = "Change Username";
+            AccountUsername.Text = "修改用户名";
             AccountUsername.Click += AccountUsername_Click;
             // 
             // AccountPassword
             // 
             AccountPassword.Name = "AccountPassword";
             AccountPassword.Size = new System.Drawing.Size(171, 22);
-            AccountPassword.Text = "Change &Password";
+            AccountPassword.Text = "修改&密码";
             AccountPassword.Click += AccountPassword_Click;
             // 
             // AccountS2
@@ -286,7 +288,7 @@
             // 
             AccountDelete.Name = "AccountDelete";
             AccountDelete.Size = new System.Drawing.Size(171, 22);
-            AccountDelete.Text = "Delete";
+            AccountDelete.Text = "删除";
             AccountDelete.Click += AccountDelete_Click;
             // 
             // label1
@@ -296,13 +298,13 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(36, 15);
             label1.TabIndex = 8;
-            label1.Text = "Filter:";
+            label1.Text = "筛选:";
             // 
             // tUserFilter
             // 
             tUserFilter.Location = new System.Drawing.Point(54, 28);
             tUserFilter.Name = "tUserFilter";
-            tUserFilter.PlaceholderText = "account or character name";
+            tUserFilter.PlaceholderText = "账号或角色名";
             tUserFilter.Size = new System.Drawing.Size(208, 23);
             tUserFilter.TabIndex = 9;
             tUserFilter.TextChanged += tUserFilter_TextChanged;
@@ -325,7 +327,7 @@
             groupBox1.Size = new System.Drawing.Size(834, 75);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Account Game Details";
+            groupBox1.Text = "账户游戏详情";
             // 
             // cbBanReason
             // 
@@ -345,7 +347,7 @@
             cbBanned.Name = "cbBanned";
             cbBanned.Size = new System.Drawing.Size(66, 19);
             cbBanned.TabIndex = 9;
-            cbBanned.Text = "Banned";
+            cbBanned.Text = "封禁";
             cbBanned.UseVisualStyleBackColor = true;
             cbBanned.CheckedChanged += AccountValueChanged;
             // 
@@ -366,7 +368,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(73, 15);
             label5.TabIndex = 6;
-            label5.Text = "Access Level";
+            label5.Text = "权限等级";
             // 
             // label4
             // 
@@ -375,7 +377,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(37, 15);
             label4.TabIndex = 5;
-            label4.Text = "Labor";
+            label4.Text = "劳动力";
             // 
             // tLabor
             // 
@@ -400,7 +402,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(45, 15);
             label3.TabIndex = 2;
-            label3.Text = "Loyalty";
+            label3.Text = "鲁鲁币";//Loyalty
             // 
             // label2
             // 
@@ -409,7 +411,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(44, 15);
             label2.TabIndex = 1;
-            label2.Text = "Credits";
+            label2.Text = "点券";//Credits
             // 
             // tCredits
             // 
@@ -433,7 +435,7 @@
             groupBox2.Size = new System.Drawing.Size(834, 200);
             groupBox2.TabIndex = 11;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Character Details";
+            groupBox2.Text = "角色详情";
             // 
             // btnSave
             // 
@@ -443,7 +445,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(75, 22);
             btnSave.TabIndex = 12;
-            btnSave.Text = "Save";
+            btnSave.Text = "保存";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
@@ -461,7 +463,7 @@
             Controls.Add(Menus);
             MainMenuStrip = Menus;
             Name = "AccountsForm";
-            Text = "Accounts";
+            Text = "账户";
             FormClosed += AccountsForm_FormClosed;
             Load += AccountsForm_Load;
             ((System.ComponentModel.ISupportInitialize)dgvUsers).EndInit();

@@ -46,7 +46,7 @@
             this.LClientLocation.Name = "LClientLocation";
             this.LClientLocation.Size = new System.Drawing.Size(102, 13);
             this.LClientLocation.TabIndex = 0;
-            this.LClientLocation.Text = "<no client selected>";
+            this.LClientLocation.Text = "<未选择客户端>";
             // 
             // btnFindClient
             // 
@@ -54,13 +54,13 @@
             this.btnFindClient.Name = "btnFindClient";
             this.btnFindClient.Size = new System.Drawing.Size(138, 23);
             this.btnFindClient.TabIndex = 1;
-            this.btnFindClient.Text = "Locate Client";
+            this.btnFindClient.Text = "选择客户端";
             this.btnFindClient.UseVisualStyleBackColor = true;
             this.btnFindClient.Click += new System.EventHandler(this.BtnFindClient_Click);
             // 
             // clientFolderDlg
             // 
-            this.clientFolderDlg.Description = "Please locate the root of the game client where the game_pak file is located";
+            this.clientFolderDlg.Description = "请选择游戏客户端根目录，其中应包含game_pak文件";
             this.clientFolderDlg.RootFolder = System.Environment.SpecialFolder.MyComputer;
             this.clientFolderDlg.SelectedPath = "C:\\ArcheAge\\Working";
             this.clientFolderDlg.ShowNewFolderButton = false;
@@ -72,7 +72,7 @@
             this.btnQuestSphere.Name = "btnQuestSphere";
             this.btnQuestSphere.Size = new System.Drawing.Size(138, 23);
             this.btnQuestSphere.TabIndex = 2;
-            this.btnQuestSphere.Text = "Quest Sphere Data";
+            this.btnQuestSphere.Text = "任务领域数据";
             this.btnQuestSphere.UseVisualStyleBackColor = true;
             this.btnQuestSphere.Click += new System.EventHandler(this.BtnQuestSphere_Click);
             // 
@@ -83,11 +83,11 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Export";
+            this.label1.Text = "导出";
             // 
             // exportFileDlg
             // 
-            this.exportFileDlg.Filter = "json files|*.json";
+            this.exportFileDlg.Filter = "json 文件|*.json";
             // 
             // LQuestSphereData
             // 
@@ -96,7 +96,7 @@
             this.LQuestSphereData.Name = "LQuestSphereData";
             this.LQuestSphereData.Size = new System.Drawing.Size(43, 13);
             this.LQuestSphereData.TabIndex = 4;
-            this.LQuestSphereData.Text = "<none>";
+            this.LQuestSphereData.Text = "<无>";
             // 
             // lMissionXml
             // 
@@ -105,7 +105,7 @@
             this.lMissionXml.Name = "lMissionXml";
             this.lMissionXml.Size = new System.Drawing.Size(43, 13);
             this.lMissionXml.TabIndex = 6;
-            this.lMissionXml.Text = "<none>";
+            this.lMissionXml.Text = "<无>";
             // 
             // btnMissionXml
             // 
@@ -114,7 +114,7 @@
             this.btnMissionXml.Name = "btnMissionXml";
             this.btnMissionXml.Size = new System.Drawing.Size(138, 23);
             this.btnMissionXml.TabIndex = 5;
-            this.btnMissionXml.Text = "Mission XML Data";
+            this.btnMissionXml.Text = "任务XML数据";
             this.btnMissionXml.UseVisualStyleBackColor = true;
             this.btnMissionXml.Click += new System.EventHandler(this.btnMissionXml_Click);
             // 
@@ -131,7 +131,7 @@
             this.Controls.Add(this.btnFindClient);
             this.Controls.Add(this.LClientLocation);
             this.Name = "MainForm";
-            this.Text = "AAEmu Client Data Exporter";
+            this.Text = "AAEmu 客户端数据导出工具";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);

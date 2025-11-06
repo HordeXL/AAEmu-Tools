@@ -144,7 +144,7 @@ namespace AAEmu.ClientDataExporter
                             }
                             catch (Exception x)
                             {
-                                MessageBox.Show("Exception: " + x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("异常: " + x.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 return;
                             }
                         }

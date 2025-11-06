@@ -124,14 +124,14 @@ namespace AAEmu.DBEditor.forms.server
 
             if (accountId == 0)
             {
-                lvCharacters.Items.Add("No Account Selected").ImageIndex = 0;
+                lvCharacters.Items.Add("未选择账户").ImageIndex = 0;
                 return;
             }
 
             var account = Data.MySqlDb.Login.Users.FirstOrDefault(x => x.Id == accountId);
             if (account == null)
             {
-                lvCharacters.Items.Add("Invalid Account Selected").ImageIndex = 0;
+                lvCharacters.Items.Add("所选账户无效").ImageIndex = 0;
                 return;
             }
 
@@ -165,7 +165,7 @@ namespace AAEmu.DBEditor.forms.server
             var characters = Data.MySqlDb.Game.Characters.Where(x => x.AccountId == accountId).ToList();
             if (characters.Count <= 0)
             {
-                lvCharacters.Items.Add("No Characters").ImageIndex = 0;
+                lvCharacters.Items.Add("未创建角色").ImageIndex = 0;
                 return;
             }
 
@@ -211,11 +211,12 @@ namespace AAEmu.DBEditor.forms.server
             }
 
             pbCharacter.Image = ilRaces.Images[iconId];
-            lCharacterName.Text = c.Name + (c.Deleted > 0 ? " (deleted)" : "");
+            lCharacterName.Text = c.Name + (c.Deleted > 0 ? " (已经删除)" : "");
             // ReSharper disable once LocalizableElement
             lLevel.Text = $"{Data.Server.GetText("ui_texts", "text", 1097, "<level>")} {c.Level}  {c.GetRaceName()} {c.GetGenderName()}";
             // ReSharper disable once LocalizableElement
-            lMoney.Text = $"{AaTextHelper.CopperToString(c.Money)} on player, {AaTextHelper.CopperToString(c.Money2)} in warehouse";
+            //lMoney.Text = $"{AaTextHelper.CopperToString(c.Money)} on player, {AaTextHelper.CopperToString(c.Money2)} in warehouse";
+            lMoney.Text = $"背包 {AaTextHelper.CopperToString(c.Money)}, 仓库 {AaTextHelper.CopperToString(c.Money2)}";
             // ReSharper disable once LocalizableElement
             lClass.Text = $"{AbilityNames.GetClassName(c.Ability1, c.Ability2, c.Ability3)} ({c.GetClassName()})";
         }
@@ -301,11 +302,11 @@ namespace AAEmu.DBEditor.forms.server
 
             if (Data.MySqlDb.Game.Characters.Any(x => x.AccountId == SelectedAccount.Id))
             {
-                MessageBox.Show($"It's not allowed to delete accounts that still have characters attached!");
+                MessageBox.Show($"账户下有角色时不可删除!");
                 return;
             }
 
-            if (MessageBox.Show($"Are you sure you want to delete user {SelectedAccount.Username} ({SelectedAccount.Id})", "Delete user", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show($"确定要删除用户吗 {SelectedAccount.Username} ({SelectedAccount.Id})", "删除用户", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             try
@@ -338,7 +339,8 @@ namespace AAEmu.DBEditor.forms.server
                 var duplicates = Data.MySqlDb.Login.Users.FirstOrDefault(x => x.Username.ToLower() == newName.ToLower());
                 if (duplicates != null)
                 {
-                    MessageBox.Show($"Username {newName} is already taken by user {duplicates.Id}");
+                    //MessageBox.Show($"Username {newName} is already taken by user {duplicates.Id}");
+                    MessageBox.Show($"用户名 {newName} 已被用户 {duplicates.Id} 使用");
                     return;
                 }
 

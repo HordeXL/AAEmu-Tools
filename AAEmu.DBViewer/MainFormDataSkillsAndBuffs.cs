@@ -1164,7 +1164,7 @@ public partial class MainForm
             }
             else
             {
-                lSkillGCD.Text = "Default";
+                lSkillGCD.Text = "默认";
             }
 
             // lSkillGCD.Text = skill.ignore_global_cooldown ? "Ignore" : "Normal";
@@ -1172,15 +1172,15 @@ public partial class MainForm
             IconIdToLabel(skill.IconId, skillIcon);
             lSkillTags.Text = TagsAsString(idx, AaDb.DbTaggedSkills);
 
-            ShowSelectedData("skills", "(id = " + idx.ToString() + ")", "id ASC");
+            ShowSelectedData("技能", "(id = " + idx.ToString() + ")", "id ASC");
 
             if (skill.FirstReagentOnly)
             {
-                labelSkillReagents.Text = "Requires either of these items to use";
+                labelSkillReagents.Text = "满足其一即可使用";
             }
             else
             {
-                labelSkillReagents.Text = "Required items to use this skill";
+                labelSkillReagents.Text = "使用此技能所需条件";
             }
 
             // Produces
@@ -1232,7 +1232,7 @@ public partial class MainForm
         else
         {
             lSkillID.Text = idx.ToString();
-            lSkillName.Text = "<not found>";
+            lSkillName.Text = "<未找到>";
             lSkillCost.Text = "";
             lSkillMana.Text = "";
             lSkillLabor.Text = "";

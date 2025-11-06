@@ -30,9 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CharacterForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Select a character in the list on the left ...");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("请在左侧列表中选择一个角色 ...");
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("0");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Select a character in the list on the left ...");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("请在左侧列表中选择一个角色 ...");
             tFilter = new System.Windows.Forms.TextBox();
             lvCharacterList = new System.Windows.Forms.ListView();
             ilRaces = new System.Windows.Forms.ImageList(components);
@@ -74,7 +74,7 @@
             // 
             tFilter.Location = new System.Drawing.Point(12, 30);
             tFilter.Name = "tFilter";
-            tFilter.PlaceholderText = "<filter by name or ID>";
+            tFilter.PlaceholderText = "<通过 iD/名称筛选>";
             tFilter.Size = new System.Drawing.Size(177, 23);
             tFilter.TabIndex = 0;
             tFilter.TextChanged += tFilter_TextChanged;
@@ -126,7 +126,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(33, 15);
             label1.TabIndex = 7;
-            label1.Text = "Filter";
+            label1.Text = "筛选";
             // 
             // tcCharacter
             // 
@@ -148,7 +148,7 @@
             tpServerStats.Padding = new System.Windows.Forms.Padding(3);
             tpServerStats.Size = new System.Drawing.Size(612, 345);
             tpServerStats.TabIndex = 0;
-            tpServerStats.Text = "Stats";
+            tpServerStats.Text = "状态";
             tpServerStats.UseVisualStyleBackColor = true;
             // 
             // tvStats
@@ -157,7 +157,7 @@
             tvStats.Location = new System.Drawing.Point(3, 3);
             tvStats.Name = "tvStats";
             treeNode1.Name = "Node0";
-            treeNode1.Text = "Select a character in the list on the left ...";
+            treeNode1.Text = "请在左侧列表中选择一个角色 ...";
             tvStats.Nodes.AddRange(new System.Windows.Forms.TreeNode[] { treeNode1 });
             tvStats.Size = new System.Drawing.Size(606, 339);
             tvStats.TabIndex = 4;
@@ -172,7 +172,7 @@
             tpItems.Padding = new System.Windows.Forms.Padding(3);
             tpItems.Size = new System.Drawing.Size(612, 345);
             tpItems.TabIndex = 1;
-            tpItems.Text = "Items";
+            tpItems.Text = "物品";
             tpItems.UseVisualStyleBackColor = true;
             tpItems.Enter += tpItems_Enter;
             // 
@@ -183,7 +183,7 @@
             lContainer.Name = "lContainer";
             lContainer.Size = new System.Drawing.Size(59, 15);
             lContainer.TabIndex = 2;
-            lContainer.Text = "Container";
+            lContainer.Text = "容器";//Container
             // 
             // lvItems
             // 
@@ -202,22 +202,22 @@
             // 
             // chItemTemplateId
             // 
-            chItemTemplateId.Text = "TemplateId";
+            chItemTemplateId.Text = "模板ID";
             chItemTemplateId.Width = 70;
             // 
             // chItemCount
             // 
-            chItemCount.Text = "Amount";
+            chItemCount.Text = "数量";
             // 
             // chItemName
             // 
-            chItemName.Text = "Name";
-            chItemName.Width = 200;
+            chItemName.Text = "名称";
+            chItemName.Width = 150;
             // 
             // chItemCategory
             // 
-            chItemCategory.Text = "Category";
-            chItemCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            chItemCategory.Text = "分类";
+            //chItemCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             chItemCategory.Width = 80;
             // 
             // chItemDbId
@@ -227,14 +227,14 @@
             // 
             // chItemSlot
             // 
-            chItemSlot.Text = "Slot#";
-            chItemSlot.Width = 80;
+            chItemSlot.Text = "插槽";
+            chItemSlot.Width = 70;
             // 
             // chItemSlotType
             // 
-            chItemSlotType.Text = "SlotType";
-            chItemSlotType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            chItemSlotType.Width = 30;
+            chItemSlotType.Text = "插槽类型";
+            //chItemSlotType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            chItemSlotType.Width = 80;
             // 
             // gbContainerSelect
             // 
@@ -251,7 +251,7 @@
             gbContainerSelect.Size = new System.Drawing.Size(600, 51);
             gbContainerSelect.TabIndex = 0;
             gbContainerSelect.TabStop = false;
-            gbContainerSelect.Text = "Container";
+            gbContainerSelect.Text = "容器";
             // 
             // cbItemContainerTypeSelect
             // 
@@ -272,7 +272,7 @@
             radioButton1.TabIndex = 7;
             radioButton1.TabStop = true;
             radioButton1.Tag = "6";
-            radioButton1.Text = "Auction";
+            radioButton1.Text = "拍卖";
             radioButton1.UseVisualStyleBackColor = true;
             radioButton1.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -285,7 +285,7 @@
             rbPetGear.TabIndex = 6;
             rbPetGear.TabStop = true;
             rbPetGear.Tag = "252";
-            rbPetGear.Text = "Pet Gear";
+            rbPetGear.Text = "宠物装备";
             rbPetGear.UseVisualStyleBackColor = true;
             rbPetGear.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -298,7 +298,7 @@
             rbSystem.TabIndex = 5;
             rbSystem.TabStop = true;
             rbSystem.Tag = "-1";
-            rbSystem.Text = "Other";
+            rbSystem.Text = "其他的";
             rbSystem.UseVisualStyleBackColor = true;
             rbSystem.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -311,7 +311,7 @@
             rbMail.TabIndex = 4;
             rbMail.TabStop = true;
             rbMail.Tag = "5";
-            rbMail.Text = "Mail";
+            rbMail.Text = "邮箱";
             rbMail.UseVisualStyleBackColor = true;
             rbMail.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -324,7 +324,7 @@
             rbWarehouse.TabIndex = 2;
             rbWarehouse.TabStop = true;
             rbWarehouse.Tag = "3";
-            rbWarehouse.Text = "Warehouse";
+            rbWarehouse.Text = "仓库";
             rbWarehouse.UseVisualStyleBackColor = true;
             rbWarehouse.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -337,7 +337,7 @@
             rbInventory.TabIndex = 1;
             rbInventory.TabStop = true;
             rbInventory.Tag = "2";
-            rbInventory.Text = "Inventory";
+            rbInventory.Text = "背包";
             rbInventory.UseVisualStyleBackColor = true;
             rbInventory.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -350,7 +350,7 @@
             rbEquipement.TabIndex = 0;
             rbEquipement.TabStop = true;
             rbEquipement.Tag = "1";
-            rbEquipement.Text = "Equipment";
+            rbEquipement.Text = "装备";
             rbEquipement.UseVisualStyleBackColor = true;
             rbEquipement.CheckedChanged += rbContainers_CheckedChanged;
             // 
@@ -363,7 +363,7 @@
             tpOwnedObjects.Padding = new System.Windows.Forms.Padding(3);
             tpOwnedObjects.Size = new System.Drawing.Size(612, 345);
             tpOwnedObjects.TabIndex = 2;
-            tpOwnedObjects.Text = "Owned";
+            tpOwnedObjects.Text = "已拥有";
             tpOwnedObjects.UseVisualStyleBackColor = true;
             // 
             // cbIncludeAccountHouses
@@ -375,7 +375,7 @@
             cbIncludeAccountHouses.Name = "cbIncludeAccountHouses";
             cbIncludeAccountHouses.Size = new System.Drawing.Size(221, 19);
             cbIncludeAccountHouses.TabIndex = 6;
-            cbIncludeAccountHouses.Text = "Include other houses on this account";
+            cbIncludeAccountHouses.Text = "将此账户下的其他房屋包含在内";
             cbIncludeAccountHouses.UseVisualStyleBackColor = true;
             cbIncludeAccountHouses.CheckedChanged += cbIncludeAccountHouses_CheckedChanged;
             // 
@@ -385,7 +385,7 @@
             tvOwned.Location = new System.Drawing.Point(3, 25);
             tvOwned.Name = "tvOwned";
             treeNode2.Name = "Node0";
-            treeNode2.Text = "Select a character in the list on the left ...";
+            treeNode2.Text = "请在左侧列表中选择一个角色 ...";
             tvOwned.Nodes.AddRange(new System.Windows.Forms.TreeNode[] { treeNode2 });
             tvOwned.Size = new System.Drawing.Size(606, 318);
             tvOwned.TabIndex = 5;
@@ -396,7 +396,7 @@
             btnSelectionOK.Name = "btnSelectionOK";
             btnSelectionOK.Size = new System.Drawing.Size(65, 22);
             btnSelectionOK.TabIndex = 9;
-            btnSelectionOK.Text = "Select";
+            btnSelectionOK.Text = "选择";
             btnSelectionOK.UseVisualStyleBackColor = true;
             btnSelectionOK.Visible = false;
             btnSelectionOK.Click += btnSelectionOK_Click;
@@ -412,7 +412,7 @@
             Controls.Add(lvCharacterList);
             Controls.Add(tFilter);
             Name = "CharacterForm";
-            Text = "Character";
+            Text = "角色";
             FormClosed += CharacterForm_FormClosed;
             Load += CharacterForm_Load;
             tcCharacter.ResumeLayout(false);

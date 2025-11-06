@@ -118,28 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="IcsTextBoxInfo.Text" xml:space="preserve">
-    <value>To create shop entries you need to do the following things.
+    <value>创建商店条目需完成以下操作.
 
-1) Create a new SKU for the item entry you want to sell
-SKUs are individual lines on the sales panel where you can optionally select how many you want to buy at the same time.
-SKUs with the same Shop ID will be listed together when you press the buy button in-game.
-You can use this to offer items in bulk at a discount. If you want to sell somthing in multiple currencies, you will need to create a duplicate SKU for it in another currency.
-If you create a new SKU and leave the shop item id empty or zero, a new shop item with the default settings will get created for just this SKU.
+1) 为待售商品创建新SKU
+SKU是销售面板上的独立条目,玩家可在此处选择同时购买的数量(可选).
+相同商店ID的SKU会在玩家点击游戏内购买按钮时合并显示,可用于批量折扣促销.
+若需支持多币种销售,必须为每种货币创建重复的SKU.
+新建SKU时若留空或填零商店物品ID,系统将自动生成一个仅关联该SKU的默认商店物品.
 
-2) Create a Shop Item entry
-You can attach multiple SKUs to one shop item if wanted. Here you decide if this entry is giftable or not.
-You can double-click on a item in the tree view to filter the SKUs for that shop item.
+2) 新建商品
+您可以将多个SKU关联至同一商品(可选配置)。此处可设置该商品是否支持赠送功能.
+双击树状图中的商品,即可筛选出该商品关联的所有SKU.
 
-3) Setup the Marketplace Shop Tab items
-You can define which shop items appear on which tabs. It's possible to put one Shop Item on more than one tab without having to create a seperate entry for it. This ensures that prices are consistent across all tabs.
-You can simply drag-and-drop items into place.
-If you have opened one of the "special tab menus", like "All, Featured or New". The button at the bottom to auto-create this sub menu will be enabled. It will do it's best to fill in items as needed, but it will erase any items that were already on that sub menu.
-You can also right-click on items on the tab menu page and pcik find shop item to filter for that item on the shop item tab.
+3) 请在此设置商城各商店标签页中需要显示的商品
+您可自定义商品在商城各标签页的展示位置。同一商品可跨多个标签页展示，无需重复创建，确保所有标签页价格保持一致.
+您可以直接拖放商品到目标位置.
+当您打开任一'特殊标签菜单'（如'全部'、'推荐'或'新品'）时，底部的自动生成子菜单按钮将启用。系统会根据需要自动填充商品，但会清空该子菜单原有的所有商品.
+您也可以右键点击标签菜单中的商品，选择「查找对应商品」选项，系统将在商品管理标签页中自动筛选出该商品.
 
 
-(*) Notes:
-- There is currently no way to create new items from a empty database. It's adviced to install the example shop from AAEmu first and edit that.
-- It is not allowed to delete SKUs or Shop Items once created. This is due to the logging feature used by AAEmu. Editing or removing the IDs would mess up the logs.</value>
+(*) 备注:
+- 当前系统不支持从空数据库直接创建商品。建议先安装AAEmu提供的示例商店模板,然后基于该模板进行修改.
+- 注意: SKU和商店商品条目一经创建即不可删除。此限制源于AAEmu采用的日志记录机制,编辑或移除ID会导致日志数据紊乱.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="panel1.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
