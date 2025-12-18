@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -540,7 +540,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             /*
             if (SelectedAhBotItemEntry == null)
             {
-                MessageBox.Show("No item selected");
+                MessageBox.Show("未选择物品");
                 return;
             }
             */

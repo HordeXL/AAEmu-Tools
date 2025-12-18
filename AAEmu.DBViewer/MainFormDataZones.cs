@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -969,7 +969,7 @@ namespace AAEmu.DBViewer
                 AddSubZones(ref allAreas, zv.Value);
 
             if (allAreas.Count <= 0)
-                MessageBox.Show("未找到子区域 ?");
+                MessageBox.Show("未找到子区域");
             else
             {
                 var map = MapViewForm.GetMap();

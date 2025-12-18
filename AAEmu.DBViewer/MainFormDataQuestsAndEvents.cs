@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -985,7 +985,7 @@ public partial class MainForm
                         }
                         catch (Exception x)
                         {
-                            MessageBox.Show("Exception: " + x.Message, "Error", MessageBoxButtons.OK,
+                            MessageBox.Show("异常: " + x.Message, "错误", MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                             return;
                         }
@@ -1012,7 +1012,7 @@ public partial class MainForm
         map.Show();
 
         if (map.GetQuestSphereCount() > 0)
-            if (MessageBox.Show("Keep current Quest Spheres ?", "Add Spheres", MessageBoxButtons.YesNo,
+            if (MessageBox.Show("保留当前任务区域 ?", "添加任务区域", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.No)
                 map.ClearQuestSpheres();
 
@@ -1058,7 +1058,7 @@ public partial class MainForm
         var foundCount = 0;
 
         if ((map.GetQuestSphereCount() > 0) || (map.GetPoICount() > 0))
-            if (MessageBox.Show("Keep current NPC and Quest Spheres ?", "Add Quest Info", MessageBoxButtons.YesNo,
+            if (MessageBox.Show("保留当前NPC和任务区域 ?", "添加任务信息", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question) == DialogResult.No)
             {
                 map.ClearPoI();
@@ -1171,11 +1171,11 @@ public partial class MainForm
         if (foundCount <= 0)
         {
             if (NPCsToShow.Count > 0)
-                MessageBox.Show("The Quest listed NPCs, but no valid match was found in the dat files.");
+                MessageBox.Show("任务中列出了NPC，但在dat文件中未找到有效的匹配项。");
         }
 
         if ((foundCount <= 0) && (sphereCount <= 0))
-            MessageBox.Show("Nothing to display.");
+            MessageBox.Show("没有要显示的内容。");
 
         map.tsbShowQuestSphere.Checked = true;
         map.tsbNamesQuestSphere.Checked = true;

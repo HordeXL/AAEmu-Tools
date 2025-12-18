@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -578,7 +578,7 @@ public partial class MainForm
             }
 
             if ((map.GetPoICount() > 0) && (npcList.Count > 0))
-                if (MessageBox.Show("Keep current PoI's ?", "Add NPC", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前 PoI's ?", "增加NPC", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPoI();
 
@@ -633,7 +633,7 @@ public partial class MainForm
                         var posVals = posStringBase.Split(',');
                         if (posVals.Length != 3)
                         {
-                            MessageBox.Show("Invalid number of values inside Pos: " + posStringBase);
+                            MessageBox.Show("Pos函数内的参数值数量无效: " + posStringBase);
                             continue;
                         }
 
@@ -647,7 +647,7 @@ public partial class MainForm
                         }
                         catch
                         {
-                            MessageBox.Show("Invalid float inside Pos: " + posStringBase);
+                            MessageBox.Show("Pos参数包含无效浮点数值: " + posStringBase);
                         }
                     }
 
@@ -663,7 +663,7 @@ public partial class MainForm
                             var posVals = posString.Split(',');
                             if (posVals.Length != 3)
                             {
-                                MessageBox.Show("Invalid number of values inside Pos: " + posString);
+                                MessageBox.Show("Pos函数内的参数值数量无效: " + posString);
                                 continue;
                             }
 
@@ -678,7 +678,7 @@ public partial class MainForm
                             }
                             catch
                             {
-                                MessageBox.Show("Invalid float inside Pos: " + posString);
+                                MessageBox.Show("Pos参数包含无效浮点数值: " + posString);
                             }
 
                         }
@@ -805,7 +805,7 @@ public partial class MainForm
                                 var posVals = posString.Split(',');
                                 if (posVals.Length != 3)
                                 {
-                                    MessageBox.Show("Invalid number of values inside Pos: " + posString);
+                                    MessageBox.Show("Pos函数内的参数值数量无效: " + posString);
                                     continue;
                                 }
 
@@ -820,7 +820,7 @@ public partial class MainForm
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Invalid float inside Pos: " + posString);
+                                    MessageBox.Show("Pos参数包含无效浮点数值: " + posString);
                                 }
 
                             }
@@ -839,7 +839,7 @@ public partial class MainForm
         }
         else
         {
-            MessageBox.Show("Invalid zone selected ?");
+            MessageBox.Show("选择的区域无效");
             return;
         }
     }
@@ -928,7 +928,7 @@ public partial class MainForm
                                 var posVals = valPos.Split(',');
                                 if (posVals.Length != 3)
                                 {
-                                    MessageBox.Show("Invalid number of values inside Pos: " + valPos);
+                                    MessageBox.Show("Pos函数内的参数值数量无效: " + valPos);
                                     continue;
                                 }
 
@@ -942,7 +942,7 @@ public partial class MainForm
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Invalid float inside Pos: " + valPos);
+                                    MessageBox.Show("Pos参数包含无效浮点数值: " + valPos);
                                 }
                             }
 
@@ -963,7 +963,7 @@ public partial class MainForm
                                     var posVals = posString.Split(',');
                                     if (posVals.Length != 3)
                                     {
-                                        MessageBox.Show("Invalid number of values inside Pos: " + posString);
+                                        MessageBox.Show("Pos函数内的参数值数量无效: " + posString);
                                         continue;
                                     }
 
@@ -980,7 +980,7 @@ public partial class MainForm
                                     }
                                     catch
                                     {
-                                        MessageBox.Show("Invalid float inside Pos: " + posString);
+                                        MessageBox.Show("Pos参数包含无效浮点数值: " + posString);
                                     }
 
                                 }
@@ -1004,7 +1004,7 @@ public partial class MainForm
         }
         else
         {
-            MessageBox.Show("Invalid zone selected ?");
+            MessageBox.Show("选择的区域无效");
             return;
         }
     }
@@ -1093,7 +1093,7 @@ public partial class MainForm
                                 var posVals = valPos.Split(',');
                                 if (posVals.Length != 3)
                                 {
-                                    MessageBox.Show("Invalid number of values inside Pos: " + valPos);
+                                    MessageBox.Show("Pos函数内的参数值数量无效: " + valPos);
                                     continue;
                                 }
 
@@ -1107,7 +1107,7 @@ public partial class MainForm
                                 }
                                 catch
                                 {
-                                    MessageBox.Show("Invalid float inside Pos: " + valPos);
+                                    MessageBox.Show("Pos参数包含无效浮点数值: " + valPos);
                                 }
                             }
 
@@ -1127,7 +1127,7 @@ public partial class MainForm
                                     var posVals = posString.Split(',');
                                     if (posVals.Length != 3)
                                     {
-                                        MessageBox.Show("Invalid number of values inside Pos: " + posString);
+                                        MessageBox.Show("Pos函数内的参数值数量无效: " + posString);
                                         continue;
                                     }
 
@@ -1144,7 +1144,7 @@ public partial class MainForm
                                     }
                                     catch
                                     {
-                                        MessageBox.Show("Invalid float inside Pos: " + posString);
+                                        MessageBox.Show("Pos参数包含无效浮点数值: " + posString);
                                     }
 
                                 }
@@ -1168,7 +1168,7 @@ public partial class MainForm
         }
         else
         {
-            MessageBox.Show("Invalid zone selected ?");
+            MessageBox.Show("选择的区域无效");
             return;
         }
     }
@@ -1184,7 +1184,7 @@ public partial class MainForm
                 AddTransferPath(ref allPaths, zv.Value);
 
         if (allPaths.Count <= 0)
-            MessageBox.Show("No paths found inside this zone");
+            MessageBox.Show("此区域内未找到路径");
         else
         {
             // Show on map
@@ -1192,7 +1192,7 @@ public partial class MainForm
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("Append paths ?", "Add path to map", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("是否追加路径?", "添加路径到地图", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) != DialogResult.Yes)
                     map.ClearPaths();
             foreach (var p in allPaths)
@@ -1213,7 +1213,7 @@ public partial class MainForm
         }
         catch (Exception x)
         {
-            MessageBox.Show("Failed to create export directory: " + LookupExportPath + "\r\n" + x.Message);
+            MessageBox.Show("创建导出目录失败: " + LookupExportPath + "\r\n" + x.Message);
             return;
         }
 
@@ -1268,11 +1268,11 @@ public partial class MainForm
             File.WriteAllLines(Path.Combine(LookupExportPath, "quests.txt"), QuestList);
 
 
-            MessageBox.Show("Done exporting", "Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("导出完成", "导出", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (Exception x)
         {
-            MessageBox.Show("Export Failed !\r\n" + x.Message);
+            MessageBox.Show("导出失败!\r\n" + x.Message);
             return;
         }
     }
@@ -1325,7 +1325,7 @@ public partial class MainForm
 
         }
 
-        MessageBox.Show("Done");
+        MessageBox.Show("完成");
     }
 
     private void DoFindAllTransferPaths()
@@ -1340,14 +1340,14 @@ public partial class MainForm
             AddTransferPath(ref allPaths, zv.Value);
 
         if (allPaths.Count <= 0)
-            MessageBox.Show("No paths found ?");
+            MessageBox.Show("未找到路径");
         else
         {
             var map = MapViewForm.GetMap();
             map.Show();
 
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("Keep current paths ?", "Add Transfers", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前路径?", "添加传送点", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPaths();
 
@@ -1392,7 +1392,7 @@ public partial class MainForm
                     }
                     else
                     {
-                        MessageBox.Show("Failed to load " + thisInstanceName);
+                        MessageBox.Show("加载失败 " + thisInstanceName);
                     }
                 }
             }
@@ -1412,7 +1412,7 @@ public partial class MainForm
             AddHousingZones(ref allAreas, zv.Value);
 
         if (allAreas.Count <= 0)
-            MessageBox.Show("No housing found ?");
+            MessageBox.Show("未找到房屋");
         else
         {
             var map = MapViewForm.GetMap();
@@ -1455,13 +1455,13 @@ public partial class MainForm
 
 
         if (allAreas.Count <= 0)
-            MessageBox.Show("Nothing to show ?");
+            MessageBox.Show("没有要显示的内容");
         else
         {
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("Keep current paths ?", "Add Custom Path", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前路径?", "添加自定义路径", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPaths();
 
@@ -1495,7 +1495,7 @@ public partial class MainForm
             ;
             var contents = File.ReadAllText(jsonFileName);
             if (string.IsNullOrWhiteSpace(contents))
-                MessageBox.Show("File " + jsonFileName + " is empty.");
+                MessageBox.Show("文件 " + jsonFileName + " 为空。");
             else
             {
                 var data = JsonConvert.DeserializeObject<List<JsonNpcSpawns>>(contents);
@@ -1565,13 +1565,13 @@ public partial class MainForm
 
 
         if (allPoIs.Count <= 0)
-            MessageBox.Show("Nothing to show ?");
+            MessageBox.Show("没有要显示的内容");
         else
         {
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPoICount() > 0)
-                if (MessageBox.Show("Keep current PoI ?", "Add Custom Json data", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前 PoI ?", "添加自定义 Json 数据", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPoI();
 
@@ -1687,7 +1687,7 @@ public partial class MainForm
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("Keep current Paths ?", "Add AreaShapes", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前路径?", "添加区域形状", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPaths();
 
@@ -1788,7 +1788,7 @@ public partial class MainForm
 
         }
 
-        MessageBox.Show("Done");
+        MessageBox.Show("完成");
     }
 
     private void ShowDbTag(long tag)
@@ -1965,7 +1965,7 @@ public partial class MainForm
             }
             else
             {
-                MessageBox.Show("No water data found !");
+                MessageBox.Show("未找到水域数据!");
                 return;
             }
         }
@@ -1975,13 +1975,13 @@ public partial class MainForm
         }
 
         if (allPaths.Count <= 0)
-            MessageBox.Show("Nothing to show ?");
+            MessageBox.Show("没有要显示的内容");
         else
         {
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("Keep current Paths ?", "Add Json water data", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前路径?", "添加 Json 水域数据", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPaths();
 
@@ -2057,13 +2057,13 @@ public partial class MainForm
 
 
         if (allPaths.Count <= 0)
-            MessageBox.Show("Nothing to show ?");
+            MessageBox.Show("没有要显示的内容");
         else
         {
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("Keep current paths ?", "Add Unit Movement", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前路径?", "添加单位移动", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPaths();
 

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using AAEmu.DBViewer.DbDefs;
@@ -172,28 +172,28 @@ public partial class MainForm
 
                                 if (columnNames.IndexOf("en_us") >= 0)
                                 {
-                                    MessageBox.Show("The selected language \"" + lng +
-                                                    "\" was not found in localized_texts !\r\n" +
-                                                    "Reverted to English",
-                                        "Language not found",
+                                    MessageBox.Show("选择的语言 \"" + lng +
+                                                    "\" 在 localized_texts 中未找到!\r\n" +
+                                                    "已回退到英语",
+                                        "语言未找到",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     lng = "en_us";
                                 }
                                 else if (columnNames.IndexOf("ko") >= 0)
                                 {
-                                    MessageBox.Show("The selected language \"" + lng +
-                                                    "\" was not found in localized_texts !\r\n" +
-                                                    "Reverted to Korean",
-                                        "Language not found",
+                                    MessageBox.Show("选择的语言 \"" + lng +
+                                                    "\" 在 localized_texts 中未找到!\r\n" +
+                                                    "已回退到韩语",
+                                        "语言未找到",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     lng = "ko";
                                 }
                                 else
                                 {
-                                    MessageBox.Show("The selected language \"" + lng +
-                                                    "\" was not found in localized_texts !\r\n" +
-                                                    "Also was not able to revert to English or Korean, functionality of this program is not guaranteed",
-                                        "Language not found",
+                                    MessageBox.Show("选择的语言 \"" + lng +
+                                                    "\" 在 localized_texts 中未找到!\r\n" +
+                                                    "也无法回退到英语或韩语，此程序的功能不保证正常工作",
+                                        "语言未找到",
                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }

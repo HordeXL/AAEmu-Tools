@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
@@ -3109,7 +3109,7 @@ namespace AAEmu.DBViewer
 
         private void BtnAdditionalServerDb_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("是否要为此配置文件加载额外的数据库文件?", "Add DB", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show("是否要为此配置文件加载额外的数据库文件?", "添加数据库", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             if (openDBDlg.ShowDialog() != DialogResult.OK)

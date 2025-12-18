@@ -1004,7 +1004,7 @@ namespace AAEmu.DBEditor.forms.server
 
             if (Data.MySqlDb.Game.SaveChanges() <= 0)
             {
-                MessageBox.Show("Failed to save menu add changes to DB");
+                MessageBox.Show("菜单添加变更保存至数据库失败");
                 return;
             }
             lvMenuItemsTab.Sort();
@@ -1161,8 +1161,8 @@ namespace AAEmu.DBEditor.forms.server
 
         private void AutoFillAllitemsTab()
         {
-            if (MessageBox.Show("This will remove all entries of this tab and poplate them with the contents of all other items in this sub-menu!" + Environment.NewLine +
-                "Are you sure you want to continue?", "Auto-create items?", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show("这将移除该标签页的所有条目，并使用该子菜单中所有其他项目的内容填充它们!" + Environment.NewLine +
+                "确定要继续吗?", "自动创建项目?", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             var mainMenu = (byte)(cbMainMenu.SelectedIndex + 1);
@@ -1179,7 +1179,7 @@ namespace AAEmu.DBEditor.forms.server
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to delete old data: " + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("删除旧数据失败: " + ex.Message, "", MessageBoxButtons.OK);
             }
             var allItemsOfThisMenu = Data.MySqlDb.Game.IcsMenu.Where(x => (x.MainTab == mainMenu)).OrderBy(x => x.SubTab).ThenBy(x => x.TabPos).ToList();
             var newPos = 0;
@@ -1200,15 +1200,15 @@ namespace AAEmu.DBEditor.forms.server
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to save new data: " + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("保存新数据失败: " + ex.Message, "", MessageBoxButtons.OK);
             }
             FillShopTabsPage();
         }
 
         private void AutoFillNewItemsTab()
         {
-            if (MessageBox.Show("This will remove all entries of this tab and poplate them with the contents of all other items that are marked as New!" + Environment.NewLine +
-                "Are you sure you want to continue?", "Auto-create items?", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show("这将移除该标签页的所有条目，并使用所有其他标记为'新'的项目内容填充它们!" + Environment.NewLine +
+                "确定要继续吗?", "自动创建项目?", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             var mainMenu = (byte)(cbMainMenu.SelectedIndex + 1);
@@ -1225,7 +1225,7 @@ namespace AAEmu.DBEditor.forms.server
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to delete old data: " + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("删除旧数据失败: " + ex.Message, "", MessageBoxButtons.OK);
             }
 
             var allNewItems = Data.MySqlDb.Game.IcsMenu.OrderBy(x => x.MainTab).ThenBy(x => x.SubTab).ThenBy(x => x.TabPos).ToList();
@@ -1271,15 +1271,15 @@ namespace AAEmu.DBEditor.forms.server
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to save new data: " + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("保存新数据失败: " + ex.Message, "", MessageBoxButtons.OK);
             }
             FillShopTabsPage();
         }
 
         private void AutoFillLimitedItemsTab()
         {
-            if (MessageBox.Show("This will remove all entries of this tab and poplate them with the contents of all other items with limited global stock!" + Environment.NewLine +
-                "Are you sure you want to continue?", "Auto-create items?", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show("这将移除该标签页的所有条目，并使用所有其他具有全局库存限制的项目内容填充它们!" + Environment.NewLine +
+                "确定要继续吗?", "自动创建项目?", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             var mainMenu = (byte)(cbMainMenu.SelectedIndex + 1);
@@ -1296,7 +1296,7 @@ namespace AAEmu.DBEditor.forms.server
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to delete old data: " + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("删除旧数据失败: " + ex.Message, "", MessageBoxButtons.OK);
             }
 
             var allNewItems = Data.MySqlDb.Game.IcsMenu.OrderBy(x => x.MainTab).ThenBy(x => x.SubTab).ThenBy(x => x.TabPos).ToList();
@@ -1334,7 +1334,7 @@ namespace AAEmu.DBEditor.forms.server
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to save new data: " + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("保存新数据失败: " + ex.Message, "", MessageBoxButtons.OK);
             }
             FillShopTabsPage();
         }
