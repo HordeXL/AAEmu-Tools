@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -294,7 +294,7 @@ namespace AAEmu.DBEditor.forms.server
                 }
                 else
                 {
-                    gearNode.Text = "No equipment container";
+                    gearNode.Text = "无装备容器";
                 }
 
                 gearNode.Collapse();

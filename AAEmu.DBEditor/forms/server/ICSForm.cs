@@ -1,4 +1,4 @@
-﻿using AAEmu.DBEditor.data;
+using AAEmu.DBEditor.data;
 using AAEmu.DBEditor.forms.client;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -969,7 +969,7 @@ namespace AAEmu.DBEditor.forms.server
                 RePageTabPage();
                 if (Data.MySqlDb.Game.SaveChanges() <= 0)
                 {
-                    MessageBox.Show("Failed to save menu move changes to DB");
+                    MessageBox.Show("保存菜单移动变更到数据库失败");
                     return;
                 }
                 lvMenuItemsTab.Sort();

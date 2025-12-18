@@ -1,4 +1,4 @@
-﻿namespace AAEmu.DBEditor.forms.server
+namespace AAEmu.DBEditor.forms.server
 {
     partial class ICSForm
     {
@@ -196,7 +196,7 @@
             tpSKUs.Padding = new System.Windows.Forms.Padding(3);
             tpSKUs.Size = new System.Drawing.Size(879, 484);
             tpSKUs.TabIndex = 0;
-            tpSKUs.Text = "SKUs";
+            tpSKUs.Text = "SKU列表";
             tpSKUs.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
@@ -514,7 +514,7 @@
             rbSKUCurrencyAAPoints.Size = new System.Drawing.Size(77, 19);
             rbSKUCurrencyAAPoints.TabIndex = 14;
             rbSKUCurrencyAAPoints.Tag = "1";
-            rbSKUCurrencyAAPoints.Text = "AA Points";
+            rbSKUCurrencyAAPoints.Text = "AA点数";
             rbSKUCurrencyAAPoints.UseVisualStyleBackColor = true;
             rbSKUCurrencyAAPoints.CheckedChanged += tSKU_Changed;
             // 
