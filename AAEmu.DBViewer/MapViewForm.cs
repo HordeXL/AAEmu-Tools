@@ -1479,6 +1479,15 @@ namespace AAEmu.DBViewer
         {
             MapViewOnZoom(-1);
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            viewOffset.X = -16000;
+            viewOffset.Y = 16000;
+            viewScale = 0.05f;
+            pb.Invalidate();
+            pb.Refresh();
+        }
     }
 
 
