@@ -98,7 +98,7 @@ namespace AAEmu.DBEditor.forms.server
                 // Count
                 newItem.SubItems.Add(item.Count == 1 ? string.Empty : item.Count.ToString());
                 // Name
-                newItem.SubItems.Add(itemEntry != null ? Data.Server.GetText("items", "name", (long)itemEntry.Id, itemEntry.Name) : $"Item {item.TemplateId}");
+                newItem.SubItems.Add(itemEntry != null ? Data.Server.GetText("items", "name", (long)itemEntry.Id, itemEntry.Name) : $"物品 {item.TemplateId}");
                 // Category
                 newItem.SubItems.Add(itemEntry != null ? Data.Server.GetText("item_categories", "name", (long)itemEntry.CategoryId, itemEntry.CategoryId.ToString()):"???");
                 // DbId
@@ -124,7 +124,7 @@ namespace AAEmu.DBEditor.forms.server
             }
             lvItems.View = View.Details;
 
-            lContainer.Text += $@", Count:{lvItems.Items.Count}";
+            lContainer.Text += $@", 数量:{lvItems.Items.Count}";
         }
 
         private void rbContainers_CheckedChanged(object sender, EventArgs e)
@@ -248,7 +248,7 @@ namespace AAEmu.DBEditor.forms.server
                     houseNode.Nodes.Add($"共同所有者: {coOwnerCharacter?.Name ?? "<none>"} ({coOwnerCharacter?.Id ?? 0})");
                 }
 
-                houseNode.Nodes.Add($"Pos: {house.X:F0}, {house.Y:F0}, {house.Z:F0}");
+                houseNode.Nodes.Add($"位置: {house.X:F0}, {house.Y:F0}, {house.Z:F0}");
             }
             #endregion
 
@@ -284,7 +284,7 @@ namespace AAEmu.DBEditor.forms.server
                         foreach (var petGear in petGears)
                         {
                             var item = Data.Server.GetItem(petGear.TemplateId);
-                            gearNode.Nodes.Add($"Item {Data.Server.GetText("items", "name", (long)(item?.Id ?? 0), item?.Name ?? "")} ({petGear?.Id})");
+                            gearNode.Nodes.Add($"物品 {Data.Server.GetText("items", "name", (long)(item?.Id ?? 0), item?.Name ?? "")} ({petGear?.Id})");
                         }
                     }
                     else
@@ -318,33 +318,33 @@ namespace AAEmu.DBEditor.forms.server
                 else
                 {
                     var item = Data.Server.GetItem(vehicleItem.TemplateId);
-                    vehicleNode.Nodes.Add($"({vehicleItem.Id}) Item {Data.Server.GetText("items", "name", (long)item.Id, item.Name)} ({item.Id})");
+                    vehicleNode.Nodes.Add($"({vehicleItem.Id}) 物品 {Data.Server.GetText("items", "name", (long)item.Id, item.Name)} ({item.Id})");
                     if (vehicleItem.Ucc > 0)
                         vehicleNode.Nodes.Add($"UCC: {vehicleItem.Ucc}");
                 }
-                vehicleNode.Nodes.Add($"Pos: {vehicle.X:F0}, {vehicle.Y:F0}, {vehicle.Z:F0}");
+                vehicleNode.Nodes.Add($"位置: {vehicle.X:F0}, {vehicle.Y:F0}, {vehicle.Z:F0}");
                 vehicleNode.Nodes.Add($"{vehicle.Hp} HP, {vehicle.Mp} MP");
-                var childrenNode = vehicleNode.Nodes.Add($"Persistent Children");
+                var childrenNode = vehicleNode.Nodes.Add($"持久子对象");
                 var doodads = Data.MySqlDb.Game.Doodads.Where(x => (x.OwnerType == 2) && (x.HouseId == vehicle.Id));
                 foreach (var doodad in doodads)
                 {
-                    var doodadNode = childrenNode.Nodes.Add($"Doodad {doodad.Id} {Data.Server.GetText("doodad_almighties", "name", doodad.TemplateId, $"<{doodad.TemplateId}>", true)} ({doodad.TemplateId})");
+                    var doodadNode = childrenNode.Nodes.Add($"装饰物 {doodad.Id} {Data.Server.GetText("doodad_almighties", "name", doodad.TemplateId, $"<{doodad.TemplateId}>", true)} ({doodad.TemplateId})");
                     if (doodad.ParentDoodad > 0)
-                        doodadNode.Nodes.Add($"Parent: {doodad.ParentDoodad}");
-                    doodadNode.Nodes.Add($"AttachPoint: {doodad.AttachPoint}");
-                    doodadNode.Nodes.Add($"Pos: {doodad.X:F1}, {doodad.Y:F1}, {doodad.Z:F1}");
+                        doodadNode.Nodes.Add($"父对象: {doodad.ParentDoodad}");
+                    doodadNode.Nodes.Add($"附着点: {doodad.AttachPoint}");
+                    doodadNode.Nodes.Add($"位置: {doodad.X:F1}, {doodad.Y:F1}, {doodad.Z:F1}");
                     if (doodad.ItemId > 0)
-                        doodadNode.Nodes.Add($"Item: {doodad.ItemId}");
+                        doodadNode.Nodes.Add($"物品: {doodad.ItemId}");
                     if (doodad.ItemTemplateId > 0)
-                        doodadNode.Nodes.Add($"ItemTemplate: ({doodad.ItemTemplateId}) {Data.Server.GetText("items", "name", (long)doodad.ItemTemplateId, "???")}");
+                        doodadNode.Nodes.Add($"物品模板: ({doodad.ItemTemplateId}) {Data.Server.GetText("items", "name", (long)doodad.ItemTemplateId, "???")}");
                 }
 
                 var slaves = Data.MySqlDb.Game.Slaves.Where(x => (x.OwnerType == 2) && (x.OwnerId == vehicle.Id));
                 foreach (var slave in slaves)
                 {
-                    var slaveNode = childrenNode.Nodes.Add($"Slave {slave.Id} {slave.Name} ({slave.TemplateId})");
-                    slaveNode.Nodes.Add($"AttachPoint: {slave.AttachPoint}");
-                    slaveNode.Nodes.Add($"Pos: {slave.X:F1}, {slave.Y:F1}, {slave.Z:F1}");
+                    var slaveNode = childrenNode.Nodes.Add($"从属 {slave.Id} {slave.Name} ({slave.TemplateId})");
+                    slaveNode.Nodes.Add($"附着点: {slave.AttachPoint}");
+                    slaveNode.Nodes.Add($"位置: {slave.X:F1}, {slave.Y:F1}, {slave.Z:F1}");
                     slaveNode.Nodes.Add($"{slave.Hp} HP, {slave.Mp} MP");
                 }
             }
