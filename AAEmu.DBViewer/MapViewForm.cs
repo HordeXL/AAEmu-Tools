@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Xml;
 using AAEmu.DBViewer.utils;
 using AAEmu.DBViewer.DbDefs;
+using System.ComponentModel;
 
 namespace AAEmu.DBViewer
 {
@@ -37,7 +38,7 @@ namespace AAEmu.DBViewer
         private RectangleF FocusBorder = new RectangleF();
         private List<MapViewMap> cursorZoneList = new List<MapViewMap>();
 
-        [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Point ViewOffset { get => viewOffset; set { viewOffset = value; updateStatusBar(); } }
 
         public MapViewForm()
@@ -47,7 +48,7 @@ namespace AAEmu.DBViewer
             using (var loadingform = new LoadingForm())
             {
                 loadingform.Show();
-                loadingform.ShowInfo("正在准备地图数据 ...");
+                loadingform.ShowInfo("Preparing map data ...");
 
                 pb.SetBounds(0, 0, 35536, 35536);
 

@@ -363,8 +363,35 @@ public partial class MainForm
                 }
             }
         }
+
+        if (AllTableNames.GetValueOrDefault("total_character_customs") == SQLite.SQLiteFileName)
+        {
+            using (var connection = SQLite.CreateConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM total_character_customs ORDER BY id ASC";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+                        var columnNames = reader.GetColumnNames();
+
+                        while (reader.Read())
+                        {
+                            var t = new GameTotalCharacterCustoms();
+                            // Actual DB entries
+                            t.Id = GetInt64(reader, "id");
+                            t.Name = GetString(reader, "name");
+                            AaDb.DbTotalCharacterCustoms.Add(t.Id, t);
+                        }
+                    }
+                }
+            }
+        }
+
+
     }
-    
+
     private void LoadShops()
     {
         if (AllTableNames.GetValueOrDefault("merchants") == SQLite.SQLiteFileName)
@@ -373,19 +400,65 @@ public partial class MainForm
             {
                 using (var command = connection.CreateCommand())
                 {
-                    command.CommandText = "SELECT * FROM merchants ORDER BY id ASC";
+                    command.CommandText = "SELECT * FROM merchants ORDER BY npc_id ASC";
                     command.Prepare();
                     using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
                     {
-                        while (reader.Read())
+                        var columnNames = reader.GetColumnNames();
+                        var hasId = (columnNames.IndexOf("id") > 0);
+                        var hasPacks = (columnNames.IndexOf("merchant_pack_id") > 0);
+                        var cId = 0;
+                        if (hasPacks)
                         {
-                            var t = new GameMerchants();
-                            // Actual DB entries
-                            t.Id = GetInt64(reader, "id");
-                            t.NpcId = GetInt64(reader, "npc_id");
-                            t.MerchantPackId = GetInt64(reader, "merchant_pack_id");
+                            // Old merchants table
+                            while (reader.Read())
+                            {
+                                cId++;
+                                var t = new GameMerchants();
+                                // Actual DB entries
+                                t.Id = hasId ? GetInt64(reader, "id") : cId;
+                                t.NpcId = GetInt64(reader, "npc_id");
+                                t.MerchantPackId = GetInt64(reader, "merchant_pack_id");
 
-                            AaDb.DbMerchants.Add(t.Id, t);
+                                AaDb.DbMerchants.Add(t.Id, t);
+                            }
+                        }
+                        else
+                        {
+                            // New merchants table, fake this by injecting directly in the goods table and create our own IDs (use NPC ID as pack ID)
+                            while (reader.Read())
+                            {
+                                var npcId = GetInt64(reader, "npc_id");
+                                if (!AaDb.DbMerchants.TryGetValue(npcId, out var merchant))
+                                {
+                                    merchant = new GameMerchants()
+                                    {
+                                        Id = npcId,
+                                        NpcId = npcId,
+                                        MerchantPackId = npcId
+                                    };
+                                    AaDb.DbMerchants.Add(npcId, merchant);
+                                }
+                                if (!AaDb.DbMerchantPacks.TryGetValue(merchant.MerchantPackId, out var merchantPack))
+                                {
+                                    merchantPack = new GameMerchantPacks()
+                                    {
+                                        Id = merchant.MerchantPackId,
+                                        KindId = GetInt64(reader, "kind_id"),
+                                        OwnerNpcId = merchant.NpcId,
+                                    };
+                                    AaDb.DbMerchantPacks.Add(merchantPack.Id, merchantPack);
+                                }
+
+                                cId++;
+                                var t = new GameMerchantGoods();
+                                // Actual DB entries
+                                t.Id = hasId ? GetInt64(reader, "id") : cId;
+                                t.MerchantPackId = merchantPack.Id;
+                                t.ItemId = GetInt64(reader, "item_id");
+                                t.GradeId = GetInt64(reader, "grade_id");
+                                AaDb.DbMerchantGoods.Add(t.Id, t);
+                            }
                         }
                     }
                 }
@@ -418,6 +491,46 @@ public partial class MainForm
             }
         }
 
+        //
+        if (AllTableNames.GetValueOrDefault("merchant_packs") == SQLite.SQLiteFileName)
+        {
+            using (var connection = SQLite.CreateConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM merchant_packs";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+                        var columnNames = reader.GetColumnNames();
+                        var hasId = (columnNames.IndexOf("id") > 0);
+                        var cId = 0;
+                        if (hasId)
+                        {
+                            // Old merchant tables
+                            while (reader.Read())
+                            {
+                                cId++;
+                                var t = new GameMerchantPacks();
+                                // Actual DB entries
+                                t.Id = hasId ? GetInt64(reader, "id") : cId;
+                                t.Name = GetString(reader, "name");
+                                t.OwnerNpcId = GetInt64(reader, "owner_npc_id");
+                                t.KindId = GetInt64(reader, "kind_id");
+
+                                AaDb.DbMerchantPacks.Add(t.Id, t);
+                                if (!GameMerchantPacks.MerchantPackTypes.Contains(t.KindId))
+                                    GameMerchantPacks.MerchantPackTypes.Add(t.KindId);
+                            }
+                        }
+                        else
+                        {
+                            // While this table exists in 5.x, I'm not sure if it's even used.
+                        }
+                    }
+                }
+            }
+        }
     }
 
     private void LoadDoodads()
@@ -1384,6 +1497,21 @@ public partial class MainForm
             }
             #endregion
 
+            #region looks
+
+            if (npc.TotalCustomId > 0 && npc.NoApplyTotalCustom == false)
+            {
+                var looksNode = tvNPCInfo.Nodes.Add($"Total Custom: {npc.TotalCustomId}");
+                if (AaDb.DbTotalCharacterCustoms.TryGetValue(npc.TotalCustomId, out var tcc))
+                {
+                    AddCustomPropertyNode("name", tcc.Name, false, looksNode);
+                }
+                else
+                {
+                    looksNode.Nodes.Add($"Id not found");
+                }
+            }
+            #endregion
             ShowSelectedData("npcs", "(id = " + id.ToString() + ")", "id ASC");
             btnShowNPCsOnMap.Tag = npc.Id;
         }
