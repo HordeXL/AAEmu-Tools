@@ -161,7 +161,7 @@ namespace AAEmu.DBEditor.forms.server
                     switch (subSku.Currency)
                     {
                         case 0: currencyName = "点券"; break;//Credits
-                        case 1: currencyName = "AA Points"; break;
+                        case 1: currencyName = "AA点数"; break;
                         case 2: currencyName = "鲁鲁币"; break;//Loyalty
                         case 3: currencyName = "金币"; break;//Coins
                     }
@@ -220,10 +220,10 @@ namespace AAEmu.DBEditor.forms.server
             }
 
             if (shopItem.IsSale > 0)
-                itemTexts += " sale";
+                itemTexts += " 促销";
 
             if (shopItem.IsHidden > 0)
-                itemTexts += " hidden";
+                itemTexts += " 隐藏";
 
             // Also check it's sub-SKUs
             foreach (var skuItem in subSKUs)
@@ -240,7 +240,7 @@ namespace AAEmu.DBEditor.forms.server
                 }
 
                 if (skuItem.EventType > 0)
-                    itemTexts += " event";
+                    itemTexts += " 活动";
             }
 
             itemTexts = itemTexts.ToLower();
@@ -337,7 +337,7 @@ namespace AAEmu.DBEditor.forms.server
 
             // Grab tab's contents
             var tabItems = Data.MySqlDb.Game.IcsMenu.Where(x => (x.MainTab == mainMenu) && (x.SubTab == subMenu)).OrderBy(x => x.TabPos).ToList();
-            lPageCount.Text = Math.Ceiling(tabItems.Count * 1f / itemPerPage).ToString() + " page(s)";
+            lPageCount.Text = Math.Ceiling(tabItems.Count * 1f / itemPerPage).ToString() + " 页";
             foreach (var menuItem in tabItems)
             {
                 // Grab the entry's shopItem
@@ -802,10 +802,10 @@ namespace AAEmu.DBEditor.forms.server
                 if (SelectedShopItem.Remaining != oldCount)
                 {
                     if (MessageBox.Show(
-                        $"Remaining amount changed since you started editing this item {oldCount} => {SelectedShopItem.Remaining}.\n" +
-                        $"Do You want to continue with your new value of {newCount}?\n\n" +
-                        $"Note that is is not recommended to edit the shop while it is online!", 
-                        "Remaing count changed", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                        $"在你开始编辑该物品后，剩余数量已发生变化 {oldCount} => {SelectedShopItem.Remaining}。\n" +
+                        $"是否仍要使用你的新数值 {newCount} 继续?\n\n" +
+                        $"注意: 不建议在商城在线时进行编辑!", 
+                        "剩余数量已变化", MessageBoxButtons.YesNo) != DialogResult.Yes)
                         return;
                 }
                 SelectedShopItem.ShopId = uint.Parse(tShopItemShopId.Text);

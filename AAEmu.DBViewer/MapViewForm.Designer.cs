@@ -108,7 +108,7 @@
             tsslViewOffset.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             tsslViewOffset.Name = "tsslViewOffset";
             tsslViewOffset.Size = new System.Drawing.Size(43, 19);
-            tsslViewOffset.Text = "Offset";
+            tsslViewOffset.Text = "偏移";
             tsslViewOffset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             tsslViewOffset.Visible = false;
             // 
@@ -118,7 +118,7 @@
             tsslZoom.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             tsslZoom.Name = "tsslZoom";
             tsslZoom.Size = new System.Drawing.Size(53, 19);
-            tsslZoom.Text = "Zoom%";
+            tsslZoom.Text = "缩放%";
             // 
             // tsslCoords
             // 
@@ -146,7 +146,7 @@
             tsslSelectionInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             tsslSelectionInfo.Name = "tsslSelectionInfo";
             tsslSelectionInfo.Size = new System.Drawing.Size(32, 19);
-            tsslSelectionInfo.Text = "Info";
+            tsslSelectionInfo.Text = "信息";
             // 
             // tsslPoIInfo
             // 
@@ -154,7 +154,7 @@
             tsslPoIInfo.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             tsslPoIInfo.Name = "tsslPoIInfo";
             tsslPoIInfo.Size = new System.Drawing.Size(28, 19);
-            tsslPoIInfo.Text = "PoI";
+            tsslPoIInfo.Text = "兴趣点";
             // 
             // gbTools
             // 
@@ -173,7 +173,7 @@
             gbTools.Size = new System.Drawing.Size(128, 507);
             gbTools.TabIndex = 2;
             gbTools.TabStop = false;
-            gbTools.Text = "Options";
+            gbTools.Text = "选项";
             // 
             // cbInstanceSelect
             // 
@@ -207,7 +207,7 @@
             gbGrid.Size = new System.Drawing.Size(113, 191);
             gbGrid.TabIndex = 11;
             gbGrid.TabStop = false;
-            gbGrid.Text = "Grid";
+            gbGrid.Text = "网格";
             // 
             // rbGridPaths
             // 
@@ -217,7 +217,7 @@
             rbGridPaths.Size = new System.Drawing.Size(54, 19);
             rbGridPaths.TabIndex = 5;
             rbGridPaths.TabStop = true;
-            rbGridPaths.Text = "Paths";
+            rbGridPaths.Text = "路径";
             rbGridPaths.UseVisualStyleBackColor = true;
             rbGridPaths.CheckedChanged += cbOptionsChanged;
             // 
@@ -243,7 +243,7 @@
             rbGridOff.Size = new System.Drawing.Size(42, 19);
             rbGridOff.TabIndex = 3;
             rbGridOff.TabStop = true;
-            rbGridOff.Text = "Off";
+            rbGridOff.Text = "关闭";
             rbGridOff.UseVisualStyleBackColor = true;
             rbGridOff.CheckedChanged += cbOptionsChanged;
             // 
@@ -256,7 +256,7 @@
             rbGridGeo.Size = new System.Drawing.Size(46, 19);
             rbGridGeo.TabIndex = 2;
             rbGridGeo.TabStop = true;
-            rbGridGeo.Text = "Geo";
+            rbGridGeo.Text = "地理";
             rbGridGeo.UseVisualStyleBackColor = true;
             rbGridGeo.CheckedChanged += cbOptionsChanged;
             // 
@@ -268,7 +268,7 @@
             rbGridCells.Name = "rbGridCells";
             rbGridCells.Size = new System.Drawing.Size(50, 19);
             rbGridCells.TabIndex = 1;
-            rbGridCells.Text = "Cells";
+            rbGridCells.Text = "单元格";
             rbGridCells.UseVisualStyleBackColor = true;
             rbGridCells.CheckedChanged += cbOptionsChanged;
             // 
@@ -280,7 +280,7 @@
             rbGridUnits.Name = "rbGridUnits";
             rbGridUnits.Size = new System.Drawing.Size(52, 19);
             rbGridUnits.TabIndex = 0;
-            rbGridUnits.Text = "Units";
+            rbGridUnits.Text = "单位";
             rbGridUnits.UseVisualStyleBackColor = true;
             rbGridUnits.CheckedChanged += cbOptionsChanged;
             // 
@@ -294,7 +294,7 @@
             cbDrawMiniMap.Name = "cbDrawMiniMap";
             cbDrawMiniMap.Size = new System.Drawing.Size(80, 19);
             cbDrawMiniMap.TabIndex = 10;
-            cbDrawMiniMap.Text = "Road map";
+            cbDrawMiniMap.Text = "道路图";
             cbDrawMiniMap.UseVisualStyleBackColor = true;
             cbDrawMiniMap.CheckedChanged += cbOptionsChanged;
             // 
@@ -306,7 +306,7 @@
             cbDrawMainMap.Name = "cbDrawMainMap";
             cbDrawMainMap.Size = new System.Drawing.Size(72, 19);
             cbDrawMainMap.TabIndex = 9;
-            cbDrawMainMap.Text = "Full map";
+            cbDrawMainMap.Text = "完整地图";
             cbDrawMainMap.UseVisualStyleBackColor = true;
             cbDrawMainMap.CheckedChanged += cbOptionsChanged;
             //
@@ -320,7 +320,7 @@
             cbClipTerritory.Name = "cbClipTerritory";
             cbClipTerritory.Size = new System.Drawing.Size(107, 19);
             cbClipTerritory.TabIndex = 13;
-            cbClipTerritory.Text = "Clip to territory";
+            cbClipTerritory.Text = "裁剪到领地范围";
             cbClipTerritory.UseVisualStyleBackColor = true;
             cbClipTerritory.CheckedChanged += cbOptionsChanged;
             //
@@ -334,7 +334,7 @@
             cbFocus.Name = "cbFocus";
             cbFocus.Size = new System.Drawing.Size(95, 19);
             cbFocus.TabIndex = 3;
-            cbFocus.Text = "Focus border";
+            cbFocus.Text = "聚焦边框";
             cbFocus.UseVisualStyleBackColor = true;
             cbFocus.CheckedChanged += cbOptionsChanged;
             // 
@@ -346,7 +346,7 @@
             cbZoneBorders.Name = "cbZoneBorders";
             cbZoneBorders.Size = new System.Drawing.Size(96, 19);
             cbZoneBorders.TabIndex = 2;
-            cbZoneBorders.Text = "Zone borders";
+            cbZoneBorders.Text = "区域边界";
             cbZoneBorders.UseVisualStyleBackColor = true;
             cbZoneBorders.CheckedChanged += cbOptionsChanged;
             // 
@@ -404,7 +404,7 @@
             // 
             toolStripLabel3.Name = "toolStripLabel3";
             toolStripLabel3.Size = new System.Drawing.Size(34, 22);
-            toolStripLabel3.Text = "Draw";
+            toolStripLabel3.Text = "绘制";
             // 
             // tsbDrawWorld
             // 
@@ -414,7 +414,7 @@
             tsbDrawWorld.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawWorld.Name = "tsbDrawWorld";
             tsbDrawWorld.Size = new System.Drawing.Size(23, 22);
-            tsbDrawWorld.Text = "World Map";
+            tsbDrawWorld.Text = "世界地图";
             tsbDrawWorld.CheckedChanged += cbOptionsChanged;
             // 
             // tsbDrawContinent
@@ -425,7 +425,7 @@
             tsbDrawContinent.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawContinent.Name = "tsbDrawContinent";
             tsbDrawContinent.Size = new System.Drawing.Size(23, 22);
-            tsbDrawContinent.Text = "Continent";
+            tsbDrawContinent.Text = "大陆";
             tsbDrawContinent.CheckedChanged += cbOptionsChanged;
             // 
             // tsbDrawZone
@@ -436,7 +436,7 @@
             tsbDrawZone.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawZone.Name = "tsbDrawZone";
             tsbDrawZone.Size = new System.Drawing.Size(23, 22);
-            tsbDrawZone.Text = "Zone";
+            tsbDrawZone.Text = "区域";
             tsbDrawZone.CheckedChanged += cbOptionsChanged;
             // 
             // tsbDrawCity
@@ -448,14 +448,14 @@
             tsbDrawCity.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbDrawCity.Name = "tsbDrawCity";
             tsbDrawCity.Size = new System.Drawing.Size(23, 22);
-            tsbDrawCity.Text = "City/Cave";
+            tsbDrawCity.Text = "城市/洞穴";
             tsbDrawCity.CheckedChanged += cbOptionsChanged;
             // 
             // toolStripLabel2
             // 
             toolStripLabel2.Name = "toolStripLabel2";
             toolStripLabel2.Size = new System.Drawing.Size(36, 22);
-            toolStripLabel2.Text = "Show";
+            toolStripLabel2.Text = "显示";
             // 
             // tsbShowPoI
             // 
@@ -467,7 +467,7 @@
             tsbShowPoI.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbShowPoI.Name = "tsbShowPoI";
             tsbShowPoI.Size = new System.Drawing.Size(23, 22);
-            tsbShowPoI.Text = "PoI";
+            tsbShowPoI.Text = "兴趣点";
             tsbShowPoI.CheckedChanged += cbOptionsChanged;
             // 
             // tsbShowPath
@@ -480,7 +480,7 @@
             tsbShowPath.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbShowPath.Name = "tsbShowPath";
             tsbShowPath.Size = new System.Drawing.Size(23, 22);
-            tsbShowPath.Text = "Paths";
+            tsbShowPath.Text = "路径";
             tsbShowPath.CheckedChanged += cbOptionsChanged;
             // 
             // tsbShowHousing
@@ -493,7 +493,7 @@
             tsbShowHousing.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbShowHousing.Name = "tsbShowHousing";
             tsbShowHousing.Size = new System.Drawing.Size(23, 22);
-            tsbShowHousing.Text = "Housing";
+            tsbShowHousing.Text = "房屋";
             tsbShowHousing.CheckedChanged += cbOptionsChanged;
             // 
             // tsbShowSubzone
@@ -506,7 +506,7 @@
             tsbShowSubzone.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbShowSubzone.Name = "tsbShowSubzone";
             tsbShowSubzone.Size = new System.Drawing.Size(23, 22);
-            tsbShowSubzone.Text = "Subzone";
+            tsbShowSubzone.Text = "子区域";
             tsbShowSubzone.CheckedChanged += cbOptionsChanged;
             // 
             // tsbShowQuestSphere
@@ -519,7 +519,7 @@
             tsbShowQuestSphere.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbShowQuestSphere.Name = "tsbShowQuestSphere";
             tsbShowQuestSphere.Size = new System.Drawing.Size(23, 22);
-            tsbShowQuestSphere.Text = "Quest Spheres";
+            tsbShowQuestSphere.Text = "任务区域";
             tsbShowQuestSphere.CheckedChanged += cbOptionsChanged;
             // 
             // toolStripSeparator1
@@ -531,7 +531,7 @@
             // 
             toolStripLabel1.Name = "toolStripLabel1";
             toolStripLabel1.Size = new System.Drawing.Size(44, 22);
-            toolStripLabel1.Text = "Names";
+            toolStripLabel1.Text = "名称";
             // 
             // tsbNamesPoI
             // 
@@ -541,7 +541,7 @@
             tsbNamesPoI.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbNamesPoI.Name = "tsbNamesPoI";
             tsbNamesPoI.Size = new System.Drawing.Size(23, 22);
-            tsbNamesPoI.Text = "PoI";
+            tsbNamesPoI.Text = "兴趣点";
             tsbNamesPoI.CheckedChanged += cbOptionsChanged;
             // 
             // tsbNamesPath
@@ -552,7 +552,7 @@
             tsbNamesPath.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbNamesPath.Name = "tsbNamesPath";
             tsbNamesPath.Size = new System.Drawing.Size(23, 22);
-            tsbNamesPath.Text = "Paths";
+            tsbNamesPath.Text = "路径";
             tsbNamesPath.CheckedChanged += cbOptionsChanged;
             // 
             // tsbNamesHousing
@@ -563,7 +563,7 @@
             tsbNamesHousing.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbNamesHousing.Name = "tsbNamesHousing";
             tsbNamesHousing.Size = new System.Drawing.Size(23, 22);
-            tsbNamesHousing.Text = "Housing";
+            tsbNamesHousing.Text = "房屋";
             tsbNamesHousing.CheckedChanged += cbOptionsChanged;
             // 
             // tsbNamesSubzone
@@ -574,7 +574,7 @@
             tsbNamesSubzone.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbNamesSubzone.Name = "tsbNamesSubzone";
             tsbNamesSubzone.Size = new System.Drawing.Size(23, 22);
-            tsbNamesSubzone.Text = "Subzone";
+            tsbNamesSubzone.Text = "子区域";
             tsbNamesSubzone.CheckedChanged += cbOptionsChanged;
             // 
             // tsbNamesQuestSphere
@@ -585,7 +585,7 @@
             tsbNamesQuestSphere.ImageTransparentColor = System.Drawing.Color.Magenta;
             tsbNamesQuestSphere.Name = "tsbNamesQuestSphere";
             tsbNamesQuestSphere.Size = new System.Drawing.Size(23, 22);
-            tsbNamesQuestSphere.Text = "Quest Spheres";
+            tsbNamesQuestSphere.Text = "任务区域";
             tsbNamesQuestSphere.CheckedChanged += cbOptionsChanged;
             // 
             // toolStripSeparator2
@@ -620,13 +620,13 @@
             // 
             tsmPoI.Name = "tsmPoI";
             tsmPoI.Size = new System.Drawing.Size(167, 22);
-            tsmPoI.Text = "PoI";
+            tsmPoI.Text = "兴趣点";
             // 
             // tsmPath
             // 
             tsmPath.Name = "tsmPath";
             tsmPath.Size = new System.Drawing.Size(167, 22);
-            tsmPath.Text = "Path";
+            tsmPath.Text = "路径";
             // 
             // tsmMap
             // 
@@ -638,7 +638,7 @@
             // 
             tsmCopyToClipboard.Name = "tsmCopyToClipboard";
             tsmCopyToClipboard.Size = new System.Drawing.Size(167, 22);
-            tsmCopyToClipboard.Text = "CopyToClipboard";
+            tsmCopyToClipboard.Text = "复制到剪贴板";
             tsmCopyToClipboard.Visible = false;
             tsmCopyToClipboard.Click += tsmCopyToClipboard_Click;
             // 

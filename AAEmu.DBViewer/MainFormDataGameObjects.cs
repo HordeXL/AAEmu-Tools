@@ -1301,7 +1301,7 @@ public partial class MainForm
             {
                 if (mountInfoNode == null)
                 {
-                    mountInfoNode = tvNPCInfo.Nodes.Add("Mount Skills");
+                    mountInfoNode = tvNPCInfo.Nodes.Add("骑乘技能");
                     mountInfoNode.ImageIndex = 2;
                     mountInfoNode.SelectedImageIndex = 2;
                 }

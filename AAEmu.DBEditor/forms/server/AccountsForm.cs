@@ -202,7 +202,7 @@ namespace AAEmu.DBEditor.forms.server
 
             if (c == null)
             {
-                lCharacterName.Text = @"<none>";
+                lCharacterName.Text = @"<无>";
                 lLevel.Text = "";
                 lClass.Text = "";
                 lMoney.Text = "";

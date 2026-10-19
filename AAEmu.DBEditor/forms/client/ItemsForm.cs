@@ -132,7 +132,7 @@ namespace AAEmu.DBEditor.forms.client
             lItemImplId.Text = "0";
             lItemCategory.Text = "";
             lItemLevel.Text = "0";
-            lItemRequires.Text = "<none>";
+            lItemRequires.Text = "<无>";
             lItemIcon.ImageList = Data.Client.Icons;
             lItemIcon.ImageIndex = -1;
             lItemIcon.Text = "???";
@@ -179,7 +179,7 @@ namespace AAEmu.DBEditor.forms.client
             }
             else
             {
-                lItemRequires.Text = "<none>";
+                lItemRequires.Text = "<无>";
             }
 
             var desc = Data.Server.GetText("items", "description", (long)item.Id, item.Description);

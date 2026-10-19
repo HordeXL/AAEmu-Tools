@@ -865,7 +865,7 @@
             tpSettings.Name = "tpSettings";
             tpSettings.Size = new System.Drawing.Size(1082, 546);
             tpSettings.TabIndex = 19;
-            tpSettings.Text = "Settings";
+            tpSettings.Text = "设置";
             tpSettings.UseVisualStyleBackColor = true;
             // 
             // label153
@@ -876,7 +876,7 @@
             label153.Name = "label153";
             label153.Size = new System.Drawing.Size(18, 15);
             label153.TabIndex = 34;
-            label153.Text = "or";
+            label153.Text = "或";
             // 
             // btnFindClientDataDirectory
             // 
@@ -885,7 +885,7 @@
             btnFindClientDataDirectory.Name = "btnFindClientDataDirectory";
             btnFindClientDataDirectory.Size = new System.Drawing.Size(217, 26);
             btnFindClientDataDirectory.TabIndex = 33;
-            btnFindClientDataDirectory.Text = "Locate Client Game Folder";
+            btnFindClientDataDirectory.Text = "选择游戏客户端目录";
             btnFindClientDataDirectory.UseVisualStyleBackColor = true;
             btnFindClientDataDirectory.Click += btnFindClientDataDirectory_Click;
             // 
@@ -909,7 +909,7 @@
             lAppVersion.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             lAppVersion.Size = new System.Drawing.Size(81, 15);
             lAppVersion.TabIndex = 31;
-            lAppVersion.Text = "Version 0.0.0.0";
+            lAppVersion.Text = "版本 0.0.0.0";
             lAppVersion.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // BtnDeleteProfile
@@ -918,7 +918,7 @@
             BtnDeleteProfile.Name = "BtnDeleteProfile";
             BtnDeleteProfile.Size = new System.Drawing.Size(150, 22);
             BtnDeleteProfile.TabIndex = 30;
-            BtnDeleteProfile.Text = "Delete profile";
+            BtnDeleteProfile.Text = "删除配置";
             BtnDeleteProfile.UseVisualStyleBackColor = true;
             BtnDeleteProfile.Click += BtnDeleteProfile_Click;
             // 
@@ -935,7 +935,7 @@
             BtnSaveProfileAs.Name = "BtnSaveProfileAs";
             BtnSaveProfileAs.Size = new System.Drawing.Size(150, 22);
             BtnSaveProfileAs.TabIndex = 28;
-            BtnSaveProfileAs.Text = "Save profile as";
+            BtnSaveProfileAs.Text = "另存为配置";
             BtnSaveProfileAs.UseVisualStyleBackColor = true;
             BtnSaveProfileAs.Click += BtnSaveProfileAs_Click;
             // 
@@ -945,7 +945,7 @@
             BtnLoadProfile.Name = "BtnLoadProfile";
             BtnLoadProfile.Size = new System.Drawing.Size(150, 22);
             BtnLoadProfile.TabIndex = 27;
-            BtnLoadProfile.Text = "Load profile";
+            BtnLoadProfile.Text = "加载配置";
             BtnLoadProfile.UseVisualStyleBackColor = true;
             BtnLoadProfile.Click += BtnLoadProfile_Click;
             // 
@@ -956,7 +956,7 @@
             label145.Name = "label145";
             label145.Size = new System.Drawing.Size(80, 15);
             label145.TabIndex = 25;
-            label145.Text = "Saved profiles";
+            label145.Text = "已保存的配置";
             // 
             // LbProfiles
             // 
@@ -975,7 +975,7 @@
             lCurrentPakFile.Name = "lCurrentPakFile";
             lCurrentPakFile.Size = new System.Drawing.Size(117, 15);
             lCurrentPakFile.TabIndex = 22;
-            lCurrentPakFile.Text = "<no Pak file loaded>";
+            lCurrentPakFile.Text = "<未加载 Pak 文件>";
             // 
             // label8
             // 
@@ -985,7 +985,7 @@
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(231, 15);
             label8.TabIndex = 21;
-            label8.Text = "Used for loading icons and map/zone data";
+            label8.Text = "用于加载图标与地图/区域数据";
             // 
             // btnFindGameClient
             // 
@@ -994,7 +994,7 @@
             btnFindGameClient.Name = "btnFindGameClient";
             btnFindGameClient.Size = new System.Drawing.Size(217, 26);
             btnFindGameClient.TabIndex = 20;
-            btnFindGameClient.Text = "Locate Client game_pak";
+            btnFindGameClient.Text = "选择客户端 game_pak";
             btnFindGameClient.UseVisualStyleBackColor = true;
             btnFindGameClient.Click += BtnFindGameClient_Click;
             // 
@@ -1005,7 +1005,7 @@
             btnOpenServerDB.Name = "btnOpenServerDB";
             btnOpenServerDB.Size = new System.Drawing.Size(217, 26);
             btnOpenServerDB.TabIndex = 19;
-            btnOpenServerDB.Text = "Open (server) DB";
+            btnOpenServerDB.Text = "打开 (服务器) 数据库";
             btnOpenServerDB.UseVisualStyleBackColor = true;
             btnOpenServerDB.Click += BtnOpenServerDB_Click;
             // 
@@ -1017,7 +1017,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(59, 15);
             label2.TabIndex = 17;
-            label2.Text = "Language";
+            label2.Text = "语言";
             // 
             // cbItemSearchLanguage
             // 
@@ -1051,7 +1051,7 @@
             tpTables.Padding = new System.Windows.Forms.Padding(4);
             tpTables.Size = new System.Drawing.Size(1082, 546);
             tpTables.TabIndex = 0;
-            tpTables.Text = "Tables and Settings";
+            tpTables.Text = "数据表与设置";
             // 
             // label149
             // 
@@ -1061,7 +1061,7 @@
             label149.Name = "label149";
             label149.Size = new System.Drawing.Size(43, 15);
             label149.TabIndex = 27;
-            label149.Text = "DB File";
+            label149.Text = "数据库文件";
             // 
             // CbSimpleSqlSourceDb
             // 
@@ -1092,7 +1092,7 @@
             label29.Name = "label29";
             label29.Size = new System.Drawing.Size(33, 15);
             label29.TabIndex = 15;
-            label29.Text = "Filter";
+            label29.Text = "筛选";
             // 
             // tFilterTables
             // 
@@ -1112,7 +1112,7 @@
             label41.Name = "label41";
             label41.Size = new System.Drawing.Size(555, 15);
             label41.TabIndex = 12;
-            label41.Text = "You can click a table to preview, or type a simple SQLite statement above. It is pretty slow on large tables";
+            label41.Text = "可点击数据表进行预览，或在上方输入简单的 SQLite 语句。大表查询会比较慢";
             // 
             // btnSimpleSQL
             // 
@@ -1122,7 +1122,7 @@
             btnSimpleSQL.Name = "btnSimpleSQL";
             btnSimpleSQL.Size = new System.Drawing.Size(88, 26);
             btnSimpleSQL.TabIndex = 11;
-            btnSimpleSQL.Text = "Run SQL";
+            btnSimpleSQL.Text = "执行 SQL";
             btnSimpleSQL.UseVisualStyleBackColor = true;
             btnSimpleSQL.Click += BtnSimpleSQL_Click;
             // 
@@ -1152,7 +1152,7 @@
             tpCurrentRecord.Name = "tpCurrentRecord";
             tpCurrentRecord.Size = new System.Drawing.Size(1082, 546);
             tpCurrentRecord.TabIndex = 4;
-            tpCurrentRecord.Text = "Selected Data";
+            tpCurrentRecord.Text = "选中数据";
             tpCurrentRecord.UseVisualStyleBackColor = true;
             // 
             // labelCurrentDataInfo
@@ -1163,7 +1163,7 @@
             labelCurrentDataInfo.Name = "labelCurrentDataInfo";
             labelCurrentDataInfo.Size = new System.Drawing.Size(97, 15);
             labelCurrentDataInfo.TabIndex = 4;
-            labelCurrentDataInfo.Text = "Nothing selected";
+            labelCurrentDataInfo.Text = "未选择任何内容";
             // 
             // dgvCurrentData
             // 
@@ -1187,18 +1187,18 @@
             // 
             dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             dataGridViewTextBoxColumn4.FillWeight = 75F;
-            dataGridViewTextBoxColumn4.HeaderText = "Field Name";
+            dataGridViewTextBoxColumn4.HeaderText = "字段名";
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             dataGridViewTextBoxColumn4.Width = 92;
             // 
             // dataGridViewTextBoxColumn5
             // 
-            dataGridViewTextBoxColumn5.HeaderText = "Value";
+            dataGridViewTextBoxColumn5.HeaderText = "值";
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
             // 
             // Column12
             // 
-            Column12.HeaderText = "Localized";
+            Column12.HeaderText = "本地化文本";
             Column12.Name = "Column12";
             // 
             // tpLocalizer
@@ -1212,7 +1212,7 @@
             tpLocalizer.Padding = new System.Windows.Forms.Padding(4);
             tpLocalizer.Size = new System.Drawing.Size(1082, 546);
             tpLocalizer.TabIndex = 10;
-            tpLocalizer.Text = "Localizer";
+            tpLocalizer.Text = "本地化";
             tpLocalizer.UseVisualStyleBackColor = true;
             tpLocalizer.Enter += TpLocalizerEnter;
             // 
@@ -1224,7 +1224,7 @@
             label93.Name = "label93";
             label93.Size = new System.Drawing.Size(550, 15);
             label93.TabIndex = 12;
-            label93.Text = "Enter (partial) text here to search inside the localized texts. Enclose in ='s for exact search. Max 50 results";
+            label93.Text = "在此输入 (部分) 文本以在本地化文本中搜索。用 = 包裹可精确搜索。最多 50 条结果";
             // 
             // dgvLocalized
             // 
@@ -1247,25 +1247,25 @@
             // Column48
             // 
             Column48.FillWeight = 15F;
-            Column48.HeaderText = "Table";
+            Column48.HeaderText = "数据表";
             Column48.Name = "Column48";
             // 
             // Column49
             // 
             Column49.FillWeight = 15F;
-            Column49.HeaderText = "Field";
+            Column49.HeaderText = "字段";
             Column49.Name = "Column49";
             // 
             // Column51
             // 
             Column51.FillWeight = 20F;
-            Column51.HeaderText = "Index (ui_texts key)";
+            Column51.HeaderText = "索引 (ui_texts 键)";
             Column51.Name = "Column51";
             // 
             // Column50
             // 
             Column50.FillWeight = 50F;
-            Column50.HeaderText = "Value";
+            Column50.HeaderText = "值";
             Column50.Name = "Column50";
             // 
             // tSearchLocalized
@@ -1291,7 +1291,7 @@
             tpMap.Padding = new System.Windows.Forms.Padding(4);
             tpMap.Size = new System.Drawing.Size(1082, 546);
             tpMap.TabIndex = 13;
-            tpMap.Text = "Map";
+            tpMap.Text = "地图";
             tpMap.UseVisualStyleBackColor = true;
             // 
             // cbLoadFromInstanceSelect
@@ -1315,7 +1315,7 @@
             BtnLoadNpcSpawnersFromPak.Name = "BtnLoadNpcSpawnersFromPak";
             BtnLoadNpcSpawnersFromPak.Size = new System.Drawing.Size(148, 26);
             BtnLoadNpcSpawnersFromPak.TabIndex = 56;
-            BtnLoadNpcSpawnersFromPak.Text = "Load NPC Spawners";
+            BtnLoadNpcSpawnersFromPak.Text = "加载 NPC 刷新点";
             BtnLoadNpcSpawnersFromPak.UseVisualStyleBackColor = true;
             BtnLoadNpcSpawnersFromPak.Click += BtnLoadNpcSpawnersFromPak_Click;
             // 
@@ -1326,7 +1326,7 @@
             BtnLoadDoodadsFromPak.Name = "BtnLoadDoodadsFromPak";
             BtnLoadDoodadsFromPak.Size = new System.Drawing.Size(137, 26);
             BtnLoadDoodadsFromPak.TabIndex = 55;
-            BtnLoadDoodadsFromPak.Text = "Load Doodads";
+            BtnLoadDoodadsFromPak.Text = "加载装饰物";
             BtnLoadDoodadsFromPak.UseVisualStyleBackColor = true;
             BtnLoadDoodadsFromPak.Click += BtnLoadDoodadsFromPak_Click;
             // 
@@ -1338,7 +1338,7 @@
             label148.Name = "label148";
             label148.Size = new System.Drawing.Size(52, 15);
             label148.TabIndex = 54;
-            label148.Text = "Filter by:";
+            label148.Text = "筛选:";
             // 
             // tExportedObjFilter
             // 
@@ -1355,7 +1355,7 @@
             BtnLoadUntMovement.Name = "BtnLoadUntMovement";
             BtnLoadUntMovement.Size = new System.Drawing.Size(218, 26);
             BtnLoadUntMovement.TabIndex = 52;
-            BtnLoadUntMovement.Text = "Load exported unit movement";
+            BtnLoadUntMovement.Text = "加载导出的单位移动数据";
             BtnLoadUntMovement.UseVisualStyleBackColor = true;
             BtnLoadUntMovement.Click += BtnLoadUntMovement_Click;
             // 
@@ -1366,7 +1366,7 @@
             btnLoadAAEmuWater.Name = "btnLoadAAEmuWater";
             btnLoadAAEmuWater.Size = new System.Drawing.Size(268, 26);
             btnLoadAAEmuWater.TabIndex = 51;
-            btnLoadAAEmuWater.Text = "Load AAEmu json water data";
+            btnLoadAAEmuWater.Text = "加载 AAEmu json 水域数据";
             btnLoadAAEmuWater.UseVisualStyleBackColor = true;
             btnLoadAAEmuWater.Click += BtnLoadAAEmuWater_Click;
             // 
@@ -1377,7 +1377,7 @@
             btnShowEntityAreaShape.Name = "btnShowEntityAreaShape";
             btnShowEntityAreaShape.Size = new System.Drawing.Size(196, 26);
             btnShowEntityAreaShape.TabIndex = 50;
-            btnShowEntityAreaShape.Text = "Show All Entity AreaShape";
+            btnShowEntityAreaShape.Text = "显示全部实体区域形状";
             btnShowEntityAreaShape.UseVisualStyleBackColor = true;
             btnShowEntityAreaShape.Click += BtnShowEntityAreaShape_Click;
             // 
@@ -1388,7 +1388,7 @@
             btnLoadCustomAAEmuJson.Name = "btnLoadCustomAAEmuJson";
             btnLoadCustomAAEmuJson.Size = new System.Drawing.Size(268, 26);
             btnLoadCustomAAEmuJson.TabIndex = 49;
-            btnLoadCustomAAEmuJson.Text = "Load custom AAEmu json entity data";
+            btnLoadCustomAAEmuJson.Text = "加载自定义 AAEmu json 实体数据";
             btnLoadCustomAAEmuJson.UseVisualStyleBackColor = true;
             btnLoadCustomAAEmuJson.Click += BtnLoadCustomAAEmuJson_Click;
             // 
@@ -1399,7 +1399,7 @@
             btnLoadCustomPaths.Name = "btnLoadCustomPaths";
             btnLoadCustomPaths.Size = new System.Drawing.Size(173, 26);
             btnLoadCustomPaths.TabIndex = 48;
-            btnLoadCustomPaths.Text = "Load custom entity path";
+            btnLoadCustomPaths.Text = "加载自定义实体路径";
             btnLoadCustomPaths.UseVisualStyleBackColor = true;
             btnLoadCustomPaths.Click += BtnLoadCustomPaths_Click;
             // 
@@ -1411,7 +1411,7 @@
             label130.Name = "label130";
             label130.Size = new System.Drawing.Size(52, 15);
             label130.TabIndex = 47;
-            label130.Text = "Filter by:";
+            label130.Text = "筛选:";
             // 
             // cbQuestSignSphereSearchShowAll
             // 
@@ -1421,7 +1421,7 @@
             cbQuestSignSphereSearchShowAll.Name = "cbQuestSignSphereSearchShowAll";
             cbQuestSignSphereSearchShowAll.Size = new System.Drawing.Size(116, 19);
             cbQuestSignSphereSearchShowAll.TabIndex = 46;
-            cbQuestSignSphereSearchShowAll.Text = "Also show others";
+            cbQuestSignSphereSearchShowAll.Text = "同时显示其他";
             cbQuestSignSphereSearchShowAll.UseVisualStyleBackColor = true;
             // 
             // eQuestSignSphereSearch
@@ -1440,7 +1440,7 @@
             label129.Name = "label129";
             label129.Size = new System.Drawing.Size(117, 15);
             label129.TabIndex = 44;
-            label129.Text = "Shows housing areas";
+            label129.Text = "显示房屋区域";
             // 
             // label131
             // 
@@ -1450,7 +1450,7 @@
             label131.Name = "label131";
             label131.Size = new System.Drawing.Size(118, 15);
             label131.TabIndex = 44;
-            label131.Text = "Shows subzone areas";
+            label131.Text = "显示子区域";
             // 
             // btnFindAllHousing
             // 
@@ -1459,7 +1459,7 @@
             btnFindAllHousing.Name = "btnFindAllHousing";
             btnFindAllHousing.Size = new System.Drawing.Size(196, 26);
             btnFindAllHousing.TabIndex = 43;
-            btnFindAllHousing.Text = "Show All Housing";
+            btnFindAllHousing.Text = "显示全部房屋";
             btnFindAllHousing.UseVisualStyleBackColor = true;
             btnFindAllHousing.Click += BtnFindAllHousing_Click;
             // 
@@ -1470,7 +1470,7 @@
             btnFindAllSubzone.Name = "btnFindAllSubzone";
             btnFindAllSubzone.Size = new System.Drawing.Size(196, 26);
             btnFindAllSubzone.TabIndex = 50;
-            btnFindAllSubzone.Text = "Show All Subzone";
+            btnFindAllSubzone.Text = "显示全部子区域";
             btnFindAllSubzone.UseVisualStyleBackColor = true;
             btnFindAllSubzone.Click += BtnFindAllSubZone_Click;
             // 
@@ -1482,7 +1482,7 @@
             label128.Name = "label128";
             label128.Size = new System.Drawing.Size(283, 15);
             label128.TabIndex = 42;
-            label128.Text = "Routes of Airships, Carriage and other fixed pathings";
+            label128.Text = "飞艇、马车及其他固定路线的路径";
             // 
             // btnFindAllQuestSpheres
             // 
@@ -1491,7 +1491,7 @@
             btnFindAllQuestSpheres.Name = "btnFindAllQuestSpheres";
             btnFindAllQuestSpheres.Size = new System.Drawing.Size(196, 26);
             btnFindAllQuestSpheres.TabIndex = 40;
-            btnFindAllQuestSpheres.Text = "Show All Quest Spheres";
+            btnFindAllQuestSpheres.Text = "显示全部任务区域";
             btnFindAllQuestSpheres.UseVisualStyleBackColor = true;
             btnFindAllQuestSpheres.Click += BtnFindAllQuestSpheres_Click;
             // 
@@ -1502,7 +1502,7 @@
             btnFindAllTransferPaths.Name = "btnFindAllTransferPaths";
             btnFindAllTransferPaths.Size = new System.Drawing.Size(173, 26);
             btnFindAllTransferPaths.TabIndex = 39;
-            btnFindAllTransferPaths.Text = "Show All Transfer Paths";
+            btnFindAllTransferPaths.Text = "显示全部传送路径";
             btnFindAllTransferPaths.UseVisualStyleBackColor = true;
             btnFindAllTransferPaths.Click += BtnFindAllTransferPaths_Click;
             // 
@@ -1513,7 +1513,7 @@
             btnMap.Name = "btnMap";
             btnMap.Size = new System.Drawing.Size(127, 26);
             btnMap.TabIndex = 3;
-            btnMap.Text = "Open Map";
+            btnMap.Text = "打开地图";
             btnMap.UseVisualStyleBackColor = true;
             btnMap.Click += BtnMap_Click;
             // 
@@ -1539,7 +1539,7 @@
             btnExportDoodadSpawnData.Name = "btnExportDoodadSpawnData";
             btnExportDoodadSpawnData.Size = new System.Drawing.Size(194, 26);
             btnExportDoodadSpawnData.TabIndex = 4;
-            btnExportDoodadSpawnData.Text = "Export Doodad Spawn Data";
+            btnExportDoodadSpawnData.Text = "导出装饰物刷新数据";
             btnExportDoodadSpawnData.UseVisualStyleBackColor = true;
             btnExportDoodadSpawnData.Click += BtnExportDoodadSpawnData_Click;
             // 
@@ -1550,7 +1550,7 @@
             btnExportNPCSpawnData.Name = "btnExportNPCSpawnData";
             btnExportNPCSpawnData.Size = new System.Drawing.Size(194, 26);
             btnExportNPCSpawnData.TabIndex = 3;
-            btnExportNPCSpawnData.Text = "Export NPC Spawn Data";
+            btnExportNPCSpawnData.Text = "导出 NPC 刷新数据";
             btnExportNPCSpawnData.UseVisualStyleBackColor = true;
             btnExportNPCSpawnData.Click += BtnExportNPCSpawnData_Click;
             // 
@@ -1561,7 +1561,7 @@
             btnExportDataForVieweD.Name = "btnExportDataForVieweD";
             btnExportDataForVieweD.Size = new System.Drawing.Size(194, 26);
             btnExportDataForVieweD.TabIndex = 1;
-            btnExportDataForVieweD.Text = "Export Data for VieweD";
+            btnExportDataForVieweD.Text = "导出 VieweD 数据";
             btnExportDataForVieweD.UseVisualStyleBackColor = true;
             btnExportDataForVieweD.Click += BtnExportDataForVieweD_Click;
             // 
@@ -1573,7 +1573,7 @@
             lSpace.Name = "lSpace";
             lSpace.Size = new System.Drawing.Size(138, 15);
             lSpace.TabIndex = 0;
-            lSpace.Text = "Space, the final divider ...";
+            lSpace.Text = "空格，最后的分隔符 ...";
             // 
             // tpAchievements
             // 
@@ -1588,7 +1588,7 @@
             tpAchievements.Padding = new System.Windows.Forms.Padding(3);
             tpAchievements.Size = new System.Drawing.Size(1082, 546);
             tpAchievements.TabIndex = 20;
-            tpAchievements.Text = "Achievements";
+            tpAchievements.Text = "成就";
             tpAchievements.UseVisualStyleBackColor = true;
             // 
             // LAchievementReward
@@ -1599,7 +1599,7 @@
             LAchievementReward.Name = "LAchievementReward";
             LAchievementReward.Size = new System.Drawing.Size(64, 60);
             LAchievementReward.TabIndex = 13;
-            LAchievementReward.Text = "No Reward";
+            LAchievementReward.Text = "无奖励";
             LAchievementReward.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LAchievementIcon
@@ -1610,7 +1610,7 @@
             LAchievementIcon.Name = "LAchievementIcon";
             LAchievementIcon.Size = new System.Drawing.Size(64, 60);
             LAchievementIcon.TabIndex = 12;
-            LAchievementIcon.Text = "Icon";
+            LAchievementIcon.Text = "图标";
             LAchievementIcon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RtAchievementInfo
@@ -1631,7 +1631,7 @@
             BtnAchievementFilter.Name = "BtnAchievementFilter";
             BtnAchievementFilter.Size = new System.Drawing.Size(75, 22);
             BtnAchievementFilter.TabIndex = 2;
-            BtnAchievementFilter.Text = "Filter";
+            BtnAchievementFilter.Text = "筛选";
             BtnAchievementFilter.UseVisualStyleBackColor = true;
             BtnAchievementFilter.Click += BtnAchievementFilter_Click;
             // 
@@ -1664,7 +1664,7 @@
             tpBuffs.Name = "tpBuffs";
             tpBuffs.Size = new System.Drawing.Size(1082, 546);
             tpBuffs.TabIndex = 12;
-            tpBuffs.Text = "Buffs";
+            tpBuffs.Text = "增益";
             tpBuffs.UseVisualStyleBackColor = true;
             // 
             // cbSearchBuffs
@@ -1703,7 +1703,7 @@
             groupBox14.Size = new System.Drawing.Size(700, 538);
             groupBox14.TabIndex = 12;
             groupBox14.TabStop = false;
-            groupBox14.Text = "Buff Info";
+            groupBox14.Text = "增益信息";
             // 
             // splitContainer2
             // 
@@ -1738,7 +1738,7 @@
             cbBuffsHideEmpty.Name = "cbBuffsHideEmpty";
             cbBuffsHideEmpty.Size = new System.Drawing.Size(88, 19);
             cbBuffsHideEmpty.TabIndex = 22;
-            cbBuffsHideEmpty.Text = "Hide Empty";
+            cbBuffsHideEmpty.Text = "隐藏空值";
             cbBuffsHideEmpty.UseVisualStyleBackColor = true;
             cbBuffsHideEmpty.CheckedChanged += CbBuffsHideEmpty_CheckedChanged;
             // 
@@ -1750,7 +1750,7 @@
             label85.Name = "label85";
             label85.Size = new System.Drawing.Size(100, 15);
             label85.TabIndex = 6;
-            label85.Text = "Stats and Triggers";
+            label85.Text = "属性与触发";
             // 
             // tvBuffTriggers
             // 
@@ -1819,7 +1819,7 @@
             label97.Name = "label97";
             label97.Size = new System.Drawing.Size(73, 15);
             label97.TabIndex = 5;
-            label97.Text = "Other Values";
+            label97.Text = "其他数值";
             // 
             // flpBuff
             // 
@@ -1863,7 +1863,7 @@
             label117.Name = "label117";
             label117.Size = new System.Drawing.Size(31, 15);
             label117.TabIndex = 17;
-            label117.Text = "Tags";
+            label117.Text = "标签";
             // 
             // lBuffDuration
             // 
@@ -1883,7 +1883,7 @@
             label119.Name = "label119";
             label119.Size = new System.Drawing.Size(53, 15);
             label119.TabIndex = 15;
-            label119.Text = "Duration";
+            label119.Text = "持续时间";
             // 
             // label109
             // 
@@ -1893,7 +1893,7 @@
             label109.Name = "label109";
             label109.Size = new System.Drawing.Size(67, 15);
             label109.TabIndex = 14;
-            label109.Text = "Description";
+            label109.Text = "描述";
             // 
             // rtBuffDesc
             // 
@@ -1927,7 +1927,7 @@
             lBuffName.Name = "lBuffName";
             lBuffName.Size = new System.Drawing.Size(34, 15);
             lBuffName.TabIndex = 4;
-            lBuffName.Text = "none";
+            lBuffName.Text = "无";
             // 
             // label105
             // 
@@ -1937,7 +1937,7 @@
             label105.Name = "label105";
             label105.Size = new System.Drawing.Size(39, 15);
             label105.TabIndex = 3;
-            label105.Text = "Name";
+            label105.Text = "名称";
             // 
             // lBuffId
             // 
@@ -1957,7 +1957,7 @@
             label113.Name = "label113";
             label113.Size = new System.Drawing.Size(35, 15);
             label113.TabIndex = 0;
-            label113.Text = "Index";
+            label113.Text = "索引";
             // 
             // btnSearchBuffs
             // 
@@ -1967,7 +1967,7 @@
             btnSearchBuffs.Name = "btnSearchBuffs";
             btnSearchBuffs.Size = new System.Drawing.Size(92, 26);
             btnSearchBuffs.TabIndex = 11;
-            btnSearchBuffs.Text = "Search";
+            btnSearchBuffs.Text = "搜索";
             btnSearchBuffs.UseVisualStyleBackColor = true;
             btnSearchBuffs.Click += BtnSearchBuffs_Click;
             // 
@@ -1979,7 +1979,7 @@
             label115.Name = "label115";
             label115.Size = new System.Drawing.Size(92, 15);
             label115.TabIndex = 10;
-            label115.Text = "Buff Name or ID";
+            label115.Text = "增益名称或 ID";
             // 
             // dgvBuffs
             // 
@@ -2012,14 +2012,14 @@
             // dataGridViewTextBoxColumn24
             // 
             dataGridViewTextBoxColumn24.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn24.HeaderText = "Name";
+            dataGridViewTextBoxColumn24.HeaderText = "名称";
             dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
             dataGridViewTextBoxColumn24.ReadOnly = true;
             // 
             // Column52
             // 
             Column52.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCellsExceptHeader;
-            Column52.HeaderText = "Duration";
+            Column52.HeaderText = "持续时间";
             Column52.MinimumWidth = 75;
             Column52.Name = "Column52";
             Column52.ReadOnly = true;
@@ -2038,7 +2038,7 @@
             tpDoodads.Padding = new System.Windows.Forms.Padding(4);
             tpDoodads.Size = new System.Drawing.Size(1082, 546);
             tpDoodads.TabIndex = 8;
-            tpDoodads.Text = "Doodads";
+            tpDoodads.Text = "装饰物";
             tpDoodads.UseVisualStyleBackColor = true;
             // 
             // cbSearchDoodads
@@ -2079,7 +2079,7 @@
             tpDoodadInfo.Padding = new System.Windows.Forms.Padding(4);
             tpDoodadInfo.Size = new System.Drawing.Size(391, 510);
             tpDoodadInfo.TabIndex = 1;
-            tpDoodadInfo.Text = "Doodad";
+            tpDoodadInfo.Text = "装饰物";
             tpDoodadInfo.UseVisualStyleBackColor = true;
             // 
             // groupBox9
@@ -2102,7 +2102,7 @@
             groupBox9.Size = new System.Drawing.Size(383, 92);
             groupBox9.TabIndex = 13;
             groupBox9.TabStop = false;
-            groupBox9.Text = "Doodad Group Info";
+            groupBox9.Text = "装饰物组信息";
             // 
             // lDoodadGroupRemovedByHouse
             // 
@@ -2122,7 +2122,7 @@
             label77.Name = "label77";
             label77.Size = new System.Drawing.Size(110, 15);
             label77.TabIndex = 41;
-            label77.Text = "Removed By House";
+            label77.Text = "被房屋移除";
             // 
             // lDoodadGroupGuardOnFieldTime
             // 
@@ -2142,7 +2142,7 @@
             label72.Name = "label72";
             label72.Size = new System.Drawing.Size(116, 15);
             label72.TabIndex = 39;
-            label72.Text = "Guard On Field Time";
+            label72.Text = "场上守护时间";
             // 
             // lDoodadGroupIsExport
             // 
@@ -2162,7 +2162,7 @@
             label56.Name = "label56";
             label56.Size = new System.Drawing.Size(51, 15);
             label56.TabIndex = 37;
-            label56.Text = "Is Export";
+            label56.Text = "是否导出";
             // 
             // label62
             // 
@@ -2192,7 +2192,7 @@
             label68.Name = "label68";
             label68.Size = new System.Drawing.Size(54, 15);
             label68.TabIndex = 34;
-            label68.Text = "Target ID";
+            label68.Text = "目标 ID";
             // 
             // label70
             // 
@@ -2202,7 +2202,7 @@
             label70.Name = "label70";
             label70.Size = new System.Drawing.Size(39, 15);
             label70.TabIndex = 34;
-            label70.Text = "Name";
+            label70.Text = "名称";
             // 
             // groupBox8
             // 
@@ -2284,7 +2284,7 @@
             groupBox8.Size = new System.Drawing.Size(383, 412);
             groupBox8.TabIndex = 12;
             groupBox8.TabStop = false;
-            groupBox8.Text = "Doodad Info";
+            groupBox8.Text = "装饰物信息";
             // 
             // lDoodadSaveIndun
             // 
@@ -2304,7 +2304,7 @@
             label55.Name = "label55";
             label55.Size = new System.Drawing.Size(65, 15);
             label55.TabIndex = 106;
-            label55.Text = "Save Indun";
+            label55.Text = "保存副本";
             // 
             // lDoodadRestrictZoneID
             // 
@@ -2324,7 +2324,7 @@
             label126.Name = "label126";
             label126.Size = new System.Drawing.Size(90, 15);
             label126.TabIndex = 104;
-            label126.Text = "Restrict Zone ID";
+            label126.Text = "限制区域 ID";
             // 
             // lDoodadNoCollision
             // 
@@ -2344,7 +2344,7 @@
             label124.Name = "label124";
             label124.Size = new System.Drawing.Size(70, 15);
             label124.TabIndex = 102;
-            label124.Text = "No collision";
+            label124.Text = "无碰撞";
             // 
             // lDoodadDespawnOnCollision
             // 
@@ -2364,7 +2364,7 @@
             label122.Name = "label122";
             label122.Size = new System.Drawing.Size(119, 15);
             label122.TabIndex = 100;
-            label122.Text = "Despawn on collision";
+            label122.Text = "碰撞后消失";
             // 
             // lDoodadGrowthTime
             // 
@@ -2384,7 +2384,7 @@
             label120.Name = "label120";
             label120.Size = new System.Drawing.Size(76, 15);
             label120.TabIndex = 98;
-            label120.Text = "Growth Time";
+            label120.Text = "生长时间";
             // 
             // lDoodadFactionID
             // 
@@ -2404,7 +2404,7 @@
             label118.Name = "label118";
             label118.Size = new System.Drawing.Size(60, 15);
             label118.TabIndex = 96;
-            label118.Text = "Faction ID";
+            label118.Text = "阵营 ID";
             // 
             // lDoodadChildable
             // 
@@ -2424,7 +2424,7 @@
             label116.Name = "label116";
             label116.Size = new System.Drawing.Size(57, 15);
             label116.TabIndex = 94;
-            label116.Text = "Childable";
+            label116.Text = "可挂载子对象";
             // 
             // lDoodadParentable
             // 
@@ -2444,7 +2444,7 @@
             label114.Name = "label114";
             label114.Size = new System.Drawing.Size(63, 15);
             label114.TabIndex = 92;
-            label114.Text = "Parentable";
+            label114.Text = "可依附父对象";
             // 
             // lDoodadLoadModelFromWorld
             // 
@@ -2464,7 +2464,7 @@
             label112.Name = "label112";
             label112.Size = new System.Drawing.Size(136, 15);
             label112.TabIndex = 90;
-            label112.Text = "Load Model From World";
+            label112.Text = "从世界加载模型";
             // 
             // lDoodadForceUpAction
             // 
@@ -2484,7 +2484,7 @@
             label110.Name = "label110";
             label110.Size = new System.Drawing.Size(92, 15);
             label110.TabIndex = 88;
-            label110.Text = "Force Up Action";
+            label110.Text = "强制向上动作";
             // 
             // lDoodadMarkModel
             // 
@@ -2504,7 +2504,7 @@
             label108.Name = "label108";
             label108.Size = new System.Drawing.Size(71, 15);
             label108.TabIndex = 86;
-            label108.Text = "Mark Model";
+            label108.Text = "标记模型";
             // 
             // lDoodadClimateID
             // 
@@ -2524,7 +2524,7 @@
             label106.Name = "label106";
             label106.Size = new System.Drawing.Size(62, 15);
             label106.TabIndex = 84;
-            label106.Text = "Climate ID";
+            label106.Text = "气候 ID";
             // 
             // lDoodadCollideVehicle
             // 
@@ -2544,7 +2544,7 @@
             label104.Name = "label104";
             label104.Size = new System.Drawing.Size(84, 15);
             label104.TabIndex = 82;
-            label104.Text = "Collide Vehicle";
+            label104.Text = "与载具碰撞";
             // 
             // lDoodadCollideShip
             // 
@@ -2564,7 +2564,7 @@
             label102.Name = "label102";
             label102.Size = new System.Drawing.Size(70, 15);
             label102.TabIndex = 80;
-            label102.Text = "Collide Ship";
+            label102.Text = "与船只碰撞";
             // 
             // lDoodadSimRadius
             // 
@@ -2584,7 +2584,7 @@
             label100.Name = "label100";
             label100.Size = new System.Drawing.Size(65, 15);
             label100.TabIndex = 78;
-            label100.Text = "Sim Radius";
+            label100.Text = "模拟半径";
             // 
             // lDoodadTargetDecalSize
             // 
@@ -2604,7 +2604,7 @@
             label98.Name = "label98";
             label98.Size = new System.Drawing.Size(95, 15);
             label98.TabIndex = 76;
-            label98.Text = "Target Decal Size";
+            label98.Text = "目标贴花尺寸";
             // 
             // lDoodadUseTargetHighlight
             // 
@@ -2624,7 +2624,7 @@
             label96.Name = "label96";
             label96.Size = new System.Drawing.Size(115, 15);
             label96.TabIndex = 74;
-            label96.Text = "Use Target Highlight";
+            label96.Text = "使用目标高亮";
             // 
             // lDoodadUseTargetSilhouette
             // 
@@ -2644,7 +2644,7 @@
             label94.Name = "label94";
             label94.Size = new System.Drawing.Size(118, 15);
             label94.TabIndex = 72;
-            label94.Text = "Use Target Silhouette";
+            label94.Text = "使用目标剪影";
             // 
             // lDoodadUseTargetDecal
             // 
@@ -2664,7 +2664,7 @@
             label92.Name = "label92";
             label92.Size = new System.Drawing.Size(94, 15);
             label92.TabIndex = 70;
-            label92.Text = "Use Target Decal";
+            label92.Text = "使用目标贴花";
             // 
             // lDoodadShowMinimap
             // 
@@ -2684,7 +2684,7 @@
             label90.Name = "label90";
             label90.Size = new System.Drawing.Size(87, 15);
             label90.TabIndex = 68;
-            label90.Text = "Show Minimap";
+            label90.Text = "显示小地图";
             // 
             // lDoodadGroupID
             // 
@@ -2704,7 +2704,7 @@
             label88.Name = "label88";
             label88.Size = new System.Drawing.Size(54, 15);
             label88.TabIndex = 66;
-            label88.Text = "Group ID";
+            label88.Text = "组 ID";
             // 
             // lDoodadMilestoneID
             // 
@@ -2724,7 +2724,7 @@
             label86.Name = "label86";
             label86.Size = new System.Drawing.Size(73, 15);
             label86.TabIndex = 64;
-            label86.Text = "Milestone ID";
+            label86.Text = "里程碑 ID";
             // 
             // lDoodadForceToDTopPriority
             // 
@@ -2744,7 +2744,7 @@
             label84.Name = "label84";
             label84.Size = new System.Drawing.Size(124, 15);
             label84.TabIndex = 62;
-            label84.Text = "Force ToD Top Priority";
+            label84.Text = "强制时段最高优先级";
             // 
             // lDoodadUseCreatorFaction
             // 
@@ -2764,7 +2764,7 @@
             label82.Name = "label82";
             label82.Size = new System.Drawing.Size(110, 15);
             label82.TabIndex = 60;
-            label82.Text = "Use Creator Faction";
+            label82.Text = "使用创建者阵营";
             // 
             // lDoodadModelKindID
             // 
@@ -2784,7 +2784,7 @@
             label80.Name = "label80";
             label80.Size = new System.Drawing.Size(82, 15);
             label80.TabIndex = 58;
-            label80.Text = "Model Kind ID";
+            label80.Text = "模型类型 ID";
             // 
             // lDoodadMaxTime
             // 
@@ -2804,7 +2804,7 @@
             label78.Name = "label78";
             label78.Size = new System.Drawing.Size(91, 15);
             label78.TabIndex = 56;
-            label78.Text = "Maximum Time";
+            label78.Text = "最大时间";
             // 
             // lDoodadMinTime
             // 
@@ -2824,7 +2824,7 @@
             label75.Name = "label75";
             label75.Size = new System.Drawing.Size(90, 15);
             label75.TabIndex = 54;
-            label75.Text = "Minimum Time";
+            label75.Text = "最小时间";
             // 
             // lDoodadPercent
             // 
@@ -2844,7 +2844,7 @@
             label73.Name = "label73";
             label73.Size = new System.Drawing.Size(47, 15);
             label73.TabIndex = 52;
-            label73.Text = "Percent";
+            label73.Text = "百分比";
             // 
             // lDoodadMgmtSpawn
             // 
@@ -2864,7 +2864,7 @@
             label67.Name = "label67";
             label67.Size = new System.Drawing.Size(78, 15);
             label67.TabIndex = 50;
-            label67.Text = "Mgmt Spawn";
+            label67.Text = "管理刷新";
             // 
             // lDoodadShowName
             // 
@@ -2884,7 +2884,7 @@
             label64.Name = "label64";
             label64.Size = new System.Drawing.Size(71, 15);
             label64.TabIndex = 48;
-            label64.Text = "Show Name";
+            label64.Text = "显示名称";
             // 
             // lDoodadOnceOneInteraction
             // 
@@ -2904,7 +2904,7 @@
             label53.Name = "label53";
             label53.Size = new System.Drawing.Size(120, 15);
             label53.TabIndex = 46;
-            label53.Text = "Once One Interaction";
+            label53.Text = "仅交互一次";
             // 
             // lDoodadModel
             // 
@@ -2924,7 +2924,7 @@
             label71.Name = "label71";
             label71.Size = new System.Drawing.Size(41, 15);
             label71.TabIndex = 44;
-            label71.Text = "Model";
+            label71.Text = "模型";
             // 
             // lDoodadID
             // 
@@ -2974,7 +2974,7 @@
             label58.Name = "label58";
             label58.Size = new System.Drawing.Size(87, 15);
             label58.TabIndex = 34;
-            label58.Text = "Once One Man";
+            label58.Text = "仅限一人";
             // 
             // label60
             // 
@@ -2984,7 +2984,7 @@
             label60.Name = "label60";
             label60.Size = new System.Drawing.Size(39, 15);
             label60.TabIndex = 34;
-            label60.Text = "Name";
+            label60.Text = "名称";
             // 
             // tpDoodadFunctions
             // 
@@ -2995,7 +2995,7 @@
             tpDoodadFunctions.Padding = new System.Windows.Forms.Padding(4);
             tpDoodadFunctions.Size = new System.Drawing.Size(391, 510);
             tpDoodadFunctions.TabIndex = 2;
-            tpDoodadFunctions.Text = "Functions";
+            tpDoodadFunctions.Text = "功能";
             tpDoodadFunctions.UseVisualStyleBackColor = true;
             // 
             // groupBox10
@@ -3030,7 +3030,7 @@
             groupBox10.Size = new System.Drawing.Size(383, 396);
             groupBox10.TabIndex = 0;
             groupBox10.TabStop = false;
-            groupBox10.Text = "Doodad Function Groups";
+            groupBox10.Text = "装饰物功能组";
             // 
             // lDoodadPhaseFuncsActualType
             // 
@@ -3040,7 +3040,7 @@
             lDoodadPhaseFuncsActualType.Name = "lDoodadPhaseFuncsActualType";
             lDoodadPhaseFuncsActualType.Size = new System.Drawing.Size(34, 15);
             lDoodadPhaseFuncsActualType.TabIndex = 59;
-            lDoodadPhaseFuncsActualType.Text = "none";
+            lDoodadPhaseFuncsActualType.Text = "无";
             // 
             // lDoodadPhaseFuncsActualId
             // 
@@ -3060,7 +3060,7 @@
             label136.Name = "label136";
             label136.Size = new System.Drawing.Size(54, 15);
             label136.TabIndex = 57;
-            label136.Text = "Actual Id";
+            label136.Text = "实际 ID";
             // 
             // lDoodadFuncGroupIsMsgToZone
             // 
@@ -3240,7 +3240,7 @@
             label66.Name = "label66";
             label66.Size = new System.Drawing.Size(39, 15);
             label66.TabIndex = 37;
-            label66.Text = "Name";
+            label66.Text = "名称";
             // 
             // dgvDoodadFuncGroups
             // 
@@ -3300,7 +3300,7 @@
             tpDoodadTools.Padding = new System.Windows.Forms.Padding(4);
             tpDoodadTools.Size = new System.Drawing.Size(391, 510);
             tpDoodadTools.TabIndex = 3;
-            tpDoodadTools.Text = "Tools";
+            tpDoodadTools.Text = "工具";
             tpDoodadTools.UseVisualStyleBackColor = true;
             // 
             // lDoodadRemoveGMCommand
@@ -3334,7 +3334,7 @@
             btnShowDoodadOnMap.Name = "btnShowDoodadOnMap";
             btnShowDoodadOnMap.Size = new System.Drawing.Size(376, 25);
             btnShowDoodadOnMap.TabIndex = 27;
-            btnShowDoodadOnMap.Text = "Find Selected";
+            btnShowDoodadOnMap.Text = "查找选中项";
             btnShowDoodadOnMap.UseVisualStyleBackColor = true;
             btnShowDoodadOnMap.Click += BtnShowDoodadOnMap_Click;
             // 
@@ -3348,7 +3348,7 @@
             tpDoodadWorkflow.Padding = new System.Windows.Forms.Padding(4);
             tpDoodadWorkflow.Size = new System.Drawing.Size(391, 510);
             tpDoodadWorkflow.TabIndex = 4;
-            tpDoodadWorkflow.Text = "Workflow";
+            tpDoodadWorkflow.Text = "工作流";
             tpDoodadWorkflow.UseVisualStyleBackColor = true;
             // 
             // cbDoodadWorkflowHideEmpty
@@ -3360,7 +3360,7 @@
             cbDoodadWorkflowHideEmpty.Name = "cbDoodadWorkflowHideEmpty";
             cbDoodadWorkflowHideEmpty.Size = new System.Drawing.Size(124, 19);
             cbDoodadWorkflowHideEmpty.TabIndex = 1;
-            cbDoodadWorkflowHideEmpty.Text = "Hide empty values";
+            cbDoodadWorkflowHideEmpty.Text = "隐藏空值";
             cbDoodadWorkflowHideEmpty.UseVisualStyleBackColor = true;
             cbDoodadWorkflowHideEmpty.CheckedChanged += CbDoodadWorkflowHideEmpty_CheckedChanged;
             // 
@@ -3387,7 +3387,7 @@
             btnSearchDoodads.Name = "btnSearchDoodads";
             btnSearchDoodads.Size = new System.Drawing.Size(92, 26);
             btnSearchDoodads.TabIndex = 14;
-            btnSearchDoodads.Text = "Search";
+            btnSearchDoodads.Text = "搜索";
             btnSearchDoodads.UseVisualStyleBackColor = true;
             btnSearchDoodads.Click += BtnSearchDoodads_Click;
             // 
@@ -3399,7 +3399,7 @@
             label46.Name = "label46";
             label46.Size = new System.Drawing.Size(243, 15);
             label46.TabIndex = 13;
-            label46.Text = "Search Doodad ID, Group ID, Name or Model";
+            label46.Text = "搜索装饰物 ID、组 ID、名称或模型";
             // 
             // dgvDoodads
             // 
@@ -3429,7 +3429,7 @@
             // 
             // dataGridViewTextBoxColumn19
             // 
-            dataGridViewTextBoxColumn19.HeaderText = "Name";
+            dataGridViewTextBoxColumn19.HeaderText = "名称";
             dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             dataGridViewTextBoxColumn19.ReadOnly = true;
             dataGridViewTextBoxColumn19.Width = 64;
@@ -3443,21 +3443,21 @@
             // 
             // Column28
             // 
-            Column28.HeaderText = "Group";
+            Column28.HeaderText = "组";
             Column28.Name = "Column28";
             Column28.ReadOnly = true;
             Column28.Width = 65;
             // 
             // Column25
             // 
-            Column25.HeaderText = "Percent";
+            Column25.HeaderText = "百分比";
             Column25.Name = "Column25";
             Column25.ReadOnly = true;
             Column25.Width = 72;
             // 
             // Column26
             // 
-            Column26.HeaderText = "Faction";
+            Column26.HeaderText = "阵营";
             Column26.Name = "Column26";
             Column26.ReadOnly = true;
             Column26.Width = 71;
@@ -3471,7 +3471,7 @@
             // 
             // Column22
             // 
-            Column22.HeaderText = "Model";
+            Column22.HeaderText = "模型";
             Column22.Name = "Column22";
             Column22.ReadOnly = true;
             Column22.Width = 66;
@@ -3498,7 +3498,7 @@
             tpFactions.Padding = new System.Windows.Forms.Padding(4);
             tpFactions.Size = new System.Drawing.Size(1082, 546);
             tpFactions.TabIndex = 7;
-            tpFactions.Text = "Factions";
+            tpFactions.Text = "阵营";
             tpFactions.UseVisualStyleBackColor = true;
             // 
             // groupBox7
@@ -3519,7 +3519,7 @@
             groupBox7.Size = new System.Drawing.Size(216, 101);
             groupBox7.TabIndex = 33;
             groupBox7.TabStop = false;
-            groupBox7.Text = "Hostile";
+            groupBox7.Text = "敌对";
             // 
             // lFactionHostilePirate
             // 
@@ -3539,7 +3539,7 @@
             label49.Name = "label49";
             label49.Size = new System.Drawing.Size(54, 15);
             label49.TabIndex = 4;
-            label49.Text = "vs. Pirate";
+            label49.Text = "对 海盗";
             // 
             // lFactionHostileHaranya
             // 
@@ -3559,7 +3559,7 @@
             label47.Name = "label47";
             label47.Size = new System.Drawing.Size(68, 15);
             label47.TabIndex = 2;
-            label47.Text = "vs. Haranya";
+            label47.Text = "对 哈里兰";
             // 
             // lFactionHostileNuia
             // 
@@ -3579,7 +3579,7 @@
             label76.Name = "label76";
             label76.Size = new System.Drawing.Size(49, 15);
             label76.TabIndex = 0;
-            label76.Text = "vs. Nuia";
+            label76.Text = "对 诺亚";
             // 
             // groupBox6
             // 
@@ -3615,7 +3615,7 @@
             groupBox6.Size = new System.Drawing.Size(216, 261);
             groupBox6.TabIndex = 16;
             groupBox6.TabStop = false;
-            groupBox6.Text = "Faction Info";
+            groupBox6.Text = "阵营信息";
             // 
             // lFactionMotherID
             // 
@@ -3635,7 +3635,7 @@
             label65.Name = "label65";
             label65.Size = new System.Drawing.Size(60, 15);
             label65.TabIndex = 31;
-            label65.Text = "Mother ID";
+            label65.Text = "母阵营 ID";
             // 
             // lFactionDiplomacyLinkID
             // 
@@ -3655,7 +3655,7 @@
             label63.Name = "label63";
             label63.Size = new System.Drawing.Size(108, 15);
             label63.TabIndex = 29;
-            label63.Text = "Displomacy Link ID";
+            label63.Text = "外交关系 ID";
             // 
             // lFactionIsDiplomacyTarget
             // 
@@ -3665,7 +3665,7 @@
             lFactionIsDiplomacyTarget.Name = "lFactionIsDiplomacyTarget";
             lFactionIsDiplomacyTarget.Size = new System.Drawing.Size(33, 15);
             lFactionIsDiplomacyTarget.TabIndex = 28;
-            lFactionIsDiplomacyTarget.Text = "False";
+            lFactionIsDiplomacyTarget.Text = "否";
             // 
             // label61
             // 
@@ -3675,7 +3675,7 @@
             label61.Name = "label61";
             label61.Size = new System.Drawing.Size(111, 15);
             label61.TabIndex = 27;
-            label61.Text = "Is Diplomacy Target";
+            label61.Text = "是否外交目标";
             // 
             // lFactionGuardLink
             // 
@@ -3685,7 +3685,7 @@
             lFactionGuardLink.Name = "lFactionGuardLink";
             lFactionGuardLink.Size = new System.Drawing.Size(33, 15);
             lFactionGuardLink.TabIndex = 26;
-            lFactionGuardLink.Text = "False";
+            lFactionGuardLink.Text = "否";
             // 
             // label57
             // 
@@ -3695,7 +3695,7 @@
             label57.Name = "label57";
             label57.Size = new System.Drawing.Size(64, 15);
             label57.TabIndex = 25;
-            label57.Text = "Guard Link";
+            label57.Text = "守卫关联";
             // 
             // lFactionAggroLink
             // 
@@ -3705,7 +3705,7 @@
             lFactionAggroLink.Name = "lFactionAggroLink";
             lFactionAggroLink.Size = new System.Drawing.Size(33, 15);
             lFactionAggroLink.TabIndex = 24;
-            lFactionAggroLink.Text = "False";
+            lFactionAggroLink.Text = "否";
             // 
             // label54
             // 
@@ -3715,7 +3715,7 @@
             label54.Name = "label54";
             label54.Size = new System.Drawing.Size(65, 15);
             label54.TabIndex = 23;
-            label54.Text = "Aggro Link";
+            label54.Text = "仇恨关联";
             // 
             // LFactionPoliticalSystemID
             // 
@@ -3735,7 +3735,7 @@
             label52.Name = "label52";
             label52.Size = new System.Drawing.Size(104, 15);
             label52.TabIndex = 21;
-            label52.Text = "Political System ID";
+            label52.Text = "政治体系 ID";
             // 
             // lFactionOwnerTypeID
             // 
@@ -3755,7 +3755,7 @@
             label50.Name = "label50";
             label50.Size = new System.Drawing.Size(84, 15);
             label50.TabIndex = 19;
-            label50.Text = "Owner Type ID";
+            label50.Text = "所有者类型 ID";
             // 
             // label44
             // 
@@ -3765,7 +3765,7 @@
             label44.Name = "label44";
             label44.Size = new System.Drawing.Size(77, 15);
             label44.TabIndex = 18;
-            label44.Text = "Owner Name";
+            label44.Text = "所有者名称";
             // 
             // lFactionOwnerName
             // 
@@ -3795,7 +3795,7 @@
             label48.Name = "label48";
             label48.Size = new System.Drawing.Size(56, 15);
             label48.TabIndex = 15;
-            label48.Text = "Owner ID";
+            label48.Text = "所有者 ID";
             // 
             // label45
             // 
@@ -3805,7 +3805,7 @@
             label45.Name = "label45";
             label45.Size = new System.Drawing.Size(39, 15);
             label45.TabIndex = 14;
-            label45.Text = "Name";
+            label45.Text = "名称";
             // 
             // lFactionName
             // 
@@ -3835,7 +3835,7 @@
             label59.Name = "label59";
             label59.Size = new System.Drawing.Size(35, 15);
             label59.TabIndex = 0;
-            label59.Text = "Index";
+            label59.Text = "索引";
             // 
             // btnFactionsAll
             // 
@@ -3845,7 +3845,7 @@
             btnFactionsAll.Name = "btnFactionsAll";
             btnFactionsAll.Size = new System.Drawing.Size(92, 26);
             btnFactionsAll.TabIndex = 15;
-            btnFactionsAll.Text = "Show All";
+            btnFactionsAll.Text = "显示全部";
             btnFactionsAll.UseVisualStyleBackColor = true;
             btnFactionsAll.Click += BtnFactionsAll_Click;
             // 
@@ -3858,7 +3858,7 @@
             btnSearchFaction.Name = "btnSearchFaction";
             btnSearchFaction.Size = new System.Drawing.Size(92, 26);
             btnSearchFaction.TabIndex = 14;
-            btnSearchFaction.Text = "Search";
+            btnSearchFaction.Text = "搜索";
             btnSearchFaction.UseVisualStyleBackColor = true;
             btnSearchFaction.Click += BtnSearchFaction_Click;
             // 
@@ -3870,7 +3870,7 @@
             label42.Name = "label42";
             label42.Size = new System.Drawing.Size(227, 15);
             label42.TabIndex = 13;
-            label42.Text = "Search Faction ID, Name (includes owner)";
+            label42.Text = "搜索阵营 ID、名称 (包含所有者)";
             // 
             // tSearchFaction
             // 
@@ -3911,7 +3911,7 @@
             // 
             // dataGridViewTextBoxColumn16
             // 
-            dataGridViewTextBoxColumn16.HeaderText = "Name";
+            dataGridViewTextBoxColumn16.HeaderText = "名称";
             dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
             dataGridViewTextBoxColumn16.ReadOnly = true;
             dataGridViewTextBoxColumn16.Width = 64;
@@ -3960,7 +3960,7 @@
             tpItems.Padding = new System.Windows.Forms.Padding(4);
             tpItems.Size = new System.Drawing.Size(1082, 546);
             tpItems.TabIndex = 1;
-            tpItems.Text = "Items";
+            tpItems.Text = "物品";
             tpItems.UseVisualStyleBackColor = true;
             // 
             // cbItemSearch
@@ -3983,7 +3983,7 @@
             label139.Name = "label139";
             label139.Size = new System.Drawing.Size(32, 15);
             label139.TabIndex = 21;
-            label139.Text = "Type";
+            label139.Text = "类型";
             // 
             // cbItemSearchType
             // 
@@ -4019,7 +4019,7 @@
             label135.Name = "label135";
             label135.Size = new System.Drawing.Size(40, 15);
             label135.TabIndex = 18;
-            label135.Text = "Range";
+            label135.Text = "范围";
             // 
             // label83
             // 
@@ -4029,7 +4029,7 @@
             label83.Name = "label83";
             label83.Size = new System.Drawing.Size(55, 15);
             label83.TabIndex = 17;
-            label83.Text = "Category";
+            label83.Text = "分类";
             // 
             // cbItemSearchItemCategoryTypeList
             // 
@@ -4051,7 +4051,7 @@
             label51.Name = "label51";
             label51.Size = new System.Drawing.Size(54, 15);
             label51.TabIndex = 15;
-            label51.Text = "Gear Slot";
+            label51.Text = "装备栏位";
             // 
             // cbItemSearchItemArmorSlotTypeList
             // 
@@ -4075,7 +4075,7 @@
             btnFindItemSkill.Name = "btnFindItemSkill";
             btnFindItemSkill.Size = new System.Drawing.Size(130, 26);
             btnFindItemSkill.TabIndex = 12;
-            btnFindItemSkill.Text = "Find related Skills";
+            btnFindItemSkill.Text = "查找相关技能";
             btnFindItemSkill.UseVisualStyleBackColor = false;
             btnFindItemSkill.Click += BtnFindItemSkill_Click;
             // 
@@ -4106,7 +4106,7 @@
             groupBox1.Size = new System.Drawing.Size(352, 532);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Item Info";
+            groupBox1.Text = "物品信息";
             // 
             // lItemImplId
             // 
@@ -4126,7 +4126,7 @@
             label140.Name = "label140";
             label140.Size = new System.Drawing.Size(32, 15);
             label140.TabIndex = 26;
-            label140.Text = "Type";
+            label140.Text = "类型";
             // 
             // lItemTags
             // 
@@ -4148,7 +4148,7 @@
             label127.Name = "label127";
             label127.Size = new System.Drawing.Size(31, 15);
             label127.TabIndex = 24;
-            label127.Text = "Tags";
+            label127.Text = "标签";
             // 
             // lItemAddGMCommand
             // 
@@ -4193,7 +4193,7 @@
             lItemLevel.Name = "lItemLevel";
             lItemLevel.Size = new System.Drawing.Size(34, 15);
             lItemLevel.TabIndex = 8;
-            lItemLevel.Text = "none";
+            lItemLevel.Text = "无";
             // 
             // label6
             // 
@@ -4203,7 +4203,7 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(34, 15);
             label6.TabIndex = 7;
-            label6.Text = "Level";
+            label6.Text = "等级";
             // 
             // lItemCategory
             // 
@@ -4223,7 +4223,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(55, 15);
             label5.TabIndex = 4;
-            label5.Text = "Category";
+            label5.Text = "分类";
             // 
             // lItemName
             // 
@@ -4243,7 +4243,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(39, 15);
             label4.TabIndex = 2;
-            label4.Text = "Name";
+            label4.Text = "名称";
             // 
             // lItemID
             // 
@@ -4263,7 +4263,7 @@
             label3.Name = "label3";
             label3.Size = new System.Drawing.Size(35, 15);
             label3.TabIndex = 0;
-            label3.Text = "Index";
+            label3.Text = "索引";
             // 
             // btnItemSearch
             // 
@@ -4274,7 +4274,7 @@
             btnItemSearch.Name = "btnItemSearch";
             btnItemSearch.Size = new System.Drawing.Size(92, 26);
             btnItemSearch.TabIndex = 3;
-            btnItemSearch.Text = "Search";
+            btnItemSearch.Text = "搜索";
             btnItemSearch.UseVisualStyleBackColor = true;
             btnItemSearch.Click += BtnItemSearch_Click;
             // 
@@ -4307,7 +4307,7 @@
             // Item_Name_EN_US
             // 
             Item_Name_EN_US.FillWeight = 200F;
-            Item_Name_EN_US.HeaderText = "Name";
+            Item_Name_EN_US.HeaderText = "名称";
             Item_Name_EN_US.Name = "Item_Name_EN_US";
             Item_Name_EN_US.ReadOnly = true;
             Item_Name_EN_US.Width = 64;
@@ -4322,7 +4322,7 @@
             btnFindItemInLoot.Name = "btnFindItemInLoot";
             btnFindItemInLoot.Size = new System.Drawing.Size(93, 26);
             btnFindItemInLoot.TabIndex = 9;
-            btnFindItemInLoot.Text = "Find in Loot";
+            btnFindItemInLoot.Text = "在掉落中查找";
             btnFindItemInLoot.UseVisualStyleBackColor = false;
             btnFindItemInLoot.Click += BtnFindItemInLoot_Click;
             // 
@@ -4334,7 +4334,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(210, 15);
             label1.TabIndex = 1;
-            label1.Text = "Search in Item ID, Name or description";
+            label1.Text = "搜索物品 ID、名称或描述";
             // 
             // tpLoot
             // 
@@ -4350,7 +4350,7 @@
             tpLoot.Padding = new System.Windows.Forms.Padding(4);
             tpLoot.Size = new System.Drawing.Size(1082, 546);
             tpLoot.TabIndex = 2;
-            tpLoot.Text = "Loot";
+            tpLoot.Text = "掉落";
             tpLoot.UseVisualStyleBackColor = true;
             // 
             // label141
@@ -4381,7 +4381,7 @@
             groupBox11.Size = new System.Drawing.Size(1062, 71);
             groupBox11.TabIndex = 7;
             groupBox11.TabStop = false;
-            groupBox11.Text = "Loot Pack Info";
+            groupBox11.Text = "掉落包信息";
             // 
             // btnFindLootNpc
             // 
@@ -4393,7 +4393,7 @@
             btnFindLootNpc.Name = "btnFindLootNpc";
             btnFindLootNpc.Size = new System.Drawing.Size(210, 26);
             btnFindLootNpc.TabIndex = 28;
-            btnFindLootNpc.Text = "What NPC Drops This ?";
+            btnFindLootNpc.Text = "哪些 NPC 会掉落此物品 ?";
             btnFindLootNpc.UseVisualStyleBackColor = true;
             btnFindLootNpc.Click += BtnFindLootNpc_Click;
             // 
@@ -4415,7 +4415,7 @@
             label74.Name = "label74";
             label74.Size = new System.Drawing.Size(40, 15);
             label74.TabIndex = 2;
-            label74.Text = "Group";
+            label74.Text = "组";
             // 
             // LLootGroupPackID
             // 
@@ -4435,7 +4435,7 @@
             label101.Name = "label101";
             label101.Size = new System.Drawing.Size(35, 15);
             label101.TabIndex = 0;
-            label101.Text = "Index";
+            label101.Text = "索引";
             // 
             // btnLootSearch
             // 
@@ -4446,7 +4446,7 @@
             btnLootSearch.Name = "btnLootSearch";
             btnLootSearch.Size = new System.Drawing.Size(92, 26);
             btnLootSearch.TabIndex = 6;
-            btnLootSearch.Text = "Search";
+            btnLootSearch.Text = "搜索";
             btnLootSearch.UseVisualStyleBackColor = true;
             btnLootSearch.Click += BtnLootSearch_Click;
             // 
@@ -4458,7 +4458,7 @@
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(111, 15);
             label7.TabIndex = 5;
-            label7.Text = "Search Loot Pack ID";
+            label7.Text = "搜索掉落包 ID";
             // 
             // tLootSearch
             // 
@@ -4513,7 +4513,7 @@
             // 
             // Column9
             // 
-            Column9.HeaderText = "Name";
+            Column9.HeaderText = "名称";
             Column9.Name = "Column9";
             Column9.ReadOnly = true;
             Column9.Width = 64;
@@ -4527,7 +4527,7 @@
             // 
             // Column4
             // 
-            Column4.HeaderText = "Amount";
+            Column4.HeaderText = "数量";
             Column4.Name = "Column4";
             Column4.ReadOnly = true;
             Column4.Width = 76;
@@ -4548,7 +4548,7 @@
             // 
             // Column8
             // 
-            Column8.HeaderText = "Group";
+            Column8.HeaderText = "组";
             Column8.Name = "Column8";
             Column8.ReadOnly = true;
             Column8.Width = 65;
@@ -4573,7 +4573,7 @@
             tpNPCs.Padding = new System.Windows.Forms.Padding(4);
             tpNPCs.Size = new System.Drawing.Size(1082, 546);
             tpNPCs.TabIndex = 6;
-            tpNPCs.Text = "NPCs";
+            tpNPCs.Text = "NPC";
             tpNPCs.UseVisualStyleBackColor = true;
             // 
             // cbSearchNPC
@@ -4609,7 +4609,7 @@
             groupBox13.Size = new System.Drawing.Size(446, 532);
             groupBox13.TabIndex = 13;
             groupBox13.TabStop = false;
-            groupBox13.Text = "NPC Info";
+            groupBox13.Text = "NPC 信息";
             // 
             // cbNpcCollapseLoot
             // 
@@ -4621,7 +4621,7 @@
             cbNpcCollapseLoot.Name = "cbNpcCollapseLoot";
             cbNpcCollapseLoot.Size = new System.Drawing.Size(184, 19);
             cbNpcCollapseLoot.TabIndex = 32;
-            cbNpcCollapseLoot.Text = "Collapse Loot node by default";
+            cbNpcCollapseLoot.Text = "默认折叠掉落节点";
             cbNpcCollapseLoot.UseVisualStyleBackColor = true;
             // 
             // tvNPCInfo
@@ -4655,7 +4655,7 @@
             btnShowNpcLoot.Name = "btnShowNpcLoot";
             btnShowNpcLoot.Size = new System.Drawing.Size(428, 25);
             btnShowNpcLoot.TabIndex = 27;
-            btnShowNpcLoot.Text = "Find Loot";
+            btnShowNpcLoot.Text = "查找掉落";
             btnShowNpcLoot.UseVisualStyleBackColor = true;
             btnShowNpcLoot.Click += BtnShowNpcLoot_Click;
             // 
@@ -4668,7 +4668,7 @@
             btnShowNPCsOnMap.Name = "btnShowNPCsOnMap";
             btnShowNPCsOnMap.Size = new System.Drawing.Size(428, 25);
             btnShowNPCsOnMap.TabIndex = 26;
-            btnShowNPCsOnMap.Text = "Find Selected";
+            btnShowNPCsOnMap.Text = "查找选中项";
             btnShowNPCsOnMap.UseVisualStyleBackColor = true;
             btnShowNPCsOnMap.Click += BtnShowNPCsOnMap_Click;
             // 
@@ -4692,7 +4692,7 @@
             label125.Name = "label125";
             label125.Size = new System.Drawing.Size(31, 15);
             label125.TabIndex = 24;
-            label125.Text = "Tags";
+            label125.Text = "标签";
             // 
             // lGMNPCSpawn
             // 
@@ -4723,7 +4723,7 @@
             label81.Name = "label81";
             label81.Size = new System.Drawing.Size(56, 15);
             label81.TabIndex = 0;
-            label81.Text = "Template";
+            label81.Text = "模板";
             // 
             // btnSearchNPC
             // 
@@ -4734,7 +4734,7 @@
             btnSearchNPC.Name = "btnSearchNPC";
             btnSearchNPC.Size = new System.Drawing.Size(92, 26);
             btnSearchNPC.TabIndex = 10;
-            btnSearchNPC.Text = "Search";
+            btnSearchNPC.Text = "搜索";
             btnSearchNPC.UseVisualStyleBackColor = true;
             btnSearchNPC.Click += BtnSearchNPC_Click;
             // 
@@ -4746,7 +4746,7 @@
             label39.Name = "label39";
             label39.Size = new System.Drawing.Size(186, 15);
             label39.TabIndex = 9;
-            label39.Text = "Search NPC ID, Name or Model ID";
+            label39.Text = "搜索 NPC ID、名称或模型 ID";
             // 
             // dgvNPCs
             // 
@@ -4776,14 +4776,14 @@
             // 
             // dataGridViewTextBoxColumn17
             // 
-            dataGridViewTextBoxColumn17.HeaderText = "Name";
+            dataGridViewTextBoxColumn17.HeaderText = "名称";
             dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
             dataGridViewTextBoxColumn17.ReadOnly = true;
             dataGridViewTextBoxColumn17.Width = 64;
             // 
             // Column18
             // 
-            Column18.HeaderText = "Level";
+            Column18.HeaderText = "等级";
             Column18.Name = "Column18";
             Column18.ReadOnly = true;
             Column18.Width = 59;
@@ -4804,7 +4804,7 @@
             // 
             // Column21
             // 
-            Column21.HeaderText = "Faction ID";
+            Column21.HeaderText = "阵营 ID";
             Column21.Name = "Column21";
             Column21.ReadOnly = true;
             Column21.Width = 85;
@@ -4826,7 +4826,7 @@
             tpQuests.Padding = new System.Windows.Forms.Padding(4);
             tpQuests.Size = new System.Drawing.Size(1082, 546);
             tpQuests.TabIndex = 9;
-            tpQuests.Text = "Quests";
+            tpQuests.Text = "任务";
             tpQuests.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -4861,7 +4861,7 @@
             label89.Name = "label89";
             label89.Size = new System.Drawing.Size(139, 15);
             label89.TabIndex = 10;
-            label89.Text = "Search Quest ID or Name";
+            label89.Text = "搜索任务 ID 或名称";
             // 
             // btnQuestsSearch
             // 
@@ -4872,7 +4872,7 @@
             btnQuestsSearch.Name = "btnQuestsSearch";
             btnQuestsSearch.Size = new System.Drawing.Size(92, 26);
             btnQuestsSearch.TabIndex = 11;
-            btnQuestsSearch.Text = "Search";
+            btnQuestsSearch.Text = "搜索";
             btnQuestsSearch.UseVisualStyleBackColor = true;
             btnQuestsSearch.Click += BtnQuestsSearch_Click;
             // 
@@ -4911,7 +4911,7 @@
             groupBox12.Size = new System.Drawing.Size(323, 292);
             groupBox12.TabIndex = 9;
             groupBox12.TabStop = false;
-            groupBox12.Text = "Quest Text";
+            groupBox12.Text = "任务文本";
             // 
             // rtQuestText
             // 
@@ -4953,14 +4953,14 @@
             // 
             // Column35
             // 
-            Column35.HeaderText = "Name";
+            Column35.HeaderText = "名称";
             Column35.Name = "Column35";
             Column35.ReadOnly = true;
             Column35.Width = 64;
             // 
             // Column19
             // 
-            Column19.HeaderText = "Level";
+            Column19.HeaderText = "等级";
             Column19.Name = "Column19";
             Column19.ReadOnly = true;
             Column19.Width = 59;
@@ -4974,7 +4974,7 @@
             // 
             // Column36
             // 
-            Column36.HeaderText = "Category";
+            Column36.HeaderText = "分类";
             Column36.Name = "Column36";
             Column36.ReadOnly = true;
             Column36.Width = 80;
@@ -4999,7 +4999,7 @@
             btnQuestFindRelatedOnMap.Name = "btnQuestFindRelatedOnMap";
             btnQuestFindRelatedOnMap.Size = new System.Drawing.Size(231, 25);
             btnQuestFindRelatedOnMap.TabIndex = 27;
-            btnQuestFindRelatedOnMap.Text = "Show related map points";
+            btnQuestFindRelatedOnMap.Text = "显示相关地图点";
             btnQuestFindRelatedOnMap.UseVisualStyleBackColor = true;
             btnQuestFindRelatedOnMap.Click += BtnQuestFindRelatedOnMap_Click;
             // 
@@ -5014,7 +5014,7 @@
             cbQuestWorkflowHideEmpty.Name = "cbQuestWorkflowHideEmpty";
             cbQuestWorkflowHideEmpty.Size = new System.Drawing.Size(124, 19);
             cbQuestWorkflowHideEmpty.TabIndex = 1;
-            cbQuestWorkflowHideEmpty.Text = "Hide empty values";
+            cbQuestWorkflowHideEmpty.Text = "隐藏空值";
             cbQuestWorkflowHideEmpty.UseVisualStyleBackColor = true;
             cbQuestWorkflowHideEmpty.CheckedChanged += CbQuestWorkflowHideEmpty_CheckedChanged;
             // 
@@ -5040,7 +5040,7 @@
             tpSchedules.Padding = new System.Windows.Forms.Padding(3);
             tpSchedules.Size = new System.Drawing.Size(1082, 546);
             tpSchedules.TabIndex = 17;
-            tpSchedules.Text = "Schedules";
+            tpSchedules.Text = "日程";
             tpSchedules.UseVisualStyleBackColor = true;
             // 
             // tcScheduleTypes
@@ -5064,7 +5064,7 @@
             tpScheduleIRL.Padding = new System.Windows.Forms.Padding(3);
             tpScheduleIRL.Size = new System.Drawing.Size(343, 517);
             tpScheduleIRL.TabIndex = 0;
-            tpScheduleIRL.Text = "Seasonal";
+            tpScheduleIRL.Text = "季节性";
             tpScheduleIRL.UseVisualStyleBackColor = true;
             // 
             // lbSchedulesIRL
@@ -5085,7 +5085,7 @@
             tpScheduleGame.Padding = new System.Windows.Forms.Padding(3);
             tpScheduleGame.Size = new System.Drawing.Size(343, 517);
             tpScheduleGame.TabIndex = 1;
-            tpScheduleGame.Text = "Game";
+            tpScheduleGame.Text = "游戏";
             tpScheduleGame.UseVisualStyleBackColor = true;
             // 
             // lbSchedulesGame
@@ -5106,7 +5106,7 @@
             tpTowerDefs.Padding = new System.Windows.Forms.Padding(3);
             tpTowerDefs.Size = new System.Drawing.Size(343, 517);
             tpTowerDefs.TabIndex = 2;
-            tpTowerDefs.Text = "Rifts";
+            tpTowerDefs.Text = "裂隙";
             tpTowerDefs.UseVisualStyleBackColor = true;
             // 
             // lbTowerDefs
@@ -5128,7 +5128,7 @@
             tpAttendance.Padding = new System.Windows.Forms.Padding(3);
             tpAttendance.Size = new System.Drawing.Size(343, 517);
             tpAttendance.TabIndex = 3;
-            tpAttendance.Text = "Attendance";
+            tpAttendance.Text = "签到";
             tpAttendance.UseVisualStyleBackColor = true;
             // 
             // cbAttendanceFilter
@@ -5175,7 +5175,7 @@
             tpSkills.Padding = new System.Windows.Forms.Padding(4);
             tpSkills.Size = new System.Drawing.Size(1082, 546);
             tpSkills.TabIndex = 3;
-            tpSkills.Text = "Skills";
+            tpSkills.Text = "技能";
             tpSkills.UseVisualStyleBackColor = true;
             // 
             // splitContainer3
@@ -5220,7 +5220,7 @@
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(124, 15);
             label9.TabIndex = 5;
-            label9.Text = "Skill ID, Name or desc.";
+            label9.Text = "技能 ID、名称或描述";
             // 
             // btnSkillSearch
             // 
@@ -5231,7 +5231,7 @@
             btnSkillSearch.Name = "btnSkillSearch";
             btnSkillSearch.Size = new System.Drawing.Size(92, 26);
             btnSkillSearch.TabIndex = 7;
-            btnSkillSearch.Text = "Search";
+            btnSkillSearch.Text = "搜索";
             btnSkillSearch.UseVisualStyleBackColor = true;
             btnSkillSearch.Click += BtnSkillSearch_Click;
             // 
@@ -5264,14 +5264,14 @@
             // dataGridViewTextBoxColumn3
             // 
             dataGridViewTextBoxColumn3.FillWeight = 200F;
-            dataGridViewTextBoxColumn3.HeaderText = "Name";
+            dataGridViewTextBoxColumn3.HeaderText = "名称";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.ReadOnly = true;
             dataGridViewTextBoxColumn3.Width = 64;
             // 
             // Column10
             // 
-            Column10.HeaderText = "Description";
+            Column10.HeaderText = "描述";
             Column10.Name = "Column10";
             Column10.ReadOnly = true;
             Column10.Width = 92;
@@ -5302,7 +5302,7 @@
             tpSkillInfo.Padding = new System.Windows.Forms.Padding(4);
             tpSkillInfo.Size = new System.Drawing.Size(591, 510);
             tpSkillInfo.TabIndex = 0;
-            tpSkillInfo.Text = "Skill";
+            tpSkillInfo.Text = "技能";
             // 
             // groupBox2
             // 
@@ -5334,7 +5334,7 @@
             groupBox2.Size = new System.Drawing.Size(583, 502);
             groupBox2.TabIndex = 8;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Skill Info";
+            groupBox2.Text = "技能信息";
             // 
             // lSkillTags
             // 
@@ -5356,7 +5356,7 @@
             label123.Name = "label123";
             label123.Size = new System.Drawing.Size(31, 15);
             label123.TabIndex = 22;
-            label123.Text = "Tags";
+            label123.Text = "标签";
             // 
             // rtSkillDescription
             // 
@@ -5388,7 +5388,7 @@
             label20.Name = "label20";
             label20.Size = new System.Drawing.Size(99, 15);
             label20.TabIndex = 20;
-            label20.Text = "Global Cooldown";
+            label20.Text = "公共冷却";
             // 
             // lSkillCooldown
             // 
@@ -5408,7 +5408,7 @@
             label17.Name = "label17";
             label17.Size = new System.Drawing.Size(62, 15);
             label17.TabIndex = 18;
-            label17.Text = "Cooldown";
+            label17.Text = "冷却";
             // 
             // lSkillLabor
             // 
@@ -5428,7 +5428,7 @@
             label14.Name = "label14";
             label14.Size = new System.Drawing.Size(37, 15);
             label14.TabIndex = 16;
-            label14.Text = "Labor";
+            label14.Text = "劳动力";
             // 
             // lSkillMana
             // 
@@ -5448,7 +5448,7 @@
             label12.Name = "label12";
             label12.Size = new System.Drawing.Size(37, 15);
             label12.TabIndex = 14;
-            label12.Text = "Mana";
+            label12.Text = "法力";
             // 
             // lSkillCost
             // 
@@ -5468,7 +5468,7 @@
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(31, 15);
             label11.TabIndex = 12;
-            label11.Text = "Cost";
+            label11.Text = "消耗";
             // 
             // skillIcon
             // 
@@ -5500,7 +5500,7 @@
             label16.Name = "label16";
             label16.Size = new System.Drawing.Size(39, 15);
             label16.TabIndex = 2;
-            label16.Text = "Name";
+            label16.Text = "名称";
             // 
             // lSkillID
             // 
@@ -5520,7 +5520,7 @@
             label18.Name = "label18";
             label18.Size = new System.Drawing.Size(35, 15);
             label18.TabIndex = 0;
-            label18.Text = "Index";
+            label18.Text = "索引";
             // 
             // tpSkillItems
             // 
@@ -5534,7 +5534,7 @@
             tpSkillItems.Padding = new System.Windows.Forms.Padding(4);
             tpSkillItems.Size = new System.Drawing.Size(591, 510);
             tpSkillItems.TabIndex = 1;
-            tpSkillItems.Text = "Items?";
+            tpSkillItems.Text = "物品?";
             tpSkillItems.UseVisualStyleBackColor = true;
             // 
             // dgvSkillProducts
@@ -5565,14 +5565,14 @@
             // dataGridViewTextBoxColumn10
             // 
             dataGridViewTextBoxColumn10.FillWeight = 200F;
-            dataGridViewTextBoxColumn10.HeaderText = "Name";
+            dataGridViewTextBoxColumn10.HeaderText = "名称";
             dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             dataGridViewTextBoxColumn10.ReadOnly = true;
             dataGridViewTextBoxColumn10.Width = 64;
             // 
             // dataGridViewTextBoxColumn11
             // 
-            dataGridViewTextBoxColumn11.HeaderText = "Amount";
+            dataGridViewTextBoxColumn11.HeaderText = "数量";
             dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
             dataGridViewTextBoxColumn11.ReadOnly = true;
             dataGridViewTextBoxColumn11.Width = 76;
@@ -5605,14 +5605,14 @@
             // dataGridViewTextBoxColumn7
             // 
             dataGridViewTextBoxColumn7.FillWeight = 200F;
-            dataGridViewTextBoxColumn7.HeaderText = "Name";
+            dataGridViewTextBoxColumn7.HeaderText = "名称";
             dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             dataGridViewTextBoxColumn7.ReadOnly = true;
             dataGridViewTextBoxColumn7.Width = 64;
             // 
             // dataGridViewTextBoxColumn8
             // 
-            dataGridViewTextBoxColumn8.HeaderText = "Amount";
+            dataGridViewTextBoxColumn8.HeaderText = "数量";
             dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             dataGridViewTextBoxColumn8.ReadOnly = true;
             dataGridViewTextBoxColumn8.Width = 76;
@@ -5626,7 +5626,7 @@
             label13.Name = "label13";
             label13.Size = new System.Drawing.Size(119, 15);
             label13.TabIndex = 1;
-            label13.Text = "Produced by this skill";
+            label13.Text = "由该技能产出";
             // 
             // labelSkillReagents
             // 
@@ -5636,7 +5636,7 @@
             labelSkillReagents.Name = "labelSkillReagents";
             labelSkillReagents.Size = new System.Drawing.Size(166, 15);
             labelSkillReagents.TabIndex = 0;
-            labelSkillReagents.Text = "Required items to use this skill";
+            labelSkillReagents.Text = "使用该技能所需的物品";
             // 
             // tpSkillExecution
             // 
@@ -5651,7 +5651,7 @@
             tpSkillExecution.Padding = new System.Windows.Forms.Padding(4);
             tpSkillExecution.Size = new System.Drawing.Size(591, 510);
             tpSkillExecution.TabIndex = 2;
-            tpSkillExecution.Text = "Execution";
+            tpSkillExecution.Text = "执行过程";
             tpSkillExecution.UseVisualStyleBackColor = true;
             // 
             // label150
@@ -5662,7 +5662,7 @@
             label150.Name = "label150";
             label150.Size = new System.Drawing.Size(287, 15);
             label150.TabIndex = 4;
-            label150.Text = "Dbl-Click event to follow, Right-click event for callers";
+            label150.Text = "双击事件以跳转，右键查看调用者";
             // 
             // btnSkillTreeCollapse
             // 
@@ -5684,7 +5684,7 @@
             btnCopySkillExecutionTree.Name = "btnCopySkillExecutionTree";
             btnCopySkillExecutionTree.Size = new System.Drawing.Size(88, 26);
             btnCopySkillExecutionTree.TabIndex = 2;
-            btnCopySkillExecutionTree.Text = "Copy Tree";
+            btnCopySkillExecutionTree.Text = "复制树";
             btnCopySkillExecutionTree.UseVisualStyleBackColor = true;
             btnCopySkillExecutionTree.Click += BtnCopySkillExecutionTree_Click;
             // 
@@ -5711,7 +5711,7 @@
             gbSkillPlotEventInfo.Size = new System.Drawing.Size(576, 136);
             gbSkillPlotEventInfo.TabIndex = 1;
             gbSkillPlotEventInfo.TabStop = false;
-            gbSkillPlotEventInfo.Text = "Parameters";
+            gbSkillPlotEventInfo.Text = "参数";
             // 
             // lPlotEventTargetUpdate
             // 
@@ -5721,7 +5721,7 @@
             lPlotEventTargetUpdate.Name = "lPlotEventTargetUpdate";
             lPlotEventTargetUpdate.Size = new System.Drawing.Size(84, 15);
             lPlotEventTargetUpdate.TabIndex = 12;
-            lPlotEventTargetUpdate.Text = "Target Update:";
+            lPlotEventTargetUpdate.Text = "目标更新:";
             // 
             // lPlotEventSourceUpdate
             // 
@@ -5731,7 +5731,7 @@
             lPlotEventSourceUpdate.Name = "lPlotEventSourceUpdate";
             lPlotEventSourceUpdate.Size = new System.Drawing.Size(87, 15);
             lPlotEventSourceUpdate.TabIndex = 11;
-            lPlotEventSourceUpdate.Text = "Source Update:";
+            lPlotEventSourceUpdate.Text = "来源更新:";
             // 
             // lPlotEventAoE
             // 
@@ -5741,7 +5741,7 @@
             lPlotEventAoE.Name = "lPlotEventAoE";
             lPlotEventAoE.Size = new System.Drawing.Size(31, 15);
             lPlotEventAoE.TabIndex = 10;
-            lPlotEventAoE.Text = "AoE:";
+            lPlotEventAoE.Text = "范围效果:";
             // 
             // lPlotEventTickets
             // 
@@ -5751,7 +5751,7 @@
             lPlotEventTickets.Name = "lPlotEventTickets";
             lPlotEventTickets.Size = new System.Drawing.Size(47, 15);
             lPlotEventTickets.TabIndex = 9;
-            lPlotEventTickets.Text = "Tickets:";
+            lPlotEventTickets.Text = "票据:";
             // 
             // lPlotEventP9
             // 
@@ -5856,7 +5856,7 @@
             tvSkill.Margin = new System.Windows.Forms.Padding(4);
             tvSkill.Name = "tvSkill";
             treeNode3.Name = "SkillNode";
-            treeNode3.Text = "Skill";
+            treeNode3.Text = "技能";
             tvSkill.Nodes.AddRange(new System.Windows.Forms.TreeNode[] { treeNode3 });
             tvSkill.SelectedImageIndex = 0;
             tvSkill.Size = new System.Drawing.Size(575, 306);
@@ -5876,7 +5876,7 @@
             // 
             tsmiPlotBookmarkHeader.Name = "tsmiPlotBookmarkHeader";
             tsmiPlotBookmarkHeader.Size = new System.Drawing.Size(100, 22);
-            tsmiPlotBookmarkHeader.Text = "Goto";
+            tsmiPlotBookmarkHeader.Text = "跳转";
             // 
             // tssPlotBookmark1
             // 
@@ -5894,7 +5894,7 @@
             tpSpheres.Name = "tpSpheres";
             tpSpheres.Size = new System.Drawing.Size(1082, 546);
             tpSpheres.TabIndex = 18;
-            tpSpheres.Text = "Spheres";
+            tpSpheres.Text = "区域";
             tpSpheres.UseVisualStyleBackColor = true;
             // 
             // TvSpheres
@@ -5931,7 +5931,7 @@
             BtnSearchSpheres.Name = "BtnSearchSpheres";
             BtnSearchSpheres.Size = new System.Drawing.Size(92, 26);
             BtnSearchSpheres.TabIndex = 16;
-            BtnSearchSpheres.Text = "Search";
+            BtnSearchSpheres.Text = "搜索";
             BtnSearchSpheres.UseVisualStyleBackColor = true;
             BtnSearchSpheres.Click += BtnSearchSpheres_Click;
             // 
@@ -5943,7 +5943,7 @@
             label144.Name = "label144";
             label144.Size = new System.Drawing.Size(194, 15);
             label144.TabIndex = 15;
-            label144.Text = "Search Sphere ID, Name or Detail ID";
+            label144.Text = "搜索区域 ID、名称或详情 ID";
             // 
             // DgvSpheres
             // 
@@ -5973,28 +5973,28 @@
             // 
             // dataGridViewTextBoxColumn29
             // 
-            dataGridViewTextBoxColumn29.HeaderText = "Name";
+            dataGridViewTextBoxColumn29.HeaderText = "名称";
             dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
             dataGridViewTextBoxColumn29.ReadOnly = true;
             dataGridViewTextBoxColumn29.Width = 64;
             // 
             // Column40
             // 
-            Column40.HeaderText = "Detail Type";
+            Column40.HeaderText = "详情类型";
             Column40.Name = "Column40";
             Column40.ReadOnly = true;
             Column40.Width = 90;
             // 
             // Column39
             // 
-            Column39.HeaderText = "Detail Id";
+            Column39.HeaderText = "详情 ID";
             Column39.Name = "Column39";
             Column39.ReadOnly = true;
             Column39.Width = 75;
             // 
             // Column41
             // 
-            Column41.HeaderText = "Enter/Leave";
+            Column41.HeaderText = "进入/离开";
             Column41.Name = "Column41";
             Column41.ReadOnly = true;
             Column41.Width = 94;
@@ -6013,7 +6013,7 @@
             tpTags.Padding = new System.Windows.Forms.Padding(4);
             tpTags.Size = new System.Drawing.Size(1082, 546);
             tpTags.TabIndex = 15;
-            tpTags.Text = "Tags";
+            tpTags.Text = "标签";
             tpTags.UseVisualStyleBackColor = true;
             // 
             // label138
@@ -6024,7 +6024,7 @@
             label138.Name = "label138";
             label138.Size = new System.Drawing.Size(46, 15);
             label138.TabIndex = 13;
-            label138.Text = "Used in";
+            label138.Text = "用于";
             // 
             // tvTagInfo
             // 
@@ -6051,7 +6051,7 @@
             btnSearchTags.Name = "btnSearchTags";
             btnSearchTags.Size = new System.Drawing.Size(92, 26);
             btnSearchTags.TabIndex = 11;
-            btnSearchTags.Text = "Search";
+            btnSearchTags.Text = "搜索";
             btnSearchTags.UseVisualStyleBackColor = true;
             btnSearchTags.Click += BtnSearchTags_Click;
             // 
@@ -6084,7 +6084,7 @@
             // dataGridViewTextBoxColumn23
             // 
             dataGridViewTextBoxColumn23.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewTextBoxColumn23.HeaderText = "Name";
+            dataGridViewTextBoxColumn23.HeaderText = "名称";
             dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
             dataGridViewTextBoxColumn23.ReadOnly = true;
             // 
@@ -6096,7 +6096,7 @@
             label137.Name = "label137";
             label137.Size = new System.Drawing.Size(105, 15);
             label137.TabIndex = 9;
-            label137.Text = "Search ID or Name";
+            label137.Text = "搜索 ID 或名称";
             // 
             // tSearchTags
             // 
@@ -6130,7 +6130,7 @@
             tpTrade.Padding = new System.Windows.Forms.Padding(4);
             tpTrade.Size = new System.Drawing.Size(1082, 546);
             tpTrade.TabIndex = 14;
-            tpTrade.Text = "Trades";
+            tpTrade.Text = "贸易";
             tpTrade.UseVisualStyleBackColor = true;
             // 
             // lTradeRate
@@ -6163,7 +6163,7 @@
             label152.Name = "label152";
             label152.Size = new System.Drawing.Size(109, 15);
             label152.TabIndex = 11;
-            label152.Text = "Item refund price +";
+            label152.Text = "物品回收价格 +";
             // 
             // lTradeMultiplier
             // 
@@ -6182,7 +6182,7 @@
             label142.Name = "label142";
             label142.Size = new System.Drawing.Size(297, 15);
             label142.TabIndex = 9;
-            label142.Text = "Note: This is only the raw rates for the sales by distance";
+            label142.Text = "注: 这只是按距离销售的原始比率";
             // 
             // lTradeRoute
             // 
@@ -6202,7 +6202,7 @@
             label133.Name = "label133";
             label133.Size = new System.Drawing.Size(37, 15);
             label133.TabIndex = 7;
-            label133.Text = "Ratio:";
+            label133.Text = "比率:";
             // 
             // label134
             // 
@@ -6212,7 +6212,7 @@
             label134.Name = "label134";
             label134.Size = new System.Drawing.Size(39, 15);
             label134.TabIndex = 6;
-            label134.Text = "Profit:";
+            label134.Text = "利润:";
             // 
             // lTradeRatio
             // 
@@ -6242,7 +6242,7 @@
             label132.Name = "label132";
             label132.Size = new System.Drawing.Size(67, 15);
             label132.TabIndex = 3;
-            label132.Text = "Destination";
+            label132.Text = "目的地";
             // 
             // label121
             // 
@@ -6252,7 +6252,7 @@
             label121.Name = "label121";
             label121.Size = new System.Drawing.Size(71, 15);
             label121.TabIndex = 2;
-            label121.Text = "Source Pack";
+            label121.Text = "来源包";
             // 
             // lbTradeDestination
             // 
@@ -6288,7 +6288,7 @@
             tpSlaves.Padding = new System.Windows.Forms.Padding(3);
             tpSlaves.Size = new System.Drawing.Size(1082, 546);
             tpSlaves.TabIndex = 16;
-            tpSlaves.Text = "Vehicles";
+            tpSlaves.Text = "载具";
             tpSlaves.UseVisualStyleBackColor = true;
             // 
             // groupBox15
@@ -6308,7 +6308,7 @@
             groupBox15.Size = new System.Drawing.Size(384, 528);
             groupBox15.TabIndex = 18;
             groupBox15.TabStop = false;
-            groupBox15.Text = "Vehicle Info";
+            groupBox15.Text = "载具信息";
             // 
             // tvSlaveInfo
             // 
@@ -6324,7 +6324,7 @@
             tvSlaveInfo.Margin = new System.Windows.Forms.Padding(4);
             tvSlaveInfo.Name = "tvSlaveInfo";
             treeNode4.Name = "SkillNode";
-            treeNode4.Text = "Slave";
+            treeNode4.Text = "载具";
             tvSlaveInfo.Nodes.AddRange(new System.Windows.Forms.TreeNode[] { treeNode4 });
             tvSlaveInfo.SelectedImageIndex = 0;
             tvSlaveInfo.Size = new System.Drawing.Size(368, 466);
@@ -6349,7 +6349,7 @@
             label143.Name = "label143";
             label143.Size = new System.Drawing.Size(39, 15);
             label143.TabIndex = 2;
-            label143.Text = "Name";
+            label143.Text = "名称";
             // 
             // lSlaveTemplate
             // 
@@ -6369,7 +6369,7 @@
             label146.Name = "label146";
             label146.Size = new System.Drawing.Size(56, 15);
             label146.TabIndex = 0;
-            label146.Text = "Template";
+            label146.Text = "模板";
             // 
             // btnSearchSlave
             // 
@@ -6380,7 +6380,7 @@
             btnSearchSlave.Name = "btnSearchSlave";
             btnSearchSlave.Size = new System.Drawing.Size(92, 26);
             btnSearchSlave.TabIndex = 17;
-            btnSearchSlave.Text = "Search";
+            btnSearchSlave.Text = "搜索";
             btnSearchSlave.UseVisualStyleBackColor = true;
             btnSearchSlave.Click += BtnSearchSlave_Click;
             // 
@@ -6392,7 +6392,7 @@
             label147.Name = "label147";
             label147.Size = new System.Drawing.Size(189, 15);
             label147.TabIndex = 16;
-            label147.Text = "Search Slave ID, Name or Model ID";
+            label147.Text = "搜索载具 ID、名称或模型 ID";
             // 
             // tSearchSlave
             // 
@@ -6434,7 +6434,7 @@
             // 
             // dataGridViewTextBoxColumn26
             // 
-            dataGridViewTextBoxColumn26.HeaderText = "Name";
+            dataGridViewTextBoxColumn26.HeaderText = "名称";
             dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
             dataGridViewTextBoxColumn26.ReadOnly = true;
             dataGridViewTextBoxColumn26.Width = 64;
@@ -6442,14 +6442,14 @@
             // dataGridViewTextBoxColumn27
             // 
             dataGridViewTextBoxColumn27.FillWeight = 10F;
-            dataGridViewTextBoxColumn27.HeaderText = "Model";
+            dataGridViewTextBoxColumn27.HeaderText = "模型";
             dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
             dataGridViewTextBoxColumn27.ReadOnly = true;
             dataGridViewTextBoxColumn27.Width = 66;
             // 
             // Column37
             // 
-            Column37.HeaderText = "Level";
+            Column37.HeaderText = "等级";
             Column37.Name = "Column37";
             Column37.ReadOnly = true;
             Column37.Width = 59;
@@ -6457,7 +6457,7 @@
             // Column5
             // 
             Column5.FillWeight = 10F;
-            Column5.HeaderText = "Faction";
+            Column5.HeaderText = "阵营";
             Column5.Name = "Column5";
             Column5.ReadOnly = true;
             Column5.Width = 71;
@@ -6465,7 +6465,7 @@
             // Column38
             // 
             Column38.FillWeight = 15F;
-            Column38.HeaderText = "Model Details";
+            Column38.HeaderText = "模型详情";
             Column38.Name = "Column38";
             Column38.ReadOnly = true;
             Column38.Width = 104;
@@ -6477,7 +6477,7 @@
             tpVendors.Name = "tpVendors";
             tpVendors.Size = new System.Drawing.Size(1082, 546);
             tpVendors.TabIndex = 21;
-            tpVendors.Text = "Vendors";
+            tpVendors.Text = "商人";
             tpVendors.UseVisualStyleBackColor = true;
             // 
             // groupBox16
@@ -6488,7 +6488,7 @@
             groupBox16.Size = new System.Drawing.Size(176, 145);
             groupBox16.TabIndex = 0;
             groupBox16.TabStop = false;
-            groupBox16.Text = "Vendor Types";
+            groupBox16.Text = "商人类型";
             // 
             // clbVendorTypes
             // 
@@ -6515,7 +6515,7 @@
             tpZones.Padding = new System.Windows.Forms.Padding(4);
             tpZones.Size = new System.Drawing.Size(1082, 546);
             tpZones.TabIndex = 5;
-            tpZones.Text = "Zones";
+            tpZones.Text = "区域";
             tpZones.UseVisualStyleBackColor = true;
             // 
             // groupBox5
@@ -6538,7 +6538,7 @@
             groupBox5.Size = new System.Drawing.Size(351, 118);
             groupBox5.TabIndex = 11;
             groupBox5.TabStop = false;
-            groupBox5.Text = "World Group Info";
+            groupBox5.Text = "世界组信息";
             // 
             // label33
             // 
@@ -6548,7 +6548,7 @@
             label33.Name = "label33";
             label33.Size = new System.Drawing.Size(40, 15);
             label33.TabIndex = 40;
-            label33.Text = "Image";
+            label33.Text = "图像";
             // 
             // lWorldGroupImageSizeAndPos
             // 
@@ -6588,7 +6588,7 @@
             label43.Name = "label43";
             label43.Size = new System.Drawing.Size(54, 15);
             label43.TabIndex = 34;
-            label43.Text = "Target ID";
+            label43.Text = "目标 ID";
             // 
             // label35
             // 
@@ -6598,7 +6598,7 @@
             label35.Name = "label35";
             label35.Size = new System.Drawing.Size(39, 15);
             label35.TabIndex = 34;
-            label35.Text = "Name";
+            label35.Text = "名称";
             // 
             // lWorldGroupImageMap
             // 
@@ -6618,7 +6618,7 @@
             label37.Name = "label37";
             label37.Size = new System.Drawing.Size(86, 15);
             label37.TabIndex = 35;
-            label37.Text = "Size && Position";
+            label37.Text = "尺寸 && 位置";
             // 
             // label40
             // 
@@ -6628,7 +6628,7 @@
             label40.Name = "label40";
             label40.Size = new System.Drawing.Size(67, 15);
             label40.TabIndex = 38;
-            label40.Text = "Image Map";
+            label40.Text = "地图图像";
             // 
             // lWorldGroupSizeAndPos
             // 
@@ -6676,7 +6676,7 @@
             groupBox4.Size = new System.Drawing.Size(351, 245);
             groupBox4.TabIndex = 10;
             groupBox4.TabStop = false;
-            groupBox4.Text = "Zone Groups Info";
+            groupBox4.Text = "区域组信息";
             // 
             // btnFindDoodadsInZone
             // 
@@ -6686,7 +6686,7 @@
             btnFindDoodadsInZone.Name = "btnFindDoodadsInZone";
             btnFindDoodadsInZone.Size = new System.Drawing.Size(99, 26);
             btnFindDoodadsInZone.TabIndex = 37;
-            btnFindDoodadsInZone.Text = "Find Doodads";
+            btnFindDoodadsInZone.Text = "查找装饰物";
             btnFindDoodadsInZone.UseVisualStyleBackColor = true;
             btnFindDoodadsInZone.Click += BtnFindDoodadsInZone_Click;
             // 
@@ -6712,7 +6712,7 @@
             btnFindQuestsInZone.Name = "btnFindQuestsInZone";
             btnFindQuestsInZone.Size = new System.Drawing.Size(99, 26);
             btnFindQuestsInZone.TabIndex = 35;
-            btnFindQuestsInZone.Text = "Find Quests";
+            btnFindQuestsInZone.Text = "查找任务";
             btnFindQuestsInZone.UseVisualStyleBackColor = true;
             btnFindQuestsInZone.Click += BtnFindQuestsInZone_Click;
             // 
@@ -6724,7 +6724,7 @@
             btnFindNPCsInZone.Name = "btnFindNPCsInZone";
             btnFindNPCsInZone.Size = new System.Drawing.Size(99, 26);
             btnFindNPCsInZone.TabIndex = 34;
-            btnFindNPCsInZone.Text = "Find NPCs";
+            btnFindNPCsInZone.Text = "查找 NPC";
             btnFindNPCsInZone.UseVisualStyleBackColor = true;
             btnFindNPCsInZone.Click += BtnFindNpcsInZone_Click;
             // 
@@ -6736,7 +6736,7 @@
             label15.Name = "label15";
             label15.Size = new System.Drawing.Size(83, 15);
             label15.TabIndex = 32;
-            label15.Text = "Sound Pack ID";
+            label15.Text = "音效包 ID";
             // 
             // lZoneGroupsSoundPackID
             // 
@@ -6766,7 +6766,7 @@
             label31.Name = "label31";
             label31.Size = new System.Drawing.Size(80, 15);
             label31.TabIndex = 30;
-            label31.Text = "Display Name";
+            label31.Text = "显示名称";
             // 
             // btnZoneGroupsFreshWaterFish
             // 
@@ -6776,7 +6776,7 @@
             btnZoneGroupsFreshWaterFish.Name = "btnZoneGroupsFreshWaterFish";
             btnZoneGroupsFreshWaterFish.Size = new System.Drawing.Size(99, 26);
             btnZoneGroupsFreshWaterFish.TabIndex = 29;
-            btnZoneGroupsFreshWaterFish.Text = "Freshwater Fish";
+            btnZoneGroupsFreshWaterFish.Text = "淡水鱼";
             btnZoneGroupsFreshWaterFish.UseVisualStyleBackColor = true;
             btnZoneGroupsFreshWaterFish.Click += BtnZoneGroupsFishLoot_Click;
             // 
@@ -6788,7 +6788,7 @@
             btnZoneGroupsSaltWaterFish.Name = "btnZoneGroupsSaltWaterFish";
             btnZoneGroupsSaltWaterFish.Size = new System.Drawing.Size(99, 26);
             btnZoneGroupsSaltWaterFish.TabIndex = 28;
-            btnZoneGroupsSaltWaterFish.Text = "Saltwater Fish";
+            btnZoneGroupsSaltWaterFish.Text = "咸水鱼";
             btnZoneGroupsSaltWaterFish.UseVisualStyleBackColor = true;
             btnZoneGroupsSaltWaterFish.Click += BtnZoneGroupsFishLoot_Click;
             // 
@@ -6820,7 +6820,7 @@
             label38.Name = "label38";
             label38.Size = new System.Drawing.Size(39, 15);
             label38.TabIndex = 14;
-            label38.Text = "Name";
+            label38.Text = "名称";
             // 
             // label01
             // 
@@ -6830,7 +6830,7 @@
             label01.Name = "label01";
             label01.Size = new System.Drawing.Size(86, 15);
             label01.TabIndex = 14;
-            label01.Text = "Size && Position";
+            label01.Text = "尺寸 && 位置";
             // 
             // label36
             // 
@@ -6840,7 +6840,7 @@
             label36.Name = "label36";
             label36.Size = new System.Drawing.Size(43, 15);
             label36.TabIndex = 26;
-            label36.Text = "Buff ID";
+            label36.Text = "增益 ID";
             // 
             // lZoneGroupsSizePos
             // 
@@ -6870,7 +6870,7 @@
             label24.Name = "label24";
             label24.Size = new System.Drawing.Size(67, 15);
             label24.TabIndex = 16;
-            label24.Text = "Image Map";
+            label24.Text = "地图图像";
             // 
             // label34
             // 
@@ -6880,7 +6880,7 @@
             label34.Name = "label34";
             label34.Size = new System.Drawing.Size(95, 15);
             label34.TabIndex = 24;
-            label34.Text = "Pirate desperado";
+            label34.Text = "海盗亡命徒";
             // 
             // lZoneGroupsImageMap
             // 
@@ -6910,7 +6910,7 @@
             label22.Name = "label22";
             label22.Size = new System.Drawing.Size(55, 15);
             label22.TabIndex = 18;
-            label22.Text = "Sound ID";
+            label22.Text = "音效 ID";
             // 
             // label32
             // 
@@ -6920,7 +6920,7 @@
             label32.Name = "label32";
             label32.Size = new System.Drawing.Size(128, 15);
             label32.TabIndex = 22;
-            label32.Text = "Faction Chat Region ID";
+            label32.Text = "阵营聊天频道 ID";
             // 
             // lZoneGroupsSoundID
             // 
@@ -6950,7 +6950,7 @@
             label30.Name = "label30";
             label30.Size = new System.Drawing.Size(54, 15);
             label30.TabIndex = 20;
-            label30.Text = "Target ID";
+            label30.Text = "目标 ID";
             // 
             // groupBox3
             // 
@@ -6979,7 +6979,7 @@
             groupBox3.Size = new System.Drawing.Size(352, 146);
             groupBox3.TabIndex = 9;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Zone Info";
+            groupBox3.Text = "区域信息";
             // 
             // lZoneInstance
             // 
@@ -6998,7 +6998,7 @@
             btnFindTransferPathsInZone.Name = "btnFindTransferPathsInZone";
             btnFindTransferPathsInZone.Size = new System.Drawing.Size(99, 26);
             btnFindTransferPathsInZone.TabIndex = 37;
-            btnFindTransferPathsInZone.Text = "Show Paths";
+            btnFindTransferPathsInZone.Text = "显示路径";
             btnFindTransferPathsInZone.UseVisualStyleBackColor = true;
             btnFindTransferPathsInZone.Click += btnFindTransferPathsInZone_Click;
             // 
@@ -7020,7 +7020,7 @@
             label28.Name = "label28";
             label28.Size = new System.Drawing.Size(39, 15);
             label28.TabIndex = 14;
-            label28.Text = "Name";
+            label28.Text = "名称";
             // 
             // label26
             // 
@@ -7030,7 +7030,7 @@
             label26.Name = "label26";
             label26.Size = new System.Drawing.Size(51, 15);
             label26.TabIndex = 10;
-            label26.Text = "Instance";
+            label26.Text = "副本实例";
             // 
             // lZoneFactionID
             // 
@@ -7050,7 +7050,7 @@
             label23.Name = "label23";
             label23.Size = new System.Drawing.Size(60, 15);
             label23.TabIndex = 8;
-            label23.Text = "Faction ID";
+            label23.Text = "阵营 ID";
             // 
             // lZoneGroupID
             // 
@@ -7070,7 +7070,7 @@
             label21.Name = "label21";
             label21.Size = new System.Drawing.Size(54, 15);
             label21.TabIndex = 6;
-            label21.Text = "Group ID";
+            label21.Text = "组 ID";
             // 
             // lZoneKey
             // 
@@ -7090,7 +7090,7 @@
             label19.Name = "label19";
             label19.Size = new System.Drawing.Size(56, 15);
             label19.TabIndex = 4;
-            label19.Text = "Zone Key";
+            label19.Text = "区域键";
             // 
             // lZoneName
             // 
@@ -7110,7 +7110,7 @@
             label25.Name = "label25";
             label25.Size = new System.Drawing.Size(80, 15);
             label25.TabIndex = 2;
-            label25.Text = "Display Name";
+            label25.Text = "显示名称";
             // 
             // lZoneID
             // 
@@ -7130,7 +7130,7 @@
             label27.Name = "label27";
             label27.Size = new System.Drawing.Size(35, 15);
             label27.TabIndex = 0;
-            label27.Text = "Index";
+            label27.Text = "索引";
             // 
             // btnZonesShowAll
             // 
@@ -7140,7 +7140,7 @@
             btnZonesShowAll.Name = "btnZonesShowAll";
             btnZonesShowAll.Size = new System.Drawing.Size(92, 26);
             btnZonesShowAll.TabIndex = 8;
-            btnZonesShowAll.Text = "Show All";
+            btnZonesShowAll.Text = "显示全部";
             btnZonesShowAll.UseVisualStyleBackColor = true;
             btnZonesShowAll.Click += BtnZonesShowAll_Click;
             // 
@@ -7153,7 +7153,7 @@
             btnSearchZones.Name = "btnSearchZones";
             btnSearchZones.Size = new System.Drawing.Size(92, 26);
             btnSearchZones.TabIndex = 7;
-            btnSearchZones.Text = "Search";
+            btnSearchZones.Text = "搜索";
             btnSearchZones.UseVisualStyleBackColor = true;
             btnSearchZones.Click += BtnZonesSearch_Click;
             // 
@@ -7185,34 +7185,34 @@
             // 
             // dataGridViewTextBoxColumn13
             // 
-            dataGridViewTextBoxColumn13.HeaderText = "Internal Name";
+            dataGridViewTextBoxColumn13.HeaderText = "内部名称";
             dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
             dataGridViewTextBoxColumn13.ReadOnly = true;
             // 
             // Column15
             // 
             Column15.FillWeight = 60F;
-            Column15.HeaderText = "Group ID";
+            Column15.HeaderText = "组 ID";
             Column15.Name = "Column15";
             Column15.ReadOnly = true;
             // 
             // Column11
             // 
             Column11.FillWeight = 60F;
-            Column11.HeaderText = "Zone Key";
+            Column11.HeaderText = "区域键";
             Column11.Name = "Column11";
             Column11.ReadOnly = true;
             // 
             // Column13
             // 
-            Column13.HeaderText = "Display Text";
+            Column13.HeaderText = "显示文本";
             Column13.Name = "Column13";
             Column13.ReadOnly = true;
             // 
             // Column14
             // 
             Column14.FillWeight = 60F;
-            Column14.HeaderText = "Is Closed";
+            Column14.HeaderText = "是否关闭";
             Column14.Name = "Column14";
             Column14.ReadOnly = true;
             // 
@@ -7224,7 +7224,7 @@
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(173, 15);
             label10.TabIndex = 5;
-            label10.Text = "Search in Zone ID, Key or Name";
+            label10.Text = "搜索区域 ID、键或名称";
             // 
             // tZonesSearch
             // 
@@ -7246,7 +7246,7 @@
             tpGameSettings.Padding = new System.Windows.Forms.Padding(3);
             tpGameSettings.Size = new System.Drawing.Size(1082, 546);
             tpGameSettings.TabIndex = 22;
-            tpGameSettings.Text = "Game Settings";
+            tpGameSettings.Text = "游戏设置";
             tpGameSettings.UseVisualStyleBackColor = true;
             tpGameSettings.Enter += tpGameSettings_Enter;
             // 
@@ -7257,7 +7257,7 @@
             label151.Name = "label151";
             label151.Size = new System.Drawing.Size(94, 15);
             label151.TabIndex = 8;
-            label151.Text = "Content Configs";
+            label151.Text = "内容配置";
             // 
             // dgvContentConfig
             // 
@@ -7288,7 +7288,7 @@
             // dgvCCVal
             // 
             dgvCCVal.FillWeight = 113.042969F;
-            dgvCCVal.HeaderText = "Value";
+            dgvCCVal.HeaderText = "值";
             dgvCCVal.Name = "dgvCCVal";
             dgvCCVal.ReadOnly = true;
             // 
@@ -7345,7 +7345,7 @@
             MM.ShowItemToolTips = true;
             MM.Size = new System.Drawing.Size(1090, 24);
             MM.TabIndex = 4;
-            MM.Text = "Menu";
+            MM.Text = "菜单";
             MM.Visible = false;
             // 
             // MMFile
@@ -7359,7 +7359,7 @@
             // 
             MMFileTables.Name = "MMFileTables";
             MMFileTables.Size = new System.Drawing.Size(175, 22);
-            MMFileTables.Text = "Tables and Settings";
+            MMFileTables.Text = "数据表与设置";
             MMFileTables.Click += MMFileTables_Click;
             // 
             // toolStripMenuItem1
@@ -7383,7 +7383,7 @@
             // 
             MMFileExit.Name = "MMFileExit";
             MMFileExit.Size = new System.Drawing.Size(175, 22);
-            MMFileExit.Text = "E&xit";
+            MMFileExit.Text = "退&出";
             MMFileExit.Click += MMFileExit_Click;
             // 
             // MMBack
@@ -7409,7 +7409,7 @@
             // 
             MMSelectedData.Name = "MMSelectedData";
             MMSelectedData.Size = new System.Drawing.Size(90, 20);
-            MMSelectedData.Text = "Selected &Data";
+            MMSelectedData.Text = "选中&数据";
             MMSelectedData.Click += MMSelectedData_Click;
             // 
             // MMLocalizer
@@ -7417,7 +7417,7 @@
             MMLocalizer.Name = "MMLocalizer";
             MMLocalizer.ShortcutKeys = System.Windows.Forms.Keys.F8;
             MMLocalizer.Size = new System.Drawing.Size(65, 20);
-            MMLocalizer.Text = "Localizer";
+            MMLocalizer.Text = "本地化";
             MMLocalizer.ToolTipText = "Find localized texts (F8)";
             MMLocalizer.Click += MMLocalizer_Click;
             // 
@@ -7433,14 +7433,14 @@
             MMCombat.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMSystemBuffs, MMSystemSkills });
             MMCombat.Name = "MMCombat";
             MMCombat.Size = new System.Drawing.Size(62, 20);
-            MMCombat.Text = "Combat";
+            MMCombat.Text = "战斗";
             // 
             // MMSystemBuffs
             // 
             MMSystemBuffs.Name = "MMSystemBuffs";
             MMSystemBuffs.ShortcutKeys = System.Windows.Forms.Keys.F5;
             MMSystemBuffs.Size = new System.Drawing.Size(120, 22);
-            MMSystemBuffs.Text = "Buffs";
+            MMSystemBuffs.Text = "增益";
             MMSystemBuffs.Click += MMSystemBuffs_Click;
             // 
             // MMSystemSkills
@@ -7448,7 +7448,7 @@
             MMSystemSkills.Name = "MMSystemSkills";
             MMSystemSkills.ShortcutKeys = System.Windows.Forms.Keys.F3;
             MMSystemSkills.Size = new System.Drawing.Size(120, 22);
-            MMSystemSkills.Text = "Skills";
+            MMSystemSkills.Text = "技能";
             MMSystemSkills.Click += MMSystemSkills_Click;
             // 
             // MMGameObjects
@@ -7456,14 +7456,14 @@
             MMGameObjects.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMGameObjectsDoodads, MMGameObjectsNpcs, MMGameObjectsVehicles });
             MMGameObjects.Name = "MMGameObjects";
             MMGameObjects.Size = new System.Drawing.Size(93, 20);
-            MMGameObjects.Text = "Game Objects";
+            MMGameObjects.Text = "游戏对象";
             // 
             // MMGameObjectsDoodads
             // 
             MMGameObjectsDoodads.Name = "MMGameObjectsDoodads";
             MMGameObjectsDoodads.ShortcutKeys = System.Windows.Forms.Keys.F4;
             MMGameObjectsDoodads.Size = new System.Drawing.Size(140, 22);
-            MMGameObjectsDoodads.Text = "Doodads";
+            MMGameObjectsDoodads.Text = "装饰物";
             MMGameObjectsDoodads.Click += MMGameObjectsDoodads_Click;
             // 
             // MMGameObjectsNpcs
@@ -7471,14 +7471,14 @@
             MMGameObjectsNpcs.Name = "MMGameObjectsNpcs";
             MMGameObjectsNpcs.ShortcutKeys = System.Windows.Forms.Keys.F6;
             MMGameObjectsNpcs.Size = new System.Drawing.Size(140, 22);
-            MMGameObjectsNpcs.Text = "NPCs";
+            MMGameObjectsNpcs.Text = "NPC";
             MMGameObjectsNpcs.Click += MMGameObjectsNpcs_Click;
             // 
             // MMGameObjectsVehicles
             // 
             MMGameObjectsVehicles.Name = "MMGameObjectsVehicles";
             MMGameObjectsVehicles.Size = new System.Drawing.Size(140, 22);
-            MMGameObjectsVehicles.Text = "Vehicles";
+            MMGameObjectsVehicles.Text = "载具";
             MMGameObjectsVehicles.Click += MMGameObjectsVehicles_Click;
             // 
             // MMVersion
@@ -7486,27 +7486,27 @@
             MMVersion.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             MMVersion.Name = "MMVersion";
             MMVersion.Size = new System.Drawing.Size(57, 20);
-            MMVersion.Text = "Version";
+            MMVersion.Text = "版本";
             // 
             // MMSystems
             // 
             MMSystems.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMAchievements, MMSystemFactions, MMSystemItems, MMSystemLoot, MMSystemMaps, MMSystemQuests, MMSystemSchedule, MMSystemSpheres, MMSystemTags, MMSystemTrades, MMSystemVendors, MMSystemZones, MMSystemConfigs });
             MMSystems.Name = "MMSystems";
             MMSystems.Size = new System.Drawing.Size(62, 20);
-            MMSystems.Text = "Systems";
+            MMSystems.Text = "系统";
             // 
             // MMAchievements
             // 
             MMAchievements.Name = "MMAchievements";
             MMAchievements.Size = new System.Drawing.Size(149, 22);
-            MMAchievements.Text = "Achievements";
+            MMAchievements.Text = "成就";
             MMAchievements.Click += MMAchievements_Click;
             // 
             // MMSystemFactions
             // 
             MMSystemFactions.Name = "MMSystemFactions";
             MMSystemFactions.Size = new System.Drawing.Size(149, 22);
-            MMSystemFactions.Text = "Factions";
+            MMSystemFactions.Text = "阵营";
             MMSystemFactions.Click += MMSystemFactions_Click;
             // 
             // MMSystemItems
@@ -7514,14 +7514,14 @@
             MMSystemItems.Name = "MMSystemItems";
             MMSystemItems.ShortcutKeys = System.Windows.Forms.Keys.F7;
             MMSystemItems.Size = new System.Drawing.Size(149, 22);
-            MMSystemItems.Text = "Items";
+            MMSystemItems.Text = "物品";
             MMSystemItems.Click += MMSystemItems_Click;
             // 
             // MMSystemLoot
             // 
             MMSystemLoot.Name = "MMSystemLoot";
             MMSystemLoot.Size = new System.Drawing.Size(149, 22);
-            MMSystemLoot.Text = "Loot";
+            MMSystemLoot.Text = "掉落";
             MMSystemLoot.Click += MMSystemLoot_Click;
             // 
             // MMSystemMaps
@@ -7529,7 +7529,7 @@
             MMSystemMaps.Name = "MMSystemMaps";
             MMSystemMaps.ShortcutKeys = System.Windows.Forms.Keys.F9;
             MMSystemMaps.Size = new System.Drawing.Size(149, 22);
-            MMSystemMaps.Text = "Maps";
+            MMSystemMaps.Text = "地图";
             MMSystemMaps.Click += MMSystemMaps_Click;
             // 
             // MMSystemQuests
@@ -7537,56 +7537,56 @@
             MMSystemQuests.Name = "MMSystemQuests";
             MMSystemQuests.ShortcutKeys = System.Windows.Forms.Keys.F2;
             MMSystemQuests.Size = new System.Drawing.Size(149, 22);
-            MMSystemQuests.Text = "Quests";
+            MMSystemQuests.Text = "任务";
             MMSystemQuests.Click += MMSystemQuests_Click;
             // 
             // MMSystemSchedule
             // 
             MMSystemSchedule.Name = "MMSystemSchedule";
             MMSystemSchedule.Size = new System.Drawing.Size(149, 22);
-            MMSystemSchedule.Text = "Schedule";
+            MMSystemSchedule.Text = "日程";
             MMSystemSchedule.Click += MMSystemSchedule_Click;
             // 
             // MMSystemSpheres
             // 
             MMSystemSpheres.Name = "MMSystemSpheres";
             MMSystemSpheres.Size = new System.Drawing.Size(149, 22);
-            MMSystemSpheres.Text = "Spheres";
+            MMSystemSpheres.Text = "区域";
             MMSystemSpheres.Click += MMSystemSpheres_Click;
             // 
             // MMSystemTags
             // 
             MMSystemTags.Name = "MMSystemTags";
             MMSystemTags.Size = new System.Drawing.Size(149, 22);
-            MMSystemTags.Text = "Tags";
+            MMSystemTags.Text = "标签";
             MMSystemTags.Click += MMSystemTags_Click;
             // 
             // MMSystemTrades
             // 
             MMSystemTrades.Name = "MMSystemTrades";
             MMSystemTrades.Size = new System.Drawing.Size(149, 22);
-            MMSystemTrades.Text = "Trades";
+            MMSystemTrades.Text = "贸易";
             MMSystemTrades.Click += MMSystemTrades_Click;
             // 
             // MMSystemVendors
             // 
             MMSystemVendors.Name = "MMSystemVendors";
             MMSystemVendors.Size = new System.Drawing.Size(149, 22);
-            MMSystemVendors.Text = "Vendors";
+            MMSystemVendors.Text = "商人";
             MMSystemVendors.Click += MMSystemVendors_Click;
             // 
             // MMSystemZones
             // 
             MMSystemZones.Name = "MMSystemZones";
             MMSystemZones.Size = new System.Drawing.Size(149, 22);
-            MMSystemZones.Text = "Zones";
+            MMSystemZones.Text = "区域";
             MMSystemZones.Click += MMSystemZones_Click;
             // 
             // MMSystemConfigs
             // 
             MMSystemConfigs.Name = "MMSystemConfigs";
             MMSystemConfigs.Size = new System.Drawing.Size(149, 22);
-            MMSystemConfigs.Text = "Game Configs";
+            MMSystemConfigs.Text = "游戏配置";
             // 
             // TBMain
             // 
@@ -7598,7 +7598,7 @@
             TBMain.Name = "TBMain";
             TBMain.Size = new System.Drawing.Size(1090, 31);
             TBMain.TabIndex = 5;
-            TBMain.Text = "Toolbar";
+            TBMain.Text = "工具栏";
             // 
             // TBFile
             // 
@@ -7608,13 +7608,13 @@
             TBFile.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBFile.Name = "TBFile";
             TBFile.Size = new System.Drawing.Size(42, 23);
-            TBFile.Text = "File";
+            TBFile.Text = "文件";
             // 
             // TBFileTables
             // 
             TBFileTables.Name = "TBFileTables";
             TBFileTables.Size = new System.Drawing.Size(159, 24);
-            TBFileTables.Text = "Tables";
+            TBFileTables.Text = "数据表";
             TBFileTables.Click += TBFileTables_Click;
             // 
             // toolStripSeparator3
@@ -7626,7 +7626,7 @@
             // 
             TBFileSettings.Name = "TBFileSettings";
             TBFileSettings.Size = new System.Drawing.Size(159, 24);
-            TBFileSettings.Text = "Settings";
+            TBFileSettings.Text = "设置";
             TBFileSettings.Click += TBFileSettings_Click;
             // 
             // TBFileSwitchProfileMenu
@@ -7634,7 +7634,7 @@
             TBFileSwitchProfileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { TBMenuFileSwitchSelect });
             TBFileSwitchProfileMenu.Name = "TBFileSwitchProfileMenu";
             TBFileSwitchProfileMenu.Size = new System.Drawing.Size(159, 24);
-            TBFileSwitchProfileMenu.Text = "Switch profile";
+            TBFileSwitchProfileMenu.Text = "切换配置";
             // 
             // TBMenuFileSwitchSelect
             // 
@@ -7652,7 +7652,7 @@
             // 
             TBFileExit.Name = "TBFileExit";
             TBFileExit.Size = new System.Drawing.Size(159, 24);
-            TBFileExit.Text = "Exit";
+            TBFileExit.Text = "退出";
             TBFileExit.Click += TBFileExit_Click;
             // 
             // TBS1
@@ -7694,7 +7694,7 @@
             TBSelectedData.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBSelectedData.Name = "TBSelectedData";
             TBSelectedData.Size = new System.Drawing.Size(96, 23);
-            TBSelectedData.Text = "Selected Data";
+            TBSelectedData.Text = "选中数据";
             TBSelectedData.Click += TBSelectedData_Click;
             // 
             // TBLocalizer
@@ -7704,7 +7704,7 @@
             TBLocalizer.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBLocalizer.Name = "TBLocalizer";
             TBLocalizer.Size = new System.Drawing.Size(28, 28);
-            TBLocalizer.Text = "Localizer";
+            TBLocalizer.Text = "本地化";
             TBLocalizer.ToolTipText = "Localizer (F8)";
             TBLocalizer.Click += TBLocalizer_Click;
             // 
@@ -7720,7 +7720,7 @@
             TBConfigs.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBConfigs.Name = "TBConfigs";
             TBConfigs.Size = new System.Drawing.Size(28, 28);
-            TBConfigs.Text = "Game Settings";
+            TBConfigs.Text = "游戏设置";
             TBConfigs.Click += TBConfigs_Click;
             // 
             // TBMap
@@ -7730,7 +7730,7 @@
             TBMap.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBMap.Name = "TBMap";
             TBMap.Size = new System.Drawing.Size(28, 28);
-            TBMap.Text = "Map";
+            TBMap.Text = "地图";
             TBMap.ToolTipText = "Map (F9)";
             TBMap.Click += TBMap_Click;
             // 
@@ -7751,7 +7751,7 @@
             toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new System.Drawing.Size(28, 28);
-            toolStripButton1.Text = "Achievements";
+            toolStripButton1.Text = "成就";
             toolStripButton1.Click += toolStripButton1_Click;
             // 
             // TBBuffs
@@ -7761,7 +7761,7 @@
             TBBuffs.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBBuffs.Name = "TBBuffs";
             TBBuffs.Size = new System.Drawing.Size(28, 28);
-            TBBuffs.Text = "Buffs";
+            TBBuffs.Text = "增益";
             TBBuffs.ToolTipText = "Buffs (F5)";
             TBBuffs.Click += TBBuffs_Click;
             // 
@@ -7772,7 +7772,7 @@
             TBDoodads.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBDoodads.Name = "TBDoodads";
             TBDoodads.Size = new System.Drawing.Size(28, 28);
-            TBDoodads.Text = "Doodads";
+            TBDoodads.Text = "装饰物";
             TBDoodads.ToolTipText = "Doodads (F4)";
             TBDoodads.Click += TBDoodads_Click;
             // 
@@ -7783,7 +7783,7 @@
             TBFactions.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBFactions.Name = "TBFactions";
             TBFactions.Size = new System.Drawing.Size(28, 28);
-            TBFactions.Text = "Factions";
+            TBFactions.Text = "阵营";
             TBFactions.Click += TBFactions_Click;
             // 
             // TBItems
@@ -7793,7 +7793,7 @@
             TBItems.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBItems.Name = "TBItems";
             TBItems.Size = new System.Drawing.Size(28, 28);
-            TBItems.Text = "Items";
+            TBItems.Text = "物品";
             TBItems.ToolTipText = "Items (F7)";
             TBItems.Click += TBItems_Click;
             // 
@@ -7804,7 +7804,7 @@
             TBLoot.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBLoot.Name = "TBLoot";
             TBLoot.Size = new System.Drawing.Size(28, 28);
-            TBLoot.Text = "Loot";
+            TBLoot.Text = "掉落";
             TBLoot.Click += TBLoot_Click;
             // 
             // TBNpc
@@ -7814,7 +7814,7 @@
             TBNpc.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBNpc.Name = "TBNpc";
             TBNpc.Size = new System.Drawing.Size(28, 28);
-            TBNpc.Text = "NPCs";
+            TBNpc.Text = "NPC";
             TBNpc.ToolTipText = "NPCs (F6)";
             TBNpc.Click += TBNpc_Click;
             // 
@@ -7825,7 +7825,7 @@
             TBQuests.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBQuests.Name = "TBQuests";
             TBQuests.Size = new System.Drawing.Size(28, 28);
-            TBQuests.Text = "Quests";
+            TBQuests.Text = "任务";
             TBQuests.ToolTipText = "Quests (F2)";
             TBQuests.Click += TBQuests_Click;
             // 
@@ -7836,7 +7836,7 @@
             TBSchedules.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBSchedules.Name = "TBSchedules";
             TBSchedules.Size = new System.Drawing.Size(28, 28);
-            TBSchedules.Text = "Schedules";
+            TBSchedules.Text = "日程";
             TBSchedules.Click += TBSchedules_Click;
             // 
             // TBSkills
@@ -7846,7 +7846,7 @@
             TBSkills.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBSkills.Name = "TBSkills";
             TBSkills.Size = new System.Drawing.Size(28, 28);
-            TBSkills.Text = "Skills";
+            TBSkills.Text = "技能";
             TBSkills.ToolTipText = "Skills (F3)";
             TBSkills.Click += TBSkills_Click;
             // 
@@ -7857,7 +7857,7 @@
             TBSpheres.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBSpheres.Name = "TBSpheres";
             TBSpheres.Size = new System.Drawing.Size(28, 28);
-            TBSpheres.Text = "Spheres";
+            TBSpheres.Text = "区域";
             TBSpheres.Click += TBSpheres_Click;
             // 
             // TBTags
@@ -7867,7 +7867,7 @@
             TBTags.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBTags.Name = "TBTags";
             TBTags.Size = new System.Drawing.Size(28, 28);
-            TBTags.Text = "Tags";
+            TBTags.Text = "标签";
             TBTags.Click += TBTags_Click;
             // 
             // TBTrades
@@ -7877,7 +7877,7 @@
             TBTrades.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBTrades.Name = "TBTrades";
             TBTrades.Size = new System.Drawing.Size(28, 28);
-            TBTrades.Text = "Trades";
+            TBTrades.Text = "贸易";
             TBTrades.Click += TBTrades_Click;
             // 
             // TBSlaves
@@ -7887,7 +7887,7 @@
             TBSlaves.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBSlaves.Name = "TBSlaves";
             TBSlaves.Size = new System.Drawing.Size(28, 28);
-            TBSlaves.Text = "Vehicles";
+            TBSlaves.Text = "载具";
             TBSlaves.Click += TBSlaves_Click;
             // 
             // TBVendors
@@ -7897,7 +7897,7 @@
             TBVendors.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBVendors.Name = "TBVendors";
             TBVendors.Size = new System.Drawing.Size(63, 23);
-            TBVendors.Text = "Vendors";
+            TBVendors.Text = "商人";
             TBVendors.Visible = false;
             TBVendors.Click += TBVendors_Click;
             // 
@@ -7908,7 +7908,7 @@
             TBZones.ImageTransparentColor = System.Drawing.Color.Magenta;
             TBZones.Name = "TBZones";
             TBZones.Size = new System.Drawing.Size(28, 28);
-            TBZones.Text = "Zones";
+            TBZones.Text = "区域";
             TBZones.Click += TBZones_Click;
             // 
             // openFileDialog1
@@ -7958,7 +7958,7 @@
             groupBox17.Size = new System.Drawing.Size(655, 57);
             groupBox17.TabIndex = 58;
             groupBox17.TabStop = false;
-            groupBox17.Text = "Load from game_pak design data";
+            groupBox17.Text = "从 game_pak 设计数据加载";
             // 
             // groupBox18
             // 
@@ -7969,7 +7969,7 @@
             groupBox18.Size = new System.Drawing.Size(652, 64);
             groupBox18.TabIndex = 59;
             groupBox18.TabStop = false;
-            groupBox18.Text = "Load AAEmu data";
+            groupBox18.Text = "加载 AAEmu 数据";
             // 
             // groupBox19
             // 
@@ -7984,7 +7984,7 @@
             groupBox19.Size = new System.Drawing.Size(655, 95);
             groupBox19.TabIndex = 60;
             groupBox19.TabStop = false;
-            groupBox19.Text = "Paths";
+            groupBox19.Text = "路径";
             // 
             // groupBox20
             // 
@@ -8002,7 +8002,7 @@
             groupBox20.Size = new System.Drawing.Size(652, 157);
             groupBox20.TabIndex = 61;
             groupBox20.TabStop = false;
-            groupBox20.Text = "Areas";
+            groupBox20.Text = "区域";
             // 
             // MainForm
             // 

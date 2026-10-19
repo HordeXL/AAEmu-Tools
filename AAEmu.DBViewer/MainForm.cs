@@ -868,7 +868,7 @@ namespace AAEmu.DBViewer
                 loading.ShowInfo("Loading: Icon info");
                 LoadIcons();
 
-                loading.ShowInfo("Loading: Game Configurations");
+                loading.ShowInfo("加载中: 游戏配置");
                 LoadConfigs();
 
                 loading.ShowInfo("Loading: Factions");
@@ -968,8 +968,8 @@ namespace AAEmu.DBViewer
                     if (File.Exists(Path.Combine(openFileName, "game_pak")))
                     {
                         if (MessageBox.Show(
-                                $"The folder contains a game_pak file.\nDo you want to use the game_pak directly instead of the folder?\nFolder: {openFileName}",
-                                "Use found game_pak?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                                $"该文件夹中包含 game_pak 文件。\n是否直接使用该 game_pak 而不使用文件夹?\n文件夹: {openFileName}",
+                                "发现 game_pak，是否使用?", MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             openFileName = Path.Combine(openFileName, "game_pak");
                         }
@@ -1008,7 +1008,7 @@ namespace AAEmu.DBViewer
             }
             else
             {
-                MessageBox.Show($@"Failed to load: {openFileName}");
+                MessageBox.Show($@"加载失败: {openFileName}");
                 ClientFileManager.ClearSources();
                 return false;
             }
@@ -1909,7 +1909,7 @@ namespace AAEmu.DBViewer
                     map.Show();
                     map.cbInstanceSelect.Text = info.targetWorldName;
 
-                    if (map.GetPoICount() > 0 && MessageBox.Show("Keep PoI's ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                    if (map.GetPoICount() > 0 && MessageBox.Show("保留当前兴趣点 ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
                         map.ClearPoI();
                     var tp = info.targetPosition;
                     map.AddPoI(tp.X, tp.Y, tp.Z, info.targetSearchText, Color.Aquamarine, info.targetRadius, "", 0, null);
@@ -3255,9 +3255,9 @@ namespace AAEmu.DBViewer
             }
 
             tvPopupMenuName.Text = tcViewer.SelectedTab?.Text ?? "???";
-            tvPopupCopyTree.Text = @"Copy TreeView";
+            tvPopupCopyTree.Text = @"复制整棵树";
             tvPopupCopyTree.Tag = treeView;
-            tvPopupCopyNode.Text = @"Copy Node";
+            tvPopupCopyNode.Text = @"复制节点";
             tvPopupCopyNode.Tag = treeView.SelectedNode;
             tvPopupCopyNode.Enabled = treeView.SelectedNode != null;
         }
@@ -3282,8 +3282,8 @@ namespace AAEmu.DBViewer
             tvSchedule.Nodes.Clear();
 
             var header = selectedItem.AdditionalReward ?
-                $"{selectedItem.Year:0000}-{selectedItem.Month:00} attended {selectedItem.DayCount} days" :
-                $"{selectedItem.Year:0000}-{selectedItem.Month:00} Day {selectedItem.DayCount:00}";
+                $"{selectedItem.Year:0000}-{selectedItem.Month:00} 连续签到 {selectedItem.DayCount} 天" :
+                $"{selectedItem.Year:0000}-{selectedItem.Month:00} 第 {selectedItem.DayCount:00} 天";
 
             var rootNode = tvSchedule.Nodes.Add(header);
             rootNode.ImageIndex = selectedItem.AdditionalReward ? 3 : 2;
@@ -3292,10 +3292,10 @@ namespace AAEmu.DBViewer
 
             rootNode.Nodes.Add($"ID: {selectedItem.Id}");
             var grade = AaDb.DbItemGrades.GetValueOrDefault(selectedItem.ItemGradeId);
-            var gradeText = $"(Grade: {grade?.NameLocalized ?? ""} {selectedItem.ItemGradeId})";
+            var gradeText = $"(品级: {grade?.NameLocalized ?? ""} {selectedItem.ItemGradeId})";
             AddCustomPropertyNode("item_id", selectedItem.ItemId.ToString(), false, rootNode).Text += $@" x {selectedItem.ItemCount} {gradeText}";
             if (!string.IsNullOrWhiteSpace(selectedItem.Comment))
-                rootNode.Nodes.Add($"Comment: {selectedItem.Comment}");
+                rootNode.Nodes.Add($"备注: {selectedItem.Comment}");
 
 
 
@@ -3318,9 +3318,9 @@ namespace AAEmu.DBViewer
             lbAttendance.Items.Clear();
             tvSchedule.Nodes.Clear();
             if (filter == "All")
-                tvSchedule.Nodes.Add("Filter month to show details").ImageIndex = 2;
-            var rootNode = tvSchedule.Nodes.Add($"{filter} daily attendance rewards");
-            var attendNode = tvSchedule.Nodes.Add($"{filter} number of days attended rewards");
+                tvSchedule.Nodes.Add("请选择月份以显示详情").ImageIndex = 2;
+            var rootNode = tvSchedule.Nodes.Add($"{filter} 每日签到奖励");
+            var attendNode = tvSchedule.Nodes.Add($"{filter} 累计签到天数奖励");
             foreach (var val in AaDb.DbAccountAttendanceRewards.Values
                          .OrderBy(x => x.Year)
                          .ThenBy(x => x.Month)
@@ -3333,7 +3333,7 @@ namespace AAEmu.DBViewer
                     {
                         var dayNode = AddCustomPropertyNode("item_id", val.ItemId.ToString(), false, val.AdditionalReward ? attendNode : rootNode);
                         var grade = AaDb.DbItemGrades.GetValueOrDefault(val.ItemGradeId);
-                        var gradeText = $"{grade?.NameLocalized ?? $"Grade {val.ItemGradeId}"}";
+                        var gradeText = $"{grade?.NameLocalized ?? $"品级 {val.ItemGradeId}"}";
                         dayNode.Text = $@"{val.ToItemLessString()} - {val.ItemCount} x {dayNode.Text} ({gradeText})";
                     }
                 }
@@ -3351,7 +3351,7 @@ namespace AAEmu.DBViewer
             var doodadGFiles = ClientFileManager.GetFilesInDirectory("game", "doodad.g", true).Where(f => f.EndsWith(doodadG, StringComparison.InvariantCultureIgnoreCase) && f.StartsWith(cellsFolder, StringComparison.InvariantCultureIgnoreCase)).ToList();
             if (!doodadGFiles.Any())
             {
-                MessageBox.Show(@$"Pak does not seem to contain DESIGN doodad data {instanceName}");
+                MessageBox.Show(@$"Pak 中似乎不包含 {instanceName} 的 DESIGN 装饰物数据");
                 return;
             }
             PrepareWorldXml(false);
@@ -3360,7 +3360,7 @@ namespace AAEmu.DBViewer
             map.Show();
             map.cbInstanceSelect.Text = instanceName;
 
-            if (map.GetPoICount() > 0 && MessageBox.Show(@"Keep PoI's ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            if (map.GetPoICount() > 0 && MessageBox.Show(@"保留当前兴趣点 ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
                 map.ClearPoI();
 
             foreach (var doodadGFile in doodadGFiles)
@@ -3420,18 +3420,18 @@ namespace AAEmu.DBViewer
                             continue;
                         posX += (cellX * 1024f);
                         posY += (cellY * 1024f);
-                        map.AddPoI(posX, posY, posZ, (AaDb.DbDoodadAlmighties.GetValueOrDefault(currentDoodadId)?.NameLocalized ?? "DoodadId: ") + $" ({currentDoodadId})", Color.YellowGreen, 0, "doodad", currentDoodadId, null);
+                        map.AddPoI(posX, posY, posZ, (AaDb.DbDoodadAlmighties.GetValueOrDefault(currentDoodadId)?.NameLocalized ?? "装饰物ID: ") + $" ({currentDoodadId})", Color.YellowGreen, 0, "doodad", currentDoodadId, null);
                         resultList.Add(new Tuple<long, Vector3>(currentDoodadId, new Vector3(posX, posY, posZ)));
                     }
                 }
 
                 if (resultList.Count > 0 &&
-                    MessageBox.Show($"Do you want to add {resultList.Count} doodads to the doodads search page?",
-                        "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    MessageBox.Show($"是否将这 {resultList.Count} 个装饰物添加到装饰物搜索页?",
+                        "确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     using (var loading = new LoadingForm())
                     {
-                        loading.ShowInfo($"Adding {resultList.Count} Doodads");
+                        loading.ShowInfo($"正在添加 {resultList.Count} 个装饰物");
                         loading.Show();
                         dgvDoodads.Hide();
                         dgvDoodads.Rows.Clear();
@@ -3457,7 +3457,7 @@ namespace AAEmu.DBViewer
                                 c++;
                                 if ((c % 25) == 0)
                                 {
-                                    loading.ShowInfo($"Loading {c}/{resultList.Count} Doodads");
+                                    loading.ShowInfo($"正在加载装饰物 {c}/{resultList.Count}");
                                 }
                             }
                         }
@@ -3484,7 +3484,7 @@ namespace AAEmu.DBViewer
             var npcSpawnersGFiles = ClientFileManager.GetFilesInDirectory("game", "npc_spawners.g", true).Where(f => f.EndsWith(npcSpawnersG, StringComparison.InvariantCultureIgnoreCase) && f.StartsWith(zoneFolder, StringComparison.InvariantCultureIgnoreCase)).ToList();
             if (!npcSpawnersGFiles.Any())
             {
-                MessageBox.Show(@$"Pak does not seem to contain DESIGN NpcSpawner data for {instanceName}");
+                MessageBox.Show(@$"Pak 中似乎不包含 {instanceName} 的 DESIGN NPC 刷新点数据");
                 return;
             }
             PrepareWorldXml(false);
@@ -3494,7 +3494,7 @@ namespace AAEmu.DBViewer
             map.cbInstanceSelect.Text = instanceName;
 
             if ((map.GetPoICount() > 0 || map.GetPathCount() > 0) &&
-                MessageBox.Show(@"Keep PoI's ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                MessageBox.Show(@"保留当前兴趣点 ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
             {
                 map.ClearPoI();
                 map.ClearPaths();

@@ -93,7 +93,7 @@
             label1.Name = "label1";
             label1.Size = new System.Drawing.Size(142, 15);
             label1.TabIndex = 1;
-            label1.Text = "Character the Bot runs on";
+            label1.Text = "机器人使用的游戏角色";
             // 
             // lAhBotName
             // 
@@ -130,7 +130,7 @@
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(152, 15);
             label2.TabIndex = 5;
-            label2.Text = "Account the bot will run on";
+            label2.Text = "机器人将运行的账户";
             // 
             // label3
             // 
@@ -155,7 +155,7 @@
             btnConnect.Name = "btnConnect";
             btnConnect.Size = new System.Drawing.Size(275, 93);
             btnConnect.TabIndex = 8;
-            btnConnect.Text = "Start";
+            btnConnect.Text = "开始";
             btnConnect.UseVisualStyleBackColor = true;
             btnConnect.Click += btnConnect_Click;
             // 
@@ -189,7 +189,7 @@
             tpSettings.Name = "tpSettings";
             tpSettings.Size = new System.Drawing.Size(792, 394);
             tpSettings.TabIndex = 2;
-            tpSettings.Text = "Settings";
+            tpSettings.Text = "设置";
             tpSettings.UseVisualStyleBackColor = true;
             // 
             // AhBotTextBoxInfo
@@ -209,7 +209,7 @@
             btnCleanMails.Name = "btnCleanMails";
             btnCleanMails.Size = new System.Drawing.Size(169, 22);
             btnCleanMails.TabIndex = 12;
-            btnCleanMails.Text = "Check Mails";
+            btnCleanMails.Text = "检查邮箱";
             btnCleanMails.UseVisualStyleBackColor = true;
             btnCleanMails.Visible = false;
             btnCleanMails.Click += btnCleanMails_Click;
@@ -220,7 +220,7 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new System.Drawing.Size(169, 22);
             btnSave.TabIndex = 11;
-            btnSave.Text = "Save Configuration";
+            btnSave.Text = "保存配置";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Visible = false;
             btnSave.Click += btnSave_Click;
@@ -231,7 +231,7 @@
             btnLoadConfig.Name = "btnLoadConfig";
             btnLoadConfig.Size = new System.Drawing.Size(169, 22);
             btnLoadConfig.TabIndex = 10;
-            btnLoadConfig.Text = "Load Configuration";
+            btnLoadConfig.Text = "加载配置";
             btnLoadConfig.UseVisualStyleBackColor = true;
             btnLoadConfig.Visible = false;
             btnLoadConfig.Click += btnLoadConfig_Click;
@@ -250,7 +250,7 @@
             tpAhList.Padding = new System.Windows.Forms.Padding(3);
             tpAhList.Size = new System.Drawing.Size(792, 394);
             tpAhList.TabIndex = 1;
-            tpAhList.Text = "AH";
+            tpAhList.Text = "拍卖行";
             tpAhList.UseVisualStyleBackColor = true;
             // 
             // gbItemEntrySettings
@@ -283,7 +283,7 @@
             gbItemEntrySettings.Size = new System.Drawing.Size(336, 378);
             gbItemEntrySettings.TabIndex = 21;
             gbItemEntrySettings.TabStop = false;
-            gbItemEntrySettings.Text = "Item listing settings";
+            gbItemEntrySettings.Text = "物品上架设置";
             // 
             // lItemIcon
             // 
@@ -330,7 +330,7 @@
             label11.Name = "label11";
             label11.Size = new System.Drawing.Size(61, 15);
             label11.TabIndex = 18;
-            label11.Text = "Comment";
+            label11.Text = "备注";
             // 
             // lStartBidPreview
             // 
@@ -357,7 +357,7 @@
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(31, 15);
             label4.TabIndex = 1;
-            label4.Text = "Item";
+            label4.Text = "物品";
             // 
             // lItemName
             // 
@@ -385,7 +385,7 @@
             lGrade.Name = "lGrade";
             lGrade.Size = new System.Drawing.Size(38, 15);
             lGrade.TabIndex = 4;
-            lGrade.Text = "Grade";
+            lGrade.Text = "品级";
             // 
             // cbGrade
             // 
@@ -404,7 +404,7 @@
             label5.Name = "label5";
             label5.Size = new System.Drawing.Size(126, 15);
             label5.TabIndex = 6;
-            label5.Text = "Item amount per entry";
+            label5.Text = "每条上架数量";
             // 
             // btnRemoveItem
             // 
@@ -413,7 +413,7 @@
             btnRemoveItem.Name = "btnRemoveItem";
             btnRemoveItem.Size = new System.Drawing.Size(116, 22);
             btnRemoveItem.TabIndex = 15;
-            btnRemoveItem.Text = "Remove";
+            btnRemoveItem.Text = "移除";
             btnRemoveItem.UseVisualStyleBackColor = true;
             btnRemoveItem.Click += btnRemoveItem_Click;
             // 
@@ -432,7 +432,7 @@
             btnUpdateAhItem.Name = "btnUpdateAhItem";
             btnUpdateAhItem.Size = new System.Drawing.Size(116, 22);
             btnUpdateAhItem.TabIndex = 14;
-            btnUpdateAhItem.Text = "Update/Add";
+            btnUpdateAhItem.Text = "更新/添加";
             btnUpdateAhItem.UseVisualStyleBackColor = true;
             btnUpdateAhItem.Click += btnUpdateAhItem_Click;
             // 
@@ -443,7 +443,7 @@
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(193, 15);
             label6.TabIndex = 8;
-            label6.Text = "Sale price (buy-out, zero to disable)";
+            label6.Text = "一口价 (设为0则禁用)";
             // 
             // tListedCount
             // 
@@ -471,7 +471,7 @@
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(259, 15);
             label8.TabIndex = 12;
-            label8.Text = "Number of times to keep this entry listed on AH";
+            label8.Text = "该条目在拍卖行保持上架的次数";
             // 
             // label7
             // 
@@ -480,7 +480,7 @@
             label7.Name = "label7";
             label7.Size = new System.Drawing.Size(68, 15);
             label7.TabIndex = 10;
-            label7.Text = "Starting Bid";
+            label7.Text = "起拍价";
             // 
             // tStartBid
             // 
@@ -498,7 +498,7 @@
             label10.Name = "label10";
             label10.Size = new System.Drawing.Size(93, 15);
             label10.TabIndex = 20;
-            label10.Text = "Currently on AH";
+            label10.Text = "当前在拍卖行";
             // 
             // lbAhLiveList
             // 
@@ -516,7 +516,7 @@
             label9.Name = "label9";
             label9.Size = new System.Drawing.Size(90, 15);
             label9.TabIndex = 18;
-            label9.Text = "Bot List settings";
+            label9.Text = "机器人物品列表设置";
             // 
             // btnQueryServerAH
             // 
@@ -524,7 +524,7 @@
             btnQueryServerAH.Name = "btnQueryServerAH";
             btnQueryServerAH.Size = new System.Drawing.Size(239, 22);
             btnQueryServerAH.TabIndex = 17;
-            btnQueryServerAH.Text = "Update live stats";
+            btnQueryServerAH.Text = "更新实时统计";
             btnQueryServerAH.UseVisualStyleBackColor = true;
             btnQueryServerAH.Click += btnQueryServerAH_Click;
             // 
@@ -556,7 +556,7 @@
             tpLogs.Padding = new System.Windows.Forms.Padding(3);
             tpLogs.Size = new System.Drawing.Size(792, 394);
             tpLogs.TabIndex = 0;
-            tpLogs.Text = "Logs";
+            tpLogs.Text = "日志";
             tpLogs.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -575,7 +575,7 @@
             BtnClearLog.Name = "BtnClearLog";
             BtnClearLog.Size = new System.Drawing.Size(114, 23);
             BtnClearLog.TabIndex = 0;
-            BtnClearLog.Text = "Clear";
+            BtnClearLog.Text = "清空";
             BtnClearLog.UseVisualStyleBackColor = true;
             BtnClearLog.Click += BtnClearLog_Click;
             // 

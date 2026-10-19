@@ -393,7 +393,7 @@ public partial class MainForm
             {
                 if (require.KindId == GameUnitReqsKind.CompleteQuestContext)
                 {
-                    requiredQuestsText += $"{AaDb.DbQuestContexts.GetValueOrDefault(require.Value1)?.NameLocalized ?? "unknown quest"} |nc;({require.Value1})|r\r";
+                    requiredQuestsText += $"{AaDb.DbQuestContexts.GetValueOrDefault(require.Value1)?.NameLocalized ?? "未知任务"} |nc;({require.Value1})|r\r";
                 }
             }
 
@@ -457,12 +457,12 @@ public partial class MainForm
         // Previous quests
         if (!string.IsNullOrWhiteSpace(requiredQuestsText))
         {
-            questText += "|nr;Previous Quest(s)|r:\r" + requiredQuestsText + "\r";
+            questText += "|nr;前置任务|r:\r" + requiredQuestsText + "\r";
         }
         
         // Next quests
         var nextComponentCheck = AaDb.DbUnitReqs.Values.Where(x => x.KindId == GameUnitReqsKind.CompleteQuestContext && x.Value1 == q.Id && x.OwnerType == "QuestComponent");
-        var nextQuestText = "|ni;Next Quest(s)|r:\r";
+        var nextQuestText = "|ni;后续任务|r:\r";
         var nextQuestcount = 0;
         foreach (var nextUnitReqs in nextComponentCheck)
         {
@@ -471,7 +471,7 @@ public partial class MainForm
             {
                 foreach (var questStartComponent in nextQuests)
                 {
-                    nextQuestText += $"{AaDb.DbQuestContexts.GetValueOrDefault(questStartComponent.QuestContextId)?.NameLocalized ?? "unknown quest"} |nc;({questStartComponent.QuestContextId})|r\r";
+                    nextQuestText += $"{AaDb.DbQuestContexts.GetValueOrDefault(questStartComponent.QuestContextId)?.NameLocalized ?? "未知任务"} |nc;({questStartComponent.QuestContextId})|r\r";
                     nextQuestcount++;
                 }
             }

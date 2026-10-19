@@ -1217,7 +1217,7 @@ public partial class MainForm
             // lSkillGCD.Text = skill.ignore_global_cooldown ? "Ignore" : "Normal";
             var desc = skill.DescriptionLocalized;
             if (skill.CrimePoint > 0)
-                desc += "\n\n|nd;Considered a crime|r";
+                desc += "\n\n|nd;视为犯罪行为|r";
             FormattedTextToRichtEdit(desc, rtSkillDescription);
             IconIdToLabel(skill.IconId, skillIcon);
             lSkillTags.Text = TagsAsString(idx, AaDb.DbTaggedSkills);
@@ -1429,7 +1429,7 @@ public partial class MainForm
         var dynStats = AaDb.DbDynamicUnitModifiers.Values.Where(x => x.BuffId == buff_id).ToList();
         if (dynStats.Any())
         {
-            var statsNode = tvBuffTriggers.Nodes.Add("Dynamic stat modifiers");
+            var statsNode = tvBuffTriggers.Nodes.Add("动态属性修正");
             foreach (var unitStat in dynStats)
             {
                 var statNode = statsNode.Nodes.Add($"{unitStat.UnitAttributeId} {(unitStat.UnitModifierTypeId != 0 ? "%" : "")} - {unitStat.FuncType} ({unitStat.FuncId})");
@@ -1467,7 +1467,7 @@ public partial class MainForm
         var mods = AaDb.DbBuffModifiers.Values.Where(x => x.OwnerType == "Buff" && x.OwnerId == buff_id).ToList();
         if (mods.Any())
         {
-            var modsNode = tvBuffTriggers.Nodes.Add("Modifiers");
+            var modsNode = tvBuffTriggers.Nodes.Add("修正值");
             foreach (var mod in mods)
             {
                 TreeNode modNode = null;
@@ -1478,12 +1478,12 @@ public partial class MainForm
                 if (modNode == null)
                     continue; // should never happen
 
-                modNode.Text = @"With " + modNode.Text;
+                modNode.Text = @"作用于 " + modNode.Text;
 
                 modNode.Nodes.Add($"buff_attribute_id: {mod.BuffAttributeId}");
-                modNode.Nodes.Add($"value: {mod.Value}{(mod.UnitModifierTypeId != 0 ? "%" : "")}");
+                modNode.Nodes.Add($"数值: {mod.Value}{(mod.UnitModifierTypeId != 0 ? "%" : "")}");
                 if (mod.Synergy)
-                    modNode.Nodes.Add("synergy");
+                    modNode.Nodes.Add("协同");
             }
         }
 
@@ -1512,13 +1512,13 @@ public partial class MainForm
         var buffSourceEffects = AaDb.DbBuffEffects.Values.Where(x => x.BuffId == buff_id);
         foreach (var buffSourceEffect in buffSourceEffects)
         {
-            var effectSourceNode = tvBuffTriggers.Nodes.Add($"Source - BuffEffect ({buffSourceEffect.Id})");
+            var effectSourceNode = tvBuffTriggers.Nodes.Add($"来源 - 增益效果 ({buffSourceEffect.Id})");
             var sourceEffects = AaDb.DbEffects.Values.Where(x => x.ActualType == "BuffEffect" && x.ActualId == buffSourceEffect.Id).ToList();
             if (sourceEffects.Any())
             {
                 foreach (var effect in sourceEffects)
                 {
-                    var thisEffectNode = effectSourceNode.Nodes.Add($"Effect ({effect.Id})");
+                    var thisEffectNode = effectSourceNode.Nodes.Add($"效果 ({effect.Id})");
                     var skillEffectsList = AaDb.DbSkillEffects.Values.Where(se => se.EffectId == effect.Id).ToList();
                     foreach (var skillEffect in skillEffectsList)
                     {
