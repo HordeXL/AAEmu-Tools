@@ -3,11 +3,14 @@ using AAPacker;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Xml;
+using AAEmu.DBViewer.utils.io;
 
 namespace AAEmu.DBViewer
 {
@@ -467,14 +470,14 @@ namespace AAEmu.DBViewer
             AddMiniMapRef(MapLevel.City, 252, 100, "w_lilyut_meadow_west_ronbann_mine", 112, 52, 0, 0, 680, 436);
 
             // Read .g file data for roads
-            if ((MainForm.ThisForm.Pak != null) && MainForm.ThisForm.Pak.IsOpen)
+            if (ClientFileManager.HasValidSources())
             {
                 foreach (var zg in AaDb.DbZoneGroups)
                 {
                     var refs = MapViewMiniMapRef.ListPossibleFileNames(zg.Value.Name, 100, Properties.Settings.Default.DefaultGameLanguage, ".g");
                     foreach (var r in refs)
-                        if (MainForm.ThisForm.Pak.FileExists(r))
-                            LoadGFileFromPak(MainForm.ThisForm.Pak, r);
+                        if (ClientFileManager.HasValidSources())
+                            LoadGFileFromPak(r);
                 }
             }
             // Override refs if needed
@@ -515,13 +518,13 @@ namespace AAEmu.DBViewer
             return 0;
         }
 
-        public static void LoadGFileFromPak(AAPak pak, string fileName)
+        public static void LoadGFileFromPak(string fileName)
         {
-            if ((pak == null) || (!pak.IsOpen) || !pak.FileExists(fileName))
+            if (!ClientFileManager.FileExists(fileName))
                 return;
 
             var lines = new List<string>();
-            using (var fs = pak.ExportFileAsStream(fileName))
+            using (var fs = ClientFileManager.GetFileStream(fileName))
             {
                 using (var sr = new StreamReader(fs))
                 {
@@ -652,14 +655,14 @@ namespace AAEmu.DBViewer
         public static List<string> ListPossibleFileNames(string baseFileName, int scale, string locale, string ext = ".dds")
         {
             var res = new List<string>();
-            // List possible files in order of prefered
+            // List possible files in order of preferred
             // Version 1.2
             res.Add("game/ui/map/road/" + locale + "/" + baseFileName + "_road_" + scale.ToString() + ext);
             res.Add("game/ui/map/road/" + baseFileName + "_road_" + scale.ToString() + ext);
             // starting from Version ?.?
             res.Add("game/ui/map/map_resources/" + baseFileName + "/" + locale + "/road_" + scale.ToString() + ext);
             res.Add("game/ui/map/map_resources/" + baseFileName + "/road_" + scale.ToString() + ext);
-            // The following is to capture a error from XLGames on some maps like sanddeep
+            // The following is to capture an error from XLGames on some maps like Sanddeep
             res.Add("game/ui/map/road/" + locale + "/" + baseFileName + "_" + scale.ToString() + ext);
             res.Add("game/ui/map/road/" + baseFileName + "_" + scale.ToString() + ext);
             return res;
@@ -774,6 +777,7 @@ namespace AAEmu.DBViewer
         public string Name = string.Empty;
         public string InstanceName = string.Empty;
         public string MapImageFile = string.Empty;
+        public string BaseFileName = string.Empty;
         public Bitmap MapBitmapImage = null;
 
         public string RoadImageFile = string.Empty;
@@ -782,6 +786,171 @@ namespace AAEmu.DBViewer
         public Bitmap RoadBitmapImage = null;
 
         public long ZoneGroup = 0;
+
+        // Lazily built copy of MapBitmapImage with everything outside the owned zone
+        // sectors made transparent; null when no territory data applies to this map
+        public Bitmap TerritoryClippedImage = null;
+        public bool TerritoryClipResolved = false;
+        public Bitmap TerritoryClippedRoadImage = null;
+        public bool TerritoryRoadClipResolved = false;
+    }
+
+    /// <summary>
+    /// Clips map images to the world-surface territory they own. Every map texture fills its
+    /// whole camera rectangle with decorative padding, so overlaid zone maps normally cover
+    /// (and sometimes completely hide) their neighbors; masking the pixels whose 64m world
+    /// sector belongs to another zone group makes the maps tile exactly along zone borders.
+    /// </summary>
+    public static class MapViewTerritoryClip
+    {
+        // Continent map base file name => zone name prefix inside main_world's world.xml
+        private static readonly Dictionary<string, string> ContinentZonePrefixes = new Dictionary<string, string>()
+        {
+            { "land_west", "w_" },
+            { "land_east", "e_" },
+            { "land_origin", "o_" },
+            { "land_garden", "g_" },
+        };
+
+        public static Bitmap GetImageForDraw(MapViewMap map)
+        {
+            if (map.MapBitmapImage == null)
+                return null;
+
+            if (!map.TerritoryClipResolved)
+            {
+                // The worlds XML data may not be loaded yet; retry on a later paint
+                if (MapViewWorldXML.instances.Count <= 0)
+                    return map.MapBitmapImage;
+
+                map.TerritoryClipResolved = true;
+                try
+                {
+                    var sectors = CollectOwnedSectors(map);
+                    if ((sectors != null) && (sectors.Count > 0))
+                        map.TerritoryClippedImage = BuildClippedBitmap(map.MapBitmapImage, map.ZoneCoords, sectors);
+                }
+                catch
+                {
+                    map.TerritoryClippedImage = null;
+                }
+            }
+
+            return map.TerritoryClippedImage ?? map.MapBitmapImage;
+        }
+
+        public static Bitmap GetRoadImageForDraw(MapViewMap map)
+        {
+            if (map.RoadBitmapImage == null)
+                return null;
+
+            // Only the newer full-canvas road overlays share the zone rectangle mapping;
+            // legacy sub-rect overlays keep their original image
+            if ((map.MapBitmapImage == null) ||
+                (map.RoadBitmapImage.Width != map.MapBitmapImage.Width) ||
+                (map.RoadBitmapImage.Height != map.MapBitmapImage.Height))
+                return map.RoadBitmapImage;
+
+            if (!map.TerritoryRoadClipResolved)
+            {
+                if (MapViewWorldXML.instances.Count <= 0)
+                    return map.RoadBitmapImage;
+
+                map.TerritoryRoadClipResolved = true;
+                try
+                {
+                    var sectors = CollectOwnedSectors(map);
+                    if ((sectors != null) && (sectors.Count > 0))
+                        map.TerritoryClippedRoadImage = BuildClippedBitmap(map.RoadBitmapImage, map.ZoneCoords, sectors);
+                }
+                catch
+                {
+                    map.TerritoryClippedRoadImage = null;
+                }
+            }
+
+            return map.TerritoryClippedRoadImage ?? map.RoadBitmapImage;
+        }
+
+        private static HashSet<(int x, int y)> CollectOwnedSectors(MapViewMap map)
+        {
+            if (map.MapLevel == MapLevel.Continent)
+            {
+                if (!ContinentZonePrefixes.TryGetValue(map.BaseFileName, out var prefix))
+                    return null;
+                return CollectSectors(
+                    MapViewWorldXML.main_world,
+                    zoneInfo => zoneInfo.name.StartsWith(prefix, StringComparison.Ordinal));
+            }
+
+            if ((map.MapLevel < MapLevel.Zone) || (map.ZoneGroup <= 0))
+                return null;
+
+            // Only maps whose zones live on the main world surface can be clipped; instanced
+            // dungeon maps use their own coordinate space and keep the full image
+            var inst = MapViewWorldXML.FindInstanceByZoneGroup(map.ZoneGroup);
+            if ((inst == null) || (inst != MapViewWorldXML.main_world))
+                return null;
+
+            return CollectSectors(
+                inst,
+                zoneInfo => AaDb.GetZoneByKey(zoneInfo.zone_key)?.GroupId == map.ZoneGroup);
+        }
+
+        private static HashSet<(int x, int y)> CollectSectors(
+            MapViewWorldXML world,
+            Func<MapViewWorldXMLZoneInfo, bool> ownsZone)
+        {
+            if (world == null)
+                return null;
+
+            var sectors = new HashSet<(int x, int y)>();
+            foreach (var zoneInfo in world.zones.Values)
+            {
+                if (!ownsZone(zoneInfo))
+                    continue;
+
+                sectors.UnionWith(zoneInfo.GetAbsoluteSectors());
+            }
+
+            return sectors;
+        }
+
+        private static Bitmap BuildClippedBitmap(Bitmap source, RectangleF zoneCoords, HashSet<(int x, int y)> sectors)
+        {
+            const float sectorSize = 64f;
+            var clipped = new Bitmap(source.Width, source.Height, PixelFormat.Format32bppArgb);
+            using (var g = Graphics.FromImage(clipped))
+                g.DrawImage(source, new Rectangle(0, 0, clipped.Width, clipped.Height));
+
+            var data = clipped.LockBits(
+                new Rectangle(0, 0, clipped.Width, clipped.Height),
+                ImageLockMode.ReadWrite,
+                PixelFormat.Format32bppArgb);
+            var bytes = new byte[Math.Abs(data.Stride) * clipped.Height];
+            Marshal.Copy(data.Scan0, bytes, 0, bytes.Length);
+
+            // The image stretches exactly onto the zone group's world rectangle, so pixels
+            // map linearly onto world sectors; world Y points north while rows go top-down
+            var sectorXByColumn = new int[clipped.Width];
+            for (var x = 0; x < clipped.Width; x++)
+                sectorXByColumn[x] = (int)Math.Floor((zoneCoords.X + ((x + 0.5f) / clipped.Width * zoneCoords.Width)) / sectorSize);
+
+            for (var y = 0; y < clipped.Height; y++)
+            {
+                var sectorY = (int)Math.Floor((zoneCoords.Y + zoneCoords.Height - ((y + 0.5f) / clipped.Height * zoneCoords.Height)) / sectorSize);
+                var rowOffset = y * data.Stride;
+                for (var x = 0; x < clipped.Width; x++)
+                {
+                    if (!sectors.Contains((sectorXByColumn[x], sectorY)))
+                        bytes[rowOffset + (x * 4) + 3] = 0;
+                }
+            }
+
+            Marshal.Copy(bytes, 0, data.Scan0, bytes.Length);
+            clipped.UnlockBits(data);
+            return clipped;
+        }
     }
 
     public class MapViewPath
@@ -914,6 +1083,7 @@ namespace AAEmu.DBViewer
         public int Y = 0;
         public Rectangle bounds = new Rectangle();
         public long zone_key = 0;
+        public List<(int, int)> SectorList = [];
     }
 
     public class MapViewWorldXMLZoneInfo
@@ -923,12 +1093,147 @@ namespace AAEmu.DBViewer
         public int originCellX = 0;
         public int originCellY = 0;
         public List<MapViewWorldXMLZoneCellInfo> Cells = new List<MapViewWorldXMLZoneCellInfo>();
+
+        // Lazily built lookup caches: the absolute 64m sector set gives O(1) membership tests,
+        // the outline loops replace per-frame edge scans, and the world bounds enable culling
+        private HashSet<(int x, int y)> absoluteSectors = null;
+        public Rectangle WorldBounds { get; private set; } = Rectangle.Empty;
+        public List<Point[]> OutlineLoops { get; private set; } = new List<Point[]>();
+
         public MapViewWorldXMLZoneCellInfo FindCell(int coordX, int coordY)
         {
             foreach (var cell in Cells)
                 if (cell.bounds.Contains(coordX, coordY))
                     return cell;
             return null;
+        }
+
+        public HashSet<(int x, int y)> GetAbsoluteSectors()
+        {
+            EnsureSectorCache();
+            return absoluteSectors;
+        }
+
+        public void EnsureSectorCache()
+        {
+            if (absoluteSectors != null)
+                return;
+
+            var sectors = new HashSet<(int x, int y)>();
+            var minX = int.MaxValue;
+            var minY = int.MaxValue;
+            var maxX = int.MinValue;
+            var maxY = int.MinValue;
+            foreach (var cell in Cells)
+            {
+                foreach (var (sectorX, sectorY) in cell.SectorList)
+                {
+                    var absX = (cell.X * 16) + sectorX;
+                    var absY = (cell.Y * 16) + sectorY;
+                    sectors.Add((absX, absY));
+                    if (absX < minX) minX = absX;
+                    if (absY < minY) minY = absY;
+                    if (absX > maxX) maxX = absX;
+                    if (absY > maxY) maxY = absY;
+                }
+            }
+
+            absoluteSectors = sectors;
+            WorldBounds = sectors.Count <= 0
+                ? Rectangle.Empty
+                : Rectangle.FromLTRB(minX * 64, minY * 64, (maxX + 1) * 64, (maxY + 1) * 64);
+            OutlineLoops = ZoneOutlineTracer.BuildLoops(sectors, 64);
+        }
+
+        public bool SectorExists(int cellX, int cellY, int sectorX, int sectorY)
+        {
+            EnsureSectorCache();
+            return absoluteSectors.Contains(((cellX * 16) + sectorX, (cellY * 16) + sectorY));
+        }
+
+        public bool Contains(Point cursorCoords)
+        {
+            EnsureSectorCache();
+            if (!WorldBounds.Contains(cursorCoords))
+                return false;
+            return absoluteSectors.Contains((cursorCoords.X / 64, cursorCoords.Y / 64));
+        }
+    }
+
+    /// <summary>
+    /// Traces the boundary of a sector set into closed polygons: edges are emitted only where the
+    /// neighboring sector is missing, chained into loops and merged while collinear. The result is
+    /// cached per zone so painting no longer rescans every sector on every frame.
+    /// </summary>
+    public static class ZoneOutlineTracer
+    {
+        public static List<Point[]> BuildLoops(HashSet<(int x, int y)> sectors, int scale)
+        {
+            var outgoing = new Dictionary<(int x, int y), Stack<(int x, int y)>>();
+            void AddEdge((int x, int y) from, (int x, int y) to)
+            {
+                if (!outgoing.TryGetValue(from, out var targets))
+                    outgoing[from] = targets = new Stack<(int x, int y)>();
+                targets.Push(to);
+            }
+
+            foreach (var s in sectors)
+            {
+                if (!sectors.Contains((s.x, s.y - 1)))
+                    AddEdge((s.x, s.y), (s.x + 1, s.y));
+                if (!sectors.Contains((s.x + 1, s.y)))
+                    AddEdge((s.x + 1, s.y), (s.x + 1, s.y + 1));
+                if (!sectors.Contains((s.x, s.y + 1)))
+                    AddEdge((s.x + 1, s.y + 1), (s.x, s.y + 1));
+                if (!sectors.Contains((s.x - 1, s.y)))
+                    AddEdge((s.x, s.y + 1), (s.x, s.y));
+            }
+
+            var loops = new List<Point[]>();
+            while (outgoing.Count > 0)
+            {
+                var start = outgoing.Keys.First();
+                var loop = new List<(int x, int y)> { start };
+                var current = start;
+                while (true)
+                {
+                    var targets = outgoing[current];
+                    var next = targets.Pop();
+                    if (targets.Count <= 0)
+                        outgoing.Remove(current);
+                    if (next == start)
+                        break;
+                    loop.Add(next);
+                    current = next;
+                }
+
+                loops.Add(MergeCollinear(loop, scale));
+            }
+
+            return loops;
+        }
+
+        private static Point[] MergeCollinear(List<(int x, int y)> loop, int scale)
+        {
+            var merged = new List<Point>(loop.Count);
+            for (var i = 0; i < loop.Count; i++)
+            {
+                var prev = loop[(i + loop.Count - 1) % loop.Count];
+                var cur = loop[i];
+                var next = loop[(i + 1) % loop.Count];
+                var inDir = (Math.Sign(cur.x - prev.x), Math.Sign(cur.y - prev.y));
+                var outDir = (Math.Sign(next.x - cur.x), Math.Sign(next.y - cur.y));
+                if (inDir != outDir)
+                    merged.Add(new Point(cur.x * scale, cur.y * scale));
+            }
+
+            if (merged.Count >= 3)
+                return merged.ToArray();
+
+            var full = new Point[loop.Count];
+            for (var i = 0; i < loop.Count; i++)
+                full[i] = new Point(loop[i].x * scale, loop[i].y * scale);
+            return full;
         }
     }
 }

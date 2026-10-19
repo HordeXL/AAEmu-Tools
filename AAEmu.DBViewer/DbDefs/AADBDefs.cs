@@ -1,4 +1,5 @@
 ﻿using AAEmu.DBViewer.enums;
+using AAEmu.Game.Models.Game.Achievement.Enums;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -241,12 +242,14 @@ public class GameSkills
     public long CustomGcd = 0;
     public long EffectDelay = 0;
     public long AbilityId = 0;
+    public long AbilityLevel = 0;
     public long ManaCost = 0;
     public long TimingId = 0;
     public long ConsumeLp = 0;
     public bool FirstReagentOnly = false;
     public long PlotId = 0;
     public bool OrUnitReqs = false;
+    public long CrimePoint = 0;
 
     // Helpers
     public string NameLocalized = string.Empty;
@@ -747,6 +750,15 @@ public class GameBuff
     public string SearchString = string.Empty;
 }
 
+public class GameBuffEffects
+{
+    public long Id = 0;
+    public long BuffId = 0;
+    public long Chance = 0;
+    public long Stack = 0;
+    public long AbLevel = 0;
+}
+
 public class GameBuffTrigger
 {
     public long Id = 0;
@@ -1215,7 +1227,15 @@ public class GameGameSchedules
 
     public override string ToString()
     {
-        return $"{Id:000} : {AaDb.GetTranslationById(Id, "game_schedules", "name", Name)}";
+        var name = AaDb.GetTranslationById(Id, "game_schedules", "name", Name);
+        if (string.IsNullOrWhiteSpace(name) || name == $"ID{Id}")
+        {
+            var dow = DayOfWeekId.ToString();
+            var start = $"{StartTime:00}:{StartTimeMin:00}";
+            var end = $"{EndTime:00}:{EndTimeMin:00}";
+            name = $"{dow} {start}-{end}";
+        }
+        return $"{Id:000} : {name}";
     }
 }
 
@@ -1299,6 +1319,34 @@ public class GameTowerDefProgKillTargets
     public long KillCount = 0;
 }
 
+public class GameAccountAttendanceReward
+{
+    public long Id = 0;
+    public bool AdditionalReward = false;
+    public string Comment = string.Empty;
+    public long DayCount = 0;
+    public long ItemCount = 0;
+    public long ItemGradeId = 0;
+    public long ItemId = 0;
+    public long Month = 0;
+    public long Year = 0;
+
+    public override string ToString()
+    {
+        var itemName = AaDb.DbItems.TryGetValue(ItemId, out var item) ? item.NameLocalized : $"Item {ItemId}";
+        //var addMark = AdditionalReward ? " [+]" : "";
+        //return $"{Year:0000}-{Month:00} Day {DayCount:00}{addMark} : {itemName} x{ItemCount}";
+        return AdditionalReward ? $"{DayCount} Days : {itemName} x{ItemCount}" : $"{Year:0000}-{Month:00} Day {DayCount:00} : {itemName} x{ItemCount}";
+    }
+    public string ToItemLessString()
+    {
+        var itemName = AaDb.DbItems.TryGetValue(ItemId, out var item) ? item.NameLocalized : $"Item {ItemId}";
+        //var addMark = AdditionalReward ? " [+]" : "";
+        //return $"{Year:0000}-{Month:00} Day {DayCount:00}{addMark} : {itemName} x{ItemCount}";
+        return AdditionalReward ? $"{DayCount} Days" : $"{Year:0000}-{Month:00} Day {DayCount:00}";
+    }
+}
+
 public class GameConflictZones
 {
     public long ZoneGroupId = 0;
@@ -1374,6 +1422,16 @@ public class GameUnitModifiers
     public long UnitModifierTypeId = 0;
     public long Value = 0;
     public long LinearLevelBonus = 0;
+}
+
+public class GameDynamicUnitModifiers
+{
+    public long Id = 0;
+    public long BuffId = 0;
+    public UnitAttribute UnitAttributeId = 0;
+    public long UnitModifierTypeId = 0;
+    public long FuncId = 0;
+    public string FuncType = string.Empty;
 }
 
 public class GameAchievements
@@ -1480,6 +1538,36 @@ public class GameTotalCharacterCustoms
     public string Name = string.Empty;
 }
 
+public class GameCharRecords
+{
+    public long Id { get; set; }
+    public CharRecordKind KindId { get; set; }
+    public long Value1 { get; set; }
+    public long Value2 { get; set; }
+}
+
+public class GameNpcMountSkills
+{
+    public long Id { get; set; }
+    public long NpcId { get; set; }
+    public long MountSkillId { get; set; }
+}
+
+public class GameItemSummonMate
+{
+    public long Id { get; set; }
+    public long ItemId { get; set; }
+    public long NpcId { get; set; }
+
+}
+
+public class GameItemSummonSlave
+{
+    public long Id { get; set; }
+    public long ItemId { get; set; }
+    public long SlaveId { get; set; }
+}
+
 internal static class AaDb
 {
     public static Dictionary<string, GameTranslation> DbTranslations = new();
@@ -1493,7 +1581,7 @@ internal static class AaDb
     public static Dictionary<long, GameNpSkills> DbNpSkills = new();
     public static Dictionary<long, GameMountSkill> DbMountSkills = new();
     public static Dictionary<long, GameSlaveMountSkill> DbSlaveMountSkills = new();
-    public static Dictionary<long, GameNpc> DbNpCs = new();
+    public static Dictionary<long, GameNpc> DbNpcs = new();
     public static Dictionary<long, GameQuestMonsterGroups> DbQuestMonsterGroups = new();
     public static Dictionary<long, GameQuestMonsterNpcs> DbQuestMonsterNpcs = new();
     public static Dictionary<long, string> DbIcons = new();
@@ -1524,6 +1612,7 @@ internal static class AaDb
     public static Dictionary<long, GameTaggedValues> DbTaggedSkills = new();
     public static Dictionary<long, GameZoneGroupBannedTags> DbZoneGroupBannedTags = new();
     public static Dictionary<long, GameBuff> DbBuffs = new();
+    public static Dictionary<long, GameBuffEffects> DbBuffEffects = new();
     public static Dictionary<long, GameBuffTrigger> DbBuffTriggers = new();
     public static Dictionary<long, GameBuffModifier> DbBuffModifiers = new();
     public static Dictionary<long, GamePassiveBuff> DbPassiveBuffs = new();
@@ -1563,19 +1652,26 @@ internal static class AaDb
     public static Dictionary<long, GameTowerDefProgs> DbTowerDefProgs = new();
     public static Dictionary<long, GameTowerDefProgSpawnTargets> DbTowerDefProgSpawnTargets = new();
     public static Dictionary<long, GameTowerDefProgKillTargets> DbTowerDefProgKillTargets = new();
+    public static Dictionary<long, GameAccountAttendanceReward> DbAccountAttendanceRewards = new();
     public static Dictionary<long, GameSpheres> DbSpheres = new();
     public static Dictionary<long, GameUnitReqs> DbUnitReqs = new();
     public static Dictionary<long, GameUiTexts> DbUiTexts = new();
     public static Dictionary<long, GameUnitModifiers> DbUnitModifiers = new();
+    public static Dictionary<long, GameDynamicUnitModifiers> DbDynamicUnitModifiers = new();
     public static Dictionary<long, GameAchievements> DbAchievements = new();
     public static Dictionary<long, GameAchievementObjectives> DbAchievementObjectives = new();
+    public static Dictionary<long, GameCharRecords> DbCharRecords = new();
     public static Dictionary<long, GameItemGrades> DbItemGrades = new();
     public static Dictionary<long, GameItemGradeDistributions> DbItemGradeDistributions = new();
     public static Dictionary<long, GameMerchants> DbMerchants = new();
     public static Dictionary<long, GameMerchantGoods> DbMerchantGoods = new();
     public static Dictionary<long, GameMerchantPacks> DbMerchantPacks = new();
     public static Dictionary<long, GameTotalCharacterCustoms> DbTotalCharacterCustoms = new();
-
+    public static Dictionary<long, string> DbEnumContentConfigs = new();
+    public static Dictionary<ContentConfig, long> DbContentConfigs = new();
+    public static Dictionary<long, GameNpcMountSkills> DbNpcMountSkills = new();
+    public static Dictionary<long, GameItemSummonMate> DbItemSummonMates = new();
+    public static Dictionary<long, GameItemSummonSlave> DbItemSummonSlaves = new();
     public static Dictionary<long, Dictionary<long, Dictionary<long, GameAchievements>>> CompiledGroupedAchievements = new();
 
     public static void Clear()
@@ -1591,7 +1687,7 @@ internal static class AaDb
         DbNpSkills.Clear();
         DbMountSkills.Clear();
         DbSlaveMountSkills.Clear();
-        DbNpCs.Clear();
+        DbNpcs.Clear();
         DbQuestMonsterGroups.Clear();
         DbQuestMonsterNpcs.Clear();
         DbIcons.Clear();
@@ -1622,6 +1718,7 @@ internal static class AaDb
         DbTaggedSkills.Clear();
         DbZoneGroupBannedTags.Clear();
         DbBuffs.Clear();
+        DbBuffEffects.Clear();
         DbBuffTriggers.Clear();
         DbBuffModifiers.Clear();
         DbPassiveBuffs.Clear();
@@ -1661,12 +1758,15 @@ internal static class AaDb
         DbTowerDefProgs.Clear();
         DbTowerDefProgSpawnTargets.Clear();
         DbTowerDefProgKillTargets.Clear();
+        DbAccountAttendanceRewards.Clear();
         DbSpheres.Clear();
         DbUnitReqs.Clear();
         DbUiTexts.Clear();
         DbUnitModifiers.Clear();
+        DbDynamicUnitModifiers.Clear();
         DbAchievements.Clear();
         DbAchievementObjectives.Clear();
+        DbCharRecords.Clear();
         DbItemGrades.Clear();
         DbItemGradeDistributions.Clear();
         DbMerchants.Clear();
@@ -1674,6 +1774,11 @@ internal static class AaDb
         DbMerchantPacks.Clear();
         GameMerchantPacks.MerchantPackTypes.Clear();
         DbTotalCharacterCustoms.Clear();
+        DbEnumContentConfigs.Clear();
+        DbContentConfigs.Clear();
+        DbNpcMountSkills.Clear();
+        DbItemSummonMates.Clear();
+        DbItemSummonSlaves.Clear();
 
         CompiledGroupedAchievements.Clear();
     }

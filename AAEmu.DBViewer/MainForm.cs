@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -13,13 +12,12 @@ using AAEmu.ClipboardHelper;
 using AAEmu.DBViewer.utils;
 using System.Runtime;
 using AAEmu.DBViewer.enums;
-using System.Security.Cryptography;
 using Newtonsoft.Json;
 using AAEmu.DBViewer.DbDefs;
 using System.Globalization;
 using AAEmu.Commons.Utils;
-using Newtonsoft.Json.Linq;
 using System.ComponentModel;
+using AAEmu.DBViewer.utils.io;
 
 namespace AAEmu.DBViewer
 {
@@ -28,7 +26,7 @@ namespace AAEmu.DBViewer
         public static MainForm ThisForm { get; set; }
         private string DefaultTitle { get; set; } = string.Empty;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public AAPak Pak { get; set; } = new("");
+        // public AAPak Pak { get; set; } = new("");
         private List<string> PossibleLanguageIDs { get; set; } = [];
         // TableName, SqliteFileName
         private Dictionary<string, string> AllTableNames { get; set; } = new();
@@ -88,37 +86,6 @@ namespace AAEmu.DBViewer
             }
         }
 
-        private void TryLoadPakKeys(string fileName)
-        {
-            try
-            {
-                var keyFile = fileName + ".key";
-                if (File.Exists(keyFile))
-                {
-                    var customKey = new byte[16];
-                    using (var fs = new FileStream(keyFile, FileMode.Open, FileAccess.Read))
-                    {
-                        if (fs.Length != 16)
-                        {
-                            fs.Dispose();
-                            return;
-                        }
-
-                        fs.Read(customKey, 0, 16);
-                    }
-
-                    Pak.SetCustomKey(customKey);
-                }
-                else
-                    Pak.SetDefaultKey();
-            }
-            catch
-            {
-                // Reset key
-                Pak.SetDefaultKey();
-            }
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             MMVersion.Text = $"Version {Assembly.GetExecutingAssembly().GetName().Version}";
@@ -168,7 +135,7 @@ namespace AAEmu.DBViewer
 
 
             var gamePakFileName = Properties.Settings.Default.GamePakFileName;
-            if (File.Exists(gamePakFileName))
+            if (File.Exists(gamePakFileName) || Directory.Exists(gamePakFileName))
             {
                 using var loading = new LoadingForm();
                 loading.Text = $@"Loading: {Path.GetFileName(gamePakFileName)}";
@@ -177,7 +144,9 @@ namespace AAEmu.DBViewer
 
                 // TryLoadPakKeys(gamePakFileName);
 
-                if (Pak.OpenPak(gamePakFileName, true))
+                ClientFileManager.Initialize([gamePakFileName]);
+                // TODO: Need to adjust this to a better game pak validation system
+                if (ClientFileManager.HasValidSources())
                 {
                     Properties.Settings.Default.GamePakFileName = gamePakFileName;
                     lCurrentPakFile.Text = Properties.Settings.Default.GamePakFileName;
@@ -218,8 +187,7 @@ namespace AAEmu.DBViewer
             if (MapViewForm.ThisForm != null)
                 MapViewForm.ThisForm.Close();
 
-            if (Pak != null)
-                Pak.ClosePak();
+            ClientFileManager.ClearSources();
         }
 
         public IEnumerable<Control> GetAll(Control control, Type type)
@@ -437,7 +405,7 @@ namespace AAEmu.DBViewer
                                 rt.AppendText(item.NameLocalized);
                             }
                             else if ((fieldNameStr == "NPC_NAME") &&
-                                     (AaDb.DbNpCs.TryGetValue(itemVal, out GameNpc npc)))
+                                     (AaDb.DbNpcs.TryGetValue(itemVal, out GameNpc npc)))
                             {
                                 rt.AppendText(npc.NameLocalized);
                             }
@@ -607,7 +575,7 @@ namespace AAEmu.DBViewer
                 {
                     rt.SelectionColor = Color.Yellow;
                     var valueText = restText.Substring(10, nextEndBracket - 10);
-                    if (long.TryParse(valueText, out var value) && (AaDb.DbNpCs.TryGetValue(value, out var npc)))
+                    if (long.TryParse(valueText, out var value) && (AaDb.DbNpcs.TryGetValue(value, out var npc)))
                         rt.AppendText(npc.NameLocalized);
                     else
                         rt.AppendText("@NPC_NAME(" + valueText + ")");
@@ -804,8 +772,8 @@ namespace AAEmu.DBViewer
                 if (!string.IsNullOrWhiteSpace(titleSqliteFiles))
                     titleSqliteFiles += " + ";
                 else
-                if (directories.Count == 1)
-                    titleSqliteFiles += directories[0] + Path.DirectorySeparatorChar;
+                    if (directories.Count == 1)
+                        titleSqliteFiles += directories[0] + Path.DirectorySeparatorChar;
                 titleSqliteFiles += (directories.Count == 1) ? Path.GetFileName(sqliteFile) : sqliteFile;
             }
 
@@ -900,6 +868,9 @@ namespace AAEmu.DBViewer
                 loading.ShowInfo("Loading: Icon info");
                 LoadIcons();
 
+                loading.ShowInfo("Loading: Game Configurations");
+                LoadConfigs();
+
                 loading.ShowInfo("Loading: Factions");
                 LoadFactions();
 
@@ -935,6 +906,7 @@ namespace AAEmu.DBViewer
                 LoadSkillProducts();
                 LoadUnitReqs();
                 LoadUnitMods();
+                LoadDynamicUnitMods();
 
                 loading.ShowInfo("Loading: Models");
                 LoadModels();
@@ -978,43 +950,51 @@ namespace AAEmu.DBViewer
 
         private void BtnFindGameClient_Click(object sender, EventArgs e)
         {
-            _ = DoFindGameClient(true);
+            _ = DoFindGameClient(true, false);
         }
 
-        private bool DoFindGameClient(bool forceDialog)
+        private bool DoFindGameClient(bool forceDialog, bool openFolderDialog)
         {
             var openFileName = Properties.Settings.Default.GamePakFileName;
             if (forceDialog)
             {
-                if (openGamePakFileDialog.ShowDialog() != DialogResult.OK)
+                if (openFolderDialog)
                 {
-                    return false;
+                    if (openFolderDlg.ShowDialog() != DialogResult.OK)
+                    {
+                        return false;
+                    }
+                    openFileName = openFolderDlg.SelectedPath;
+                    if (File.Exists(Path.Combine(openFileName, "game_pak")))
+                    {
+                        if (MessageBox.Show(
+                                $"The folder contains a game_pak file.\nDo you want to use the game_pak directly instead of the folder?\nFolder: {openFileName}",
+                                "Use found game_pak?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        {
+                            openFileName = Path.Combine(openFileName, "game_pak");
+                        }
+                    }
                 }
-
-                openFileName = openGamePakFileDialog.FileName;
+                else
+                {
+                    if (openGamePakFileDialog.ShowDialog() != DialogResult.OK)
+                    {
+                        return false;
+                    }
+                    openFileName = openGamePakFileDialog.FileName;
+                }
             }
 
-            if (!File.Exists(openFileName))
+            if (!File.Exists(openFileName) && !Directory.Exists(openFileName))
                 return false;
 
             using var loading = new LoadingForm();
             loading.Show();
-            if (Pak.IsOpen)
-            {
-                loading.ShowInfo("Closing: " + Pak.GpFilePath);
-                Pak.ClosePak();
-                // LoadCustomReaders();
-
-                // TODO: HACK to try and free up as many memory as possible - https://stackoverflow.com/questions/30622145/free-memory-of-byte
-                GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
-                GC.Collect();
-            }
-
             loading.ShowInfo("Opening: " + Path.GetFileName(openFileName));
 
-            // TryLoadPakKeys(openFileName);
+            ClientFileManager.Initialize([openFileName]);
 
-            if (Pak.OpenPak(openFileName, true))
+            if (ClientFileManager.HasValidSources())
             {
                 Properties.Settings.Default.GamePakFileName = openFileName;
                 lCurrentPakFile.Text = Properties.Settings.Default.GamePakFileName;
@@ -1028,7 +1008,8 @@ namespace AAEmu.DBViewer
             }
             else
             {
-                MessageBox.Show($"Failed to load: {openFileName}\n{Pak.LastError}");
+                MessageBox.Show($@"Failed to load: {openFileName}");
+                ClientFileManager.ClearSources();
                 return false;
             }
 
@@ -1532,6 +1513,20 @@ namespace AAEmu.DBViewer
                 res.targetSearchButton = btnSkillSearch;
                 res.ForeColor = Color.WhiteSmoke;
                 nodeText += " - " + skill.NameLocalized;
+                if (skill.AbilityLevel > 1 || skill.AbilityId > 0)
+                {
+                    nodeText += " ( ";
+                    if (skill.AbilityId > 0)
+                    {
+                        nodeText += AaDb.GetTranslationById(skill.AbilityId, "abilities", "name", "Abi" + skill.AbilityId.ToString()) + " ";
+                    }
+                    if (skill.AbilityLevel > 0)
+                    {
+                        nodeText += "Lv " + skill.AbilityLevel + " ";
+                    }
+                    nodeText += ")";
+                }
+
                 setCustomIcon = IconIdToLabel(skill.IconId, null);
             }
             else if (key.EndsWith("item_id") && (AaDb.DbItems.TryGetValue(val, out var item)))
@@ -1555,7 +1550,7 @@ namespace AAEmu.DBViewer
                 res.ForeColor = Color.WhiteSmoke;
                 nodeText += " - " + doodad.NameLocalized;
             }
-            else if (key.EndsWith("npc_id") && (AaDb.DbNpCs.TryGetValue(val, out var npc)))
+            else if (key.EndsWith("npc_id") && (AaDb.DbNpcs.TryGetValue(val, out var npc)))
             {
                 res.targetTabPage = tpNPCs;
                 res.targetSearchBox = cbSearchNPC;
@@ -1757,6 +1752,17 @@ namespace AAEmu.DBViewer
                     if (npcSpawnerNpc.MemberType == "NpcGroup")
                         AddCustomPropertyNode("npc_group_id", npcSpawnerNpc.MemberId.ToString(), false, spawnNode);
                 }
+
+                /*
+                foreach (var gList in AAXmlDefs.NpcSpawnersByZoneKey.Values)
+                {
+                    var gSpawns = gList.Where(g => g.Type == val);
+                    foreach (var npcSpawnerGFileData in gSpawns)
+                    {
+                        spawnNode.Nodes.Add($"Has g file data ID: {npcSpawnerGFileData.Id} - Pos: {npcSpawnerGFileData.Points.FirstOrDefault()}");
+                    }
+                }
+                */
 
                 return spawnNode;
             }
@@ -3053,7 +3059,7 @@ namespace AAEmu.DBViewer
 
             bool failed = !LoadServerDB(false);
 
-            if (!failed && !DoFindGameClient(false))
+            if (!failed && !DoFindGameClient(false, false))
                 failed = true;
 
             if (failed)
@@ -3063,7 +3069,7 @@ namespace AAEmu.DBViewer
                 Properties.Settings.Default.GamePakFileName = oldGamePakFile;
                 Properties.Settings.Default.DefaultGameLanguage = oldLocale;
                 LoadServerDB(false);
-                DoFindGameClient(false);
+                DoFindGameClient(false, false);
                 MessageBox.Show($"Failed to load profile {profile.Name}");
                 return false;
             }
@@ -3238,6 +3244,346 @@ namespace AAEmu.DBViewer
                 }
                 clbVendorTypes.Items.Add(vendorTypeName, false);
             }
+        }
+
+        private void tvPopup_Opening(object sender, CancelEventArgs e)
+        {
+            if ((sender is not ContextMenuStrip { SourceControl: TreeView treeView }))
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            tvPopupMenuName.Text = tcViewer.SelectedTab?.Text ?? "???";
+            tvPopupCopyTree.Text = @"Copy TreeView";
+            tvPopupCopyTree.Tag = treeView;
+            tvPopupCopyNode.Text = @"Copy Node";
+            tvPopupCopyNode.Tag = treeView.SelectedNode;
+            tvPopupCopyNode.Enabled = treeView.SelectedNode != null;
+        }
+
+        private void tvPopup_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            if (e.ClickedItem == tvPopupCopyTree && e.ClickedItem is { Tag: TreeView treeView })
+            {
+                CopyToClipBoard($"{tvPopupMenuName.Text}: " + TreeViewToString(treeView.Nodes));
+            }
+            else if (e.ClickedItem == tvPopupCopyNode && e.ClickedItem is { Tag: TreeNode treeNode })
+            {
+                CopyToClipBoard(treeNode.Text);
+            }
+        }
+
+        private void DoAttendanceSelectedIndexChanged()
+        {
+            if (lbAttendance.SelectedItem is not GameAccountAttendanceReward selectedItem)
+                return;
+
+            tvSchedule.Nodes.Clear();
+
+            var header = selectedItem.AdditionalReward ?
+                $"{selectedItem.Year:0000}-{selectedItem.Month:00} attended {selectedItem.DayCount} days" :
+                $"{selectedItem.Year:0000}-{selectedItem.Month:00} Day {selectedItem.DayCount:00}";
+
+            var rootNode = tvSchedule.Nodes.Add(header);
+            rootNode.ImageIndex = selectedItem.AdditionalReward ? 3 : 2;
+            //if (selectedItem.AdditionalReward)
+            //    rootNode.BackColor = System.Drawing.Color.FromArgb(255, 250, 205); // LightGoldenrodYellow
+
+            rootNode.Nodes.Add($"ID: {selectedItem.Id}");
+            var grade = AaDb.DbItemGrades.GetValueOrDefault(selectedItem.ItemGradeId);
+            var gradeText = $"(Grade: {grade?.NameLocalized ?? ""} {selectedItem.ItemGradeId})";
+            AddCustomPropertyNode("item_id", selectedItem.ItemId.ToString(), false, rootNode).Text += $@" x {selectedItem.ItemCount} {gradeText}";
+            if (!string.IsNullOrWhiteSpace(selectedItem.Comment))
+                rootNode.Nodes.Add($"Comment: {selectedItem.Comment}");
+
+
+
+            rootNode.ExpandAll();
+
+            ShowSelectedData("account_attendance_rewards", "(id = " + selectedItem.Id.ToString() + ")", "id ASC");
+        }
+
+        private void lbAttendance_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DoAttendanceSelectedIndexChanged();
+        }
+
+        private void cbAttendanceFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cb = sender as ComboBox;
+            if (cb == null) return;
+            var filter = cb.SelectedItem?.ToString() ?? "All";
+
+            lbAttendance.Items.Clear();
+            tvSchedule.Nodes.Clear();
+            if (filter == "All")
+                tvSchedule.Nodes.Add("Filter month to show details").ImageIndex = 2;
+            var rootNode = tvSchedule.Nodes.Add($"{filter} daily attendance rewards");
+            var attendNode = tvSchedule.Nodes.Add($"{filter} number of days attended rewards");
+            foreach (var val in AaDb.DbAccountAttendanceRewards.Values
+                         .OrderBy(x => x.Year)
+                         .ThenBy(x => x.Month)
+                         .ThenBy(x => x.DayCount))
+            {
+                if (filter == "All" || $"{val.Year:0000}-{val.Month:00}" == filter)
+                {
+                    lbAttendance.Items.Add(val);
+                    if (filter != "All")
+                    {
+                        var dayNode = AddCustomPropertyNode("item_id", val.ItemId.ToString(), false, val.AdditionalReward ? attendNode : rootNode);
+                        var grade = AaDb.DbItemGrades.GetValueOrDefault(val.ItemGradeId);
+                        var gradeText = $"{grade?.NameLocalized ?? $"Grade {val.ItemGradeId}"}";
+                        dayNode.Text = $@"{val.ToItemLessString()} - {val.ItemCount} x {dayNode.Text} ({gradeText})";
+                    }
+                }
+            }
+            tvSchedule.ExpandAll();
+        }
+
+        private void BtnLoadDoodadsFromPak_Click(object sender, EventArgs e)
+        {
+            var instanceName = cbLoadFromInstanceSelect.Text;
+            var cellsFolder = $"game/worlds/{instanceName}/level_design/cells/";
+            const string doodadG = "/doodad.g";
+            if (!ClientFileManager.HasValidSources())
+                return;
+            var doodadGFiles = ClientFileManager.GetFilesInDirectory("game", "doodad.g", true).Where(f => f.EndsWith(doodadG, StringComparison.InvariantCultureIgnoreCase) && f.StartsWith(cellsFolder, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            if (!doodadGFiles.Any())
+            {
+                MessageBox.Show(@$"Pak does not seem to contain DESIGN doodad data {instanceName}");
+                return;
+            }
+            PrepareWorldXml(false);
+            cbLoadFromInstanceSelect.Text = instanceName;
+            var map = MapViewForm.GetMap();
+            map.Show();
+            map.cbInstanceSelect.Text = instanceName;
+
+            if (map.GetPoICount() > 0 && MessageBox.Show(@"Keep PoI's ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+                map.ClearPoI();
+
+            foreach (var doodadGFile in doodadGFiles)
+            {
+                var cellName = doodadGFile.Replace(cellsFolder, "").Replace(doodadG, "");
+                var cellNameSplit = cellName.Split("_");
+                if (cellNameSplit.Length != 2)
+                    continue;
+                if (!uint.TryParse(cellNameSplit[0], out var cellX) || !uint.TryParse(cellNameSplit[1], out var cellY))
+                    continue;
+                var sl = new List<string>();
+                var thisStream = ClientFileManager.GetFileStream(doodadGFile);
+                using (var rs = new StreamReader(thisStream))
+                {
+                    sl.Clear();
+                    while (!rs.EndOfStream)
+                    {
+                        sl.Add(rs.ReadLine().Trim().ToLower());
+                    }
+                }
+                var currentDoodadId = 0;
+                var currentDoodadCat = 0;
+                var resultList = new List<Tuple<long, Vector3>>();
+                foreach (var line in sl)
+                {
+                    var trimmedLine = line.ToLower().Replace(",", "").TrimStart(' ').TrimStart('\t');
+                    var l = trimmedLine.Split(' ');
+                    if (l.Length == 1 && l[0] == "doodad")
+                    {
+                        currentDoodadId = 0;
+                        currentDoodadCat = 0;
+                        continue;
+                    }
+
+                    if (currentDoodadId == 0 && l.Length == 2 && l[0] == "type")
+                    {
+                        if (!int.TryParse(l[1], out currentDoodadId))
+                            currentDoodadId = 0;
+                        continue;
+                    }
+
+                    if (currentDoodadCat == 0 && l.Length == 2 && l[0] == "category")
+                    {
+                        if (!int.TryParse(l[1], out currentDoodadCat))
+                            currentDoodadCat = 0;
+                        continue;
+                    }
+
+                    if (currentDoodadId != 0 && l.Length == 9 && l[0] == "pos" && l[1] == "(" && l[2] == "x" &&
+                        l[4] == "y" && l[6] == "z" && l[8] == ")")
+                    {
+                        if (
+                            !float.TryParse(l[3], NumberStyles.Any, CultureInfo.InvariantCulture, out var posX) ||
+                             !float.TryParse(l[5], NumberStyles.Any, CultureInfo.InvariantCulture, out var posY) ||
+                              !float.TryParse(l[7], NumberStyles.Any, CultureInfo.InvariantCulture, out var posZ)
+                            )
+                            continue;
+                        posX += (cellX * 1024f);
+                        posY += (cellY * 1024f);
+                        map.AddPoI(posX, posY, posZ, (AaDb.DbDoodadAlmighties.GetValueOrDefault(currentDoodadId)?.NameLocalized ?? "DoodadId: ") + $" ({currentDoodadId})", Color.YellowGreen, 0, "doodad", currentDoodadId, null);
+                        resultList.Add(new Tuple<long, Vector3>(currentDoodadId, new Vector3(posX, posY, posZ)));
+                    }
+                }
+
+                if (resultList.Count > 0 &&
+                    MessageBox.Show($"Do you want to add {resultList.Count} doodads to the doodads search page?",
+                        "Confirmation", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    using (var loading = new LoadingForm())
+                    {
+                        loading.ShowInfo($"Adding {resultList.Count} Doodads");
+                        loading.Show();
+                        dgvDoodads.Hide();
+                        dgvDoodads.Rows.Clear();
+                        var c = 0;
+                        foreach (var tuple in resultList)
+                        {
+
+                            if (AaDb.DbDoodadAlmighties.TryGetValue(tuple.Item1, out var z))
+                            {
+                                var line = dgvDoodads.Rows.Add();
+                                var row = dgvDoodads.Rows[line];
+
+                                row.Cells[0].Value = z.Id.ToString();
+                                row.Cells[1].Value = z.NameLocalized;
+                                row.Cells[2].Value = z.MgmtSpawn.ToString();
+                                row.Cells[3].Value = z.GroupId.ToString();
+                                row.Cells[4].Value = z.Percent.ToString();
+                                row.Cells[5].Value = AaDb.GetFactionName(z.FactionId, true);
+                                row.Cells[6].Value = z.ModelKindId.ToString();
+                                row.Cells[7].Value = z.Model.ToString();
+                                row.Cells[8].Value = $"{tuple.Item2.X} , {tuple.Item2.Y} = ({tuple.Item2.Z})";
+
+                                c++;
+                                if ((c % 25) == 0)
+                                {
+                                    loading.ShowInfo($"Loading {c}/{resultList.Count} Doodads");
+                                }
+                            }
+                        }
+
+                        tcViewer.SelectedTab = tpDoodads;
+                        dgvDoodads.Show();
+                    }
+                }
+            }
+
+            map.FocusAll(true, false, false);
+            map.BringToFront();
+        }
+
+        private void BtnLoadNpcSpawnersFromPak_Click(object sender, EventArgs e)
+        {
+            var instanceName = cbLoadFromInstanceSelect.Text;
+            var zoneFolder = $"game/worlds/{instanceName}/level_design/zone/";
+            // TODO: If zone_server doesn't exist, you can also try to load from editor instead
+            const string npcSpawnersG = "/zone_server/npc_spawners.g";
+            if (!ClientFileManager.HasValidSources())
+                return;
+
+            var npcSpawnersGFiles = ClientFileManager.GetFilesInDirectory("game", "npc_spawners.g", true).Where(f => f.EndsWith(npcSpawnersG, StringComparison.InvariantCultureIgnoreCase) && f.StartsWith(zoneFolder, StringComparison.InvariantCultureIgnoreCase)).ToList();
+            if (!npcSpawnersGFiles.Any())
+            {
+                MessageBox.Show(@$"Pak does not seem to contain DESIGN NpcSpawner data for {instanceName}");
+                return;
+            }
+            PrepareWorldXml(false);
+            cbLoadFromInstanceSelect.Text = instanceName;
+            var map = MapViewForm.GetMap();
+            map.Show();
+            map.cbInstanceSelect.Text = instanceName;
+
+            if ((map.GetPoICount() > 0 || map.GetPathCount() > 0) &&
+                MessageBox.Show(@"Keep PoI's ?", "", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                map.ClearPoI();
+                map.ClearPaths();
+            }
+
+            foreach (var npcSpawnersGFile in npcSpawnersGFiles)
+            {
+                var zoneName = npcSpawnersGFile.Replace(zoneFolder, "").Replace(npcSpawnersG, "");
+                if (!uint.TryParse(zoneName, out var zoneKey))
+                    continue;
+                var sl = new List<string>();
+                var thisStream = ClientFileManager.GetFileStream(npcSpawnersGFile);
+                using (var rs = new StreamReader(thisStream))
+                {
+                    sl.Clear();
+                    while (!rs.EndOfStream)
+                    {
+                        sl.Add(rs.ReadLine().Trim().ToLower());
+                    }
+                }
+
+                var spawnerList = AAXmlDefs.LoadNpcSpawnerData(zoneKey, sl.ToArray(), instanceName);
+
+                foreach (var npcSpawnerGFileData in spawnerList)
+                {
+                    if (npcSpawnerGFileData.AreaType == "point")
+                    {
+                        var pos = npcSpawnerGFileData.Points.FirstOrDefault();
+                        map.AddPoI(pos.X, pos.Y, pos.Z,
+                            $"NpcSpawner: Id {npcSpawnerGFileData.Id}, Type: {npcSpawnerGFileData.Type}", Color.Yellow, 0,
+                            "npcspawner", npcSpawnerGFileData.Id, null);
+
+                    }
+                    if (npcSpawnerGFileData.AreaType == "area")
+                    {
+                        var path = new MapViewPath();
+                        path.PathName = $"NpcSpawner: Id {npcSpawnerGFileData.Id}, Type: {npcSpawnerGFileData.Type}";
+                        path.Color = Color.LightYellow;
+                        path.DrawStyle = 0;
+                        foreach (var currentPoint in npcSpawnerGFileData.Points)
+                        {
+                            path.AddPoint(currentPoint);
+                        }
+                        path.AddPoint(npcSpawnerGFileData.Points.First());
+                        map.AddPath(path);
+                    }
+                }
+            }
+
+            map.FocusAll(true, true, false);
+            map.BringToFront();
+        }
+
+        private void tpGameSettings_Enter(object sender, EventArgs e)
+        {
+            dgvContentConfig.Rows.Clear();
+            foreach (var (ccId, val) in AaDb.DbContentConfigs)
+            {
+                var line = dgvContentConfig.Rows.Add();
+                var row = dgvContentConfig.Rows[line];
+
+                // Try to use names from the DB itself if it's in there
+                if (!AaDb.DbEnumContentConfigs.TryGetValue((long)ccId, out var enumName))
+                {
+                    enumName = ccId.ToString();
+                }
+
+                if (enumName != ((long)ccId).ToString())
+                    enumName += $" ({(long)ccId})";
+
+                row.Cells[0].Value = enumName;
+                row.Cells[1].Value = val.ToString();
+            }
+        }
+
+        private void TBConfigs_Click(object sender, EventArgs e)
+        {
+            tcViewer.SelectedTab = tpGameSettings;
+        }
+
+        private void tbTradeRate_ValueChanged(object sender, EventArgs e)
+        {
+            lTradeRate.Text = $@"{tbTradeRate.Value} %";
+            DoTradeDestinationSelectedIndexChanged();
+        }
+
+        private void btnFindClientDataDirectory_Click(object sender, EventArgs e)
+        {
+            _ = DoFindGameClient(true, true);
         }
     }
 }

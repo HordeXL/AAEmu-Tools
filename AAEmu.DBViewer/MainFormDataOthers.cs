@@ -5,12 +5,14 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Security.AccessControl;
 using System.Windows.Forms;
 using System.Xml;
 using AAEmu.DBViewer.DbDefs;
+using AAEmu.DBViewer.enums;
 using AAEmu.DBViewer.JsonData;
 using AAEmu.DBViewer.utils;
+using AAEmu.DBViewer.utils.io;
+using AAEmu.Game.Models.Game.Achievement.Enums;
 using AAEmu.Game.Models.Game.World;
 using AAEmu.Game.Utils.DB;
 using Newtonsoft.Json;
@@ -249,16 +251,64 @@ public partial class MainForm
         }
     }
 
+    private void LoadConfigs()
+    {
+        if (AllTableNames.GetValueOrDefault("enum_content_configs") == SQLite.SQLiteFileName)
+        {
+            AaDb.DbEnumContentConfigs.Clear();
+            using (var connection = SQLite.CreateConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM enum_content_configs ORDER BY id ASC";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+                        while (reader.Read())
+                        {
+                            // Actual DB entries
+                            var id = GetInt64(reader, "id");
+                            var value = GetString(reader, "name");
+                            AaDb.DbEnumContentConfigs.Add(id, value);
+                        }
+                    }
+                }
+            }
+        }
+        if (AllTableNames.GetValueOrDefault("content_configs") == SQLite.SQLiteFileName)
+        {
+            AaDb.DbContentConfigs.Clear();
+            using (var connection = SQLite.CreateConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM content_configs ORDER BY id ASC";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+                        while (reader.Read())
+                        {
+                            // Actual DB entries
+                            var id = (ContentConfig)GetInt64(reader, "id");
+                            var value = GetInt64(reader, "value");
+                            // early versions also have kind_id which is just a category of sorts
+                            AaDb.DbContentConfigs.Add(id, value);
+                        }
+                    }
+                }
+            }
+        }
+    }
     private int IconIdToLabel(long iconId, Label iconImgLabel)
     {
         var cachedImageIndex = -1;
-        if (Pak.IsOpen)
+        if (ClientFileManager.HasValidSources())
         {
             if (AaDb.DbIcons.TryGetValue(iconId, out var iconname))
             {
                 var fn = "game/ui/icon/" + iconname;
 
-                if (Pak.FileExists(fn))
+                if (ClientFileManager.FileExists(fn))
                 {
                     try
                     {
@@ -275,7 +325,7 @@ public partial class MainForm
                         else
                         {
                             // Load from Pak if not cached
-                            var fStream = Pak.ExportFileAsStream(fn);
+                            var fStream = ClientFileManager.GetFileStream(fn);
                             var bmp = Tools.BitmapUtil.ReadDDSFromStream(fStream);
 
                             if (iconImgLabel != null)
@@ -341,7 +391,7 @@ public partial class MainForm
 
     private void LoadTrades()
     {
-        if (AllTableNames.GetValueOrDefault("specialities") != SQLite.SQLiteFileName)
+        if (AllTableNames.GetValueOrDefault("specialties") != SQLite.SQLiteFileName)
             return;
 
         var sourceZones = new List<long>();
@@ -357,6 +407,8 @@ public partial class MainForm
                 {
                     Application.UseWaitCursor = true;
                     Cursor = Cursors.WaitCursor;
+                    var columnNames = reader.GetColumnNames();
+                    var hasRatioProfitVendor = columnNames.Contains("ratio") && columnNames.Contains("profit") && columnNames.Contains("vendor_exist");
 
                     while (reader.Read())
                     {
@@ -364,9 +416,12 @@ public partial class MainForm
                         t.Id = GetInt64(reader, "id");
                         t.RowZoneGroupId = GetInt64(reader, "row_zone_group_id");
                         t.ColZoneGroupId = GetInt64(reader, "col_zone_group_id");
-                        t.Ratio = GetInt64(reader, "ratio");
-                        t.Profit = GetInt64(reader, "profit");
-                        t.VendorExist = GetBool(reader, "vendor_exist");
+                        if (hasRatioProfitVendor)
+                        {
+                            t.Ratio = GetInt64(reader, "ratio");
+                            t.Profit = GetInt64(reader, "profit");
+                            t.VendorExist = GetBool(reader, "vendor_exist");
+                        }
 
                         AaDb.DbSpecialities.Add(t.Id, t);
 
@@ -425,7 +480,7 @@ public partial class MainForm
                     row.Cells[2].Value = string.Empty;
                 }
 
-                if ((z.OwnerTypeId == 1) && AaDb.DbNpCs.TryGetValue(z.OwnerId, out var ownerNpc))
+                if ((z.OwnerTypeId == 1) && AaDb.DbNpcs.TryGetValue(z.OwnerId, out var ownerNpc))
                 {
                     row.Cells[3].Value = ownerNpc.NameLocalized;
                 }
@@ -479,7 +534,7 @@ public partial class MainForm
                 row.Cells[2].Value = string.Empty;
             }
 
-            if ((z.OwnerTypeId == 1) && AaDb.DbNpCs.TryGetValue(z.OwnerId, out var ownerNpc))
+            if ((z.OwnerTypeId == 1) && AaDb.DbNpcs.TryGetValue(z.OwnerId, out var ownerNpc))
             {
                 row.Cells[3].Value = ownerNpc.NameLocalized;
             }
@@ -589,7 +644,7 @@ public partial class MainForm
                 {
                     if (npc.id != searchId)
                         continue;
-                    if (AaDb.DbNpCs.TryGetValue(npc.id, out var z))
+                    if (AaDb.DbNpcs.TryGetValue(npc.id, out var z))
                     {
                         map.AddPoI(npc.x, npc.y, npc.z, z.NameLocalized + " (" + npc.id.ToString() + ")",
                             Color.Yellow,
@@ -705,7 +760,7 @@ public partial class MainForm
             if (worldOff == null)
                 return;
 
-            if (!Pak.IsOpen || !Pak.FileExists(zone.GamePakZoneTransferPathXml))
+            if (!ClientFileManager.FileExists(zone.GamePakZoneTransferPathXml))
             {
                 // MessageBox.Show("No path file found for this zone");
                 return;
@@ -715,7 +770,7 @@ public partial class MainForm
             int pathsFound = 0;
             try
             {
-                var fs = Pak.ExportFileAsStream(zone.GamePakZoneTransferPathXml);
+                var fs = ClientFileManager.GetFileStream(zone.GamePakZoneTransferPathXml);
 
                 var _doc = new XmlDocument();
                 _doc.Load(fs);
@@ -854,7 +909,7 @@ public partial class MainForm
             if (worldOff == null)
                 return;
 
-            if (!Pak.IsOpen || !Pak.FileExists(zone.GamePakSubZoneXml))
+            if (!ClientFileManager.FileExists(zone.GamePakSubZoneXml))
             {
                 // MessageBox.Show("No path file found for this zone");
                 return;
@@ -864,7 +919,7 @@ public partial class MainForm
             int areasFound = 0;
             try
             {
-                var fs = Pak.ExportFileAsStream(zone.GamePakSubZoneXml);
+                var fs = ClientFileManager.GetFileStream(zone.GamePakSubZoneXml);
 
                 var _doc = new XmlDocument();
                 _doc.Load(fs);
@@ -1019,7 +1074,7 @@ public partial class MainForm
             if (worldOff == null)
                 return;
 
-            if (!Pak.IsOpen || !Pak.FileExists(zone.GamePakZoneHousingXml))
+            if (!ClientFileManager.FileExists(zone.GamePakZoneHousingXml))
             {
                 // MessageBox.Show("No path file found for this zone");
                 return;
@@ -1029,7 +1084,7 @@ public partial class MainForm
             int areasFound = 0;
             try
             {
-                var fs = Pak.ExportFileAsStream(zone.GamePakZoneHousingXml);
+                var fs = ClientFileManager.GetFileStream(zone.GamePakZoneHousingXml);
 
                 var _doc = new XmlDocument();
                 _doc.Load(fs);
@@ -1221,7 +1276,7 @@ public partial class MainForm
         {
             // NPC
             var NPCList = new List<string>();
-            foreach (var npc in AaDb.DbNpCs)
+            foreach (var npc in AaDb.DbNpcs)
                 NPCList.Add(npc.Key.ToString() + ";" + npc.Value.NameLocalized);
             File.WriteAllLines(Path.Combine(LookupExportPath, "npcs.txt"), NPCList);
 
@@ -1308,7 +1363,7 @@ public partial class MainForm
                     newNPC.Id = i;
                     newNPC.Count = 1;
                     newNPC.UnitId = npc.id;
-                    if (AaDb.DbNpCs.TryGetValue(npc.id, out var vNPC))
+                    if (AaDb.DbNpcs.TryGetValue(npc.id, out var vNPC))
                         newNPC.Title = vNPC.NameLocalized;
                     newNPC.Position.X = npc.x;
                     newNPC.Position.Y = npc.y;
@@ -1365,7 +1420,7 @@ public partial class MainForm
     {
         if (overwrite || (MapViewWorldXML.instances == null) || (MapViewWorldXML.instances.Count < 0))
         {
-            if (!Pak.IsOpen)
+            if (!ClientFileManager.HasValidSources())
             {
                 MessageBox.Show(@"Game Pak file was not loaded !");
                 return;
@@ -1373,18 +1428,18 @@ public partial class MainForm
 
             MapViewWorldXML.instances = new List<MapViewWorldXML>();
 
-            foreach (var pfi in Pak.Files)
+            foreach (var pfi in ClientFileManager.GetFilesInDirectory("game","world.xml", true))
             {
-                if (pfi.Name.EndsWith("/world.xml") && pfi.Name.StartsWith("game/worlds/"))
+                if (pfi.EndsWith("/world.xml") && pfi.StartsWith("game/worlds/"))
                 {
-                    var splitName = pfi.Name.ToLower().Split('/');
+                    var splitName = pfi.ToLower().Split('/');
                     if (splitName.Count() != 4)
                         continue;
                     var thisInstanceName = splitName[2];
 
                     var inst = new MapViewWorldXML();
                     if (inst.LoadFromStream(
-                            Pak.ExportFileAsStream("game/worlds/" + thisInstanceName + "/world.xml")))
+                            ClientFileManager.GetFileStream("game/worlds/" + thisInstanceName + "/world.xml")))
                     {
                         MapViewWorldXML.instances.Add(inst);
                         if (thisInstanceName == "main_world")
@@ -1398,6 +1453,18 @@ public partial class MainForm
             }
 
         }
+        
+        cbLoadFromInstanceSelect.Items.Clear();
+        foreach (var instance in MapViewWorldXML.instances)
+        {
+            cbLoadFromInstanceSelect.Items.Add(instance.WorldName);
+            if (instance.WorldName == "main_world")
+            {
+                cbLoadFromInstanceSelect.SelectedIndex = cbLoadFromInstanceSelect.Items.Count - 1;
+            }
+        }
+
+        cbLoadFromInstanceSelect.Enabled = true;
     }
 
     private void DoFindAllHousing()
@@ -1508,7 +1575,7 @@ public partial class MainForm
                             var ni = new MapViewPoI();
                             ni.Coord = new Vector3(spawner.Position.X, spawner.Position.Y, spawner.Position.Z);
                             ni.PoIColor = Color.LightGray;
-                            if (isNPCs && AaDb.DbNpCs.TryGetValue(spawner.UnitId, out var npc))
+                            if (isNPCs && AaDb.DbNpcs.TryGetValue(spawner.UnitId, out var npc))
                             {
                                 ni.Name = npc.NameLocalized;
                                 ni.PoIColor = Color.Yellow;
@@ -1594,7 +1661,7 @@ public partial class MainForm
 
     private void AddAreaShapes(string fileName, int cellX, int cellY, ref List<MapViewPath> allAreaShapes)
     {
-        var fs = Pak.ExportFileAsStream(fileName);
+        var fs = ClientFileManager.GetFileStream(fileName);
 
         var _doc = new XmlDocument();
         _doc.Load(fs);
@@ -1657,7 +1724,7 @@ public partial class MainForm
 
     private void DoShowEntityAreaShape()
     {
-        if (!Pak.IsOpen)
+        if (!ClientFileManager.HasValidSources())
             return;
 
         var entityFiles = new List<string>();
@@ -1677,7 +1744,7 @@ public partial class MainForm
             {
                 var cellName = x.ToString().PadLeft(3, '0') + "_" + y.ToString().PadLeft(3, '0');
                 var fn = "game/worlds/" + worldName + "/cells/" + cellName + "/client/entities.xml";
-                if (Pak.FileExists(fn))
+                if (ClientFileManager.FileExists(fn))
                 {
                     AddAreaShapes(fn, x, y, ref allAreaShapes);
                 }
@@ -1726,18 +1793,21 @@ public partial class MainForm
         if (!(lbTradeDestination.SelectedItem is GameZoneGroups destZone))
             return;
 
-        lTradeRoute.Text = "-";
-        foreach (var z in AaDb.DbSpecialities)
+        lTradeRoute.Text = @"-";
+        foreach (var (id, z) in AaDb.DbSpecialities)
         {
-            if ((z.Value.VendorExist) && (z.Value.RowZoneGroupId == sourceZone.Id) &&
-                (z.Value.ColZoneGroupId == destZone.Id))
+            if ((z.VendorExist) && (z.RowZoneGroupId == sourceZone.Id) &&
+                (z.ColZoneGroupId == destZone.Id))
             {
-                lTradeRoute.Text = sourceZone.ToString() + " => " + destZone.ToString();
-                lTradeProfit.Text = z.Value.Profit.ToString();
-                lTradeRatio.Text = z.Value.Ratio.ToString();
+                lTradeRoute.Text = sourceZone.ToString() + @" => " + destZone.ToString();
+                lTradeProfit.Text = z.Profit.ToString();
+                lTradeRatio.Text = z.Ratio.ToString();
+                var value = (Math.Floor(z.Profit * (z.Ratio / 1000f)) / 10000f * (tbTradeRate.Value / 100f));
+                lTradeMultiplier.Text = value.ToString("F2");
             }
-        }
 
+
+        }
     }
 
     private void DoExportDoodadSpawnData()
@@ -2198,6 +2268,38 @@ public partial class MainForm
 
             }
         }
+
+        if (AllTableNames.GetValueOrDefault("char_records") == SQLite.SQLiteFileName)
+        {
+            using (var connection = SQLite.CreateConnection())
+            {
+                // Achievements
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM char_records ORDER BY id ASC";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+                        Application.UseWaitCursor = true;
+                        Cursor = Cursors.WaitCursor;
+
+                        while (reader.Read())
+                        {
+                            var t = new GameCharRecords();
+                            t.Id = GetInt64(reader, "id");
+                            t.KindId = (CharRecordKind)GetInt64(reader, "kind_id");
+                            t.Value1 = GetInt64(reader, "value1");
+                            t.Value2 = GetInt64(reader, "value2");
+                            AaDb.DbCharRecords.Add(t.Id, t);
+                        }
+
+                        Cursor = Cursors.Default;
+                        Application.UseWaitCursor = false;
+                    }
+                }
+
+            }
+        }
     }
 
     private void UpdateAchievementTree()
@@ -2225,7 +2327,7 @@ public partial class MainForm
                 subGroupNode.SelectedImageIndex = subGroupNode.ImageIndex;
                 foreach (var (key, achievement) in subCategoryGroup.OrderBy(x => x.Key))
                 {
-                    if (!string.IsNullOrWhiteSpace(TSearchAchievements.Text) && !achievement.SearchString.Contains(TSearchAchievements.Text, StringComparison.InvariantCultureIgnoreCase))
+                    if (!string.IsNullOrWhiteSpace(TSearchAchievements.Text) && !achievement.SearchString.Contains(TSearchAchievements.Text, StringComparison.InvariantCultureIgnoreCase) && !catName.Contains(TSearchAchievements.Text, StringComparison.InvariantCultureIgnoreCase) && !subCatName.Contains(TSearchAchievements.Text, StringComparison.InvariantCultureIgnoreCase))
                         continue;
 
                     var entryName = $"{key}: {achievement.NameLocalized}";
@@ -2307,12 +2409,192 @@ public partial class MainForm
             if (objectives.Any())
             {
                 // No idea why CompleteOr == true => ALL of the objectives
-                t += $"{(a.CompleteOr ? "|nd;ALL|r" : "|ni;Any|r")} of objectives{(a.CompleteNum > 1 ? $" x |ni;{a.CompleteNum}|r" : "")}:\r";
+                t += $"{(a.CompleteOr ? "|ni;Any|r" : "|nd;ALL|r")} of objectives{(a.CompleteNum > 1 ? $" x |ni;{a.CompleteNum}|r" : "")}:\r";
 
                 foreach (var objective in objectives)
                 {
-                    t +=
-                        $"Id:{objective.Id}, RecordId: {objective.RecordId} (unit_reqs: {(objective.OrUnitReqs ? "Any" : "ALL")})\r";
+                    t += $"Id:{objective.Id}, RecordId: {objective.RecordId} (unit_reqs: {(objective.OrUnitReqs ? "Any" : "ALL")})\r";
+                    var charRecord = AaDb.DbCharRecords.GetValueOrDefault(objective.RecordId);
+                    if (charRecord != null)
+                    {
+                        switch (charRecord.KindId)
+                        {
+                            case CharRecordKind.PvpKillEnemy:
+                            case CharRecordKind.PvpKillHonorWar:
+                            case CharRecordKind.PvpKillSiege:
+                            case CharRecordKind.PvpKillAlly:
+                            case CharRecordKind.PvpDeathEnemy:
+                            case CharRecordKind.PvpDeathHonorWar:
+                            case CharRecordKind.PvpDeathSiege:
+                            case CharRecordKind.PvpDeathAlly:
+                            case CharRecordKind.WinAttackSiege:
+                            case CharRecordKind.WinDefenceSiege:
+                            case CharRecordKind.LoseAttackSiege:
+                            case CharRecordKind.LoseDefenceSiege:
+                                if (charRecord.Value1 > 0)
+                                {
+                                    t += $"|nc;{charRecord.KindId}|r in |ni;{AaDb.DbZoneGroups.GetValueOrDefault(charRecord.Value1)?.DisplayTextLocalized ?? "unknown zone group"}|r, Value2: |nc;{charRecord.Value2}|r\r\r";
+                                }
+                                else
+                                {
+                                    t += $"|nc;{charRecord.KindId}|r, Value2: |nc;{charRecord.Value2}|r\r\r";
+                                }
+                                break;
+                            /*
+                            case CharRecordKind.CompleteAchievement:
+                                break;
+                            case CharRecordKind.CharLevel:
+                                break;
+                            case CharRecordKind.PetLevel:
+                                break;
+                            case CharRecordKind.PlayTime:
+                                break;
+                            case CharRecordKind.WinZoneBattle:
+                                break;
+                            case CharRecordKind.MyGold:
+                                break;
+                            case CharRecordKind.SpendGold:
+                                break;
+                            case CharRecordKind.ChangeLook:
+                                break;
+                            case CharRecordKind.GetLifePoint:
+                                break;
+                            */
+                            case CharRecordKind.GetActability:
+                                t += $"|nc;{charRecord.KindId}|r |ni;{AaDb.GetTranslationById(charRecord.Value1, "actability_groups", "name", charRecord.Value1.ToString())}|r, Value2: |nc;{charRecord.Value2}|r\r\r";
+                                break;
+                            case CharRecordKind.GetHonorPoint:
+                                if (charRecord.Value2 > 0)
+                                {
+                                    t += $"|nc;{charRecord.KindId}|r in |ni;{AaDb.DbZoneGroups.GetValueOrDefault(charRecord.Value2)?.DisplayTextLocalized ?? "unknown zone group"}|r, Value1: |nc;{charRecord.Value1}|r\r\r";
+                                }
+                                else
+                                {
+                                    t += $"|nc;{charRecord.KindId}|r, Value1: |nc;{charRecord.Value1}|r\r\r";
+                                }
+                                break;
+                            case CharRecordKind.GetItemType:
+                            case CharRecordKind.MakeItemType:
+                                // Note: Value2 seems to be -1 for all entries of GetItemType, MakeItemType and GetItemImpl
+                                t += $"|nc;{charRecord.KindId}|r with |ni;{AaDb.DbItems.GetValueOrDefault(charRecord.Value1)?.NameLocalized ?? "unknown item"}|r ({charRecord.Value1}) @ |nc;{(charRecord.Value2 >= 0 ? AaDb.DbItemGrades.GetValueOrDefault(charRecord.Value2)?.NameLocalized ?? "unknown grade" : "any grade")}|r\r\r";
+                                break;
+                            case CharRecordKind.GetItemImpl:
+                            case CharRecordKind.MakeItemImpl:
+                                // Note: Value2 seems to be -1 for all entries of GetItemType, MakeItemType and GetItemImpl
+                                t += $"|nc;{charRecord.KindId}|r of type |ni;{(GameItemImplId)charRecord.Value1}|r ({charRecord.Value1}) @ |nc;{(charRecord.Value2 >= 0 ? AaDb.DbItemGrades.GetValueOrDefault(charRecord.Value2)?.NameLocalized ?? "unknown grade" : "any grade")}|r\r\r";
+                                break;
+                            /*
+                            case CharRecordKind.SpendLabor:
+                                break;
+                            case CharRecordKind.AbilityLevel:
+                                break;
+                            case CharRecordKind.AbilityChange:
+                                break;
+                            case CharRecordKind.DeadByPvp:
+                                break;
+                            case CharRecordKind.DeadByNpc:
+                                break;
+                            */
+                            case CharRecordKind.KillNpc:
+                                t += $"|nc;{charRecord.KindId}|r on |ni;{AaDb.DbNpcs.GetValueOrDefault(charRecord.Value1)?.NameLocalized ?? "unknown npc"}|r ({charRecord.Value1}), Value2: {charRecord.Value2}\r\r";
+                                break;
+                            /*
+                            case CharRecordKind.KillSlave:
+                                break;
+                            case CharRecordKind.CompleteQuestCategory:
+                                break;
+                            case CharRecordKind.CompleteQuestType:
+                                break;
+                            case CharRecordKind.GetLootpack:
+                                break;
+                            */
+                            case CharRecordKind.GetLootitem:
+                            case CharRecordKind.UseItem:
+                            case CharRecordKind.ItemFix:
+                            case CharRecordKind.SellItem:
+                                t += $"|nc;{charRecord.KindId}|r with |ni;{AaDb.DbItems.GetValueOrDefault(charRecord.Value1)?.NameLocalized ?? "unknown item"}|r ({charRecord.Value1}), Value2: {charRecord.Value2}\r\r";
+                                break;
+                            /*
+                            case CharRecordKind.MakeHousing:
+                                break;
+                            case CharRecordKind.AuctionBuy:
+                                break;
+                            case CharRecordKind.AuctionSold:
+                                break;
+                            */
+                            case CharRecordKind.UseSkill:
+                                t += $"|nc;{charRecord.KindId}|r |ni;{AaDb.DbSkills.GetValueOrDefault(charRecord.Value1)?.NameLocalized ?? "unknown skill"}|r ({charRecord.Value1}), Value2: |nc;{charRecord.Value2}|r\r\r";
+                                break;
+                            /*
+                            case CharRecordKind.GetJuryPoint:
+                                break;
+                            case CharRecordKind.ReportCrime:
+                                break;
+                            case CharRecordKind.Judgement:
+                                break;
+                            case CharRecordKind.WinDuel:
+                                break;
+                            case CharRecordKind.KillWanted:
+                                break;
+                            case CharRecordKind.NpcEmotion:
+                                break;
+                            case CharRecordKind.GetFaction:
+                                break;
+                            case CharRecordKind.MyDishonorablePoint:
+                                break;
+                            case CharRecordKind.EnchantItem:
+                                break;
+                            case CharRecordKind.EnchantFailure:
+                                break;
+                            case CharRecordKind.EnrollParty:
+                                break;
+                            case CharRecordKind.EnrollRaidGroup:
+                                break;
+                            case CharRecordKind.EnrollFamily:
+                                break;
+                            case CharRecordKind.EnrollGuild:
+                                break;
+                            case CharRecordKind.EnrollNation:
+                                break;
+                            case CharRecordKind.TopGearScore:
+                                break;
+                            case CharRecordKind.BeHero:
+                                break;
+                            case CharRecordKind.BeHeroGrade:
+                                break;
+                            case CharRecordKind.GetLeadership:
+                                break;
+                            case CharRecordKind.HeroVote:
+                                break;
+                            case CharRecordKind.GetReputation:
+                                break;
+                            case CharRecordKind.SetReputation:
+                                break;
+                            case CharRecordKind.RebuildHousing:
+                                break;
+                            case CharRecordKind.UseMobilizationOrder:
+                                break;
+                            case CharRecordKind.IncreasedFavoritePortalLimit:
+                                break;
+                            case CharRecordKind.BattleFieldWin:
+                                break;
+                            case CharRecordKind.BattleFieldLose:
+                                break;
+                            case CharRecordKind.BattleFieldDraw:
+                                break;
+                            case CharRecordKind.BattleFieldKill:
+                                break;
+                            case CharRecordKind.BattleFieldDeath:
+                                break;
+                            case CharRecordKind.BattleFieldAssist:
+                                break;
+                            */
+                            default:
+                                t += $"KindId: |nc;{charRecord.KindId}|r, Value1: |nc;{charRecord.Value1}|r, Value2: |nc;{charRecord.Value2}|r\r\r";
+                                break;
+                        }
+                        
+                    }
                 }
 
                 t += "\r";

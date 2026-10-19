@@ -1,3 +1,8 @@
+using AAEmu.DBViewer.DbDefs;
+using AAEmu.DBViewer.enums;
+using AAEmu.Game.Utils.DB;
+using Newtonsoft.Json;
+using AAEmu.DBViewer.utils.io;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,9 +11,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using AAEmu.DBViewer.DbDefs;
-using AAEmu.DBViewer.enums;
-using AAEmu.Game.Utils.DB;
 
 namespace AAEmu.DBViewer;
 
@@ -328,6 +330,7 @@ public partial class MainForm
         foreach (var t in qTextQuery)
             questText += t + "\r\r";
 
+        var requiredQuestsText = string.Empty;
         foreach (var c in comps)
         {
             // Component Info
@@ -386,6 +389,14 @@ public partial class MainForm
             var requires = GetQuestComponentRequirements(c.Id);
             var reqNode = AddUnitRequirementNode(requires, c.OrUnitReqs, componentNode.Nodes);
 
+            foreach (var require in requires)
+            {
+                if (require.KindId == GameUnitReqsKind.CompleteQuestContext)
+                {
+                    requiredQuestsText += $"{AaDb.DbQuestContexts.GetValueOrDefault(require.Value1)?.NameLocalized ?? "unknown quest"} |nc;({require.Value1})|r\r";
+                }
+            }
+
             var componentInfoNode = componentNode.Nodes.Add("Properties");
             componentInfoNode.ForeColor = Color.Yellow;
             var fieldsList = GetCustomTableValues("quest_components", "id", c.Id.ToString());
@@ -442,6 +453,32 @@ public partial class MainForm
                 actsNode.Expand();
             }
         }
+
+        // Previous quests
+        if (!string.IsNullOrWhiteSpace(requiredQuestsText))
+        {
+            questText += "|nr;Previous Quest(s)|r:\r" + requiredQuestsText + "\r";
+        }
+        
+        // Next quests
+        var nextComponentCheck = AaDb.DbUnitReqs.Values.Where(x => x.KindId == GameUnitReqsKind.CompleteQuestContext && x.Value1 == q.Id && x.OwnerType == "QuestComponent");
+        var nextQuestText = "|ni;Next Quest(s)|r:\r";
+        var nextQuestcount = 0;
+        foreach (var nextUnitReqs in nextComponentCheck)
+        {
+            var nextQuests = AaDb.DbQuestComponents.Values.Where(x => x.Id == nextUnitReqs.OwnerId && x.ComponentKindId == 2); // kind 2 = start
+            if (nextQuests.Any())
+            {
+                foreach (var questStartComponent in nextQuests)
+                {
+                    nextQuestText += $"{AaDb.DbQuestContexts.GetValueOrDefault(questStartComponent.QuestContextId)?.NameLocalized ?? "unknown quest"} |nc;({questStartComponent.QuestContextId})|r\r";
+                    nextQuestcount++;
+                }
+            }
+        }
+
+        if (nextQuestcount > 0)
+            questText += nextQuestText + "\r";
 
         rootNode.Expand();
         tvQuestWorkflow.SelectedNode = rootNode;
@@ -634,8 +671,7 @@ public partial class MainForm
             // tower defs
             if (AllTableNames.GetValueOrDefault("tower_defs") == SQLite.SQLiteFileName &&
                 AllTableNames.GetValueOrDefault("tower_def_progs") == SQLite.SQLiteFileName &&
-                AllTableNames.GetValueOrDefault("tower_def_prog_spawn_targets") == SQLite.SQLiteFileName &&
-                AllTableNames.GetValueOrDefault("tower_def_prog_kill_targets") == SQLite.SQLiteFileName)
+                AllTableNames.GetValueOrDefault("tower_def_prog_spawn_targets") == SQLite.SQLiteFileName)
             {
                 using (var command = connection.CreateCommand())
                 {
@@ -736,32 +772,70 @@ public partial class MainForm
                     }
                 }
 
-                // tower def kill targets
-                using (var command = connection.CreateCommand())
+                // tower def kill targets (optional)
+                if (AllTableNames.GetValueOrDefault("tower_def_prog_kill_targets") == SQLite.SQLiteFileName)
                 {
-                    command.CommandText = "SELECT * FROM tower_def_prog_kill_targets ORDER BY id ASC";
-                    command.Prepare();
-                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    using (var command = connection.CreateCommand())
                     {
-                        Application.UseWaitCursor = true;
-                        Cursor = Cursors.WaitCursor;
-
-                        while (reader.Read())
+                        command.CommandText = "SELECT * FROM tower_def_prog_kill_targets ORDER BY id ASC";
+                        command.Prepare();
+                        using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
                         {
-                            var t = new GameTowerDefProgKillTargets();
-                            t.Id = GetInt64(reader, "id");
-                            t.TowerDefProgId = GetInt64(reader, "tower_def_prog_id");
-                            t.KillTargetId = GetInt64(reader, "kill_target_id");
-                            t.KillTargetType = GetString(reader, "kill_target_type");
-                            t.KillCount = GetInt64(reader, "kill_count");
+                            Application.UseWaitCursor = true;
+                            Cursor = Cursors.WaitCursor;
 
-                            AaDb.DbTowerDefProgKillTargets.Add(t.Id, t);
+                            while (reader.Read())
+                            {
+                                var t = new GameTowerDefProgKillTargets();
+                                t.Id = GetInt64(reader, "id");
+                                t.TowerDefProgId = GetInt64(reader, "tower_def_prog_id");
+                                t.KillTargetId = GetInt64(reader, "kill_target_id");
+                                t.KillTargetType = GetString(reader, "kill_target_type");
+                                t.KillCount = GetInt64(reader, "kill_count");
+
+                                AaDb.DbTowerDefProgKillTargets.Add(t.Id, t);
+                            }
+
+                            Cursor = Cursors.Default;
+                            Application.UseWaitCursor = false;
                         }
-
-                        Cursor = Cursors.Default;
-                        Application.UseWaitCursor = false;
                     }
                 }
+
+                // account attendance rewards (login tracker)
+                if (AllTableNames.GetValueOrDefault("account_attendance_rewards") == SQLite.SQLiteFileName)
+                {
+                    using (var command = connection.CreateCommand())
+                    {
+                        command.CommandText = "SELECT * FROM account_attendance_rewards ORDER BY year DESC, month DESC, day_count ASC";
+                        command.Prepare();
+                        using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                        {
+                            Application.UseWaitCursor = true;
+                            Cursor = Cursors.WaitCursor;
+
+                            while (reader.Read())
+                            {
+                                var t = new GameAccountAttendanceReward();
+                                t.Id = GetInt64(reader, "id");
+                                t.AdditionalReward = GetBool(reader, "additional_reward");
+                                t.Comment = GetString(reader, "comment");
+                                t.DayCount = GetInt64(reader, "day_count");
+                                t.ItemCount = GetInt64(reader, "item_count");
+                                t.ItemGradeId = GetInt64(reader, "item_grade_id");
+                                t.ItemId = GetInt64(reader, "item_id");
+                                t.Month = GetInt64(reader, "month");
+                                t.Year = GetInt64(reader, "year");
+
+                                AaDb.DbAccountAttendanceRewards.Add(t.Id, t);
+                            }
+
+                            Cursor = Cursors.Default;
+                            Application.UseWaitCursor = false;
+                        }
+                    }
+                }
+
             }
         }
 
@@ -786,9 +860,29 @@ public partial class MainForm
             lbTowerDefs.Items.Add(val);
         }
 
+        //lbAttendance.Sorted = true;
+        lbAttendance.Items.Clear();
+        foreach (var (key, val) in AaDb.DbAccountAttendanceRewards)
+        {
+            lbAttendance.Items.Add(val);
+        }
+
+        // Fill attendance month filter
+        cbAttendanceFilter.Items.Clear();
+        cbAttendanceFilter.Items.Add("All");
+        var months = AaDb.DbAccountAttendanceRewards.Values
+            .Select(x => $"{x.Year:0000}-{x.Month:00}")
+            .Distinct()
+            .OrderBy(x => x)
+            .ToList();
+        foreach (var m in months)
+            cbAttendanceFilter.Items.Add(m);
+        cbAttendanceFilter.SelectedIndex = cbAttendanceFilter.Items.Count > 1 ? cbAttendanceFilter.Items.Count - 1 : 0;
+
         tpSchedules.Enabled = (lbSchedulesIRL.Items.Count > 0) || 
                               (lbSchedulesGame.Items.Count > 0) ||
-                              (lbTowerDefs.Items.Count > 0);
+                              (lbTowerDefs.Items.Count > 0) ||
+                              (lbAttendance.Items.Count > 0);
 
         if (lbSchedulesIRL.Items.Count <= 0)
             lbSchedulesIRL.Items.Add("未加载内容或数据不完整");
@@ -796,6 +890,8 @@ public partial class MainForm
             lbSchedulesGame.Items.Add("未加载内容或数据不完整");
         if (lbTowerDefs.Items.Count <= 0)
             lbTowerDefs.Items.Add("未加载内容或数据不完整");
+        if (lbAttendance.Items.Count <= 0)
+            lbAttendance.Items.Add("Nothing loaded or incomplete data");
 
         tcScheduleTypes.SelectedTab = tpTowerDefs;
     }
@@ -870,21 +966,20 @@ public partial class MainForm
 
     public void LoadQuestSpheresFromPak()
     {
-        if ((Pak == null) || (!Pak.IsOpen))
+        if (!ClientFileManager.HasValidSources())
             return;
-
 
         AaDb.PakQuestSignSpheres = new List<QuestSphereEntry>();
         var sl = new List<string>();
 
-        // Find all related files and concat them into a giant stringlist
-        foreach (var pfi in Pak.Files)
+        // Find all related files and concat them into a giant string list
+        foreach (var pfi in ClientFileManager.GetFilesInDirectory("game", "quest_sign_sphere.g", true))
         {
-            var lowerName = pfi.Name.ToLower();
+            var lowerName = pfi.ToLower();
             if (lowerName.EndsWith("quest_sign_sphere.g"))
             {
                 var nameSplit = lowerName.Split('/');
-                var thisStream = Pak.ExportFileAsStream(pfi);
+                var thisStream = ClientFileManager.GetFileStream(pfi);
                 using (var rs = new StreamReader(thisStream))
                 {
                     sl.Clear();
@@ -990,7 +1085,7 @@ public partial class MainForm
                     }
                     else
                     {
-                        Debug.WriteLine($"Invalid data at line {i} in {pfi.Name}");
+                        Debug.WriteLine($"Invalid data at line {i} in {pfi}");
                     }
                 }
                 // System.Threading.Thread.Sleep(5);
@@ -1153,7 +1248,7 @@ public partial class MainForm
                     {
                         //if (!NPCsToShow.Contains(npc.id))
                         //    continue;
-                        if (AaDb.DbNpCs.TryGetValue(npc.id, out var z))
+                        if (AaDb.DbNpcs.TryGetValue(npc.id, out var z))
                         {
                             map.AddPoI(npc.x, npc.y, npc.z, z.NameLocalized + " (" + npc.id.ToString() + ")",
                                 Color.Yellow, 0f, "npc", npc.id, z);
@@ -1246,7 +1341,7 @@ public partial class MainForm
         {
             var startTime = new DateTime(
                 (int)selectedItem.StYear, (int)selectedItem.StMonth, (int)selectedItem.StDay,
-                (int)selectedItem.StHour, (int)selectedItem.StMin, (int)selectedItem.StMin);
+                (int)selectedItem.StHour, (int)selectedItem.StMin, 0);
             rootNode.Nodes.Add($"IRL Starts: {startTime}");
         }
 
@@ -1254,7 +1349,7 @@ public partial class MainForm
         {
             var startTime = new DateTime(
                 (int)selectedItem.EdYear, (int)selectedItem.EdMonth, (int)selectedItem.EdDay,
-                (int)selectedItem.EdHour, (int)selectedItem.EdMin, (int)selectedItem.EdMin);
+                (int)selectedItem.EdHour, (int)selectedItem.EdMin, 0);
             rootNode.Nodes.Add($"IRL Ends: {startTime}");
         }
 
@@ -1263,15 +1358,19 @@ public partial class MainForm
         {
             var questNode = tvSchedule.Nodes.Add("Quests");
             foreach (var gameScheduleQuest in quests)
+            {
                 AddCustomPropertyNode("quest_id", gameScheduleQuest.QuestId.ToString(), false, questNode);
+            }
         }
 
         var doodads = AaDb.DbScheduleDoodads.Values.Where(x => x.GameScheduleId == selectedItem.Id);
         if (doodads.Any())
         {
             var doodadNode = tvSchedule.Nodes.Add("Doodads");
-            foreach (var gameScheduleQuest in doodads)
-                AddCustomPropertyNode("doodad_id", gameScheduleQuest.DoodadId.ToString(), false, doodadNode);
+            foreach (var gameScheduleDoodad in doodads)
+            {
+                AddCustomPropertyNode("doodad_id", gameScheduleDoodad.DoodadId.ToString(), false, doodadNode);
+            }
         }
 
         var spawners = AaDb.DbScheduleSpawners.Values.Where(x => x.GameScheduleId == selectedItem.Id);
@@ -1279,7 +1378,9 @@ public partial class MainForm
         {
             var spawnersNode = tvSchedule.Nodes.Add("Spawners");
             foreach (var gameScheduleQuest in spawners)
+            {
                 AddCustomPropertyNode("spawner_id", gameScheduleQuest.SpawnerId.ToString(), false, spawnersNode);
+            }
         }
 
         tvSchedule.ExpandAll();

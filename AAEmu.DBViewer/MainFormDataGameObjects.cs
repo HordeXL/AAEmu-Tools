@@ -157,7 +157,7 @@ public partial class MainForm
 
                             t.SearchString = t.Name + " " + t.NameLocalized;
                             t.SearchString = t.SearchString.ToLower();
-                            AaDb.DbNpCs.Add(t.Id, t);
+                            AaDb.DbNpcs.Add(t.Id, t);
                         }
                     }
                 }
@@ -375,13 +375,14 @@ public partial class MainForm
                     using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
                     {
                         var columnNames = reader.GetColumnNames();
+                        var readName = (columnNames.IndexOf("name") >= 0);
 
                         while (reader.Read())
                         {
                             var t = new GameTotalCharacterCustoms();
                             // Actual DB entries
                             t.Id = GetInt64(reader, "id");
-                            t.Name = GetString(reader, "name");
+                            t.Name = readName ? GetString(reader, "name") : t.Id.ToString();
                             AaDb.DbTotalCharacterCustoms.Add(t.Id, t);
                         }
                     }
@@ -1020,7 +1021,7 @@ public partial class MainForm
         Cursor = Cursors.WaitCursor;
         dgvNPCs.Rows.Clear();
         var c = 0;
-        foreach (var t in AaDb.DbNpCs)
+        foreach (var t in AaDb.DbNpcs)
         {
             var z = t.Value;
             if ((z.Id == searchId) || (z.ModelId == searchId) || z.SearchString.Contains(searchText, StringComparison.InvariantCultureIgnoreCase))
@@ -1063,7 +1064,7 @@ public partial class MainForm
 
     private void ShowDbNpcInfo(long id)
     {
-        if (AaDb.DbNpCs.TryGetValue(id, out var npc))
+        if (AaDb.DbNpcs.TryGetValue(id, out var npc))
         {
             lNPCTemplate.Text = npc.Id.ToString();
             lNPCTags.Text = TagsAsString(id, AaDb.DbTaggedNpCs);
@@ -1280,6 +1281,35 @@ public partial class MainForm
                 passiveBuffsNode.Expand();
             else
                 tvNPCInfo.Nodes.Remove(passiveBuffsNode);
+            #endregion
+
+            #region mounts
+            TreeNode mountInfoNode = null;
+
+            var npcMountSkillIds = AaDb.DbNpcMountSkills.Values.Where(x => x.NpcId == npc.Id).ToList();
+
+            var mountedSkillList = new HashSet<long>();
+            foreach (var npcMountSkillId in npcMountSkillIds)
+            {
+                var mountSkill = AaDb.DbMountSkills.GetValueOrDefault(npcMountSkillId.MountSkillId);
+                if (mountSkill != null)
+                {
+                    mountedSkillList.Add(mountSkill.SkillId);
+                }
+            }
+            foreach (var l in mountedSkillList)
+            {
+                if (mountInfoNode == null)
+                {
+                    mountInfoNode = tvNPCInfo.Nodes.Add("Mount Skills");
+                    mountInfoNode.ImageIndex = 2;
+                    mountInfoNode.SelectedImageIndex = 2;
+                }
+                AddCustomPropertyNode("skill_id", l.ToString(), false, mountInfoNode);
+            }
+
+            if (mountInfoNode?.Nodes.Count > 0)
+                mountInfoNode.Expand();
             #endregion
 
             #region npc_quests

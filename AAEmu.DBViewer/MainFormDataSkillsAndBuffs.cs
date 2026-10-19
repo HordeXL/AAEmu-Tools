@@ -51,6 +51,7 @@ public partial class MainForm
                             t.IgnoreGlobalCooldown = GetBool(reader, "ignore_global_cooldown");
                             t.EffectDelay = GetInt64(reader, "effect_delay");
                             t.AbilityId = GetInt64(reader, "ability_id");
+                            t.AbilityLevel = GetInt64(reader, "ability_level");
                             t.ManaCost = GetInt64(reader, "mana_cost");
                             t.TimingId = GetInt64(reader, "timing_id");
                             t.ConsumeLp = GetInt64(reader, "consume_lp");
@@ -61,6 +62,7 @@ public partial class MainForm
                             t.PlotId = GetInt64(reader, "plot_id");
 
                             t.OrUnitReqs = GetBool(reader, "or_unit_reqs");
+                            t.CrimePoint = GetInt64(reader, "crime_point");
 
                             t.NameLocalized = AaDb.GetTranslationById(t.Id, "skills", "name", t.Name);
                             t.DescriptionLocalized = AaDb.GetTranslationById(t.Id, "skills", "desc", t.Desc);
@@ -167,6 +169,27 @@ public partial class MainForm
                                 t.Name = GetString(reader, "name");
                             t.SkillId = GetInt64(reader, "skill_id");
                             AaDb.DbMountSkills.Add(t.Id, t);
+                        }
+                    }
+                }
+            }
+
+            // Npc Mount Skills
+            if (AllTableNames.GetValueOrDefault("npc_mount_skills") == SQLite.SQLiteFileName)
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM npc_mount_skills ORDER BY id ASC";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+                        while (reader.Read())
+                        {
+                            var t = new GameNpcMountSkills();
+                            t.Id = GetInt64(reader, "id");
+                            t.NpcId = GetInt64(reader, "npc_id");
+                            t.MountSkillId = GetInt64(reader, "mount_skill_id");
+                            AaDb.DbNpcMountSkills.Add(t.Id, t);
                         }
                     }
                 }
@@ -352,6 +375,30 @@ public partial class MainForm
                             }
 
                             AaDb.DbBuffs.Add(t.Id, t);
+                        }
+                    }
+                }
+            }
+
+            if (AllTableNames.GetValueOrDefault("buff_effects") == SQLite.SQLiteFileName)
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM buff_effects";
+                    command.Prepare();
+                    using (var reader = new SQLiteWrapperReader(command.ExecuteReader()))
+                    {
+
+                        while (reader.Read())
+                        {
+                            var t = new GameBuffEffects();
+                            t.Id = GetInt64(reader, "id");
+                            t.BuffId = GetInt64(reader, "buff_id");
+                            t.Chance = GetInt64(reader, "chance");
+                            t.Stack = GetInt64(reader, "stack");
+                            t.AbLevel = GetInt64(reader, "ab_level");
+
+                            AaDb.DbBuffEffects.Add(t.Id, t);
                         }
                     }
                 }
@@ -1168,7 +1215,10 @@ public partial class MainForm
             }
 
             // lSkillGCD.Text = skill.ignore_global_cooldown ? "Ignore" : "Normal";
-            FormattedTextToRichtEdit(skill.DescriptionLocalized, rtSkillDescription);
+            var desc = skill.DescriptionLocalized;
+            if (skill.CrimePoint > 0)
+                desc += "\n\n|nd;Considered a crime|r";
+            FormattedTextToRichtEdit(desc, rtSkillDescription);
             IconIdToLabel(skill.IconId, skillIcon);
             lSkillTags.Text = TagsAsString(idx, AaDb.DbTaggedSkills);
 
@@ -1375,6 +1425,43 @@ public partial class MainForm
             }
         }
 
+        // Dynamic Stat Modifiers
+        var dynStats = AaDb.DbDynamicUnitModifiers.Values.Where(x => x.BuffId == buff_id).ToList();
+        if (dynStats.Any())
+        {
+            var statsNode = tvBuffTriggers.Nodes.Add("Dynamic stat modifiers");
+            foreach (var unitStat in dynStats)
+            {
+                var statNode = statsNode.Nodes.Add($"{unitStat.UnitAttributeId} {(unitStat.UnitModifierTypeId != 0 ? "%" : "")} - {unitStat.FuncType} ({unitStat.FuncId})");
+
+                var funcTableName = FunctionTypeToTableName(unitStat.FuncType);
+                var funcValuesList = GetCustomTableValues(funcTableName, "id", unitStat.FuncId.ToString());
+                foreach (var effectValues in funcValuesList)
+                foreach (var effectValue in effectValues)
+                {
+                    AddCustomPropertyNode(effectValue.Key, effectValue.Value, false, statNode);
+                }
+
+                if (statNode.Text.Contains("health", StringComparison.InvariantCultureIgnoreCase))
+                    statNode.ForeColor = Color.Red;
+                else
+                if (statNode.Text.Contains("mana", StringComparison.InvariantCultureIgnoreCase))
+                    statNode.ForeColor = Color.DeepSkyBlue;
+                else
+                if (statNode.Text.Contains("armor", StringComparison.InvariantCultureIgnoreCase))
+                    statNode.ForeColor = Color.Yellow;
+                else
+                if (statNode.Text.Contains("resist", StringComparison.InvariantCultureIgnoreCase))
+                    statNode.ForeColor = Color.MediumPurple;
+                else
+                if (statNode.Text.Contains("speed", StringComparison.InvariantCultureIgnoreCase))
+                    statNode.ForeColor = Color.LawnGreen;
+                else
+                if (statNode.Text.Contains("exp", StringComparison.InvariantCultureIgnoreCase))
+                    statNode.ForeColor = Color.WhiteSmoke;
+            }
+        }
+
 
         // Buff Modifiers
         var mods = AaDb.DbBuffModifiers.Values.Where(x => x.OwnerType == "Buff" && x.OwnerId == buff_id).ToList();
@@ -1400,7 +1487,6 @@ public partial class MainForm
             }
         }
 
-
         // Buff Triggers
         var triggers = AaDb.DbBuffTriggers.Values.Where(bt => bt.BuffId == buff_id)
             .GroupBy(bt => bt.EventId, bt => bt).ToDictionary(bt => bt.Key, bt => bt.ToList());
@@ -1421,6 +1507,27 @@ public partial class MainForm
                 }
             }
         }
+
+        // Effect sources
+        var buffSourceEffects = AaDb.DbBuffEffects.Values.Where(x => x.BuffId == buff_id);
+        foreach (var buffSourceEffect in buffSourceEffects)
+        {
+            var effectSourceNode = tvBuffTriggers.Nodes.Add($"Source - BuffEffect ({buffSourceEffect.Id})");
+            var sourceEffects = AaDb.DbEffects.Values.Where(x => x.ActualType == "BuffEffect" && x.ActualId == buffSourceEffect.Id).ToList();
+            if (sourceEffects.Any())
+            {
+                foreach (var effect in sourceEffects)
+                {
+                    var thisEffectNode = effectSourceNode.Nodes.Add($"Effect ({effect.Id})");
+                    var skillEffectsList = AaDb.DbSkillEffects.Values.Where(se => se.EffectId == effect.Id).ToList();
+                    foreach (var skillEffect in skillEffectsList)
+                    {
+                        AddCustomPropertyNode("skill_id", skillEffect.SkillId.ToString(), false, thisEffectNode);
+                    }
+                }
+            }
+        }
+
 
         tvBuffTriggers.ExpandAll();
         if (tvBuffTriggers.Nodes.Count > 0)
@@ -1753,6 +1860,36 @@ public partial class MainForm
             t.LinearLevelBonus = reader.GetInt64("linear_level_bonus");
 
             AaDb.DbUnitModifiers.TryAdd(t.Id, t);
+        }
+    }
+
+    private void LoadDynamicUnitMods()
+    {
+        if (AllTableNames.GetValueOrDefault("dynamic_unit_modifiers") != SQLite.SQLiteFileName)
+            return;
+
+        using var connection = SQLite.CreateConnection();
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT * FROM dynamic_unit_modifiers";
+        command.Prepare();
+        using var sqliteReader = command.ExecuteReader();
+        using var reader = new SQLiteWrapperReader(sqliteReader);
+        var columnNames = reader.GetColumnNames();
+        var useDbId = (columnNames.IndexOf("id") >= 0);
+        var i = 0u;
+
+        while (reader.Read())
+        {
+            var t = new GameDynamicUnitModifiers();
+            i++;
+            t.Id = useDbId ? reader.GetInt64("id") : i;
+            t.BuffId = reader.GetInt64("buff_id");
+            t.UnitAttributeId = (UnitAttribute)reader.GetInt64("unit_attribute_id");
+            t.UnitModifierTypeId = reader.GetInt64("unit_modifier_type_id");
+            t.FuncId = reader.GetInt64("func_id");
+            t.FuncType = reader.GetString("func_type");
+
+            AaDb.DbDynamicUnitModifiers.TryAdd(t.Id, t);
         }
     }
 

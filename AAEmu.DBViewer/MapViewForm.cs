@@ -1,15 +1,18 @@
-﻿using System;
+﻿using AAEmu.DBViewer.DbDefs;
+using AAEmu.DBViewer.utils;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 using System.Xml;
-using AAEmu.DBViewer.utils;
-using AAEmu.DBViewer.DbDefs;
-using System.ComponentModel;
+using AAEmu.DBViewer.utils.io;
 
 namespace AAEmu.DBViewer
 {
@@ -20,7 +23,7 @@ namespace AAEmu.DBViewer
         private Point viewOffset = new Point(0, 0);
         private Point cursorCoords = new Point(0, 0);
         private Point rulerCoords = new Point(0, 0);
-        private string cursorZones = string.Empty;
+        private long cursorZoneKey = 0;
         private Point startDragPos = new Point();
         private Point startDragOffset = new Point();
         private bool isDragging = false;
@@ -37,6 +40,49 @@ namespace AAEmu.DBViewer
         private List<MapViewPoI> quest_sign_sphere = new List<MapViewPoI>();
         private RectangleF FocusBorder = new RectangleF();
         private List<MapViewMap> cursorZoneList = new List<MapViewMap>();
+
+        // Cached GDI objects and the visible area of the current paint; creating pens, brushes
+        // and fonts per element per frame dominated the paint time before
+        private readonly Dictionary<Color, Pen> thinPenCache = new Dictionary<Color, Pen>();
+        private readonly Dictionary<Color, Pen> zoneBorderPenCache = new Dictionary<Color, Pen>();
+        private readonly Dictionary<Color, SolidBrush> brushCache = new Dictionary<Color, SolidBrush>();
+        private Font mapNameFont = null;
+        private Font zoneKeyFont = null;
+        private Font crossFont = null;
+        private float crossFontScale = 0f;
+        private RectangleF viewCullRect = new RectangleF();
+
+        private Pen GetThinPen(Color color)
+        {
+            if (!thinPenCache.TryGetValue(color, out var pen))
+                thinPenCache[color] = pen = new Pen(color);
+            return pen;
+        }
+
+        private Pen GetZoneBorderPen(Color color)
+        {
+            if (!zoneBorderPenCache.TryGetValue(color, out var pen))
+                zoneBorderPenCache[color] = pen = new Pen(color, 10);
+            return pen;
+        }
+
+        private SolidBrush GetBrush(Color color)
+        {
+            if (!brushCache.TryGetValue(color, out var brush))
+                brushCache[color] = brush = new SolidBrush(color);
+            return brush;
+        }
+
+        private Font GetCrossFont()
+        {
+            if ((crossFont == null) || (crossFontScale != viewScale))
+            {
+                crossFont?.Dispose();
+                crossFont = new Font(Font.FontFamily, 12f / viewScale);
+                crossFontScale = viewScale;
+            }
+            return crossFont;
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Point ViewOffset { get => viewOffset; set { viewOffset = value; updateStatusBar(); } }
@@ -111,14 +157,14 @@ namespace AAEmu.DBViewer
                     if (iref != null)
                     {
                         level = iref.Level;
-                        if (MainForm.ThisForm.Pak.IsOpen)
+                        if (ClientFileManager.HasValidSources())
                         {
                             var fList = iref.GetPossibleFileNames(locale);
                             // Here we only check if the name has a valid filename in the Pak
                             // When actually loading, this will be repeated again to get the correct file
                             foreach (var fName in fList)
                             {
-                                if (MainForm.ThisForm.Pak.FileExists(fName))
+                                if (ClientFileManager.FileExists(fName))
                                 {
                                     mapFileName = iref.BaseFileName;
                                     break;
@@ -139,7 +185,7 @@ namespace AAEmu.DBViewer
                         m.MapBorderColor = Color.DarkGreen;
                     if (zg.FactionChatRegionId == 4)
                         m.MapBorderColor = Color.DarkRed;
-                    // If it has the Rough Sea (Turbulance) buff, it's the ocean, use a blue border
+                    // If it has the Rough Sea (Turbulence) buff, it's the ocean, use a blue border
                     if (zg.BuffId == 7743)
                     {
                         m.MapBorderColor = Color.Navy;
@@ -176,13 +222,46 @@ namespace AAEmu.DBViewer
                     cursorZoneList.Add(map);
             }
 
-            // Check if cursor is still inside the current zone
-            if (cursorZoneList.Contains(topMostMap) && (topMostMap != null))
+            var currentInstance = MapViewWorldXML.instances.FirstOrDefault(x => x.WorldName == cbInstanceSelect.Text);
+            if (currentInstance != null)
             {
-                // Leave everthing as is
+                cursorZoneKey = 0;
+                foreach (var (zoneKey, zoneInfo)in currentInstance.zones)
+                {
+                    if (zoneInfo.Contains(cursorCoords))
+                    {
+                        cursorZoneKey = zoneKey;
+                        break;
+                    }
+                }
+                // Try to find zone data in DB
+                if (cursorZoneKey > 0)
+                {
+                    var zone = AaDb.GetZoneByKey(cursorZoneKey);
+                    if (zone != null)
+                    {
+                        // Use the result from the detailed zone borders above to force the topmost map to the same zone.
+                        topMostMap = null;
+                        foreach (var map in allmaps)
+                        {
+                            if (map.ZoneGroup == zone.GroupId)
+                            {
+                                topMostMap = map;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            /*
+            // Check if cursor is still inside the current zone
+            if ((topMostMap != null) && cursorZoneList.Contains(topMostMap))
+            {
+                // Leave everything as is
             }
             else
             {
+                // Fallback if there wasn't any sector info
                 foreach (var z in cursorZoneList)
                 {
                     if (newTopMap == null)
@@ -191,7 +270,7 @@ namespace AAEmu.DBViewer
                     }
                     else
                     {
-                        if ((newTopMap.ZoneCoords.Width * newTopMap.ZoneCoords.Height) >= (z.ZoneCoords.Width * z.ZoneCoords.Height))
+                        if ((newTopMap.ZoneCoords.Width * newTopMap.ZoneCoords.Height) <= (z.ZoneCoords.Width * z.ZoneCoords.Height))
                         {
                             newTopMap = z;
                         }
@@ -200,6 +279,7 @@ namespace AAEmu.DBViewer
                 }
                 topMostMap = newTopMap;
             }
+            */
 
             foreach (var z in cursorZoneList)
             {
@@ -432,15 +512,15 @@ namespace AAEmu.DBViewer
 
         private void updateStatusBar()
         {
+            var lastCursorZoneKey = cursorZoneKey;
             tsslZoom.Text = "Zoom: " + (viewScale * 100).ToString() + "%";
-            /*
-            if (isDragging)
-            {
-                tsslViewOffset.Text = "drag from X:" + startDragPos.X.ToString() + " Y:" + startDragPos.Y.ToString();
-            }
-            */
 
             tsslViewOffset.Text = "View X:" + ViewOffset.X.ToString() + " Y:" + ViewOffset.Y.ToString();
+
+            // While panning, skip the cursor hit-testing and the menu rebuilds entirely; they run
+            // again on mouse-up and dominated the per-move cost of a drag
+            if (isDragging)
+                return;
 
             var cellCursorText = string.Empty;
             var cursorInstance = MapViewWorldXML.GetInstanceByName(cbInstanceSelect.Text);
@@ -478,8 +558,13 @@ namespace AAEmu.DBViewer
             tsslSelectionInfo.Text = "inside: " + zoneText + (pathText.Length > 0 ? " - " + pathText : "");
             tsslPoIInfo.Text = "nearby: " + poiText;
 
-            if ((topMostMap != lastTopMap) || (topMostPath != lastTopPath) || (topMostPoI != lastTopPoI))
-                pView.Refresh();
+            // Rebuilding the three drop-down menus is only needed when the hovered items changed;
+            // doing it on every mouse move made hovering noticeably laggy
+            if ((topMostMap == lastTopMap) && (topMostPath == lastTopPath) && (topMostPoI == lastTopPoI) &&
+                (lastCursorZoneKey == cursorZoneKey))
+                return;
+
+            pView.Invalidate();
 
             tsmMap.DropDownItems.Clear();
             if (topMostMap == null)
@@ -553,7 +638,6 @@ namespace AAEmu.DBViewer
 
                 tsmPoI.Enabled = true;
             }
-
         }
 
         private void MapViewOnMouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -595,8 +679,7 @@ namespace AAEmu.DBViewer
         private void DrawCross(Graphics g, float x, float y, Color color, string name)
         {
             int crossSize = Math.Max((int)(6f / viewScale) + 1, 5);
-            var pen = new Pen(color);
-            pen.Width = 1;
+            var pen = GetThinPen(color);
             var pos = CoordToPixel(x, y);
             g.DrawLine(pen, ViewOffset.X + pos.X, ViewOffset.Y + pos.Y - crossSize, ViewOffset.X + x, ViewOffset.Y + pos.Y + crossSize);
             g.DrawLine(pen, ViewOffset.X + pos.X - crossSize, ViewOffset.Y + pos.Y, ViewOffset.X + pos.X + crossSize, ViewOffset.Y + pos.Y);
@@ -604,10 +687,10 @@ namespace AAEmu.DBViewer
             {
                 var lines = name.Split('\n');
                 var lineYOff = 0;
+                var f = GetCrossFont();
+                var br = GetBrush(color);
                 foreach (var line in lines)
                 {
-                    var f = new Font(Font.FontFamily, 12f / viewScale);
-                    var br = new SolidBrush(color);
                     try
                     {
                         g.DrawString(line, f, br, ViewOffset.X + pos.X + crossSize, ViewOffset.Y + pos.Y - crossSize + lineYOff);
@@ -623,18 +706,14 @@ namespace AAEmu.DBViewer
 
         private void DrawRadius(Graphics g, float x, float y, Color color, string name, float radius)
         {
-            var pen = new Pen(color);
+            var pen = GetThinPen(color);
             var pos = CoordToPixel(x, y);
             var tl = CoordToPixel(x - radius, y + radius);
             g.DrawEllipse(pen, new RectangleF(ViewOffset.X + tl.X, ViewOffset.Y + tl.Y, radius * 2f, radius * 2f));
 
-            // g.DrawLine(pen, ViewOffset.X + pos.X, ViewOffset.Y + pos.Y, ViewOffset.X + x, ViewOffset.Y + pos.Y);
-            // g.DrawLine(pen, ViewOffset.X + pos.X, ViewOffset.Y + pos.Y, ViewOffset.X + pos.X, ViewOffset.Y + pos.Y);
             if (name != string.Empty)
             {
-                var f = new Font(Font.FontFamily, 12f / viewScale);
-                var br = new SolidBrush(color);
-                g.DrawString(name, f, br, ViewOffset.X + pos.X, ViewOffset.Y + pos.Y);
+                g.DrawString(name, GetCrossFont(), GetBrush(color), ViewOffset.X + pos.X, ViewOffset.Y + pos.Y);
             }
         }
 
@@ -659,22 +738,77 @@ namespace AAEmu.DBViewer
             if (!showMap)
                 return;
 
-            var pen = new Pen(map.MapBorderColor);
-            var roadpen = Pens.Black;
-
             var mappos = CoordToPixel(map.ZoneCoords.X, map.ZoneCoords.Y);
 
             var zoneBorderRect = new RectangleF(ViewOffset.X + mappos.X, ViewOffset.Y + mappos.Y - map.ZoneCoords.Height, map.ZoneCoords.Width, map.ZoneCoords.Height);
 
+            // Skip everything that cannot appear inside the current view
+            if (!viewCullRect.IntersectsWith(zoneBorderRect))
+                return;
+
             // Main Map
             if ((map.MapBitmapImage != null) && ((map.MapLevel <= MapLevel.WorldMap) || cbDrawMainMap.Checked))
             {
-                g.DrawImage(map.MapBitmapImage, zoneBorderRect);
+                var mapImage = cbClipTerritory.Checked ? MapViewTerritoryClip.GetImageForDraw(map) : map.MapBitmapImage;
+                g.DrawImage(mapImage, zoneBorderRect);
             }
 
-            var roadBorderRect = new RectangleF();
-            // Road Map Overlay (we need to read image dimensions of the mainmap, so it also requires that one loaded)
-            if ((map.MapBitmapImage != null) && (map.RoadBitmapImage != null))
+            if (cbZoneBorders.Checked && (map.Name != string.Empty))
+            {
+                var pen = GetThinPen(map.MapBorderColor);
+                g.DrawRectangle(pen, zoneBorderRect.X, zoneBorderRect.Y, zoneBorderRect.Width, zoneBorderRect.Height);
+
+                mapNameFont ??= new Font(Font.FontFamily, 100f);
+                g.DrawString(map.Name, mapNameFont, GetBrush(map.MapBorderColor), ViewOffset.X + mappos.X, ViewOffset.Y + mappos.Y);
+            }
+        }
+
+        // Road overlays are drawn in a separate pass after every map image, so a neighboring
+        // map painted later can no longer cover the roads of an earlier one
+        private void DrawRoadOverlay(Graphics g, MapViewMap map)
+        {
+            if (!cbDrawMiniMap.Checked)
+                return;
+
+            var showMap = true;
+            switch (map.MapLevel)
+            {
+                case MapLevel.WorldMap:
+                    showMap = tsbDrawWorld.Checked;
+                    break;
+                case MapLevel.Continent:
+                    showMap = tsbDrawContinent.Checked;
+                    break;
+                case MapLevel.Zone:
+                    showMap = tsbDrawZone.Checked;
+                    break;
+                case MapLevel.City:
+                    showMap = tsbDrawCity.Checked;
+                    break;
+            }
+            if (!showMap)
+                return;
+
+            // We need to read image dimensions of the mainmap, so it also requires that one loaded
+            if ((map.MapBitmapImage == null) || (map.RoadBitmapImage == null))
+                return;
+
+            var mappos = CoordToPixel(map.ZoneCoords.X, map.ZoneCoords.Y);
+            var zoneBorderRect = new RectangleF(ViewOffset.X + mappos.X, ViewOffset.Y + mappos.Y - map.ZoneCoords.Height, map.ZoneCoords.Width, map.ZoneCoords.Height);
+
+            if (!viewCullRect.IntersectsWith(zoneBorderRect))
+                return;
+
+            RectangleF roadBorderRect;
+            if ((map.RoadBitmapImage.Width == map.MapBitmapImage.Width) &&
+                (map.RoadBitmapImage.Height == map.MapBitmapImage.Height))
+            {
+                // Newer clients (10.x map_resources layout) paint the road overlay on the same
+                // full canvas as the main map, so it stretches over the exact same zone rectangle;
+                // the legacy minimap offsets no longer apply there
+                roadBorderRect = zoneBorderRect;
+            }
+            else
             {
                 var roadsize = new SizeF(
                     map.ZoneCoords.Width * map.RoadMapCoords.Width / map.ImgCoords.Width,
@@ -684,35 +818,15 @@ namespace AAEmu.DBViewer
                     map.RoadMapOffset.X / map.ImgCoords.Width * map.ZoneCoords.Width,
                     map.RoadMapOffset.Y / map.ImgCoords.Height * map.ZoneCoords.Height
                     );
-                /*
-                var roadsize = new SizeF(
-                    map.ZoneCoords.Width * map.RoadBitmapImage.Width / (float)map.MapBitmapImage.Width,
-                    map.ZoneCoords.Height * map.RoadBitmapImage.Height / (float)map.MapBitmapImage.Height
-                    );
-                var roadCoordsOffset = new PointF(
-                    map.RoadMapOffset.X / (float)map.MapBitmapImage.Width * map.ZoneCoords.Width,
-                    map.RoadMapOffset.Y / (float)map.MapBitmapImage.Height * map.ZoneCoords.Height
-                    );
-                */
 
                 roadBorderRect = new RectangleF(
                     ViewOffset.X + mappos.X + roadCoordsOffset.X,
                     ViewOffset.Y + mappos.Y + roadCoordsOffset.Y - map.ZoneCoords.Height,
                     roadsize.Width, roadsize.Height);
-
-                if (cbDrawMiniMap.Checked)
-                    g.DrawImage(map.RoadBitmapImage, roadBorderRect);
             }
 
-            if (cbZoneBorders.Checked && (map.Name != string.Empty))
-            {
-                g.DrawRectangle(pen, zoneBorderRect.X, zoneBorderRect.Y, zoneBorderRect.Width, zoneBorderRect.Height);
-                g.DrawRectangle(roadpen, roadBorderRect.X, roadBorderRect.Y, roadBorderRect.Width, roadBorderRect.Height);
-
-                var f = new Font(Font.FontFamily, 100f);
-                var br = new SolidBrush(map.MapBorderColor);
-                g.DrawString(map.Name, f, br, ViewOffset.X + mappos.X, ViewOffset.Y + mappos.Y);
-            }
+            var roadImage = cbClipTerritory.Checked ? MapViewTerritoryClip.GetRoadImageForDraw(map) : map.RoadBitmapImage;
+            g.DrawImage(roadImage, roadBorderRect);
         }
 
         private void DrawGrid(Graphics g)
@@ -892,8 +1006,7 @@ namespace AAEmu.DBViewer
                 Graphics g = e.Graphics;
 
                 g.ScaleTransform(viewScale, viewScale);
-
-                cursorZones = string.Empty;
+                viewCullRect = new RectangleF(0, 0, pView.ClientSize.Width / viewScale, pView.ClientSize.Height / viewScale);
                 foreach (var level in Enum.GetValues(typeof(MapLevel)))
                 {
                     foreach (var map in allmaps)
@@ -901,8 +1014,19 @@ namespace AAEmu.DBViewer
                             DrawMap(g, map);
                 }
 
+                // Second pass: road overlays always end up on top of every map image
+                foreach (var level in Enum.GetValues(typeof(MapLevel)))
+                {
+                    foreach (var map in allmaps)
+                        if ((map.MapLevel == (MapLevel)level) && (map.InstanceName == cbInstanceSelect.Text))
+                            DrawRoadOverlay(g, map);
+                }
+
                 if (topMostMap != null)
+                {
                     DrawMap(g, topMostMap);
+                    DrawRoadOverlay(g, topMostMap);
+                }
 
                 // Draw Grid
                 if (rbGridUnits.Checked || rbGridCells.Checked || rbGridGeo.Checked || rbGridPaths.Checked)
@@ -964,6 +1088,105 @@ namespace AAEmu.DBViewer
                     foreach (var subzoneArea in subzone)
                         DrawPath(g, subzoneArea, tsbNamesSubzone.Checked);
 
+                // Zone sectors
+                var xmlMap = MapViewWorldXML.instances.FirstOrDefault(x => x.WorldName == cbInstanceSelect.Text);
+                if (xmlMap != null && cbZoneBorders.Checked)
+                {
+                    zoneKeyFont ??= new Font(Font.FontFamily, 64f);
+                    var col = Color.Fuchsia;
+                    var colorSelect = -1;
+                    foreach (var zoneInfo in xmlMap.zones.Values)
+                    {
+                        var markThisZoneGroup = false;
+                        if (topMostMap != null)
+                        {
+                            var zone = AaDb.GetZoneByKey(zoneInfo.zone_key);
+                            if (zone != null && zone.GroupId > 0 && zone.GroupId == topMostMap.ZoneGroup)
+                                markThisZoneGroup = true;
+                        }
+
+                        if (zoneInfo.zone_key == cursorZoneKey)
+                            markThisZoneGroup = true;
+                        // The color cycle advances before any culling so zone colors stay stable while panning
+                        colorSelect++;
+                        switch (colorSelect)
+                        {
+                            case 0:
+                                col = Color.DarkRed;
+                                break;
+                            case 1:
+                                col = Color.DarkGreen;
+                                break;
+                            case 2:
+                                col = Color.DarkBlue;
+                                break;
+                            case 3:
+                                col = Color.DarkOrange;
+                                break;
+                            case 4:
+                                col = Color.CadetBlue;
+                                break;
+                            case 5:
+                                col = Color.DarkSeaGreen;
+                                break;
+                            case 6:
+                                col = Color.PaleGoldenrod;
+                                break;
+                            default:
+                                col = Color.Purple;
+                                colorSelect = -1;
+                                break;
+                        }
+
+                        if (zoneInfo.Cells.Count <= 0)
+                            continue;
+
+                        // The outline polygons and world bounds are cached per zone; rescanning
+                        // every sector with per-sector neighbor lookups made every frame crawl
+                        zoneInfo.EnsureSectorCache();
+                        if (zoneInfo.OutlineLoops.Count <= 0)
+                            continue;
+
+                        var wb = zoneInfo.WorldBounds;
+                        var zoneCanvasRect = new RectangleF(ViewOffset.X + wb.X, ViewOffset.Y - wb.Bottom, wb.Width, wb.Height);
+                        if (!viewCullRect.IntersectsWith(zoneCanvasRect))
+                            continue;
+
+                        using (var outline = new GraphicsPath(FillMode.Alternate))
+                        {
+                            foreach (var loop in zoneInfo.OutlineLoops)
+                            {
+                                var pts = new PointF[loop.Length];
+                                for (var i = 0; i < loop.Length; i++)
+                                    pts[i] = new PointF(ViewOffset.X + loop[i].X, ViewOffset.Y - loop[i].Y);
+                                outline.AddPolygon(pts);
+                            }
+
+                            g.DrawPath(GetZoneBorderPen(col), outline);
+
+                            if (markThisZoneGroup)
+                            {
+                                using (var markBrush = new HatchBrush(HatchStyle.DottedGrid, zoneInfo.zone_key == cursorZoneKey ? Color.Yellow : col, Color.Transparent))
+                                    g.FillPath(markBrush, outline);
+                            }
+                        }
+
+                        // place zoneKey name in the middle of the bounding box
+                        var cx = zoneCanvasRect.X + (zoneCanvasRect.Width / 2f);
+                        var cy = zoneCanvasRect.Y + (zoneCanvasRect.Height / 2f);
+                        var textSize = g.MeasureString(zoneInfo.name, zoneKeyFont);
+                        if (zoneInfo.zone_key == cursorZoneKey)
+                        {
+                            g.FillRectangle(Brushes.Black, cx - (textSize.Width / 2), cy - (textSize.Height / 2), textSize.Width, textSize.Height);
+                            g.DrawString(zoneInfo.name, zoneKeyFont, Brushes.Yellow, cx - (textSize.Width / 2), cy - (textSize.Height / 2));
+                        }
+                        else
+                        {
+                            g.DrawString(zoneInfo.name, zoneKeyFont, Brushes.Black, cx - (textSize.Width / 2), cy - (textSize.Height / 2));
+                        }
+                    }
+                }
+
                 if (cbFocus.Checked)
                     g.DrawRectangle(Pens.OrangeRed, ViewOffset.X + FocusBorder.X, ViewOffset.Y - FocusBorder.Y - FocusBorder.Height, FocusBorder.Width, FocusBorder.Height);
 
@@ -987,11 +1210,11 @@ namespace AAEmu.DBViewer
 
         private Bitmap PackedImageToBitmap(string packedFileFolder, string packedFileName)
         {
-            if (MainForm.ThisForm.Pak.IsOpen)
+            if (ClientFileManager.HasValidSources())
             {
                 var fn = packedFileFolder + packedFileName;
 
-                if (MainForm.ThisForm.Pak.FileExists(packedFileFolder + Properties.Settings.Default.DefaultGameLanguage + "/" + packedFileName))
+                if (ClientFileManager.FileExists(packedFileFolder + Properties.Settings.Default.DefaultGameLanguage + "/" + packedFileName))
                 {
                     fn = packedFileFolder + Properties.Settings.Default.DefaultGameLanguage + "/" + packedFileName;
                 }
@@ -1002,17 +1225,18 @@ namespace AAEmu.DBViewer
 
         private Bitmap PackedImageToBitmap(string fn)
         {
-            if (MainForm.ThisForm.Pak.IsOpen)
+            if (ClientFileManager.HasValidSources())
             {
-                if (MainForm.ThisForm.Pak.FileExists(fn))
+                if (ClientFileManager.FileExists(fn))
                 {
                     try
                     {
-                        var fStream = MainForm.ThisForm.Pak.ExportFileAsStream(fn);
+                        var fStream = ClientFileManager.GetFileStream(fn);
                         return AAEmu.Tools.BitmapUtil.ReadDDSFromStream(fStream);
                     }
                     catch
                     {
+                        // Ignore errors, return null
                     }
                 }
             }
@@ -1029,12 +1253,13 @@ namespace AAEmu.DBViewer
                 var dx = (int)Math.Floor((startDragPos.X - e.X) / viewScale);
                 var dy = (int)Math.Floor((startDragPos.Y - e.Y) / viewScale);
                 ViewOffset = new Point(startDragOffset.X - dx, startDragOffset.Y - dy);
-                pView.Refresh();
+                // Invalidate instead of Refresh so the message loop can coalesce repaints while panning
+                pView.Invalidate();
             }
             else
             {
                 if ((rulerCoords.X != 0) || (rulerCoords.Y != 0))
-                    pView.Refresh();
+                    pView.Invalidate();
             }
             updateStatusBar();
         }
@@ -1110,6 +1335,7 @@ namespace AAEmu.DBViewer
             newMap.Name = displayName;
             newMap.MapLevel = level;
             newMap.MapImageFile = fileName;
+            newMap.BaseFileName = fileName;
             newMap.ZoneGroup = zone_group_id;
 
             if (zone_group_id > 0)
@@ -1121,12 +1347,12 @@ namespace AAEmu.DBViewer
 
             // MainMap
             var fn = string.Empty;
-            if (MainForm.ThisForm.Pak.IsOpen)
+            if (ClientFileManager.HasValidSources())
             {
                 var fList = MapViewImageRef.ListPossibleFileNames(fileName, Properties.Settings.Default.DefaultGameLanguage);
                 foreach (var fName in fList)
                 {
-                    if (MainForm.ThisForm.Pak.FileExists(fName))
+                    if (ClientFileManager.FileExists(fName))
                     {
                         fn = fName;
                         newMap.MapImageFile = fn;
@@ -1154,12 +1380,12 @@ namespace AAEmu.DBViewer
             {
                 newMap.RoadMapOffset = roadRef.Offset;
                 newMap.RoadMapCoords = roadRef.Rect;
-                if (MainForm.ThisForm.Pak.IsOpen)
+                if (ClientFileManager.HasValidSources())
                 {
                     var fList = roadRef.GetPossibleFileNames(Properties.Settings.Default.DefaultGameLanguage);
                     foreach (var fName in fList)
                     {
-                        if (MainForm.ThisForm.Pak.FileExists(fName))
+                        if (ClientFileManager.FileExists(fName))
                         {
                             fn = fName;
                             newMap.RoadImageFile = fn;
@@ -1169,9 +1395,23 @@ namespace AAEmu.DBViewer
                 }
             }
             if (fn != string.Empty)
+            {
                 newMap.RoadBitmapImage = PackedImageToBitmap(fn);
-            else
-                newMap.RoadBitmapImage = PackedImageToBitmap("game/ui/map/world/", fileName + "_road_100.dds");
+            }
+            else if (ClientFileManager.HasValidSources())
+            {
+                // No minimap reference matched (newer clients ship no road .g data);
+                // probe every known road file layout directly
+                foreach (var fName in MapViewMiniMapRef.ListPossibleFileNames(fileName, 100, Properties.Settings.Default.DefaultGameLanguage))
+                {
+                    if (ClientFileManager.FileExists(fName))
+                    {
+                        newMap.RoadImageFile = fName;
+                        newMap.RoadBitmapImage = PackedImageToBitmap(fName);
+                        break;
+                    }
+                }
+            }
 
 
             allmaps.Add(newMap);
@@ -1575,6 +1815,27 @@ namespace AAEmu.DBViewer
                         zci.X = zcX;
                         zci.Y = zcY;
                         zci.bounds = new Rectangle(zcX * 1024, zcY * 1024, 1024, 1024);
+                        
+                        var sectors = zoneCells[zc].SelectNodes("sectorList/sector");
+                        for (var sc = 0; sc < sectors.Count; sc++)
+                        {
+                            var sectorAttributes = XmlHelper.ReadNodeAttributes(sectors[sc]);
+                            var sectorX = 0;
+                            var sectorY = 0;
+                            foreach (var sectorAttrib in sectorAttributes)
+                            {
+                                switch (sectorAttrib.Key)
+                                {
+                                    case "x":
+                                        sectorX = int.Parse(sectorAttrib.Value);
+                                        break;
+                                    case "y":
+                                        sectorY = int.Parse(sectorAttrib.Value);
+                                        break;
+                                }
+                            }
+                            zci.SectorList.Add((sectorX, sectorY));
+                        }
                         newZI.Cells.Add(zci);
                     }
 
@@ -1634,8 +1895,13 @@ namespace AAEmu.DBViewer
 
         public MapViewWorldXMLZoneCellInfo GetCellByPosition(int x, int y)
         {
+            var point = new Point(x, y);
             foreach (var zone in zones)
             {
+                // The cached sector set rejects zones in O(1) before the linear cell scan
+                if (!zone.Value.Contains(point))
+                    continue;
+
                 var cell = zone.Value.FindCell(x, y);
                 if (cell != null)
                     return cell;
