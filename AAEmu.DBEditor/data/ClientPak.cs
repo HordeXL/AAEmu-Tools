@@ -145,7 +145,7 @@ namespace AAEmu.DBEditor.data
 
             if (!Pak.OpenPak(fileName, true))
             {
-                MainForm.Self.UpdateProgress("加载客户端PAK失败,无法打开文件： " + fileName);
+                MainForm.Self.UpdateProgress("加载客户端 PAK 失败，无法打开文件：" + fileName);
                 Pak.ClosePak();
                 Pak = null;
                 FileName = string.Empty;

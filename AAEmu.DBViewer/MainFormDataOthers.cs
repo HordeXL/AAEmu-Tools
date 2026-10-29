@@ -490,7 +490,7 @@ public partial class MainForm
                 }
                 string d = string.Empty;
                 if (z.IsDiplomacyTgt)
-                    d += "Is Target ";
+                    d += "是目标 ";
                 if (z.DiplomacyLinkId != 0)
                 {
                     d += AaDb.GetFactionName(z.DiplomacyLinkId, true);
@@ -545,7 +545,7 @@ public partial class MainForm
 
             string d = string.Empty;
             if (z.IsDiplomacyTgt)
-                d += "Is Target ";
+                d += "是目标 ";
             if (z.DiplomacyLinkId != 0)
             {
                 d += AaDb.GetFactionName(z.DiplomacyLinkId, true);
@@ -587,7 +587,7 @@ public partial class MainForm
         else
         {
             lFactionID.Text = "0";
-            lFactionName.Text = "<none>";
+            lFactionName.Text = "<无>";
             lFactionOwnerName.Text = "";
             lFactionOwnerTypeID.Text = "";
             lFactionOwnerID.Text = "";
@@ -616,7 +616,7 @@ public partial class MainForm
 
         using (var loading = new LoadingForm())
         {
-            loading.ShowInfo("Searching in zones: " + AaDb.DbZoneGroups.Count.ToString());
+            loading.ShowInfo("正在搜索区域：" + AaDb.DbZoneGroups.Count.ToString());
             loading.Show();
 
             var zoneCount = 0;
@@ -626,7 +626,7 @@ public partial class MainForm
                 if (zg != null)
                 {
                     zoneCount++;
-                    loading.ShowInfo("Searching in zones: " + zoneCount.ToString() + "/" +
+                    loading.ShowInfo("正在搜索区域：" + zoneCount.ToString() + "/" +
                                      AaDb.DbZoneGroups.Count.ToString());
                     npcList.AddRange(GetNpcSpawnsInZoneGroup(zg.Id, false));
                 }
@@ -1268,7 +1268,7 @@ public partial class MainForm
         }
         catch (Exception x)
         {
-            MessageBox.Show("创建导出目录失败: " + LookupExportPath + "\r\n" + x.Message);
+            MessageBox.Show("创建导出目录失败：" + LookupExportPath + "\r\n" + x.Message);
             return;
         }
 
@@ -1422,7 +1422,7 @@ public partial class MainForm
         {
             if (!ClientFileManager.HasValidSources())
             {
-                MessageBox.Show(@"Game Pak file was not loaded !");
+                MessageBox.Show(@"未加载 game_pak 文件！");
                 return;
             }
 
@@ -1592,7 +1592,7 @@ public partial class MainForm
                             }
                             else if (isTransfers && AaDb.DbTransfers.TryGetValue(spawner.UnitId, out var transfer))
                             {
-                                ni.Name = "Model: " + transfer.ModelId.ToString();
+                                ni.Name = "模型：" + transfer.ModelId.ToString();
                                 ni.PoIColor = Color.Navy;
                                 ni.TypeId = transfer.Id;
                                 ni.SourceObject = transfer;
@@ -1638,7 +1638,7 @@ public partial class MainForm
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPoICount() > 0)
-                if (MessageBox.Show("保留当前 PoI ?", "添加自定义 Json 数据", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前兴趣点？", "添加自定义 JSON 数据", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPoI();
 
@@ -1651,7 +1651,7 @@ public partial class MainForm
             map.Refresh();
 
             if (allPoIs.Count > 10000)
-                MessageBox.Show($"Done loading {allPoIs.Count} items");
+                MessageBox.Show($"已加载 {allPoIs.Count} 个兴趣点");
         }
 
         Cursor = Cursors.Default;
@@ -1736,7 +1736,7 @@ public partial class MainForm
         using (var loading = new LoadingForm())
         {
             loading.Show();
-            loading.ShowInfo("Searching for cell entities");
+            loading.ShowInfo("正在搜索单元格实体");
             var worldXml = MapViewWorldXML.GetInstanceByName(worldName);
 
             for (var y = 0; y <= worldXml.CellCount.Y; y++)
@@ -1754,11 +1754,11 @@ public partial class MainForm
             var map = MapViewForm.GetMap();
             map.Show();
             if (map.GetPathCount() > 0)
-                if (MessageBox.Show("保留当前路径?", "添加区域形状", MessageBoxButtons.YesNo,
+                if (MessageBox.Show("保留当前路径？", "添加区域形状", MessageBoxButtons.YesNo,
                         MessageBoxIcon.Question) == DialogResult.No)
                     map.ClearPaths();
 
-            loading.ShowInfo("Adding " + allAreaShapes.Count.ToString() + " areas");
+            loading.ShowInfo("正在添加 " + allAreaShapes.Count.ToString() + " 个区域");
 
             foreach (var p in allAreaShapes)
                 map.AddPath(p);
@@ -1878,7 +1878,7 @@ public partial class MainForm
         foreach (var i in buffs)
         {
             if (groupNode == null)
-                groupNode = tvTagInfo.Nodes.Add("Buffs");
+                groupNode = tvTagInfo.Nodes.Add("增益");
             AddCustomPropertyNode("buff_id", i.TargetId.ToString(), false, groupNode);
         }
 
@@ -1889,7 +1889,7 @@ public partial class MainForm
         foreach (var i in items)
         {
             if (groupNode == null)
-                groupNode = tvTagInfo.Nodes.Add("Items");
+                groupNode = tvTagInfo.Nodes.Add("物品");
             AddCustomPropertyNode("item_id", i.TargetId.ToString(), false, groupNode);
         }
 
@@ -1900,7 +1900,7 @@ public partial class MainForm
         foreach (var i in npcs)
         {
             if (groupNode == null)
-                groupNode = tvTagInfo.Nodes.Add("NPCs");
+                groupNode = tvTagInfo.Nodes.Add("NPC");
             AddCustomPropertyNode("npc_id", i.TargetId.ToString(), false, groupNode);
         }
 
@@ -1911,7 +1911,7 @@ public partial class MainForm
         foreach (var i in skills)
         {
             if (groupNode == null)
-                groupNode = tvTagInfo.Nodes.Add("Skills");
+                groupNode = tvTagInfo.Nodes.Add("技能");
             AddCustomPropertyNode("skill_id", i.TargetId.ToString(), false, groupNode);
         }
 
@@ -1922,7 +1922,7 @@ public partial class MainForm
         foreach (var i in zones)
         {
             if (groupNode == null)
-                groupNode = tvTagInfo.Nodes.Add("Zone Groups (banned tags)");
+                groupNode = tvTagInfo.Nodes.Add("区域组（禁用标签）");
             AddCustomPropertyNode("zone_group_id", i.ZoneGroupId.ToString(), false, groupNode);
         }
 
@@ -1963,8 +1963,8 @@ public partial class MainForm
                 if (c >= 250)
                 {
                     MessageBox.Show(
-                        "The results were cut off at " + c.ToString() + " items, please refine your search !",
-                        "Too many entries", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "搜索结果已截断（仅显示 " + c.ToString() + " 个物品），请优化搜索条件！",
+                        "条目过多", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 }
             }
@@ -2388,20 +2388,20 @@ public partial class MainForm
             {
                 item = null;
                 LAchievementReward.Image = null;
-                LAchievementReward.Text = "No Reward";
+                LAchievementReward.Text = "无奖励";
             }
 
             t = $"|nd;{a.NameLocalized}|r ( {a.Id} )\r" +
-                $"Category: {a.CategoryId} - {a.SubCategoryId}\r" +
-                $"\rSummary:\r" +
+                $"分类：{a.CategoryId} - {a.SubCategoryId}\r" +
+                $"\r摘要：\r" +
                 $"{a.SummaryLocalized}\r" +
-                $"\rDescription:\r" +
+                $"\r描述：\r" +
                 $"{a.DescriptionLocalized}\r" +
                 $"\r";
 
             if (item != null)
             {
-                t += $"Reward:\r|ni;{item.NameLocalized}|r ( {item.Id} )\r" +
+                t += $"奖励：\r|ni;{item.NameLocalized}|r ( {item.Id} )\r" +
                      $"\r";
             }
 
@@ -2409,11 +2409,11 @@ public partial class MainForm
             if (objectives.Any())
             {
                 // No idea why CompleteOr == true => ALL of the objectives
-                t += $"{(a.CompleteOr ? "|ni;Any|r" : "|nd;ALL|r")} of objectives{(a.CompleteNum > 1 ? $" x |ni;{a.CompleteNum}|r" : "")}:\r";
+                t += $"{(a.CompleteOr ? "|ni;任意|r" : "|nd;全部|r")}个目标{(a.CompleteNum > 1 ? $" x |ni;{a.CompleteNum}|r" : "")}：\r";
 
                 foreach (var objective in objectives)
                 {
-                    t += $"Id:{objective.Id}, RecordId: {objective.RecordId} (unit_reqs: {(objective.OrUnitReqs ? "Any" : "ALL")})\r";
+                    t += $"ID：{objective.Id}, 记录ID：{objective.RecordId}（条件：{(objective.OrUnitReqs ? "任意" : "全部")}）\r";
                     var charRecord = AaDb.DbCharRecords.GetValueOrDefault(objective.RecordId);
                     if (charRecord != null)
                     {
@@ -2619,7 +2619,7 @@ public partial class MainForm
             LAchievementIcon.Image = null;
             LAchievementIcon.Text = "???";
             LAchievementReward.Image = null;
-            LAchievementReward.Text = "No Reward";
+            LAchievementReward.Text = "无奖励";
         }
 
         FormattedTextToRichtEdit(t, RtAchievementInfo);

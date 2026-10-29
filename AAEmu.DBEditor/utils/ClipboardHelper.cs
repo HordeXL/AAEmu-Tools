@@ -112,7 +112,7 @@ namespace AAEmu.DBEditor.utils
                     catch
                     {
                         // ex from first exception
-                        System.Windows.Forms.MessageBox.Show(ex.Message, "Copy to Clipboard", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                        System.Windows.Forms.MessageBox.Show(ex.Message, "复制到剪贴板", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                         // LogAndShowMessage(ex);
                     }
                 }

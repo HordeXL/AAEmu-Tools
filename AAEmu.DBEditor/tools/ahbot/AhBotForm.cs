@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
@@ -234,7 +234,7 @@ namespace AAEmu.DBEditor.tools.ahbot
                     cbGrade.SelectedIndex = cbGrade.Items.Count - 1;
 
                 /*
-                Log("Populating AH Listing");
+                Log("正在生成拍卖行列表");
                 // Populate Items
                 foreach (var item in Data.Server.CompactSqlite.Items.Where(x =>
                              (x.Price > 1) && (x.Refund > 1) && (x.AuctionACategoryId > 0)))
@@ -1085,7 +1085,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             }
             else
             {
-                lBuyOutPreview.Text = @"Invalid";
+                lBuyOutPreview.Text = @"无效";
                 lListingInfo.Text = @"?";
             }
         }
@@ -1110,7 +1110,7 @@ namespace AAEmu.DBEditor.tools.ahbot
             }
             else
             {
-                lStartBidPreview.Text = @"Invalid";
+                lStartBidPreview.Text = @"无效";
                 lListingInfo.Text = @"?";
             }
 
@@ -1132,7 +1132,7 @@ namespace AAEmu.DBEditor.tools.ahbot
 
             SelectedItem = item;
             lItemId.Text = item.Id.ToString();
-            lItemName.Text = Data.Server.LocalizedText.GetValueOrDefault(("items", "name", item.Id)) ?? "<error>";
+            lItemName.Text = Data.Server.LocalizedText.GetValueOrDefault(("items", "name", item.Id)) ?? "<错误>";
             if (item.FixedGrade >= 0)
             {
                 cbGrade.SelectedIndex = (int)(item.FixedGrade ?? 0);

@@ -94,7 +94,7 @@ namespace AAEmu.DBViewer
             using (var loadingform = new LoadingForm())
             {
                 loadingform.Show();
-                loadingform.ShowInfo("Preparing map data ...");
+                loadingform.ShowInfo("正在准备地图数据 ...");
 
                 pb.SetBounds(0, 0, 35536, 35536);
 
@@ -513,9 +513,9 @@ namespace AAEmu.DBViewer
         private void updateStatusBar()
         {
             var lastCursorZoneKey = cursorZoneKey;
-            tsslZoom.Text = "Zoom: " + (viewScale * 100).ToString() + "%";
+            tsslZoom.Text = "缩放：" + (viewScale * 100).ToString() + "%";
 
-            tsslViewOffset.Text = "View X:" + ViewOffset.X.ToString() + " Y:" + ViewOffset.Y.ToString();
+            tsslViewOffset.Text = "视图 X：" + ViewOffset.X.ToString() + " Y：" + ViewOffset.Y.ToString();
 
             // While panning, skip the cursor hit-testing and the menu rebuilds entirely; they run
             // again on mouse-up and dominated the per-move cost of a drag
@@ -555,8 +555,8 @@ namespace AAEmu.DBViewer
             var zoneText = GetCursorZones();
             var pathText = GetCursorPaths();
             var poiText = GetCursorPoI();
-            tsslSelectionInfo.Text = "inside: " + zoneText + (pathText.Length > 0 ? " - " + pathText : "");
-            tsslPoIInfo.Text = "nearby: " + poiText;
+            tsslSelectionInfo.Text = "所在区域：" + zoneText + (pathText.Length > 0 ? " - " + pathText : "");
+            tsslPoIInfo.Text = "附近：" + poiText;
 
             // Rebuilding the three drop-down menus is only needed when the hovered items changed;
             // doing it on every mouse move made hovering noticeably laggy

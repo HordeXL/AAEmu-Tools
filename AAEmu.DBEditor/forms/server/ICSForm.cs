@@ -1,4 +1,4 @@
-using AAEmu.DBEditor.data;
+﻿using AAEmu.DBEditor.data;
 using AAEmu.DBEditor.forms.client;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -304,7 +304,7 @@ namespace AAEmu.DBEditor.forms.server
                 while (lvMenuItemsTab.Groups.Count < thisPage)
                 {
                     var newPage = (lvMenuItemsTab.Groups.Count + 1);
-                    lvMenuItemsTab.Groups.Add(newPage.ToString(), "页 " + newPage.ToString());
+                    lvMenuItemsTab.Groups.Add(newPage.ToString(), "第 " + newPage.ToString() + " 页");
                 }
                 // item.Group = lvMenuItemsTab.Groups[thisPage.ToString()];
                 if (item.Tag is IcsMenu menuItem)

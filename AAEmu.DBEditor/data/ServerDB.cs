@@ -47,19 +47,20 @@ namespace AAEmu.DBEditor.data
             try
             {
                 var locals = context.LocalizedTexts.ToList();
+                var language = ProgramSettings.NormalizeClientLanguage(ProgramSettings.Instance.ClientLanguage);
                 foreach (var localize in locals)
                 {
                     var s = localize.EnUs;// localize.Ko;
-                    switch (ProgramSettings.Instance.ClientLanguage.ToLower())
+                    switch (language)
                     {
-                        case "韩语": s = localize.Ko; break;
-                        case "英语": s = localize.EnUs; break;
-                        case "俄语": s = localize.Ru; break;
-                        case "德语": s = localize.De; break;
-                        case "法语": s = localize.Fr; break;
-                        case "简中": s = localize.ZhCn; break;
-                        case "繁中": s = localize.ZhTw; break;
-                        case "日语": s = localize.Ja; break;
+                        case "ko": s = localize.Ko; break;
+                        case "en_us": s = localize.EnUs; break;
+                        case "ru": s = localize.Ru; break;
+                        case "de": s = localize.De; break;
+                        case "fr": s = localize.Fr; break;
+                        case "zh_cn": s = localize.ZhCn; break;
+                        case "zh_tw": s = localize.ZhTw; break;
+                        case "ja": s = localize.Ja; break;
                     }
                     LocalizedText.Add(new(localize.TblName, localize.TblColumnName, localize.Idx), s);
                 }

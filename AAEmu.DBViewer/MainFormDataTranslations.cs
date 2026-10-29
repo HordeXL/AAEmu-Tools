@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using AAEmu.DBViewer.DbDefs;
@@ -8,8 +9,95 @@ namespace AAEmu.DBViewer;
 
 public partial class MainForm
 {
+    private static readonly Dictionary<string, string> CustomTranslationZh = new()
+    {
+        ["[Friendly]"] = "[友好]",
+        ["[Neutral]"] = "[中立]",
+        ["[Hostile]"] = "[敌对]",
+        ["[Deforestation - Trees]"] = "[伐木 - 树木]",
+        ["[Picking - Herbs]"] = "[采集 - 草药]",
+        ["[Mining - Minerals]"] = "[采矿 - 矿物]",
+        ["[Livestock - Livestock]"] = "[畜牧 - 牲畜]",
+        ["[Other - Mailbox]"] = "[其他 - 邮箱]",
+        ["[Workbench - Pension item]"] = "[工作台 - 寄售物品]",
+        ["[Workbench - Architecture]"] = "[工作台 - 建筑]",
+        ["[Workbench - Cooking]"] = "[工作台 - 烹饪]",
+        ["[Workbench - Handicraft]"] = "[工作台 - 手工艺]",
+        ["[Others - Quest]"] = "[其他 - 任务]",
+        ["[Agriculture - Crops]"] = "[农业 - 作物]",
+        ["[Others - Skill]"] = "[其他 - 技能]",
+        ["[Collect - Water]"] = "[采集 - 水]",
+        ["[Collect - Soil]"] = "[采集 - 土壤]",
+        ["[Workbench - Machine]"] = "[工作台 - 机械]",
+        ["[Workbench - Metal]"] = "[工作台 - 金属]",
+        ["[Workbench - Crest]"] = "[工作台 - 纹章]",
+        ["[Workbench - Masonry]"] = "[工作台 - 石工]",
+        ["[Workbench - Fabric]"] = "[工作台 - 布料]",
+        ["[Workbench - Leather]"] = "[工作台 - 皮革]",
+        ["[Workbench - Weapons]"] = "[工作台 - 武器]",
+        ["[Workbench - Wood]"] = "[工作台 - 木材]",
+        ["[Others - Interaction]"] = "[其他 - 交互]",
+        ["[Others - Level]"] = "[其他 - 等级]",
+        ["[Interaction - Sales]"] = "[交互 - 销售]",
+        ["[Interaction - Adventure T1]"] = "[交互 - 冒险 T1]",
+        ["[Interaction - Adventure T2]"] = "[交互 - 冒险 T2]",
+        ["[Interaction - Adventure T3]"] = "[交互 - 冒险 T3]",
+        ["[Interaction - Adventure T4]"] = "[交互 - 冒险 T4]",
+        ["[Interaction - Adventure T5]"] = "[交互 - 冒险 T5]",
+        ["[Interaction - Adventure T6]"] = "[交互 - 冒险 T6]",
+        ["[Interaction - Adventure T7]"] = "[交互 - 冒险 T7]",
+        ["[Interaction - Backpack]"] = "[交互 - 背包]",
+        ["[Interaction - Excavation]"] = "[交互 - 挖掘]",
+        ["[Agriculture - Marine Crops]"] = "[农业 - 海洋作物]",
+        ["[Marine related]"] = "[海洋相关]",
+        ["[Portal - Space gap]"] = "[传送门 - 空间裂隙]",
+        ["[Portal - Mirage Island]"] = "[传送门 - 幻影岛]",
+        ["[Portal - Instance Dungeon]"] = "[传送门 - 副本]",
+        ["[Workbench - Specialties]"] = "[工作台 - 特产]",
+        ["[Unused]"] = "[未使用]",
+        ["[Workbench - Archeum]"] = "[工作台 - 源晶]",
+        ["[Workbench - Cloth Armor]"] = "[工作台 - 布甲]",
+        ["[Workbench - Leather Armor]"] = "[工作台 - 皮甲]",
+        ["[Workbench - Woodworking]"] = "[工作台 - 木工]",
+        ["[Workbench - Metal Armor]"] = "[工作台 - 板甲]",
+        ["[Others - Spatial Records]"] = "[其他 - 空间记录]",
+        ["[Others - Quest (hunting grounds)]"] = "[其他 - 任务（猎场）]",
+        ["[Normal Treasure]"] = "[普通宝藏]",
+        ["[Grand Treasure]"] = "[高级宝藏]",
+        ["[Rare Treasure]"] = "[稀有宝藏]",
+        ["[Arcane Treasure]"] = "[神秘宝藏]",
+        ["[Heroic Treasure]"] = "[英雄宝藏]",
+        ["[Housing Area Marker - General Residential Area]"] = "[住宅区标记 - 普通住宅区]",
+        ["[Housing Area Marker - Marine Residential Area]"] = "[住宅区标记 - 海洋住宅区]",
+        ["[Housing Area Marker - Luxury Residential Area]"] = "[住宅区标记 - 高级住宅区]",
+        ["[Housing Area Marker - Thatched Farmhouse Area]"] = "[住宅区标记 - 茅草农舍区]",
+        ["[Fish]"] = "[鱼类]",
+        ["[Workbench - Paper]"] = "[工作台 - 纸张]",
+        ["[Workbench - Printing]"] = "[工作台 - 印刷]",
+        ["[Housing - Doors/Windows]"] = "[房屋 - 门窗]",
+        ["[Housing - Furniture]"] = "[房屋 - 家具]",
+        ["[Fish Furniture]"] = "[鱼类家具]",
+        ["[Fish Stand]"] = "[鱼摊]",
+        ["[Others - Quest_Do not apply frost protection]"] = "[其他 - 任务（不应用霜冻保护）]",
+        ["[Housing Area Marker - Straw Hat Scarecrow Garden]"] = "[住宅区标记 - 草帽稻草人花园]",
+        ["[Housing Area Marker - Private Pumpkin Scarecrow Garden]"] = "[住宅区标记 - 私人南瓜稻草人花园]",
+        ["[Housing Area Marker - Water Residential Area]"] = "[住宅区标记 - 水上住宅区]",
+        ["[Holy Statue?]"] = "[神圣雕像？]",
+        ["[Backpack Storage]"] = "[背包仓库]",
+        ["[Workbench - Art]"] = "[工作台 - 艺术]",
+        ["[No fishing allowed]"] = "[禁止钓鱼]",
+        ["[Summon Guard/Pet]"] = "[召唤守卫/宠物]",
+        ["[Can't use the training arena]"] = "[无法使用训练场]",
+        ["[Instance Worldview]"] = "[副本世界观]",
+        ["[Snowman Event]"] = "[雪人活动]",
+        ["[Library Items and Skill restricted]"] = "[图书馆物品与技能限制]",
+    };
+
     private static void AddCustomTranslation(string table, string field, long idx, string val)
     {
+        if ((Properties.Settings.Default.DefaultGameLanguage ?? string.Empty).StartsWith("zh", StringComparison.OrdinalIgnoreCase))
+            val = CustomTranslationZh.GetValueOrDefault(val, val);
+
         // Try overriding if empty
         foreach (var tl in AaDb.DbTranslations)
         {
@@ -166,26 +254,29 @@ public partial class MainForm
                         if (columnNames == null)
                         {
                             columnNames = reader.GetColumnNames();
+                            var showWarning = !string.Equals(lng, "zh_cn", StringComparison.OrdinalIgnoreCase);
                             if (columnNames.IndexOf(lng) < 0)
                             {
                                 // selected language not found, revert to en_us or ko as default
 
                                 if (columnNames.IndexOf("en_us") >= 0)
                                 {
-                                    MessageBox.Show("选择的语言 \"" + lng +
-                                                    "\" 在 localized_texts 中未找到!\r\n" +
-                                                    "已回退到英语",
-                                        "语言未找到",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if (showWarning)
+                                        MessageBox.Show("选择的语言 \"" + lng +
+                                                        "\" 在 localized_texts 中未找到!\r\n" +
+                                                        "已回退到英语",
+                                            "语言未找到",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     lng = "en_us";
                                 }
                                 else if (columnNames.IndexOf("ko") >= 0)
                                 {
-                                    MessageBox.Show("选择的语言 \"" + lng +
-                                                    "\" 在 localized_texts 中未找到!\r\n" +
-                                                    "已回退到韩语",
-                                        "语言未找到",
-                                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if (showWarning)
+                                        MessageBox.Show("选择的语言 \"" + lng +
+                                                        "\" 在 localized_texts 中未找到!\r\n" +
+                                                        "已回退到韩语",
+                                            "语言未找到",
+                                            MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     lng = "ko";
                                 }
                                 else

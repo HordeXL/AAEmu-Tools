@@ -838,23 +838,23 @@ public partial class MainForm
     {
         switch (id)
         {
-            case 1: return "Level (1)";
-            case 2: return "Relation (2)";
-            case 3: return "Direction (3)";
-            case 4: return "Unk4 (4)";
-            case 5: return "BuffTag (5)";
-            case 6: return "WeaponEquipStatus (6)";
-            case 7: return "Chance (7)";
-            case 8: return "Dead (8)";
-            case 9: return "CombatDiceResult (9)";
-            case 10: return "InstrumentType (10)";
-            case 11: return "Range (11)";
-            case 12: return "Variable (12)";
-            case 13: return "UnitAttrib (13)";
-            case 14: return "ActAbility (14)";
-            case 15: return "Stealth (15)";
-            case 16: return "Visible (16)";
-            case 17: return "ABLevel (17)";
+            case 1: return "等级 (1)";
+            case 2: return "关系 (2)";
+            case 3: return "方向 (3)";
+            case 4: return "未知4 (4)";
+            case 5: return "增益标签 (5)";
+            case 6: return "武器装备状态 (6)";
+            case 7: return "概率 (7)";
+            case 8: return "死亡 (8)";
+            case 9: return "战斗掷骰结果 (9)";
+            case 10: return "乐器类型 (10)";
+            case 11: return "范围 (11)";
+            case 12: return "变量 (12)";
+            case 13: return "单位属性 (13)";
+            case 14: return "熟练度 (14)";
+            case 15: return "潜行 (15)";
+            case 16: return "可见 (16)";
+            case 17: return "熟练度等级 (17)";
             default: return id.ToString();
         }
     }
@@ -864,7 +864,7 @@ public partial class MainForm
         depth++;
         if (depth > 16)
         {
-            var overflowNode = new TreeNode("Too many recursions !");
+            var overflowNode = new TreeNode("递归层数过多！");
             overflowNode.ImageIndex = 4;
             overflowNode.SelectedImageIndex = 4;
             overflowNode.Tag = 0;
@@ -888,25 +888,25 @@ public partial class MainForm
         var plotEventConditions = AaDb.DbPlotEventConditions.Where(pec => pec.Value.EventId == child.Id);
         foreach (var plotEventCondition in plotEventConditions)
         {
-            var eventConditionName = $"Event Condition ({plotEventCondition.Value.ConditionId})";
+            var eventConditionName = $"事件条件 ({plotEventCondition.Value.ConditionId})";
             var eventConditionNode = new TreeNode(eventConditionName);
             eventConditionNode.Text = eventConditionName;
             eventConditionNode.ImageIndex = 3;
             eventConditionNode.SelectedImageIndex = 3;
             eventConditionNode.Tag = 0;
             eventNode.Nodes.Add(eventConditionNode);
-            eventConditionNode.Nodes.Add("Source: " + PlotUpdateMethod(plotEventCondition.Value.SourceId));
-            eventConditionNode.Nodes.Add("Target: " + PlotUpdateMethod(plotEventCondition.Value.TargetId));
-            eventConditionNode.Nodes.Add("Notify Failure: " + plotEventCondition.Value.NotifyFailure);
+            eventConditionNode.Nodes.Add("来源：" + PlotUpdateMethod(plotEventCondition.Value.SourceId));
+            eventConditionNode.Nodes.Add("目标：" + PlotUpdateMethod(plotEventCondition.Value.TargetId));
+            eventConditionNode.Nodes.Add("失败通知：" + plotEventCondition.Value.NotifyFailure);
             if (AaDb.DbPlotConditions.TryGetValue(plotEventCondition.Value.ConditionId, out var condition))
             {
                 eventConditionNode.Text += (condition.NotCondition ? " NOT " : " ") + ConditionTypeName(condition.KindId);
                 var compareCondition = condition.KindId is 1 or 12 or 13 or 14;
                 if (compareCondition)
                 {
-                    var param1Name = "Param1: ";
+                    var param1Name = "参数1：";
                     if (condition.KindId == 1)
-                        param1Name = "Level ";
+                        param1Name = "等级 ";
                     if (condition.KindId == 12)
                         param1Name = "VAR";
                     if (condition.KindId == 13)
@@ -933,7 +933,7 @@ public partial class MainForm
                             pNode.Text += @" <= " + condition.Param3;
                             break;
                         default:
-                            pNode.Text += $@" (operation {condition.Param2}?) " + condition.Param3;
+                            pNode.Text += $@"（操作 {condition.Param2}？）" + condition.Param3;
                             break;
                     }
                 }
@@ -941,11 +941,11 @@ public partial class MainForm
                 {
                     // eventConditionNode.Nodes.Add("Condition: " + (condition.not_condition ? "NOT " : "") + ConditionTypeName(condition.kind_id));
                     if (condition.Param1 != 0)
-                        eventConditionNode.Nodes.Add("Param1: " + condition.Param1);
+                        eventConditionNode.Nodes.Add("参数1：" + condition.Param1);
                     if (condition.Param2 != 0)
-                        eventConditionNode.Nodes.Add("Param2: " + condition.Param2);
+                        eventConditionNode.Nodes.Add("参数2：" + condition.Param2);
                     if (condition.Param3 != 0)
-                        eventConditionNode.Nodes.Add("Param3: " + condition.Param3);
+                        eventConditionNode.Nodes.Add("参数3：" + condition.Param3);
                 }
             }
         }
@@ -954,15 +954,15 @@ public partial class MainForm
         var plotEventEffects = AaDb.DbPlotEffects.Where(pec => pec.Value.EventId == child.Id).OrderBy(pec => pec.Value.Position);
         foreach (var plotEffect in plotEventEffects)
         {
-            var eventConditionName = $"Plot Effect ({plotEffect.Value.Id})";
+            var eventConditionName = $"剧情效果 ({plotEffect.Value.Id})";
             var effectNode = new TreeNode(eventConditionName);
             effectNode.ImageIndex = 2;
             effectNode.SelectedImageIndex = 2;
             effectNode.Tag = 0;
             eventNode.Nodes.Add(effectNode);
-            effectNode.Nodes.Add("Pos: " + plotEffect.Value.Position);
-            effectNode.Nodes.Add("Source: " + PlotUpdateMethod(plotEffect.Value.SourceId));
-            effectNode.Nodes.Add("Target: " + PlotUpdateMethod(plotEffect.Value.TargetId));
+            effectNode.Nodes.Add("位置：" + plotEffect.Value.Position);
+            effectNode.Nodes.Add("来源：" + PlotUpdateMethod(plotEffect.Value.SourceId));
+            effectNode.Nodes.Add("目标：" + PlotUpdateMethod(plotEffect.Value.TargetId));
             // var actualEffectNode = effectNode.Nodes.Add("Actual Effect: " + plotEffect.Value.actual_type + " (" +plotEffect.Value.actual_id + ")");
 
             CreatePlotEffectNode(plotEffect.Value.ActualType, plotEffect.Value.ActualId, effectNode, true);
@@ -973,7 +973,7 @@ public partial class MainForm
         {
             if (n.Value.NextEventId == n.Value.EventId)
             {
-                var rNode = eventNode.Nodes.Add("Repeats itself with Delay: " + n.Value.Delay + ", Speed: " + n.Value.Speed);
+                var rNode = eventNode.Nodes.Add("循环自身，延迟：" + n.Value.Delay + "，速度：" + n.Value.Speed);
                 rNode.ImageIndex = 3;
                 rNode.SelectedImageIndex = rNode.ImageIndex;
             }
@@ -983,7 +983,7 @@ public partial class MainForm
                 //AddPlotEventNode(eventNode, next, depth, "Next Plot Event: ");
 
                 var nextNode = new TreeNodeWithPlotEventReference();
-                nextNode.Text = $@"Next Event Node: {next.Id} - {next.Name}";
+                nextNode.Text = $@"下一事件节点：{next.Id} - {next.Name}";
                 nextNode.TargetEventId = next.Id;
                 nextNode.Tag = next.Id;
                 nextNode.ImageIndex = 2;
@@ -992,7 +992,7 @@ public partial class MainForm
             }
             else
             {
-                var errorNode = new TreeNode("Unknown Next Event: " + n.Value.NextEventId.ToString());
+                var errorNode = new TreeNode("未知下一事件：" + n.Value.NextEventId.ToString());
                 errorNode.ImageIndex = 4;
                 errorNode.SelectedImageIndex = 4;
                 errorNode.Tag = 0;
@@ -1065,7 +1065,7 @@ public partial class MainForm
         {
             if (effectsRoot == null)
             {
-                effectsRoot = tvSkill.Nodes.Add("Effects");
+                effectsRoot = tvSkill.Nodes.Add("效果");
                 effectsRoot.ImageIndex = 2;
                 effectsRoot.SelectedImageIndex = 2;
                 effectsRoot.Tag = 0;
@@ -1199,7 +1199,7 @@ public partial class MainForm
             lSkillCooldown.Text = MSToString(skill.CooldownTime);
             if ((skill.DefaultGcd) && (!skill.IgnoreGlobalCooldown))
             {
-                lSkillGCD.Text = "Default";
+                lSkillGCD.Text = "默认";
             }
             else if ((!skill.DefaultGcd) && (!skill.IgnoreGlobalCooldown))
             {
@@ -1207,7 +1207,7 @@ public partial class MainForm
             }
             else if ((!skill.DefaultGcd) && (skill.IgnoreGlobalCooldown))
             {
-                lSkillGCD.Text = "Ignored";
+                lSkillGCD.Text = "忽略";
             }
             else
             {
@@ -1222,7 +1222,7 @@ public partial class MainForm
             IconIdToLabel(skill.IconId, skillIcon);
             lSkillTags.Text = TagsAsString(idx, AaDb.DbTaggedSkills);
 
-            ShowSelectedData("技能", "(id = " + idx.ToString() + ")", "id ASC");
+            ShowSelectedData("skills", "(id = " + idx.ToString() + ")", "id ASC");
 
             if (skill.FirstReagentOnly)
             {
@@ -1398,12 +1398,12 @@ public partial class MainForm
         var stats = AaDb.DbUnitModifiers.Values.Where(x => x.OwnerType == "Buff" && x.OwnerId == buff_id).ToList();
         if (stats.Any())
         {
-            var statsNode = tvBuffTriggers.Nodes.Add("Stat modifiers");
+            var statsNode = tvBuffTriggers.Nodes.Add("属性修正");
             foreach (var unitStat in stats)
             {
                 var statNode = statsNode.Nodes.Add($"{unitStat.UnitAttributeId} {unitStat.Value}{(unitStat.UnitModifierTypeId != 0 ? "%" : "")}");
                 if (unitStat.LinearLevelBonus > 0)
-                    statNode.Text += $" +Linear Level Bonus: {unitStat.LinearLevelBonus}";
+                    statNode.Text += $" +线性等级加成：{unitStat.LinearLevelBonus}";
 
                 if (statNode.Text.Contains("health", StringComparison.InvariantCultureIgnoreCase))
                     statNode.ForeColor = Color.Red;
@@ -1712,8 +1712,8 @@ public partial class MainForm
                 if (c >= 250)
                 {
                     MessageBox.Show(
-                        "The results were cut off at " + c.ToString() + " buffs, please refine your search !",
-                        "Too many entries", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "搜索结果已截断（仅显示 " + c.ToString() + " 个增益），请优化搜索条件！",
+                        "条目过多", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 }
             }
@@ -1762,8 +1762,8 @@ public partial class MainForm
     private void DoSkillAfterSelect(TreeNode node)
     {
 
-        lPlotEventSourceUpdate.Text = @"Source Update: ?";
-        lPlotEventTargetUpdate.Text = @"Target Update: ?";
+        lPlotEventSourceUpdate.Text = @"来源更新：?";
+        lPlotEventTargetUpdate.Text = @"目标更新：?";
         lPlotEventP1.Text = @"1: ?";
         lPlotEventP2.Text = @"2: ?";
         lPlotEventP3.Text = @"3: ?";
@@ -1773,8 +1773,8 @@ public partial class MainForm
         lPlotEventP7.Text = @"7: ?";
         lPlotEventP8.Text = @"8: ?";
         lPlotEventP9.Text = @"9: ?";
-        lPlotEventTickets.Text = @"Tickets: ?";
-        lPlotEventAoE.Text = @"AoE: ?";
+        lPlotEventTickets.Text = @"票据：?";
+        lPlotEventAoE.Text = @"范围效果：?";
 
 
         if ((node == null) || (node.Tag == null))
@@ -1783,9 +1783,9 @@ public partial class MainForm
             return;
 
         lPlotEventSourceUpdate.Text =
-            @"Source Update Method: " + PlotUpdateMethod(plotEvent.SourceUpdateMethodId);
+            @"来源更新方式：" + PlotUpdateMethod(plotEvent.SourceUpdateMethodId);
         lPlotEventTargetUpdate.Text =
-            @"Target Update Method: " + PlotUpdateMethod(plotEvent.TargetUpdateMethodId);
+            @"目标更新方式：" + PlotUpdateMethod(plotEvent.TargetUpdateMethodId);
         lPlotEventP1.Text = @"1: " + plotEvent.TargetUpdateMethodParam1.ToString();
         lPlotEventP2.Text = @"2: " + plotEvent.TargetUpdateMethodParam2.ToString();
         lPlotEventP3.Text = @"3: " + plotEvent.TargetUpdateMethodParam3.ToString();
@@ -1795,8 +1795,8 @@ public partial class MainForm
         lPlotEventP7.Text = @"7: " + plotEvent.TargetUpdateMethodParam7.ToString();
         lPlotEventP8.Text = @"8: " + plotEvent.TargetUpdateMethodParam8.ToString();
         lPlotEventP9.Text = @"9: " + plotEvent.TargetUpdateMethodParam9.ToString();
-        lPlotEventTickets.Text = @"Tickets: " + plotEvent.Tickets.ToString();
-        lPlotEventAoE.Text = @"AoE: " + (plotEvent.AeoDiminishing ? "Diminishing" : "Normal");
+        lPlotEventTickets.Text = @"票据：" + plotEvent.Tickets.ToString();
+        lPlotEventAoE.Text = @"范围效果：" + (plotEvent.AeoDiminishing ? "递减" : "普通");
 
         ShowSelectedData("plot_events", "id == " + plotEvent.Id.ToString(), "id");
     }

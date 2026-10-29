@@ -34,7 +34,7 @@ namespace AAEmu.DBEditor
         private bool CloseAllForms()
         {
             if (OwnedForms.Length > 0)
-                if (MessageBox.Show("重新加载将关闭所有已打开表单!\r\n是否继续 ?", "重新加载", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes)
+                if (MessageBox.Show("重新加载将关闭所有已打开的窗口！\r\n是否继续？", "重新加载", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) != DialogResult.Yes)
                     return false;
 
             for (var i = OwnedForms.Length - 1; i >= 0; i--)
@@ -232,14 +232,21 @@ namespace AAEmu.DBEditor
             MMVersion.Text = $@"版本: {Assembly.GetExecutingAssembly().GetName().Version}";
 
             // Set the radio buttons for locale
-            rbLocaleEnUs.Checked = ProgramSettings.Instance.ClientLanguage == "en_us";
-            rbLocaleRu.Checked = ProgramSettings.Instance.ClientLanguage == "ru";
-            rbLocaleKo.Checked = ProgramSettings.Instance.ClientLanguage == "ko";
-            rbLocaleFr.Checked = ProgramSettings.Instance.ClientLanguage == "fr";
-            rbLocaleDe.Checked = ProgramSettings.Instance.ClientLanguage == "de";
-            rbLocaleJa.Checked = ProgramSettings.Instance.ClientLanguage == "ja";
-            rbLocaleZhTw.Checked = ProgramSettings.Instance.ClientLanguage == "zh_tw";
-            rbLocaleZhCn.Checked = ProgramSettings.Instance.ClientLanguage == "zh_cn";
+            // Normalize legacy values (e.g. the old "zh_cn" code or translated labels like "简中")
+            // to the stable language codes used by the database.
+            var clientLanguage = ProgramSettings.NormalizeClientLanguage(ProgramSettings.Instance.ClientLanguage);
+            ProgramSettings.Instance.ClientLanguage = clientLanguage;
+            rbLocaleEnUs.Checked = clientLanguage == "en_us";
+            rbLocaleRu.Checked = clientLanguage == "ru";
+            rbLocaleKo.Checked = clientLanguage == "ko";
+            rbLocaleFr.Checked = clientLanguage == "fr";
+            rbLocaleDe.Checked = clientLanguage == "de";
+            rbLocaleJa.Checked = clientLanguage == "ja";
+            rbLocaleZhTw.Checked = clientLanguage == "zh_tw";
+            rbLocaleZhCn.Checked = clientLanguage == "zh_cn";
+            if (!rbLocaleEnUs.Checked && !rbLocaleRu.Checked && !rbLocaleKo.Checked && !rbLocaleFr.Checked &&
+                !rbLocaleDe.Checked && !rbLocaleJa.Checked && !rbLocaleZhTw.Checked && !rbLocaleZhCn.Checked)
+                rbLocaleEnUs.Checked = true;
 
             Data.Initialize();
             ValidateFilesTask = new Task(new Action(delegate
@@ -372,7 +379,8 @@ namespace AAEmu.DBEditor
 
             if (rbLocale.Checked)
             {
-                ProgramSettings.Instance.ClientLanguage = rbLocale.Text;
+                ProgramSettings.Instance.ClientLanguage =
+                    rbLocale.Tag as string ?? ProgramSettings.NormalizeClientLanguage(rbLocale.Text);
                 // AAEmu.DBEditor.Properties.Settings.Default.Save();
                 UpdateProgress("本地化配置已更新，正在从数据库重新加载 ...");
                 if (Data.Server.ReloadLocale(Data.Server.CompactSqlite))
@@ -429,8 +437,8 @@ namespace AAEmu.DBEditor
                     MessageBox.Show("保存新设置失败");
                     return;
                 }
-                if (MessageBox.Show($"设置已更改，需要重启生效.{Environment.NewLine}" +
-                                    $"需要现在就重启吗?", "设置", MessageBoxButtons.YesNo) ==
+                if (MessageBox.Show($"设置已更改，需要重启生效。{Environment.NewLine}" +
+                                    "需要现在就重启吗？", "设置", MessageBoxButtons.YesNo) ==
                     DialogResult.Yes)
                 {
 
@@ -448,7 +456,7 @@ namespace AAEmu.DBEditor
             var exeFile = Environment.ProcessPath ?? string.Empty;
             if (!File.Exists(exeFile))
             {
-                MessageBox.Show($"I no longer exist ?{Environment.NewLine}{exeFile}");
+                MessageBox.Show($"无法找到程序自身：{Environment.NewLine}{exeFile}");
                 return false;
             }
 

@@ -204,7 +204,7 @@ namespace AAEmu.DBEditor.forms.server
                     continue;
 
                 var abilityName = Data.Server.GetText("actability_groups", "name", actAbility.Id, "<" + actAbility.Id + ">");
-                var abilityNode = vocationNode.Nodes.Add($"{abilityName}, {actAbility.Point} (排名 {actAbility.Step})");
+                var abilityNode = vocationNode.Nodes.Add($"{abilityName}, {actAbility.Point}（等级 {actAbility.Step}）");
             }
 
             // Honor
@@ -239,13 +239,13 @@ namespace AAEmu.DBEditor.forms.server
                 else
                 {
                     var ownerCharacter = Data.MySqlDb.Game.Characters.FirstOrDefault(x => x.Id == house.Owner);
-                    houseNode.Nodes.Add($"所有者: {ownerCharacter?.Name ?? "<none>"} ({ownerCharacter?.Id ?? 0})");
+                    houseNode.Nodes.Add($"所有者：{ownerCharacter?.Name ?? "<无>"} ({ownerCharacter?.Id ?? 0})");
                 }
 
                 if (house.CoOwner != house.Owner)
                 {
                     var coOwnerCharacter = Data.MySqlDb.Game.Characters.FirstOrDefault(x => x.Id == house.CoOwner);
-                    houseNode.Nodes.Add($"共同所有者: {coOwnerCharacter?.Name ?? "<none>"} ({coOwnerCharacter?.Id ?? 0})");
+                    houseNode.Nodes.Add($"共同所有者：{coOwnerCharacter?.Name ?? "<无>"} ({coOwnerCharacter?.Id ?? 0})");
                 }
 
                 houseNode.Nodes.Add($"位置: {house.X:F0}, {house.Y:F0}, {house.Z:F0}");
@@ -320,7 +320,7 @@ namespace AAEmu.DBEditor.forms.server
                     var item = Data.Server.GetItem(vehicleItem.TemplateId);
                     vehicleNode.Nodes.Add($"({vehicleItem.Id}) 物品 {Data.Server.GetText("items", "name", (long)item.Id, item.Name)} ({item.Id})");
                     if (vehicleItem.Ucc > 0)
-                        vehicleNode.Nodes.Add($"UCC: {vehicleItem.Ucc}");
+                        vehicleNode.Nodes.Add($"UCC：{vehicleItem.Ucc}");
                 }
                 vehicleNode.Nodes.Add($"位置: {vehicle.X:F0}, {vehicle.Y:F0}, {vehicle.Z:F0}");
                 vehicleNode.Nodes.Add($"{vehicle.Hp} HP, {vehicle.Mp} MP");
@@ -336,13 +336,13 @@ namespace AAEmu.DBEditor.forms.server
                     if (doodad.ItemId > 0)
                         doodadNode.Nodes.Add($"物品: {doodad.ItemId}");
                     if (doodad.ItemTemplateId > 0)
-                        doodadNode.Nodes.Add($"物品模板: ({doodad.ItemTemplateId}) {Data.Server.GetText("items", "name", (long)doodad.ItemTemplateId, "???")}");
+                        doodadNode.Nodes.Add($"物品模板：({doodad.ItemTemplateId}) {Data.Server.GetText("items", "name", (long)doodad.ItemTemplateId, "???")}");
                 }
 
                 var slaves = Data.MySqlDb.Game.Slaves.Where(x => (x.OwnerType == 2) && (x.OwnerId == vehicle.Id));
                 foreach (var slave in slaves)
                 {
-                    var slaveNode = childrenNode.Nodes.Add($"从属 {slave.Id} {slave.Name} ({slave.TemplateId})");
+                    var slaveNode = childrenNode.Nodes.Add($"召唤物 {slave.Id} {slave.Name} ({slave.TemplateId})");
                     slaveNode.Nodes.Add($"附着点: {slave.AttachPoint}");
                     slaveNode.Nodes.Add($"位置: {slave.X:F1}, {slave.Y:F1}, {slave.Z:F1}");
                     slaveNode.Nodes.Add($"{slave.Hp} HP, {slave.Mp} MP");

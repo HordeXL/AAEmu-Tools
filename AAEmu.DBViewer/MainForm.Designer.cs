@@ -2182,7 +2182,7 @@
             lDoodadGroupName.Name = "lDoodadGroupName";
             lDoodadGroupName.Size = new System.Drawing.Size(50, 15);
             lDoodadGroupName.TabIndex = 36;
-            lDoodadGroupName.Text = "<none>";
+            lDoodadGroupName.Text = "<无>";
             // 
             // label68
             // 
@@ -2494,7 +2494,7 @@
             lDoodadMarkModel.Name = "lDoodadMarkModel";
             lDoodadMarkModel.Size = new System.Drawing.Size(50, 15);
             lDoodadMarkModel.TabIndex = 87;
-            lDoodadMarkModel.Text = "<none>";
+            lDoodadMarkModel.Text = "<无>";
             // 
             // label108
             // 
@@ -2914,7 +2914,7 @@
             lDoodadModel.Name = "lDoodadModel";
             lDoodadModel.Size = new System.Drawing.Size(50, 15);
             lDoodadModel.TabIndex = 45;
-            lDoodadModel.Text = "<none>";
+            lDoodadModel.Text = "<无>";
             // 
             // label71
             // 
@@ -2964,7 +2964,7 @@
             lDoodadName.Name = "lDoodadName";
             lDoodadName.Size = new System.Drawing.Size(50, 15);
             lDoodadName.TabIndex = 36;
-            lDoodadName.Text = "<none>";
+            lDoodadName.Text = "<无>";
             // 
             // label58
             // 
@@ -3080,7 +3080,7 @@
             label111.Name = "label111";
             label111.Size = new System.Drawing.Size(89, 15);
             label111.TabIndex = 55;
-            label111.Text = "is_msg_to_zone";
+            label111.Text = "区域消息";
             // 
             // lDoodadFuncGroupSoundID
             // 
@@ -3100,7 +3100,7 @@
             label107.Name = "label107";
             label107.Size = new System.Drawing.Size(59, 15);
             label107.TabIndex = 53;
-            label107.Text = "comment";
+            label107.Text = "备注";
             // 
             // lDoodadFuncGroupSoundTime
             // 
@@ -3120,7 +3120,7 @@
             label103.Name = "label103";
             label103.Size = new System.Drawing.Size(69, 15);
             label103.TabIndex = 51;
-            label103.Text = "sound_time";
+            label103.Text = "音效时间";
             // 
             // lDoodadFuncGroupModel
             // 
@@ -3130,7 +3130,7 @@
             lDoodadFuncGroupModel.Name = "lDoodadFuncGroupModel";
             lDoodadFuncGroupModel.Size = new System.Drawing.Size(50, 15);
             lDoodadFuncGroupModel.TabIndex = 50;
-            lDoodadFuncGroupModel.Text = "<none>";
+            lDoodadFuncGroupModel.Text = "<无>";
             // 
             // label99
             // 
@@ -3140,7 +3140,7 @@
             label99.Name = "label99";
             label99.Size = new System.Drawing.Size(41, 15);
             label99.TabIndex = 49;
-            label99.Text = "model";
+            label99.Text = "模型";
             // 
             // lDoodadFuncGroupComment
             // 
@@ -3150,7 +3150,7 @@
             lDoodadFuncGroupComment.Name = "lDoodadFuncGroupComment";
             lDoodadFuncGroupComment.Size = new System.Drawing.Size(50, 15);
             lDoodadFuncGroupComment.TabIndex = 48;
-            lDoodadFuncGroupComment.Text = "<none>";
+            lDoodadFuncGroupComment.Text = "<无>";
             // 
             // label95
             // 
@@ -3160,7 +3160,7 @@
             label95.Name = "label95";
             label95.Size = new System.Drawing.Size(55, 15);
             label95.TabIndex = 47;
-            label95.Text = "sound_id";
+            label95.Text = "音效ID";
             // 
             // lDoodadFuncGroupPhaseMsg
             // 
@@ -3170,7 +3170,7 @@
             lDoodadFuncGroupPhaseMsg.Name = "lDoodadFuncGroupPhaseMsg";
             lDoodadFuncGroupPhaseMsg.Size = new System.Drawing.Size(50, 15);
             lDoodadFuncGroupPhaseMsg.TabIndex = 46;
-            lDoodadFuncGroupPhaseMsg.Text = "<none>";
+            lDoodadFuncGroupPhaseMsg.Text = "<无>";
             // 
             // label91
             // 
@@ -3180,7 +3180,7 @@
             label91.Name = "label91";
             label91.Size = new System.Drawing.Size(66, 15);
             label91.TabIndex = 45;
-            label91.Text = "phase_msg";
+            label91.Text = "阶段消息";
             // 
             // lDoodadFuncGroupKindID
             // 
@@ -3200,7 +3200,7 @@
             label87.Name = "label87";
             label87.Size = new System.Drawing.Size(157, 15);
             label87.TabIndex = 43;
-            label87.Text = "doodad_func_group_kind_id";
+            label87.Text = "功能组类型ID";
             // 
             // lDoodadFuncGroupID
             // 
@@ -3230,7 +3230,7 @@
             lDoodadFuncGroupName.Name = "lDoodadFuncGroupName";
             lDoodadFuncGroupName.Size = new System.Drawing.Size(50, 15);
             lDoodadFuncGroupName.TabIndex = 38;
-            lDoodadFuncGroupName.Text = "<none>";
+            lDoodadFuncGroupName.Text = "<无>";
             // 
             // label66
             // 
@@ -3271,21 +3271,21 @@
             // Column32
             // 
             Column32.FillWeight = 15F;
-            Column32.HeaderText = "Kind";
+            Column32.HeaderText = "类型";
             Column32.Name = "Column32";
             Column32.ReadOnly = true;
             // 
             // Column33
             // 
             Column33.FillWeight = 25F;
-            Column33.HeaderText = "ActualID";
+            Column33.HeaderText = "实际ID";
             Column33.Name = "Column33";
             Column33.ReadOnly = true;
             // 
             // Column54
             // 
             Column54.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            Column54.HeaderText = "ActualType";
+            Column54.HeaderText = "实际类型";
             Column54.Name = "Column54";
             Column54.ReadOnly = true;
             // 
@@ -3436,7 +3436,7 @@
             // 
             // Column23
             // 
-            Column23.HeaderText = "Managed";
+            Column23.HeaderText = "托管";
             Column23.Name = "Column23";
             Column23.ReadOnly = true;
             Column23.Width = 82;
@@ -3464,7 +3464,7 @@
             // 
             // Column31
             // 
-            Column31.HeaderText = "Model Type";
+            Column31.HeaderText = "模型类型";
             Column31.Name = "Column31";
             Column31.ReadOnly = true;
             Column31.Width = 94;
@@ -3478,7 +3478,7 @@
             // 
             // Column53
             // 
-            Column53.HeaderText = "Spawns";
+            Column53.HeaderText = "刷新点";
             Column53.Name = "Column53";
             Column53.ReadOnly = true;
             Column53.Width = 72;
@@ -3775,7 +3775,7 @@
             lFactionOwnerName.Name = "lFactionOwnerName";
             lFactionOwnerName.Size = new System.Drawing.Size(50, 15);
             lFactionOwnerName.TabIndex = 17;
-            lFactionOwnerName.Text = "<none>";
+            lFactionOwnerName.Text = "<无>";
             // 
             // lFactionOwnerID
             // 
@@ -3815,7 +3815,7 @@
             lFactionName.Name = "lFactionName";
             lFactionName.Size = new System.Drawing.Size(50, 15);
             lFactionName.TabIndex = 3;
-            lFactionName.Text = "<none>";
+            lFactionName.Text = "<无>";
             // 
             // lFactionID
             // 
@@ -3918,21 +3918,21 @@
             // 
             // Column30
             // 
-            Column30.HeaderText = "Mother";
+            Column30.HeaderText = "母对象";
             Column30.Name = "Column30";
             Column30.ReadOnly = true;
             Column30.Width = 71;
             // 
             // Column24
             // 
-            Column24.HeaderText = "Owner";
+            Column24.HeaderText = "所有者";
             Column24.Name = "Column24";
             Column24.ReadOnly = true;
             Column24.Width = 67;
             // 
             // Column29
             // 
-            Column29.HeaderText = "Diplomacy";
+            Column29.HeaderText = "外交";
             Column29.Name = "Column29";
             Column29.ReadOnly = true;
             Column29.Width = 89;
@@ -3989,7 +3989,7 @@
             // 
             cbItemSearchType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbItemSearchType.FormattingEnabled = true;
-            cbItemSearchType.Items.AddRange(new object[] { "Any", "Head (1)", "Neck (2)", "Chest (3)", "Waist (4)", "Legs (5)", "Hands (6)", "Feet (7)", "Arms (8)", "Back (9)", "Ear (10)", "Finger (11)", "Undershirt (12)", "Underpants (13)", "Mainhand (14)", "Offhand (15)", "TwoHanded (16)", "OneHanded (17)", "Ranged (18)", "Ammunition (19)", "Shield (20)", "Instrument (21)", "Bag (22)", "Face (23)", "Hair (24)", "Glasses (25)", "Reserved (26)", "Tail (27)", "Body (28)", "Beard (29)", "Backpack (30)", "Cosplay (31)" });
+            cbItemSearchType.Items.AddRange(new object[] { "全部", "头部 (1)", "颈部 (2)", "胸部 (3)", "腰部 (4)", "腿部 (5)", "手部 (6)", "脚部 (7)", "手臂 (8)", "背部 (9)", "耳部 (10)", "手指 (11)", "内衣 (12)", "内裤 (13)", "主手 (14)", "副手 (15)", "双手 (16)", "单手 (17)", "远程 (18)", "弹药 (19)", "盾牌 (20)", "乐器 (21)", "背包 (22)", "面部 (23)", "发型 (24)", "眼镜 (25)", "预留 (26)", "尾部 (27)", "身体 (28)", "胡须 (29)", "背囊 (30)", "时装 (31)" });
             cbItemSearchType.Location = new System.Drawing.Point(52, 35);
             cbItemSearchType.Margin = new System.Windows.Forms.Padding(4);
             cbItemSearchType.Name = "cbItemSearchType";
@@ -4002,7 +4002,7 @@
             cbItemSearchRange.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             cbItemSearchRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             cbItemSearchRange.FormattingEnabled = true;
-            cbItemSearchRange.Items.AddRange(new object[] { "All", "Region Specific", "Extra" });
+            cbItemSearchRange.Items.AddRange(new object[] { "全部", "区域限定", "额外" });
             cbItemSearchRange.Location = new System.Drawing.Point(554, 35);
             cbItemSearchRange.Margin = new System.Windows.Forms.Padding(4);
             cbItemSearchRange.Name = "cbItemSearchRange";
@@ -4233,7 +4233,7 @@
             lItemName.Name = "lItemName";
             lItemName.Size = new System.Drawing.Size(50, 15);
             lItemName.TabIndex = 3;
-            lItemName.Text = "<none>";
+            lItemName.Text = "<无>";
             // 
             // label4
             // 
@@ -4362,7 +4362,7 @@
             label141.Name = "label141";
             label141.Size = new System.Drawing.Size(422, 15);
             label141.TabIndex = 8;
-            label141.Text = "* Drop-rates displayed are experimental and may not represent intended values";
+            label141.Text = "* 显示的掉落率为实验性数值，可能不代表实际设定";
             // 
             // groupBox11
             // 
@@ -4499,14 +4499,14 @@
             // 
             // Column2
             // 
-            Column2.HeaderText = "Loot Pack ID";
+            Column2.HeaderText = "掉落包ID";
             Column2.Name = "Column2";
             Column2.ReadOnly = true;
             Column2.Width = 80;
             // 
             // Column1
             // 
-            Column1.HeaderText = "Item ID";
+            Column1.HeaderText = "物品ID";
             Column1.Name = "Column1";
             Column1.ReadOnly = true;
             Column1.Width = 65;
@@ -4520,7 +4520,7 @@
             // 
             // Column3
             // 
-            Column3.HeaderText = "Drop Rate";
+            Column3.HeaderText = "掉落率";
             Column3.Name = "Column3";
             Column3.ReadOnly = true;
             Column3.Width = 78;
@@ -4534,14 +4534,14 @@
             // 
             // Column6
             // 
-            Column6.HeaderText = "Grade ID";
+            Column6.HeaderText = "品级ID";
             Column6.Name = "Column6";
             Column6.ReadOnly = true;
             Column6.Width = 71;
             // 
             // Column7
             // 
-            Column7.HeaderText = "Always Drop";
+            Column7.HeaderText = "必定掉落";
             Column7.Name = "Column7";
             Column7.ReadOnly = true;
             Column7.Width = 90;
@@ -4555,7 +4555,7 @@
             // 
             // LootGroupRate
             // 
-            LootGroupRate.HeaderText = "(Loot Group Drop Rate)";
+            LootGroupRate.HeaderText = "(掉落组掉落率)";
             LootGroupRate.Name = "LootGroupRate";
             LootGroupRate.ReadOnly = true;
             LootGroupRate.Width = 117;
@@ -4790,14 +4790,14 @@
             // 
             // Column17
             // 
-            Column17.HeaderText = "Kind ID";
+            Column17.HeaderText = "类型ID";
             Column17.Name = "Column17";
             Column17.ReadOnly = true;
             Column17.Width = 70;
             // 
             // Column16
             // 
-            Column16.HeaderText = "Grade ID";
+            Column16.HeaderText = "品级ID";
             Column16.Name = "Column16";
             Column16.ReadOnly = true;
             Column16.Width = 77;
@@ -4811,7 +4811,7 @@
             // 
             // Column34
             // 
-            Column34.HeaderText = "Spawns";
+            Column34.HeaderText = "刷新点";
             Column34.Name = "Column34";
             Column34.ReadOnly = true;
             Column34.Width = 72;
@@ -4967,7 +4967,7 @@
             // 
             // Column20
             // 
-            Column20.HeaderText = "ZoneId";
+            Column20.HeaderText = "区域ID";
             Column20.Name = "Column20";
             Column20.ReadOnly = true;
             Column20.Width = 69;
@@ -5490,7 +5490,7 @@
             lSkillName.Name = "lSkillName";
             lSkillName.Size = new System.Drawing.Size(50, 15);
             lSkillName.TabIndex = 3;
-            lSkillName.Text = "<none>";
+            lSkillName.Text = "<无>";
             // 
             // label16
             // 
@@ -5557,7 +5557,7 @@
             // 
             // dataGridViewTextBoxColumn9
             // 
-            dataGridViewTextBoxColumn9.HeaderText = "Item ID";
+            dataGridViewTextBoxColumn9.HeaderText = "物品ID";
             dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             dataGridViewTextBoxColumn9.ReadOnly = true;
             dataGridViewTextBoxColumn9.Width = 70;
@@ -5597,7 +5597,7 @@
             // 
             // dataGridViewTextBoxColumn6
             // 
-            dataGridViewTextBoxColumn6.HeaderText = "Item ID";
+            dataGridViewTextBoxColumn6.HeaderText = "物品ID";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
             dataGridViewTextBoxColumn6.ReadOnly = true;
             dataGridViewTextBoxColumn6.Width = 70;
@@ -6558,7 +6558,7 @@
             lWorldGroupImageSizeAndPos.Name = "lWorldGroupImageSizeAndPos";
             lWorldGroupImageSizeAndPos.Size = new System.Drawing.Size(50, 15);
             lWorldGroupImageSizeAndPos.TabIndex = 41;
-            lWorldGroupImageSizeAndPos.Text = "<none>";
+            lWorldGroupImageSizeAndPos.Text = "<无>";
             // 
             // lWorldGroupTargetID
             // 
@@ -6578,7 +6578,7 @@
             lWorldGroupName.Name = "lWorldGroupName";
             lWorldGroupName.Size = new System.Drawing.Size(50, 15);
             lWorldGroupName.TabIndex = 36;
-            lWorldGroupName.Text = "<none>";
+            lWorldGroupName.Text = "<无>";
             // 
             // label43
             // 
@@ -6638,7 +6638,7 @@
             lWorldGroupSizeAndPos.Name = "lWorldGroupSizeAndPos";
             lWorldGroupSizeAndPos.Size = new System.Drawing.Size(50, 15);
             lWorldGroupSizeAndPos.TabIndex = 37;
-            lWorldGroupSizeAndPos.Text = "<none>";
+            lWorldGroupSizeAndPos.Text = "<无>";
             // 
             // groupBox4
             // 
@@ -6699,7 +6699,7 @@
             labelZoneGroupRestrictions.Size = new System.Drawing.Size(145, 15);
             labelZoneGroupRestrictions.TabIndex = 36;
             labelZoneGroupRestrictions.Tag = "0";
-            labelZoneGroupRestrictions.Text = "(Show Restrictions)";
+            labelZoneGroupRestrictions.Text = "(显示限制条件)";
             labelZoneGroupRestrictions.TextAlign = System.Drawing.ContentAlignment.TopRight;
             mainFormToolTip.SetToolTip(labelZoneGroupRestrictions, "Nothing to see here");
             labelZoneGroupRestrictions.Click += LabelZoneGroupRestrictions_Click;
@@ -6756,7 +6756,7 @@
             lZoneGroupsDisplayName.Name = "lZoneGroupsDisplayName";
             lZoneGroupsDisplayName.Size = new System.Drawing.Size(50, 15);
             lZoneGroupsDisplayName.TabIndex = 31;
-            lZoneGroupsDisplayName.Text = "<none>";
+            lZoneGroupsDisplayName.Text = "<无>";
             // 
             // label31
             // 
@@ -6800,7 +6800,7 @@
             lZoneGroupsName.Name = "lZoneGroupsName";
             lZoneGroupsName.Size = new System.Drawing.Size(50, 15);
             lZoneGroupsName.TabIndex = 15;
-            lZoneGroupsName.Text = "<none>";
+            lZoneGroupsName.Text = "<无>";
             // 
             // lZoneGroupsBuffID
             // 
@@ -6850,7 +6850,7 @@
             lZoneGroupsSizePos.Name = "lZoneGroupsSizePos";
             lZoneGroupsSizePos.Size = new System.Drawing.Size(50, 15);
             lZoneGroupsSizePos.TabIndex = 15;
-            lZoneGroupsSizePos.Text = "<none>";
+            lZoneGroupsSizePos.Text = "<无>";
             // 
             // lZoneGroupsPirateDesperado
             // 
@@ -6989,7 +6989,7 @@
             lZoneInstance.Name = "lZoneInstance";
             lZoneInstance.Size = new System.Drawing.Size(50, 15);
             lZoneInstance.TabIndex = 38;
-            lZoneInstance.Text = "<none>";
+            lZoneInstance.Text = "<无>";
             // 
             // btnFindTransferPathsInZone
             // 
@@ -7010,7 +7010,7 @@
             lZoneDisplayName.Name = "lZoneDisplayName";
             lZoneDisplayName.Size = new System.Drawing.Size(50, 15);
             lZoneDisplayName.TabIndex = 15;
-            lZoneDisplayName.Text = "<none>";
+            lZoneDisplayName.Text = "<无>";
             // 
             // label28
             // 
@@ -7100,7 +7100,7 @@
             lZoneName.Name = "lZoneName";
             lZoneName.Size = new System.Drawing.Size(50, 15);
             lZoneName.TabIndex = 3;
-            lZoneName.Text = "<none>";
+            lZoneName.Text = "<无>";
             // 
             // label25
             // 
@@ -7297,13 +7297,13 @@
             openDBDlg.DefaultExt = "sqlite3";
             openDBDlg.FileName = "compact.sqlite3";
             openDBDlg.Filter = "SQLite3 files|*.sqlite3|All files|*.*";
-            openDBDlg.Title = "Open Server DB File";
+            openDBDlg.Title = "打开服务器数据库文件";
             // 
             // openGamePakFileDialog
             // 
             openGamePakFileDialog.Filter = "AA Game Pak|game_pak|All files|*.*";
             openGamePakFileDialog.RestoreDirectory = true;
-            openGamePakFileDialog.Title = "Open game_pak";
+            openGamePakFileDialog.Title = "打开 game_pak";
             // 
             // mainFormToolTip
             // 
@@ -7317,14 +7317,14 @@
             ofdCustomPaths.AddToRecent = false;
             ofdCustomPaths.DefaultExt = "xml";
             ofdCustomPaths.Filter = "XML Files|*.xml|All Files|*.*";
-            ofdCustomPaths.Title = "Open custom path";
+            ofdCustomPaths.Title = "打开自定义路径文件";
             // 
             // ofdJsonData
             // 
             ofdJsonData.AddToRecent = false;
             ofdJsonData.DefaultExt = "xml";
             ofdJsonData.Filter = "Json Files|*.json|All Files|*.*";
-            ofdJsonData.Title = "Open custom json data";
+            ofdJsonData.Title = "打开自定义 JSON 数据";
             // 
             // ilIcons
             // 
@@ -7353,7 +7353,7 @@
             MMFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { MMFileTables, toolStripMenuItem1, MMFileSettings, toolStripSeparator2, MMFileExit });
             MMFile.Name = "MMFile";
             MMFile.Size = new System.Drawing.Size(37, 20);
-            MMFile.Text = "&File";
+            MMFile.Text = "文件(&F)";
             // 
             // MMFileTables
             // 
@@ -7371,7 +7371,7 @@
             // 
             MMFileSettings.Name = "MMFileSettings";
             MMFileSettings.Size = new System.Drawing.Size(175, 22);
-            MMFileSettings.Text = "&Settings";
+            MMFileSettings.Text = "设置(&S)";
             MMFileSettings.Click += MMFileSettings_Click;
             // 
             // toolStripSeparator2
@@ -7392,7 +7392,7 @@
             MMBack.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Subtract;
             MMBack.Size = new System.Drawing.Size(35, 20);
             MMBack.Text = "<<";
-            MMBack.ToolTipText = "Previous Tab";
+            MMBack.ToolTipText = "上一标签页";
             MMBack.Click += MMBack_Click;
             // 
             // MMForward
@@ -7402,7 +7402,7 @@
             MMForward.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.Subtract;
             MMForward.Size = new System.Drawing.Size(35, 20);
             MMForward.Text = ">>";
-            MMForward.ToolTipText = "Forward Tab";
+            MMForward.ToolTipText = "下一标签页";
             MMForward.Click += MMForward_Click;
             // 
             // MMSelectedData
@@ -7418,7 +7418,7 @@
             MMLocalizer.ShortcutKeys = System.Windows.Forms.Keys.F8;
             MMLocalizer.Size = new System.Drawing.Size(65, 20);
             MMLocalizer.Text = "本地化";
-            MMLocalizer.ToolTipText = "Find localized texts (F8)";
+            MMLocalizer.ToolTipText = "查找本地化文本 (F8)";
             MMLocalizer.Click += MMLocalizer_Click;
             // 
             // MMSplitter
@@ -7640,7 +7640,7 @@
             // 
             TBMenuFileSwitchSelect.Name = "TBMenuFileSwitchSelect";
             TBMenuFileSwitchSelect.Size = new System.Drawing.Size(136, 24);
-            TBMenuFileSwitchSelect.Text = "<profile>";
+            TBMenuFileSwitchSelect.Text = "<配置>";
             TBMenuFileSwitchSelect.Click += TBMenuFileSwitchSelect_Click;
             // 
             // toolStripSeparator4
@@ -7668,7 +7668,7 @@
             TMBack.Name = "TMBack";
             TMBack.Size = new System.Drawing.Size(33, 23);
             TMBack.Text = "<<";
-            TMBack.ToolTipText = "Previous page";
+            TMBack.ToolTipText = "上一页";
             TMBack.Click += TMBack_Click;
             // 
             // TBForward
@@ -7679,7 +7679,7 @@
             TBForward.Name = "TBForward";
             TBForward.Size = new System.Drawing.Size(33, 23);
             TBForward.Text = ">>";
-            TBForward.ToolTipText = "Next Page";
+            TBForward.ToolTipText = "下一页";
             TBForward.Click += TBForward_Click;
             // 
             // TBS2
@@ -7705,7 +7705,7 @@
             TBLocalizer.Name = "TBLocalizer";
             TBLocalizer.Size = new System.Drawing.Size(28, 28);
             TBLocalizer.Text = "本地化";
-            TBLocalizer.ToolTipText = "Localizer (F8)";
+            TBLocalizer.ToolTipText = "本地化 (F8)";
             TBLocalizer.Click += TBLocalizer_Click;
             // 
             // toolStripSeparator1
@@ -7731,7 +7731,7 @@
             TBMap.Name = "TBMap";
             TBMap.Size = new System.Drawing.Size(28, 28);
             TBMap.Text = "地图";
-            TBMap.ToolTipText = "Map (F9)";
+            TBMap.ToolTipText = "地图 (F9)";
             TBMap.Click += TBMap_Click;
             // 
             // TBSplit
@@ -7762,7 +7762,7 @@
             TBBuffs.Name = "TBBuffs";
             TBBuffs.Size = new System.Drawing.Size(28, 28);
             TBBuffs.Text = "增益";
-            TBBuffs.ToolTipText = "Buffs (F5)";
+            TBBuffs.ToolTipText = "增益 (F5)";
             TBBuffs.Click += TBBuffs_Click;
             // 
             // TBDoodads
@@ -7773,7 +7773,7 @@
             TBDoodads.Name = "TBDoodads";
             TBDoodads.Size = new System.Drawing.Size(28, 28);
             TBDoodads.Text = "装饰物";
-            TBDoodads.ToolTipText = "Doodads (F4)";
+            TBDoodads.ToolTipText = "装饰物 (F4)";
             TBDoodads.Click += TBDoodads_Click;
             // 
             // TBFactions
@@ -7794,7 +7794,7 @@
             TBItems.Name = "TBItems";
             TBItems.Size = new System.Drawing.Size(28, 28);
             TBItems.Text = "物品";
-            TBItems.ToolTipText = "Items (F7)";
+            TBItems.ToolTipText = "物品 (F7)";
             TBItems.Click += TBItems_Click;
             // 
             // TBLoot
@@ -7815,7 +7815,7 @@
             TBNpc.Name = "TBNpc";
             TBNpc.Size = new System.Drawing.Size(28, 28);
             TBNpc.Text = "NPC";
-            TBNpc.ToolTipText = "NPCs (F6)";
+            TBNpc.ToolTipText = "NPC (F6)";
             TBNpc.Click += TBNpc_Click;
             // 
             // TBQuests
@@ -7826,7 +7826,7 @@
             TBQuests.Name = "TBQuests";
             TBQuests.Size = new System.Drawing.Size(28, 28);
             TBQuests.Text = "任务";
-            TBQuests.ToolTipText = "Quests (F2)";
+            TBQuests.ToolTipText = "任务 (F2)";
             TBQuests.Click += TBQuests_Click;
             // 
             // TBSchedules
@@ -7847,7 +7847,7 @@
             TBSkills.Name = "TBSkills";
             TBSkills.Size = new System.Drawing.Size(28, 28);
             TBSkills.Text = "技能";
-            TBSkills.ToolTipText = "Skills (F3)";
+            TBSkills.ToolTipText = "技能 (F3)";
             TBSkills.Click += TBSkills_Click;
             // 
             // TBSpheres
@@ -7915,25 +7915,25 @@
             // 
             openFileDialog1.DefaultExt = "xml";
             openFileDialog1.Filter = "XML Files|*.xml|All Files|*.*";
-            openFileDialog1.Title = "Open custom path";
+            openFileDialog1.Title = "打开自定义路径文件";
             // 
             // openFileDialog2
             // 
             openFileDialog2.DefaultExt = "xml";
             openFileDialog2.Filter = "XML Files|*.xml|All Files|*.*";
-            openFileDialog2.Title = "Open custom path";
+            openFileDialog2.Title = "打开自定义路径文件";
             // 
             // openFileDialog3
             // 
             openFileDialog3.DefaultExt = "xml";
             openFileDialog3.Filter = "XML Files|*.xml|All Files|*.*";
-            openFileDialog3.Title = "Open custom path";
+            openFileDialog3.Title = "打开自定义路径文件";
             // 
             // openFileDialog4
             // 
             openFileDialog4.DefaultExt = "xml";
             openFileDialog4.Filter = "XML Files|*.xml|All Files|*.*";
-            openFileDialog4.Title = "Open custom path";
+            openFileDialog4.Title = "打开自定义路径文件";
             // 
             // ofdLoadUnitMovementDialog
             // 
@@ -7941,7 +7941,7 @@
             ofdLoadUnitMovementDialog.DefaultExt = "json";
             ofdLoadUnitMovementDialog.FileName = "unit_movement.json";
             ofdLoadUnitMovementDialog.Filter = "JSON Files|*.json|All Files|*.*";
-            ofdLoadUnitMovementDialog.Title = "Open Unit Movement File";
+            ofdLoadUnitMovementDialog.Title = "打开单位移动数据文件";
             // 
             // openFolderDlg
             // 

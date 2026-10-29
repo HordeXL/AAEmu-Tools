@@ -392,7 +392,7 @@
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.Size = new System.Drawing.Size(30, 22);
             toolStripButton1.Text = ">|<";
-            toolStripButton1.ToolTipText = "Center Map";
+            toolStripButton1.ToolTipText = "居中地图";
             toolStripButton1.Click += toolStripButton1_Click;
             // 
             // toolStripSeparator4
@@ -632,7 +632,7 @@
             // 
             tsmMap.Name = "tsmMap";
             tsmMap.Size = new System.Drawing.Size(167, 22);
-            tsmMap.Text = "Map";
+            tsmMap.Text = "地图";
             // 
             // tsmCopyToClipboard
             // 
@@ -654,7 +654,7 @@
             DoubleBuffered = true;
             Margin = new System.Windows.Forms.Padding(4);
             Name = "MapViewForm";
-            Text = "Map View";
+            Text = "地图视图";
             FormClosing += MapViewForm_FormClosing;
             FormClosed += MapViewForm_FormClosed;
             Load += MapViewForm_Load;

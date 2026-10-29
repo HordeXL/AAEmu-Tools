@@ -10,6 +10,43 @@ namespace AAEmu.DBViewer;
 
 public partial class MainForm
 {
+    private static string ItemImplName(GameItemImplId implId) => implId switch
+    {
+        GameItemImplId.Misc => "杂项",
+        GameItemImplId.Weapon => "武器",
+        GameItemImplId.Armor => "护甲",
+        GameItemImplId.Body => "身体",
+        GameItemImplId.Bag => "背包",
+        GameItemImplId.Housing => "房屋",
+        GameItemImplId.HousingDecoration => "房屋装饰",
+        GameItemImplId.Tool => "工具",
+        GameItemImplId.SummonSlave => "召唤物",
+        GameItemImplId.SpawnDoodad => "生成装饰物",
+        GameItemImplId.AcceptQuest => "接受任务",
+        GameItemImplId.SummonMate => "召唤宠物",
+        GameItemImplId.Recipe => "配方",
+        GameItemImplId.Crafting => "制作",
+        GameItemImplId.Portal => "传送门",
+        GameItemImplId.EnchantingGem => "附魔宝石",
+        GameItemImplId.ReportCrime => "举报犯罪",
+        GameItemImplId.LogicDoodad => "逻辑装饰物",
+        GameItemImplId.HasUcc => "拥有 UCC",
+        GameItemImplId.OpenEmblemUi => "打开纹章界面",
+        GameItemImplId.Shipyard => "船坞",
+        GameItemImplId.Socket => "镶嵌",
+        GameItemImplId.Backpack => "背囊",
+        GameItemImplId.OpenPaper => "打开纸张",
+        GameItemImplId.Accessory => "饰品",
+        GameItemImplId.Treasure => "宝藏",
+        GameItemImplId.MusicSheet => "乐谱",
+        GameItemImplId.Dyeing => "染色",
+        GameItemImplId.SlaveEquipment => "召唤物装备",
+        GameItemImplId.GradeEnchantingSupport => "品级附魔支持",
+        GameItemImplId.MateArmor => "宠物护甲",
+        GameItemImplId.Location => "位置",
+        _ => implId.ToString(),
+    };
+
     private void LoadItems()
     {
         var hasItemPriceTable = AllTableNames.GetValueOrDefault("item_prices") == SQLite.SQLiteFileName;
@@ -372,7 +409,7 @@ public partial class MainForm
         using (var loadform = new LoadingForm())
         {
             loadform.Show();
-            loadform.ShowInfo($"Scanning {AaDb.DbItems.Count} items");
+            loadform.ShowInfo($"正在扫描 {AaDb.DbItems.Count} 个物品");
             var i = 0;
 
             dgvItem.Hide();
@@ -447,7 +484,7 @@ public partial class MainForm
                     if (dgvItem.Rows.Count > 500)
                     {
                         MessageBox.Show(
-                            "结果项过多,列表已截断至500条。请缩小搜索范围!");
+                            "结果项过多，列表已截断至 500 条。请缩小搜索范围！");
                         break;
                     }
                 }
@@ -494,11 +531,11 @@ public partial class MainForm
             {
                 var requiresArmor = GetItemArmorRequirements(item.ItemArmors.Id);
                 if (requiresArmor.Any())
-                    fullDescription += $"\n\n|ni;Equipping this armor requires {(item.ItemArmors.OrUnitReqs ? "Any" : "All")} of the following|r";
+                    fullDescription += $"\n\n|ni;装备此护甲需要满足以下{(item.ItemArmors.OrUnitReqs ? "任意一项" : "全部")}条件|r";
                     
                 foreach (var req in requiresArmor)
                 {
-                    fullDescription += $"\n{req.KindId} - Value1: {req.Value1}, Value2: {req.Value2}";
+                    fullDescription += $"\n类型 {req.KindId} - 数值1: {req.Value1}, 数值2: {req.Value2}";
                 }
             }
 
@@ -506,18 +543,18 @@ public partial class MainForm
             {
                 var requiresWeapon = GetItemWeaponRequirements(item.ItemWeapons.Id);
                 if (requiresWeapon.Any())
-                    fullDescription += $"\n\n|ni;Equipping this weapon requires {(item.ItemWeapons.OrUnitReqs ? "Any" : "All")} of the following|r";
+                    fullDescription += $"\n\n|ni;装备此武器需要满足以下{(item.ItemWeapons.OrUnitReqs ? "任意一项" : "全部")}条件|r";
 
                 foreach (var req in requiresWeapon)
                 {
-                    fullDescription += $"\n{req.KindId} - Value1: {req.Value1}, Value2: {req.Value2}";
+                    fullDescription += $"\n类型 {req.KindId} - 数值1: {req.Value1}, 数值2: {req.Value2}";
                 }
             }
             
             var mateEntry = AaDb.DbItemSummonMates.Values.FirstOrDefault(x => x.ItemId == item.Id);
             if (mateEntry != null)
             {
-                fullDescription += $"\n\n|nc;Using this item summons a\n@NPC_NAME({mateEntry.NpcId})|r (NpcId {mateEntry.NpcId})";
+                fullDescription += $"\n\n|nc;使用此物品可召唤\n@NPC_NAME({mateEntry.NpcId})|r (NPC ID {mateEntry.NpcId})";
             }
 
             var slaveEntry = AaDb.DbItemSummonSlaves.Values.FirstOrDefault(x => x.ItemId == item.Id);
@@ -526,11 +563,11 @@ public partial class MainForm
                 var callSlave = AaDb.DbSlaves.GetValueOrDefault(slaveEntry.SlaveId);
                 if (callSlave != null)
                 {
-                    fullDescription += $"\n\n|nc;Using this item calls a\n{callSlave.NameLocalized}|r (SlaveId {slaveEntry.SlaveId})";
+                    fullDescription += $"\n\n|nc;使用此物品可召唤\n{callSlave.NameLocalized}|r (召唤物ID {slaveEntry.SlaveId})";
                 }
                 else
                 {
-                    fullDescription += $"\n\n|nr;Invalid summon SlaveId {slaveEntry.SlaveId}\r";
+                    fullDescription += $"\n\n|nr;召唤物ID无效：{slaveEntry.SlaveId}\r";
                 }
             }
 

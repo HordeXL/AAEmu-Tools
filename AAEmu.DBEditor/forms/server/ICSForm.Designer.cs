@@ -1,4 +1,4 @@
-namespace AAEmu.DBEditor.forms.server
+﻿namespace AAEmu.DBEditor.forms.server
 {
     partial class ICSForm
     {
@@ -1079,7 +1079,7 @@ namespace AAEmu.DBEditor.forms.server
             // 
             tShopItemMinLevel.Location = new System.Drawing.Point(158, 18);
             tShopItemMinLevel.Name = "tShopItemMinLevel";
-            tShopItemMinLevel.PlaceholderText = "minimum level";
+            tShopItemMinLevel.PlaceholderText = "最低等级";
             tShopItemMinLevel.Size = new System.Drawing.Size(49, 23);
             tShopItemMinLevel.TabIndex = 32;
             tShopItemMinLevel.Text = "0";
@@ -1089,7 +1089,7 @@ namespace AAEmu.DBEditor.forms.server
             // 
             tShopItemMaxLevel.Location = new System.Drawing.Point(234, 18);
             tShopItemMaxLevel.Name = "tShopItemMaxLevel";
-            tShopItemMaxLevel.PlaceholderText = "maximum level";
+            tShopItemMaxLevel.PlaceholderText = "最高等级";
             tShopItemMaxLevel.Size = new System.Drawing.Size(49, 23);
             tShopItemMaxLevel.TabIndex = 33;
             tShopItemMaxLevel.Text = "0";
@@ -1262,7 +1262,7 @@ namespace AAEmu.DBEditor.forms.server
             ClientSize = new System.Drawing.Size(887, 512);
             Controls.Add(tcICS);
             Name = "ICSForm";
-            Text = "Ingame Cash Shop";
+            Text = "游戏内商城";
             Load += ICSForm_Load;
             tcICS.ResumeLayout(false);
             tpInfo.ResumeLayout(false);

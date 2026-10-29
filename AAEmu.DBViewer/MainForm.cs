@@ -23,6 +23,110 @@ namespace AAEmu.DBViewer
 {
     public partial class MainForm : Form
     {
+        private static readonly Dictionary<string, string> FieldNameZh = new()
+        {
+            ["id"] = "ID",
+            ["name"] = "名称",
+            ["comment"] = "备注",
+            ["category_id"] = "分类ID",
+            ["item_id"] = "物品ID",
+            ["item_count"] = "物品数量",
+            ["item_template_id"] = "物品模板ID",
+            ["template_id"] = "模板ID",
+            ["skill_id"] = "技能ID",
+            ["buff_id"] = "增益ID",
+            ["npc_id"] = "NPC ID",
+            ["quest_id"] = "任务ID",
+            ["quest_context_id"] = "任务上下文ID",
+            ["doodad_id"] = "装饰物ID",
+            ["doodad_func_group_id"] = "装饰物功能组ID",
+            ["slave_id"] = "召唤物ID",
+            ["base_skill_delay"] = "基础技能延迟",
+            ["base_skill_strafe"] = "基础技能侧移",
+            ["casting_time"] = "施法时间",
+            ["cooldown_time"] = "冷却时间",
+            ["effect_delay"] = "效果延迟",
+            ["ability_id"] = "能力ID",
+            ["actual_func_id"] = "实际功能ID",
+            ["actual_func_type"] = "实际功能类型",
+            ["owner_id"] = "所有者ID",
+            ["owner_type"] = "所有者类型",
+            ["owner_type_id"] = "所有者类型ID",
+            ["zone_id"] = "区域ID",
+            ["zone_key"] = "区域键",
+            ["group_id"] = "组ID",
+            ["level"] = "等级",
+            ["min_level"] = "最低等级",
+            ["max_level"] = "最高等级",
+            ["give_term"] = "发放期限",
+            ["give_max"] = "发放上限",
+            ["premium_grade_id"] = "高级品级ID",
+            ["active_take"] = "主动领取",
+            ["on_air"] = "空中状态",
+            ["tool_tip"] = "提示文本",
+            ["show_wherever"] = "任意位置显示",
+            ["show_whenever"] = "任意时间显示",
+            ["icon_path"] = "图标路径",
+            ["enable_key_string"] = "启用键字符串",
+            ["disable_key_string"] = "禁用键字符串",
+            ["label_key_string"] = "标签键字符串",
+            ["cond_to_next_time"] = "进入下一步条件",
+            ["cond_comp_by_and"] = "条件按且组合",
+            ["world_id"] = "世界ID",
+            ["kind_id"] = "类型ID",
+            ["value1"] = "数值1",
+            ["value2"] = "数值2",
+            ["value3"] = "数值3",
+            ["param1"] = "参数1",
+            ["param2"] = "参数2",
+            ["param3"] = "参数3",
+            ["buff_attribute_id"] = "增益属性ID",
+            ["unit_attribute_id"] = "单位属性ID",
+            ["modifier_type_id"] = "修正类型ID",
+            ["func_type"] = "功能类型",
+            ["func_id"] = "功能ID",
+            ["attach_point"] = "附着点",
+            ["parent_doodad"] = "父装饰物",
+            ["model_id"] = "模型ID",
+            ["sound_id"] = "音效ID",
+            ["sound_pack_id"] = "音效包ID",
+            ["target_id"] = "目标ID",
+            ["faction_id"] = "阵营ID",
+            ["mother_id"] = "母对象ID",
+            ["diplomacy_link_id"] = "外交关系ID",
+            ["is_diplomacy_tgt"] = "是外交目标",
+            ["schedule_id"] = "日程ID",
+            ["tower_def_id"] = "塔防ID",
+            ["tower_def_prog_id"] = "塔防进度ID",
+            ["kill_target_id"] = "击杀目标ID",
+            ["spawn_target_id"] = "刷新目标ID",
+            ["next_event_id"] = "下一事件ID",
+            ["event_id"] = "事件ID",
+            ["condition_id"] = "条件ID",
+            ["source_id"] = "来源ID",
+            ["sound_time"] = "音效时间",
+            ["phase_msg"] = "阶段消息",
+            ["is_msg_to_zone"] = "区域消息",
+            ["actual_id"] = "实际ID",
+            ["actual_type"] = "实际类型",
+            ["doodad_func_group_kind_id"] = "功能组类型ID",
+            ["item_grade_id"] = "物品品级ID",
+            ["grade_id"] = "品级ID",
+            ["npc_spawner_id"] = "NPC 刷新点ID",
+            ["spawner_id"] = "刷新点ID",
+            ["min_population"] = "最小数量",
+            ["max_population"] = "最大数量",
+            ["spawn_delay_min"] = "最小刷新延迟",
+            ["spawn_delay_max"] = "最大刷新延迟",
+            ["start_time"] = "开始时间",
+            ["end_time"] = "结束时间",
+            ["test_radius_npc"] = "NPC 测试半径",
+            ["test_radius_pc"] = "玩家测试半径",
+            ["suspend_spawn_count"] = "暂停刷新数量",
+            ["save_indun"] = "保存副本",
+            ["activation_state"] = "激活状态",
+        };
+
         public static MainForm ThisForm { get; set; }
         private string DefaultTitle { get; set; } = string.Empty;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -88,7 +192,7 @@ namespace AAEmu.DBViewer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            MMVersion.Text = $"Version {Assembly.GetExecutingAssembly().GetName().Version}";
+            MMVersion.Text = $"版本 {Assembly.GetExecutingAssembly().GetName().Version}";
             lAppVersion.Text = MMVersion.Text;
             MM.Visible = false;
             tcViewer.ItemSize = new Size(0, 1);
@@ -119,9 +223,9 @@ namespace AAEmu.DBViewer
             tcDoodads.SelectedTab = tpDoodadWorkflow;
 
             cbItemSearchType.Items.Clear();
-            cbItemSearchType.Items.Add("Any");
+            cbItemSearchType.Items.Add("全部");
             foreach (var implId in Enum.GetValues(typeof(GameItemImplId)))
-                cbItemSearchType.Items.Add(((int)implId).ToString() + " - " + implId.ToString());
+                cbItemSearchType.Items.Add(((int)implId).ToString() + " - " + ItemImplName((GameItemImplId)implId));
             cbItemSearchType.SelectedIndex = 0;
 
             LoadProfiles();
@@ -138,9 +242,9 @@ namespace AAEmu.DBViewer
             if (File.Exists(gamePakFileName) || Directory.Exists(gamePakFileName))
             {
                 using var loading = new LoadingForm();
-                loading.Text = $@"Loading: {Path.GetFileName(gamePakFileName)}";
+                loading.Text = $@"正在加载：{Path.GetFileName(gamePakFileName)}";
                 loading.Show();
-                loading.ShowInfo("Opening: " + Path.GetFileName(gamePakFileName));
+                loading.ShowInfo("正在打开：" + Path.GetFileName(gamePakFileName));
 
                 // TryLoadPakKeys(gamePakFileName);
 
@@ -151,9 +255,9 @@ namespace AAEmu.DBViewer
                     Properties.Settings.Default.GamePakFileName = gamePakFileName;
                     lCurrentPakFile.Text = Properties.Settings.Default.GamePakFileName;
 
-                    loading.ShowInfo("Loading: World Data");
+                    loading.ShowInfo("正在加载：世界数据");
                     PrepareWorldXml(true);
-                    loading.ShowInfo("Loading: Quest Sign Sphere Data");
+                    loading.ShowInfo("正在加载：任务区域数据");
                     LoadQuestSpheresFromPak();
                 }
             }
@@ -219,7 +323,7 @@ namespace AAEmu.DBViewer
             if (sender is Label)
             {
                 string s = (sender as Label).Text;
-                if ((s == "<none>") || (s == "???") || (s.Trim(' ') == string.Empty))
+                if ((s == "<无>") || (s == "???") || (s.Trim(' ') == string.Empty))
                     s = string.Empty;
                 if (s != string.Empty)
                     CopyToClipBoard(s);
@@ -849,58 +953,58 @@ namespace AAEmu.DBViewer
             try
             {
 
-                loading.Text = $@"Loading: {Path.GetFileName(sqliteFileName)}";
+                loading.Text = $@"正在加载：{Path.GetFileName(sqliteFileName)}";
                 loading.Show();
 
                 // The table name loading is basically just to check if we can read the DB file
-                loading.ShowInfo("Loading: Table names");
+                loading.ShowInfo("正在加载：数据表名称");
                 LoadTableNames();
 
                 UpdateTitleBar();
 
                 // Make sure translations are loaded first, other tables depend on it
-                loading.ShowInfo("Loading: Translation");
+                loading.ShowInfo("正在加载：翻译数据");
                 LoadTranslations(Properties.Settings.Default.DefaultGameLanguage);
-                loading.ShowInfo("Loading: Custom Translations");
+                loading.ShowInfo("正在加载：自定义翻译");
                 AddCustomTranslations();
                 LoadUiTexts();
 
-                loading.ShowInfo("Loading: Icon info");
+                loading.ShowInfo("正在加载：图标信息");
                 LoadIcons();
 
-                loading.ShowInfo("加载中: 游戏配置");
+                loading.ShowInfo("正在加载：游戏配置");
                 LoadConfigs();
 
-                loading.ShowInfo("Loading: Factions");
+                loading.ShowInfo("正在加载：阵营");
                 LoadFactions();
 
-                loading.ShowInfo("Loading: Plots");
+                loading.ShowInfo("正在加载：剧情");
                 LoadPlots();
 
-                loading.ShowInfo("Loading: Buffs");
+                loading.ShowInfo("正在加载：增益");
                 LoadBuffs();
 
-                loading.ShowInfo("Loading: Transfers");
+                loading.ShowInfo("正在加载：传送");
                 LoadTransfers();
                 LoadTransferPaths();
 
-                loading.ShowInfo("Loading: Tags");
+                loading.ShowInfo("正在加载：标签");
                 LoadTags();
 
-                loading.ShowInfo("Loading: Zones");
+                loading.ShowInfo("正在加载：区域");
                 LoadZoneGroupBannedTags();
                 LoadZones();
 
-                loading.ShowInfo("Loading: Doodads");
+                loading.ShowInfo("正在加载：装饰物");
                 LoadDoodads();
 
-                loading.ShowInfo("Loading: Items");
+                loading.ShowInfo("正在加载：物品");
                 LoadItemCategories();
                 LoadItems();
                 LoadItemArmors();
                 LoadItemWeapons();
 
-                loading.ShowInfo("Loading: Skills");
+                loading.ShowInfo("正在加载：技能");
                 LoadSkills();
                 LoadSkillReagents();
                 LoadSkillProducts();
@@ -908,41 +1012,41 @@ namespace AAEmu.DBViewer
                 LoadUnitMods();
                 LoadDynamicUnitMods();
 
-                loading.ShowInfo("Loading: Models");
+                loading.ShowInfo("正在加载：模型");
                 LoadModels();
 
-                loading.ShowInfo("Loading: NPCs");
+                loading.ShowInfo("正在加载：NPC");
                 LoadNpcs();
 
-                loading.ShowInfo("Loading: Shops");
+                loading.ShowInfo("正在加载：商店");
                 LoadShops();
 
-                loading.ShowInfo("Loading: Vehicles");
+                loading.ShowInfo("正在加载：载具");
                 LoadSlaves();
 
-                loading.ShowInfo("Loading: Quests");
+                loading.ShowInfo("正在加载：任务");
                 LoadQuests();
 
-                loading.ShowInfo("Loading: Trades");
+                loading.ShowInfo("正在加载：交易");
                 LoadTrades();
 
-                loading.ShowInfo("Loading: Loot");
+                loading.ShowInfo("正在加载：掉落");
                 LoadLoots();
 
-                loading.ShowInfo("Loading: Schedules");
+                loading.ShowInfo("正在加载：日程");
                 LoadSchedules();
 
-                loading.ShowInfo("Loading: Spheres");
+                loading.ShowInfo("正在加载：领域数据");
                 LoadSpheresFromCompact();
 
-                loading.ShowInfo("Loading: Achievements");
+                loading.ShowInfo("正在加载：成就");
                 LoadAchievements();
 
                 return true;
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, @"Exception loading DB", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message, @"加载数据库异常", MessageBoxButtons.OK);
                 return false;
             }
         }
@@ -990,7 +1094,7 @@ namespace AAEmu.DBViewer
 
             using var loading = new LoadingForm();
             loading.Show();
-            loading.ShowInfo("Opening: " + Path.GetFileName(openFileName));
+            loading.ShowInfo("正在打开：" + Path.GetFileName(openFileName));
 
             ClientFileManager.Initialize([openFileName]);
 
@@ -1021,7 +1125,7 @@ namespace AAEmu.DBViewer
             var dbFile = AllTableNames.GetValueOrDefault(table) ?? string.Empty;
             if (string.IsNullOrWhiteSpace(dbFile) || !File.Exists(dbFile))
             {
-                labelCurrentDataInfo.Text = $@"{table} not found in {dbFile}, something went wrong";
+                labelCurrentDataInfo.Text = $@"未找到数据表 {table}（文件: {dbFile}）";
                 dgvCurrentData.Rows.Clear();
                 return;
             }
@@ -1118,7 +1222,7 @@ namespace AAEmu.DBViewer
 
                                 if (((line % 100) == 0) && (line > 0))
                                 {
-                                    if (MessageBox.Show($"Already added {line} records, continue?", "SQL Query", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                                    if (MessageBox.Show($"已添加 {line} 条记录，是否继续？", "SQL 查询", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                                         break;
                                 }
                             }
@@ -1135,7 +1239,7 @@ namespace AAEmu.DBViewer
             {
                 Cursor = Cursors.Default;
                 Application.UseWaitCursor = false;
-                MessageBox.Show(x.Message, "Run MySQL Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(x.Message, "执行 MySQL 异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -1398,13 +1502,13 @@ namespace AAEmu.DBViewer
                             var gradeRate = (float)weight / (float)totalWeight * 100f;
                             if (AaDb.DbItemGrades.TryGetValue(gradeId, out var grade))
                             {
-                                var gradeNode = itemNode.Nodes.Add($"Grade: {grade.NameLocalized} ({gradeId}) @ {gradeRate:F0}%");
+                                var gradeNode = itemNode.Nodes.Add($"品级：{grade.NameLocalized} ({gradeId})，{gradeRate:F0}%");
                                 gradeNode.ForeColor = grade.ColorArgb;
                                 gradeNode.SelectedImageIndex = gradeNode.ImageIndex = IconIdToLabel(grade.IconId, null);
                             }
                             else
                             {
-                                itemNode.Nodes.Add($"Grade: Invalid ({gradeId}) ").ForeColor = Color.Red;
+                                itemNode.Nodes.Add($"品级：无效 ({gradeId}) ").ForeColor = Color.Red;
                             }
 
                         }
@@ -1412,7 +1516,7 @@ namespace AAEmu.DBViewer
                     }
                     else
                     {
-                        itemNode.Nodes.Add("Unknown grade distribution").ForeColor = Color.Red;
+                        itemNode.Nodes.Add("未知品级分布").ForeColor = Color.Red;
                     }
 
                 }
@@ -1449,6 +1553,8 @@ namespace AAEmu.DBViewer
             if (hideNull && IsCustomPropertyEmpty(value))
                 return null;
 
+            var displayKey = FieldNameZh.GetValueOrDefault(key, key);
+
             // First try to detect localizable entries
             var rootSplit = rootNode.Text.Split(' ');
             var rootTypeName = string.Empty;
@@ -1473,13 +1579,13 @@ namespace AAEmu.DBViewer
                 localizedNode.targetTextBox = tSearchLocalized;
                 localizedNode.targetSearchText = rootTypeName + " " + key + " =" + rootTypeKey + "=";
                 localizedNode.targetSearchButton = null;
-                localizedNode.Text = key + ": " + localizedValue;
+                localizedNode.Text = displayKey + "：" + localizedValue;
                 localizedNode.ForeColor = Color.LightYellow;
                 rootNode.Nodes.Add(localizedNode);
                 return localizedNode;
             }
 
-            var nodeText = key + ": " + value;
+            var nodeText = displayKey + "：" + value;
             if (!long.TryParse(value, out var val))
             {
                 var normalNode = rootNode.Nodes.Add(nodeText);
@@ -1759,7 +1865,7 @@ namespace AAEmu.DBViewer
                     var gSpawns = gList.Where(g => g.Type == val);
                     foreach (var npcSpawnerGFileData in gSpawns)
                     {
-                        spawnNode.Nodes.Add($"Has g file data ID: {npcSpawnerGFileData.Id} - Pos: {npcSpawnerGFileData.Points.FirstOrDefault()}");
+                        spawnNode.Nodes.Add($"包含 g 文件数据 ID：{npcSpawnerGFileData.Id} - 位置：{npcSpawnerGFileData.Points.FirstOrDefault()}");
                     }
                 }
                 */
@@ -2017,7 +2123,7 @@ namespace AAEmu.DBViewer
 
                 if (DgvSpheres.Rows.Count > 250)
                 {
-                    MessageBox.Show("Results truncated to 250 results, please be more specific in the search");
+                    MessageBox.Show("结果已截断为 250 条，请缩小搜索范围");
                     break;
                 }
             }
@@ -2074,7 +2180,7 @@ namespace AAEmu.DBViewer
 
             if (questList.Count > 0)
             {
-                var questNode = TvSpheres.Nodes.Add("Quests Sign Spheres");
+                var questNode = TvSpheres.Nodes.Add("任务区域");
                 foreach (var questId in questList)
                 {
                     var quests = AaDb.PakQuestSignSpheres.Where(x => x.QuestId == questId).ToArray();
@@ -2104,7 +2210,7 @@ namespace AAEmu.DBViewer
                         }
 
                         var zonePosNode = new TreeNodeWithInfo();
-                        zonePosNode.Text = $"Position: {questSphereEntry.X} , {questSphereEntry.Y} , {questSphereEntry.Z}";
+                        zonePosNode.Text = $"位置：{questSphereEntry.X} , {questSphereEntry.Y} , {questSphereEntry.Z}";
                         zonePosNode.targetPosition = new Vector3(questSphereEntry.X, questSphereEntry.Y, questSphereEntry.Z);
                         zonePosNode.targetRadius = questSphereEntry.Radius;
                         zonePosNode.targetWorldName = questSphereEntry.WorldId;
@@ -2112,7 +2218,7 @@ namespace AAEmu.DBViewer
                         zonePosNode.ForeColor = Color.Aquamarine;
                         qNode.Nodes.Add(zonePosNode);
 
-                        qNode.Nodes.Add($"Radius: {questSphereEntry.Radius}");
+                        qNode.Nodes.Add($"半径：{questSphereEntry.Radius}");
                     }
                 }
 
@@ -2158,7 +2264,7 @@ namespace AAEmu.DBViewer
                 reqNode.ForeColor = Color.Aqua;
                 foreach (var req in requirements)
                 {
-                    reqNode.Nodes.Add($"kind_id: {req.KindId}, value1: {req.Value1}, value2: {req.Value2}");
+                    reqNode.Nodes.Add($"类型ID：{req.KindId}，数值1：{req.Value1}，数值2：{req.Value2}");
                 }
                 reqNode.ExpandAll();
                 return reqNode;
@@ -3004,13 +3110,13 @@ namespace AAEmu.DBViewer
         {
             if (string.IsNullOrWhiteSpace(TSaveProfileName.Text))
             {
-                MessageBox.Show("Name is required");
+                MessageBox.Show("请输入名称");
                 return;
             }
 
             if (Profiles.Any(x => x.Name.Equals(TSaveProfileName.Text, StringComparison.InvariantCultureIgnoreCase)))
             {
-                MessageBox.Show("Name already exists");
+                MessageBox.Show("名称已存在");
                 return;
             }
 
@@ -3070,7 +3176,7 @@ namespace AAEmu.DBViewer
                 Properties.Settings.Default.DefaultGameLanguage = oldLocale;
                 LoadServerDB(false);
                 DoFindGameClient(false, false);
-                MessageBox.Show($"Failed to load profile {profile.Name}");
+                MessageBox.Show($"加载配置失败：{profile.Name}");
                 return false;
             }
 
@@ -3082,7 +3188,7 @@ namespace AAEmu.DBViewer
         {
             if (LbProfiles.SelectedItem is not SavedProfile profile)
             {
-                MessageBox.Show("No profile selected");
+                MessageBox.Show("未选择配置");
                 return;
             }
 
@@ -3093,16 +3199,16 @@ namespace AAEmu.DBViewer
         {
             if (LbProfiles.SelectedItem is not SavedProfile profile)
             {
-                MessageBox.Show("No profile selected");
+                MessageBox.Show("未选择配置");
                 return;
             }
 
-            if (MessageBox.Show($"Are you sure you want to remove {profile.Name} ?", "Delete profile", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show($"确定要删除配置 {profile.Name} 吗？", "删除配置", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             if (!Profiles.Remove(profile))
             {
-                MessageBox.Show("Failed to remove profile");
+                MessageBox.Show("删除配置失败");
                 return;
             }
 
@@ -3117,7 +3223,7 @@ namespace AAEmu.DBViewer
 
         private void BtnAdditionalServerDb_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you want to load an additional database file for this profile?", "Add DB", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show("是否为此配置加载额外的数据库文件？", "添加数据库", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             if (openDBDlg.ShowDialog() != DialogResult.OK)
@@ -3128,7 +3234,7 @@ namespace AAEmu.DBViewer
             var sqliteFiles = Properties.Settings.Default.DBFileName.Split(Path.PathSeparator).ToList();
             if (sqliteFiles.Contains(openDBDlg.FileName))
             {
-                MessageBox.Show($"{openDBDlg.FileName} is already loaded");
+                MessageBox.Show($"{openDBDlg.FileName} 已加载");
                 return;
             }
             sqliteFiles.Add(openDBDlg.FileName);
@@ -3185,7 +3291,7 @@ namespace AAEmu.DBViewer
 
                 // Update header
                 cmPlotBookmarks.Items[0].Tag = thisPlotEvent;
-                cmPlotBookmarks.Items[0].Text = $@"{thisPlotEvent.ThisEventId} is called from";
+                cmPlotBookmarks.Items[0].Text = $@"{thisPlotEvent.ThisEventId} 被以下事件调用";
 
                 // Remove old entries
                 for (var i = cmPlotBookmarks.Items.Count - 1; i >= 2; i--)
@@ -3200,7 +3306,7 @@ namespace AAEmu.DBViewer
                         plotEventRef.Parent is TreeNodeWithPlotEventReference parentNode &&
                         plotEventRef.TargetEventId == thisPlotEvent.ThisEventId)
                     {
-                        cmPlotBookmarks.Items.Add($"Event {parentNode.Text}").Tag = plotEventRef;
+                        cmPlotBookmarks.Items.Add($"事件 {parentNode.Text}").Tag = plotEventRef;
                     }
                 }
             }
@@ -3290,7 +3396,7 @@ namespace AAEmu.DBViewer
             //if (selectedItem.AdditionalReward)
             //    rootNode.BackColor = System.Drawing.Color.FromArgb(255, 250, 205); // LightGoldenrodYellow
 
-            rootNode.Nodes.Add($"ID: {selectedItem.Id}");
+            rootNode.Nodes.Add($"ID：{selectedItem.Id}");
             var grade = AaDb.DbItemGrades.GetValueOrDefault(selectedItem.ItemGradeId);
             var gradeText = $"(品级: {grade?.NameLocalized ?? ""} {selectedItem.ItemGradeId})";
             AddCustomPropertyNode("item_id", selectedItem.ItemId.ToString(), false, rootNode).Text += $@" x {selectedItem.ItemCount} {gradeText}";
@@ -3313,11 +3419,12 @@ namespace AAEmu.DBViewer
         {
             var cb = sender as ComboBox;
             if (cb == null) return;
-            var filter = cb.SelectedItem?.ToString() ?? "All";
+            var isAll = cb.SelectedIndex <= 0;
+            var filter = isAll ? "全部" : cb.SelectedItem?.ToString() ?? string.Empty;
 
             lbAttendance.Items.Clear();
             tvSchedule.Nodes.Clear();
-            if (filter == "All")
+            if (isAll)
                 tvSchedule.Nodes.Add("请选择月份以显示详情").ImageIndex = 2;
             var rootNode = tvSchedule.Nodes.Add($"{filter} 每日签到奖励");
             var attendNode = tvSchedule.Nodes.Add($"{filter} 累计签到天数奖励");
@@ -3326,10 +3433,10 @@ namespace AAEmu.DBViewer
                          .ThenBy(x => x.Month)
                          .ThenBy(x => x.DayCount))
             {
-                if (filter == "All" || $"{val.Year:0000}-{val.Month:00}" == filter)
+                if (isAll || $"{val.Year:0000}-{val.Month:00}" == filter)
                 {
                     lbAttendance.Items.Add(val);
-                    if (filter != "All")
+                    if (!isAll)
                     {
                         var dayNode = AddCustomPropertyNode("item_id", val.ItemId.ToString(), false, val.AdditionalReward ? attendNode : rootNode);
                         var grade = AaDb.DbItemGrades.GetValueOrDefault(val.ItemGradeId);

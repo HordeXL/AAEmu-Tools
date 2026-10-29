@@ -1,4 +1,4 @@
-using AAEmu.DBViewer.DbDefs;
+﻿using AAEmu.DBViewer.DbDefs;
 using AAEmu.DBViewer.enums;
 using AAEmu.Game.Utils.DB;
 using Newtonsoft.Json;
@@ -283,7 +283,7 @@ public partial class MainForm
         var rootNode = tvQuestWorkflow.Nodes.Add(q.NameLocalized + " ( " + q.Id + " )");
         rootNode.ForeColor = Color.White;
 
-        var contextNode = rootNode.Nodes.Add("Context");
+        var contextNode = rootNode.Nodes.Add("上下文");
         contextNode.ForeColor = Color.White;
         var contextFieldsList = GetCustomTableValues("quest_contexts", "id", q.Id.ToString());
         foreach (var contextFields in contextFieldsList)
@@ -298,7 +298,7 @@ public partial class MainForm
                 {
                     if (AaDb.DbQuestCategories.TryGetValue(q.CategoryId, out var questCat))
                     {
-                        contextNode.Nodes.Add("Category: " + questCat.NameLocalized + " ( " + questCat.Id + " )");
+                        contextNode.Nodes.Add("分类：" + questCat.NameLocalized + " ( " + questCat.Id + " )");
                     }
                     else
                         AddCustomPropertyNode(contextField.Key, contextField.Value, false, contextNode);
@@ -366,7 +366,7 @@ public partial class MainForm
             kindName += " ( " + c.ComponentKindId + " )";
 
             // Quest Component header
-            var componentNode = rootNode.Nodes.Add("Component " + c.Id.ToString() + " - " + kindName);
+            var componentNode = rootNode.Nodes.Add("组件 " + c.Id.ToString() + " - " + kindName);
             questText += "|nc;" + kindName + "|r\r\r";
 
             // Quest description text
@@ -397,7 +397,7 @@ public partial class MainForm
                 }
             }
 
-            var componentInfoNode = componentNode.Nodes.Add("Properties");
+            var componentInfoNode = componentNode.Nodes.Add("属性");
             componentInfoNode.ForeColor = Color.Yellow;
             var fieldsList = GetCustomTableValues("quest_components", "id", c.Id.ToString());
             foreach (var fields in fieldsList)
@@ -424,7 +424,7 @@ public partial class MainForm
 
             foreach (var a in acts)
             {
-                var actsNode = componentNode.Nodes.Add("Act " + a.Id + " - " + a.ActDetailType + " ( " +
+                var actsNode = componentNode.Nodes.Add("动作 " + a.Id + " - " + a.ActDetailType + " ( " +
                                                        a.ActDetailId + " )");
                 actsNode.ForeColor = Color.LimeGreen;
                 var actDetailTableName = FunctionTypeToTableName(a.ActDetailType);
@@ -869,7 +869,7 @@ public partial class MainForm
 
         // Fill attendance month filter
         cbAttendanceFilter.Items.Clear();
-        cbAttendanceFilter.Items.Add("All");
+        cbAttendanceFilter.Items.Add("全部");
         var months = AaDb.DbAccountAttendanceRewards.Values
             .Select(x => $"{x.Year:0000}-{x.Month:00}")
             .Distinct()
@@ -891,7 +891,7 @@ public partial class MainForm
         if (lbTowerDefs.Items.Count <= 0)
             lbTowerDefs.Items.Add("未加载内容或数据不完整");
         if (lbAttendance.Items.Count <= 0)
-            lbAttendance.Items.Add("Nothing loaded or incomplete data");
+            lbAttendance.Items.Add("未加载内容或数据不完整");
 
         tcScheduleTypes.SelectedTab = tpTowerDefs;
     }
@@ -1225,7 +1225,7 @@ public partial class MainForm
 
             using (var loading = new LoadingForm())
             {
-                loading.ShowInfo("Searching NPCs in zones: " + AaDb.DbZoneGroups.Count.ToString());
+                loading.ShowInfo("正在区域中搜索 NPC：" + AaDb.DbZoneGroups.Count.ToString());
                 loading.Show();
 
                 var zoneCount = 0;
@@ -1235,7 +1235,7 @@ public partial class MainForm
                     if (zg != null)
                     {
                         zoneCount++;
-                        loading.ShowInfo("Searching in zones: " + zoneCount.ToString() + "/" +
+                        loading.ShowInfo("正在搜索区域：" + zoneCount.ToString() + "/" +
                                          AaDb.DbZoneGroups.Count.ToString());
                         npcList.AddRange(GetNpcSpawnsInZoneGroup(zg.Id, false, NPCsToShow));
                     }
@@ -1289,7 +1289,7 @@ public partial class MainForm
             var startTime = new DateTime(
                 selectedItem.StYear, selectedItem.StMonth, selectedItem.StDay,
                 selectedItem.StHour, selectedItem.StMin, selectedItem.StMin);
-            rootNode.Nodes.Add($"Starts: {startTime}");
+            rootNode.Nodes.Add($"开始：{startTime}");
         }
 
         if ((selectedItem.EdYear > 0) && (selectedItem.EdMonth > 0) && (selectedItem.EdDay > 0))
@@ -1297,7 +1297,7 @@ public partial class MainForm
             var startTime = new DateTime(
                 selectedItem.EdYear, selectedItem.EdMonth, selectedItem.EdDay,
                 selectedItem.EdHour, selectedItem.EdMin, selectedItem.EdMin);
-            rootNode.Nodes.Add($"Ends: {startTime}");
+            rootNode.Nodes.Add($"结束：{startTime}");
         }
 
         rootNode.Nodes.Add($"give_term: {selectedItem.GiveTerm}");
@@ -1332,17 +1332,17 @@ public partial class MainForm
         tvSchedule.Nodes.Clear();
         var rootNode = tvSchedule.Nodes.Add(selectedItem.ToString());
 
-        rootNode.Nodes.Add($"Day of the Week: {selectedItem.DayOfWeekId}");
+        rootNode.Nodes.Add($"星期：{selectedItem.DayOfWeekId}");
 
-        rootNode.Nodes.Add($"Starts: {selectedItem.StartTime:00}:{selectedItem.StartTimeMin:00}");
-        rootNode.Nodes.Add($"Ends: {selectedItem.EndTime:00}:{selectedItem.EndTimeMin:00}");
+        rootNode.Nodes.Add($"开始：{selectedItem.StartTime:00}:{selectedItem.StartTimeMin:00}");
+        rootNode.Nodes.Add($"结束：{selectedItem.EndTime:00}:{selectedItem.EndTimeMin:00}");
 
         if ((selectedItem.StYear > 0) && (selectedItem.StMonth > 0) && (selectedItem.StDay > 0))
         {
             var startTime = new DateTime(
                 (int)selectedItem.StYear, (int)selectedItem.StMonth, (int)selectedItem.StDay,
                 (int)selectedItem.StHour, (int)selectedItem.StMin, 0);
-            rootNode.Nodes.Add($"IRL Starts: {startTime}");
+            rootNode.Nodes.Add($"现实开始：{startTime}");
         }
 
         if ((selectedItem.EdYear > 0) && (selectedItem.EdMonth > 0) && (selectedItem.EdDay > 0))
@@ -1350,13 +1350,13 @@ public partial class MainForm
             var startTime = new DateTime(
                 (int)selectedItem.EdYear, (int)selectedItem.EdMonth, (int)selectedItem.EdDay,
                 (int)selectedItem.EdHour, (int)selectedItem.EdMin, 0);
-            rootNode.Nodes.Add($"IRL Ends: {startTime}");
+            rootNode.Nodes.Add($"现实结束：{startTime}");
         }
 
         var quests = AaDb.DbScheduleQuest.Values.Where(x => x.GameScheduleId == selectedItem.Id);
         if (quests.Any())
         {
-            var questNode = tvSchedule.Nodes.Add("Quests");
+            var questNode = tvSchedule.Nodes.Add("任务");
             foreach (var gameScheduleQuest in quests)
             {
                 AddCustomPropertyNode("quest_id", gameScheduleQuest.QuestId.ToString(), false, questNode);
@@ -1366,7 +1366,7 @@ public partial class MainForm
         var doodads = AaDb.DbScheduleDoodads.Values.Where(x => x.GameScheduleId == selectedItem.Id);
         if (doodads.Any())
         {
-            var doodadNode = tvSchedule.Nodes.Add("Doodads");
+            var doodadNode = tvSchedule.Nodes.Add("装饰物");
             foreach (var gameScheduleDoodad in doodads)
             {
                 AddCustomPropertyNode("doodad_id", gameScheduleDoodad.DoodadId.ToString(), false, doodadNode);
@@ -1376,7 +1376,7 @@ public partial class MainForm
         var spawners = AaDb.DbScheduleSpawners.Values.Where(x => x.GameScheduleId == selectedItem.Id);
         if (spawners.Any())
         {
-            var spawnersNode = tvSchedule.Nodes.Add("Spawners");
+            var spawnersNode = tvSchedule.Nodes.Add("刷新点");
             foreach (var gameScheduleQuest in spawners)
             {
                 AddCustomPropertyNode("spawner_id", gameScheduleQuest.SpawnerId.ToString(), false, spawnersNode);
@@ -1399,14 +1399,14 @@ public partial class MainForm
         rootNode.ImageIndex = 3;
 
         if (hasName)
-            rootNode.Nodes.Add($"Title: {selectedItem.TitleMsgLocalized}");
+            rootNode.Nodes.Add($"标题：{selectedItem.TitleMsgLocalized}");
 
         if (selectedItem.Tod != 0f)
         {
             var startHours = (int)Math.Floor(selectedItem.Tod);
             var startMinutes = (int)Math.Floor((selectedItem.Tod % 1) * 60f);
 
-            rootNode.Nodes.Add($"Starts at {startHours:00}:{startMinutes:00} game time");
+            rootNode.Nodes.Add($"开始于 {startHours:00}:{startMinutes:00} 游戏时间");
         }
         else
         {
@@ -1417,9 +1417,9 @@ public partial class MainForm
                 foreach (var conflictZoneWarTrigger in conflictZoneWarTriggers)
                 {
                     if (AaDb.DbZoneGroups.TryGetValue(conflictZoneWarTrigger.ZoneGroupId, out var zoneGroup))
-                        rootNode.Nodes.Add($"Starts when WAR in {zoneGroup.DisplayTextLocalized} ({zoneGroup.Id})");
+                        rootNode.Nodes.Add($"在 {zoneGroup.DisplayTextLocalized} ({zoneGroup.Id}) 发生战争时开始");
                     else
-                        rootNode.Nodes.Add($"Starts when WAR in zone_group {conflictZoneWarTrigger.ZoneGroupId})");
+                        rootNode.Nodes.Add($"在区域组 {conflictZoneWarTrigger.ZoneGroupId}) 发生战争时开始");
                     triggerCount++;
                 }
             }
@@ -1429,26 +1429,26 @@ public partial class MainForm
                 foreach (var conflictZonePeaceTrigger in conflictZonePeaceTriggers)
                 {
                     if (AaDb.DbZoneGroups.TryGetValue(conflictZonePeaceTrigger.ZoneGroupId, out var zoneGroup))
-                        rootNode.Nodes.Add($"Starts when PEACE in {zoneGroup.DisplayTextLocalized} ({zoneGroup.Id})");
+                        rootNode.Nodes.Add($"在 {zoneGroup.DisplayTextLocalized} ({zoneGroup.Id}) 和平时开始");
                     else
-                        rootNode.Nodes.Add($"Starts when PEACE in zone_group {conflictZonePeaceTrigger.ZoneGroupId})");
+                        rootNode.Nodes.Add($"在区域组 {conflictZonePeaceTrigger.ZoneGroupId}) 和平时开始");
                     triggerCount++;
                 }
             }
 
             if (triggerCount <= 0)
-                rootNode.Nodes.Add($"Starts by manual trigger");
+                rootNode.Nodes.Add("由手动触发开始");
         }
 
-        rootNode.Nodes.Add($"First wave after: {selectedItem.FirstWaveAfter} - {MSToString((long)Math.Round(selectedItem.FirstWaveAfter*1000f))}");
-        rootNode.Nodes.Add($"Force end after: {selectedItem.ForceEndTime} - {MSToString((long)Math.Round(selectedItem.ForceEndTime * 1000f))}");
-        rootNode.Nodes.Add($"ToD Day Interval: {selectedItem.TodDayInterval}");
+        rootNode.Nodes.Add($"首波延迟：{selectedItem.FirstWaveAfter} - {MSToString((long)Math.Round(selectedItem.FirstWaveAfter*1000f))}");
+        rootNode.Nodes.Add($"强制结束延迟：{selectedItem.ForceEndTime} - {MSToString((long)Math.Round(selectedItem.ForceEndTime * 1000f))}");
+        rootNode.Nodes.Add($"昼夜天数间隔：{selectedItem.TodDayInterval}");
         AddCustomPropertyNode("target_npc_spawner_id", selectedItem.TargetNpcSpawnerId.ToString(), false, rootNode);
         AddCustomPropertyNode("kill_npc_id", selectedItem.KillNpcId.ToString(), false, rootNode);
         AddCustomPropertyNode("kill_npc_count", selectedItem.KillNpcCount.ToString(), false, rootNode);
 
-        rootNode.Nodes.Add($"Start Message: {selectedItem.StartMsgLocalized}");
-        rootNode.Nodes.Add($"End Message: {selectedItem.EndMsgLocalized}");
+        rootNode.Nodes.Add($"开始消息：{selectedItem.StartMsgLocalized}");
+        rootNode.Nodes.Add($"结束消息：{selectedItem.EndMsgLocalized}");
 
         var steps = AaDb.DbTowerDefProgs.Values.Where(x => x.TowerDefId == selectedItem.Id)?.OrderBy(x => x.Id);
         if (steps.Any())
@@ -1461,7 +1461,7 @@ public partial class MainForm
                 stepNode.Nodes.Add($"cond_to_next_time: {step.CondToNextTime} - {MSToString((long)Math.Round(step.CondToNextTime * 1000f))}");
                 stepNode.Nodes.Add($"cond_comp_by_and: {step.CondCompByAnd}");
 
-                var spawnsNode = stepNode.Nodes.Add("Spawns");
+                var spawnsNode = stepNode.Nodes.Add("刷新");
                 var spawnTargets = AaDb.DbTowerDefProgSpawnTargets.Values.Where(x => x.TowerDefProgId == step.Id);
                 if (spawnTargets.Any())
                 {
@@ -1476,11 +1476,11 @@ public partial class MainForm
                             spawnNode = spawnsNode.Nodes.Add($"{spawnTarget.SpawnTargetType} - {spawnTarget.SpawnTargetId}");
 
                         if (spawnTarget.DespawnOnNextStep)
-                            spawnNode.Nodes.Add("Despawns on next step").ImageIndex = 3;
+                            spawnNode.Nodes.Add("下一步消失").ImageIndex = 3;
                     }
                 }
 
-                var killsNode = stepNode.Nodes.Add("Kills");
+                var killsNode = stepNode.Nodes.Add("击杀");
                 var killTargets = AaDb.DbTowerDefProgKillTargets.Values.Where(x => x.TowerDefProgId == step.Id);
                 if (killTargets.Any())
                 {

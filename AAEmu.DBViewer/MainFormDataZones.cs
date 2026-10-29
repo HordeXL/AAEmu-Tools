@@ -287,7 +287,7 @@ namespace AAEmu.DBViewer
                 // From Zones
                 lZoneID.Text = zone.Id.ToString();
                 if (zone.Closed)
-                    lZoneDisplayName.Text = zone.DisplayTextLocalized + " (closed)";
+                    lZoneDisplayName.Text = zone.DisplayTextLocalized + "（已关闭）";
                 else
                     lZoneDisplayName.Text = zone.DisplayTextLocalized;
                 lZoneName.Text = zone.Name;
@@ -374,7 +374,7 @@ namespace AAEmu.DBViewer
                             }
                             else
                             {
-                                bannedInfo += tag.Id + " - [Unknown Tag]\r\n";
+                                bannedInfo += b.Value.TagId + " - [未知标签]\r\n";
                             }
                         }
                     }
@@ -392,7 +392,7 @@ namespace AAEmu.DBViewer
                         labelZoneGroupRestrictions.Text = "(" + bannedTagsCount.ToString() + " 限制条件)";
                         labelZoneGroupRestrictions.ForeColor = System.Drawing.Color.Red;
                         labelZoneGroupRestrictions.Tag = zg.Id;
-                        mainFormToolTip.ToolTipTitle = "Banned ZoneGroup Tags";
+                        mainFormToolTip.ToolTipTitle = "禁用的区域组标签";
                         mainFormToolTip.SetToolTip(labelZoneGroupRestrictions, bannedInfo);
                     }
 
@@ -428,7 +428,7 @@ namespace AAEmu.DBViewer
                 if (inst != null)
                     lZoneInstance.Text = inst.WorldName;
                 else
-                    lZoneInstance.Text = "<unknown>";
+                    lZoneInstance.Text = "<未知>";
 
                 /*
                 // It doesn't seem like there is any zone that exists in multiple instances
@@ -445,7 +445,7 @@ namespace AAEmu.DBViewer
                         }
                 }
                 if (instances == string.Empty)
-                    instances = "<unknown>";
+                    instances = "<未知>";
                 lZoneInstance.Text = instances;
                 */
 
@@ -454,13 +454,13 @@ namespace AAEmu.DBViewer
             else
             {
                 lZoneID.Text = "";
-                lZoneDisplayName.Text = "<none>";
-                lZoneName.Text = "<none>";
+                lZoneDisplayName.Text = "<无>";
+                lZoneName.Text = "<无>";
                 lZoneKey.Text = "";
                 lZoneGroupID.Text = "";
                 lZoneFactionID.Text = "";
                 btnFindTransferPathsInZone.Tag = 0;
-                lZoneInstance.Text = "<none>";
+                lZoneInstance.Text = "<无>";
 
                 blank_world_groups = true;
                 blank_zone_groups = true;
@@ -469,8 +469,8 @@ namespace AAEmu.DBViewer
             if (blank_zone_groups)
             {
                 // blank stuff
-                lZoneGroupsDisplayName.Text = "<none>";
-                lZoneGroupsName.Text = "<none>";
+                lZoneGroupsDisplayName.Text = "<无>";
+                lZoneGroupsName.Text = "<无>";
                 btnFindNPCsInZone.Tag = null;
                 btnFindNPCsInZone.Enabled = false;
                 lZoneGroupsSizePos.Text = "";
@@ -490,7 +490,7 @@ namespace AAEmu.DBViewer
 
             if (blank_world_groups)
             {
-                lWorldGroupName.Text = "<none>";
+                lWorldGroupName.Text = "<无>";
                 lWorldGroupSizeAndPos.Text = "";
                 lWorldGroupImageSizeAndPos.Text = "";
                 lWorldGroupImageMap.Text = "";
@@ -716,12 +716,12 @@ namespace AAEmu.DBViewer
                                         if (npc_spawner_npcs.Count > 0)
                                         {
                                             if (npc_spawner_npcs.Count == 1)
-                                                row.Cells[6].Value = string.Format("Used by 1 spawner, {0}",
+                                                row.Cells[6].Value = string.Format("被 1 个刷新点使用：{0}",
                                                     npc_spawner_npcs[0].NpcSpawnerId);
                                             else
                                             {
                                                 var ids = npc_spawner_npcs.Select(a => a.NpcSpawnerId).ToList();
-                                                row.Cells[6].Value = string.Format("Used by {0} spawners, {1}",
+                                                row.Cells[6].Value = string.Format("被 {0} 个刷新点使用：{1}",
                                                     ids.Count,
                                                     string.Join(", ", ids));
                                             }
@@ -730,7 +730,7 @@ namespace AAEmu.DBViewer
                                             row.Cells[6].Value = string.Format("{0} , {1} = ({2})", npc.x, npc.y,
                                                 npc.AsSextant());
                                         else
-                                            row.Cells[6].Value = npc.count.ToString() + " instances in zone";
+                                            row.Cells[6].Value = npc.count.ToString() + " 个实例位于此区域";
 
                                         c++;
                                         if ((c % 25) == 0)
@@ -1023,7 +1023,7 @@ namespace AAEmu.DBViewer
                     {
                         using (var loading = new LoadingForm())
                         {
-                            loading.ShowInfo("正在加载 " + doodadList.Count.ToString() + " 个Doodads");
+                            loading.ShowInfo("正在加载 " + doodadList.Count.ToString() + " 个装饰物");
                             loading.Show();
 
                             // Add to NPC list

@@ -13,6 +13,43 @@ namespace AAEmu.DBEditor.forms.client
 {
     public partial class ItemsForm : Form
     {
+        private static string ItemImplementName(ItemImplement impl) => impl switch
+        {
+            ItemImplement.Misc => "杂项",
+            ItemImplement.Weapon => "武器",
+            ItemImplement.Armor => "护甲",
+            ItemImplement.Body => "身体",
+            ItemImplement.Bag => "背包",
+            ItemImplement.Housing => "房屋",
+            ItemImplement.HousingDecoration => "房屋装饰",
+            ItemImplement.Tool => "工具",
+            ItemImplement.SummonSlave => "召唤物",
+            ItemImplement.SpawnDoodad => "生成装饰物",
+            ItemImplement.AcceptQuest => "接受任务",
+            ItemImplement.SummonMate => "召唤宠物",
+            ItemImplement.Recipe => "配方",
+            ItemImplement.Crafting => "制作",
+            ItemImplement.Portal => "传送门",
+            ItemImplement.EnchantingGem => "附魔宝石",
+            ItemImplement.ReportCrime => "举报犯罪",
+            ItemImplement.LogicDoodad => "逻辑装饰物",
+            ItemImplement.HasUcc => "拥有 UCC",
+            ItemImplement.OpenEmblemUi => "打开纹章界面",
+            ItemImplement.Shipyard => "船坞",
+            ItemImplement.Socket => "镶嵌",
+            ItemImplement.Backpack => "背囊",
+            ItemImplement.OpenPaper => "打开纸张",
+            ItemImplement.Accessory => "饰品",
+            ItemImplement.Treasure => "宝藏",
+            ItemImplement.MusicSheet => "乐谱",
+            ItemImplement.Dyeing => "染色",
+            ItemImplement.SlaveEquipment => "召唤物装备",
+            ItemImplement.GradeEnchantingSupport => "品级附魔支持",
+            ItemImplement.MateArmor => "宠物护甲",
+            ItemImplement.Location => "位置",
+            _ => impl.ToString(),
+        };
+
         public bool IsSelectionDialog { get; set; }
         public Item SelectedItem { get; set; }
 
@@ -105,7 +142,7 @@ namespace AAEmu.DBEditor.forms.client
                     lvItems.Items.Add(newItem);
                     if (lvItems.Items.Count > 500)
                     {
-                        MessageBox.Show($"列表已截断, 仅显示500项");
+                        MessageBox.Show("列表已截断，仅显示 500 项。");
                         break;
                     }
                 }
@@ -170,7 +207,7 @@ namespace AAEmu.DBEditor.forms.client
             else
             if ((item.LevelRequirement > 0) && (item.LevelLimit <= 0))
             {
-                lItemRequires.Text = item.LevelRequirement.ToString() + " ~ MaxLv";
+                lItemRequires.Text = item.LevelRequirement.ToString() + " ~ 最高等级";
             }
             else
             if ((item.LevelRequirement <= 0) && (item.LevelLimit > 0))
@@ -209,7 +246,7 @@ namespace AAEmu.DBEditor.forms.client
             cbFilterImplement.SelectedIndex = 0;
             foreach (var impl in Enum.GetValues(typeof(ItemImplement)))
             {
-                cbFilterImplement.Items.Add($"{impl} ({(int)impl})");
+                cbFilterImplement.Items.Add($"{ItemImplementName((ItemImplement)impl)} ({(int)impl})");
             }
 
             cbFilterCategory.Items.Clear();

@@ -202,7 +202,7 @@
             // lCharacterName
             // 
             lCharacterName.AutoSize = true;
-            lCharacterName.Font = new System.Drawing.Font("SegoeUI动态字体", 9F, System.Drawing.FontStyle.Bold);
+            lCharacterName.Font = new System.Drawing.Font("Segoe UI Variable Text", 9F, System.Drawing.FontStyle.Bold);
             lCharacterName.Location = new System.Drawing.Point(338, 21);
             lCharacterName.Name = "lCharacterName";
             lCharacterName.Size = new System.Drawing.Size(53, 16);

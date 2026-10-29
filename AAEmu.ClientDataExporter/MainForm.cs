@@ -49,7 +49,7 @@ namespace AAEmu.ClientDataExporter
             if (clientFolderDlg.ShowDialog() == DialogResult.OK)
             {
                 Application.UseWaitCursor = true;
-                LClientLocation.Text = "<loading>";
+                LClientLocation.Text = "<加载中>";
                 LClientLocation.Update();
                 if (pak != null)
                     pak.ClosePak();
@@ -68,7 +68,7 @@ namespace AAEmu.ClientDataExporter
             var qsd = new List<QuestSphereEntry>();
             var sl = new List<string>();
 
-            LQuestSphereData.Text = "<searching for data>";
+            LQuestSphereData.Text = "<正在搜索数据>";
             LQuestSphereData.Update();
 
             // Find all related files and concat them into a giant stringlist
@@ -154,7 +154,7 @@ namespace AAEmu.ClientDataExporter
             }
 
             var json = JsonConvert.SerializeObject(qsd.ToArray(), Formatting.Indented);
-            LQuestSphereData.Text = "<added " + qsd.Count.ToString() + " entries>";
+            LQuestSphereData.Text = "<已添加 " + qsd.Count.ToString() + " 条>";
             LQuestSphereData.Update();
 
             exportFileDlg.FileName = "quest_sign_spheres.json";
@@ -168,7 +168,7 @@ namespace AAEmu.ClientDataExporter
             if ((pak == null) || (!pak.IsOpen))
                 return;
 
-            lMissionXml.Text = "<searching for data>";
+            lMissionXml.Text = "<正在搜索数据>";
             lMissionXml.Update();
 
             // Find all related files and concat them into a giant stringlist
@@ -180,7 +180,7 @@ namespace AAEmu.ClientDataExporter
                     // Read/Parse XML data here
                 }
             }
-            lMissionXml.Text = "<done>";
+            lMissionXml.Text = "<完成>";
         }
     }
 }

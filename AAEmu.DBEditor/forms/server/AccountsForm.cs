@@ -213,7 +213,7 @@ namespace AAEmu.DBEditor.forms.server
             pbCharacter.Image = ilRaces.Images[iconId];
             lCharacterName.Text = c.Name + (c.Deleted > 0 ? " (已经删除)" : "");
             // ReSharper disable once LocalizableElement
-            lLevel.Text = $"{Data.Server.GetText("ui_texts", "text", 1097, "<level>")} {c.Level}  {c.GetRaceName()} {c.GetGenderName()}";
+            lLevel.Text = $"{Data.Server.GetText("ui_texts", "text", 1097, "<等级>")} {c.Level}  {c.GetRaceName()} {c.GetGenderName()}";
             // ReSharper disable once LocalizableElement
             //lMoney.Text = $"{AaTextHelper.CopperToString(c.Money)} on player, {AaTextHelper.CopperToString(c.Money2)} in warehouse";
             lMoney.Text = $"背包 {AaTextHelper.CopperToString(c.Money)}, 仓库 {AaTextHelper.CopperToString(c.Money2)}";
@@ -302,11 +302,11 @@ namespace AAEmu.DBEditor.forms.server
 
             if (Data.MySqlDb.Game.Characters.Any(x => x.AccountId == SelectedAccount.Id))
             {
-                MessageBox.Show($"账户下有角色时不可删除!");
+                MessageBox.Show($"账户下有角色时不可删除！");
                 return;
             }
 
-            if (MessageBox.Show($"确定要删除用户吗 {SelectedAccount.Username} ({SelectedAccount.Id})", "删除用户", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (MessageBox.Show($"确定要删除用户 {SelectedAccount.Username} ({SelectedAccount.Id}) 吗？", "删除用户", MessageBoxButtons.YesNo) != DialogResult.Yes)
                 return;
 
             try

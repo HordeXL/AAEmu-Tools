@@ -30,12 +30,12 @@ namespace AAEmu.PassGen
         {
             Console.WriteLine("AAEmu.PassGen");
             Console.WriteLine("--------------");
-            Console.WriteLine("此工具可用于帮助生成MySQL数据库的哈希用户密码.");
-            Console.WriteLine("它仅用于AAEmu服务器的默认实现.");
-            Console.WriteLine("如果你想认真地使用密码，最好实现");
-            Console.WriteLine("你自己的密码哈希对数.");
+            Console.WriteLine("此工具可用于生成 MySQL 数据库的用户密码哈希。");
+            Console.WriteLine("仅适用于 AAEmu 服务器的默认实现。");
+            Console.WriteLine("如果要在正式环境中使用密码，建议实现");
+            Console.WriteLine("你自己的密码哈希算法。");
             Console.WriteLine();
-            Console.WriteLine("将密码留空以生成随机密码.");
+            Console.WriteLine("将密码留空可生成随机密码。");
             Console.WriteLine();
             Console.Write("密码: ");
             var pass = Console.ReadLine();
@@ -43,7 +43,7 @@ namespace AAEmu.PassGen
             {
                 pass = RandomPass(16);
                 Console.WriteLine();
-                Console.WriteLine("生成的密码: {0}", pass);
+                Console.WriteLine("生成的密码：{0}", pass);
                 Console.WriteLine();
             }
             byte[] passBytes = Encoding.UTF8.GetBytes(pass);
@@ -51,12 +51,12 @@ namespace AAEmu.PassGen
             {
                 var hash = sha.ComputeHash(passBytes);
                 var passHash = Convert.ToBase64String(hash);
-                Console.WriteLine("Hashed: {0}", passHash);
+                Console.WriteLine("哈希值：{0}", passHash);
             }
             Console.WriteLine();
-            Console.Write("提示：您可以将鼠标拖到结果上，然后按ENTER键将文本复制到剪贴板");
+            Console.Write("提示：可以用鼠标选中结果，然后按 Enter 键复制到剪贴板");
             Console.WriteLine();
-            Console.Write("Press a key to close ...");
+            Console.Write("按任意键关闭 ...");
             Console.ReadKey();
         }
     }

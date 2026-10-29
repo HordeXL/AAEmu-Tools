@@ -1080,7 +1080,7 @@ public partial class MainForm
             {
                 if (AaDb.DbAiFiles.TryGetValue(npc.AiFileId, out var aiFile))
                 {
-                    var aiNode = tvNPCInfo.Nodes.Add("AI: " + aiFile.Name);
+                    var aiNode = tvNPCInfo.Nodes.Add("AI：" + aiFile.Name);
                     aiNode.ForeColor = Color.White;
                     // aiNode.ImageIndex = 3;
                     // aiNode.SelectedImageIndex = aiNode.ImageIndex;
@@ -1096,7 +1096,7 @@ public partial class MainForm
 
             #region spawners
             // Spawners
-            var spawnersNode = tvNPCInfo.Nodes.Add("Spawners");
+            var spawnersNode = tvNPCInfo.Nodes.Add("刷新点列表");
             spawnersNode.ImageIndex = 1;
             spawnersNode.SelectedImageIndex = 1;
             var spawners = AaDb.DbNpcSpawnerNpcs.Values.Where(x => x.MemberType == "Npc" && x.MemberId == npc.Id).ToList();
@@ -1104,12 +1104,12 @@ public partial class MainForm
             {
                 if (AaDb.DbNpcSpawners.TryGetValue(npcSpawner.NpcSpawnerId, out var spawner))
                 {
-                    var spawnerNode = spawnersNode.Nodes.Add($"ID: {npcSpawner.NpcSpawnerId} - {(spawner.NpcSpawnerCategoryId == 0 ? "Normal" : "AutoCreated")} {(spawner.ActivationState ? " (ActivationState)" : string.Empty)}");
+                    var spawnerNode = spawnersNode.Nodes.Add($"ID：{npcSpawner.NpcSpawnerId} - {(spawner.NpcSpawnerCategoryId == 0 ? "普通" : "自动创建")} {(spawner.ActivationState ? " (激活状态)" : string.Empty)}");
                     
                     var npcsToSpawn = AaDb.DbNpcSpawnerNpcs.Values.Where(x => x.NpcSpawnerId == spawner.Id).ToList();
                     if (npcsToSpawn.Any())
                     {
-                        var npcSpawnNode = spawnerNode.Nodes.Add("Spawns");
+                        var npcSpawnNode = spawnerNode.Nodes.Add("刷新项");
                         foreach (var npcSpawnerNpc in npcsToSpawn)
                         {
                             AddCustomPropertyNode("npc_id", npcSpawnerNpc.MemberId.ToString(), false, npcSpawnNode);
@@ -1117,48 +1117,48 @@ public partial class MainForm
                     }
 
                     if (!string.IsNullOrWhiteSpace(spawner.Name))
-                        spawnerNode.Nodes.Add($"Name: {spawner.Name}");
+                        spawnerNode.Nodes.Add($"名称：{spawner.Name}");
                     if (!string.IsNullOrWhiteSpace(spawner.Comment))
-                        spawnerNode.Nodes.Add($"Comment: {spawner.Comment}");
+                        spawnerNode.Nodes.Add($"备注：{spawner.Comment}");
 
                     // spawnerNode.Nodes.Add($"Activation State: {spawner.activation_state}");
-                    spawnerNode.Nodes.Add($"Save Indun: {spawner.SaveIndun}");
+                    spawnerNode.Nodes.Add($"保存副本：{spawner.SaveIndun}");
 
                     if (Math.Abs(spawner.SpawnDelayMin - spawner.SpawnDelayMax) < float.Epsilon)
                     {
-                        spawnerNode.Nodes.Add($"Spawn Delay: {MSToString((long)spawner.SpawnDelayMin * 1000, true)}");
+                        spawnerNode.Nodes.Add($"刷新延迟：{MSToString((long)spawner.SpawnDelayMin * 1000, true)}");
                     }
                     else
                     {
-                        spawnerNode.Nodes.Add($"Spawn Delay Min: {MSToString((long)spawner.SpawnDelayMin * 1000, true)}");
-                        spawnerNode.Nodes.Add($"Spawn Delay Max: {MSToString((long)spawner.SpawnDelayMax * 1000, true)}");
+                        spawnerNode.Nodes.Add($"最小刷新延迟：{MSToString((long)spawner.SpawnDelayMin * 1000, true)}");
+                        spawnerNode.Nodes.Add($"最大刷新延迟：{MSToString((long)spawner.SpawnDelayMax * 1000, true)}");
                     }
 
                     if (spawner.MinPopulation != 0)
-                        spawnerNode.Nodes.Add($"Min Population: {spawner.MinPopulation}");
+                        spawnerNode.Nodes.Add($"最小数量：{spawner.MinPopulation}");
                     if (spawner.MaxPopulation != 1)
-                        spawnerNode.Nodes.Add($"Max Population: {spawner.MaxPopulation}");
+                        spawnerNode.Nodes.Add($"最大数量：{spawner.MaxPopulation}");
                     if (spawner.StartTime > 0)
-                        spawnerNode.Nodes.Add($"Start Time: {spawner.StartTime}");
+                        spawnerNode.Nodes.Add($"开始时间：{spawner.StartTime}");
                     if (spawner.EndTime > 0)
-                        spawnerNode.Nodes.Add($"End Time: {spawner.EndTime}");
+                        spawnerNode.Nodes.Add($"结束时间：{spawner.EndTime}");
                     if (spawner.TestRadiusNpc > 0)
-                        spawnerNode.Nodes.Add($"Test Radius NPC: {spawner.TestRadiusNpc}");
+                        spawnerNode.Nodes.Add($"NPC 测试半径：{spawner.TestRadiusNpc}");
                     if (spawner.TestRadiusPc > 0)
-                        spawnerNode.Nodes.Add($"Test Radius PC: {spawner.TestRadiusPc}");
+                        spawnerNode.Nodes.Add($"玩家测试半径：{spawner.TestRadiusPc}");
                     if (spawner.SuspendSpawnCount > 0)
-                        spawnerNode.Nodes.Add($"Suspend Spawn Count: {spawner.SuspendSpawnCount}");
+                        spawnerNode.Nodes.Add($"暂停刷新数量：{spawner.SuspendSpawnCount}");
                 }
                 else
                 {
-                    spawnersNode.Nodes.Add("NOT found!:" + npcSpawner.NpcSpawnerId);
+                    spawnersNode.Nodes.Add("未找到：" + npcSpawner.NpcSpawnerId);
                 }
                 spawnersNode.Expand();
             }
             #endregion
 
             #region interactions
-            var interactionNode = tvNPCInfo.Nodes.Add("Interaction");
+            var interactionNode = tvNPCInfo.Nodes.Add("交互");
             interactionNode.ImageIndex = 2;
             interactionNode.SelectedImageIndex = 2;
             if (npc.NpcInteractionSetId > 0)
@@ -1170,45 +1170,45 @@ public partial class MainForm
                 }
             }
             if (npc.Auctioneer)
-                interactionNode.Nodes.Add("Auction");
+                interactionNode.Nodes.Add("拍卖行");
             if (npc.Banker)
-                interactionNode.Nodes.Add("Warehouse");
+                interactionNode.Nodes.Add("仓库");
             if (npc.Blacksmith)
-                interactionNode.Nodes.Add("Blacksmith");
+                interactionNode.Nodes.Add("铁匠");
             if (npc.Expedition)
-                interactionNode.Nodes.Add("Guild Manager");
+                interactionNode.Nodes.Add("公会管理员");
             if (npc.Merchant)
             {
-                var merchantNode = interactionNode.Nodes.Add("Merchant");
+                var merchantNode = interactionNode.Nodes.Add("商人");
                 var shops = AaDb.DbMerchants.Values.Where(n => n.NpcId == npc.Id);
                 foreach (var shop in shops)
                 {
-                    var shopNode = merchantNode.Nodes.Add($"Merchant Pack: {shop.MerchantPackId}");
+                    var shopNode = merchantNode.Nodes.Add($"商人包：{shop.MerchantPackId}");
                     var shopItems = AaDb.DbMerchantGoods.Values.Where(m => m.MerchantPackId == shop.MerchantPackId);
                     foreach (var shopItem in shopItems)
                     {
                         var itemNode = AddCustomPropertyNode("item_id", shopItem.ItemId.ToString(), false, shopNode);
                         if (shopItem.GradeId > 0)
-                            itemNode.Text += $" - {(AaDb.DbItemGrades.GetValueOrDefault(shopItem.GradeId)?.NameLocalized ?? $"grade {shopItem.GradeId}")}";
+                            itemNode.Text += $" - {(AaDb.DbItemGrades.GetValueOrDefault(shopItem.GradeId)?.NameLocalized ?? $"品级 {shopItem.GradeId}")}";
                     }
 
                 }
             }
 
             if (npc.Priest)
-                interactionNode.Nodes.Add("Priest");
+                interactionNode.Nodes.Add("牧师");
             if (npc.Repairman)
-                interactionNode.Nodes.Add("Repairs");
+                interactionNode.Nodes.Add("修理");
             if (npc.SkillTrainer)
-                interactionNode.Nodes.Add("Skill Manager");
+                interactionNode.Nodes.Add("技能管理者");
             if (npc.Specialty)
-                interactionNode.Nodes.Add("Speciality");
+                interactionNode.Nodes.Add("特产");
             if (npc.Stabler)
-                interactionNode.Nodes.Add("Stablemaster");
+                interactionNode.Nodes.Add("马厩管理员");
             if (npc.Teleporter)
-                interactionNode.Nodes.Add("Teleporter");
+                interactionNode.Nodes.Add("传送员");
             if (npc.Trader)
-                interactionNode.Nodes.Add("Trader");
+                interactionNode.Nodes.Add("贸易商");
 
             if (interactionNode.Nodes.Count > 0)
                 interactionNode.Expand();
@@ -1221,7 +1221,7 @@ public partial class MainForm
             // Base Skill
             if (npc.BaseSkillId > 0)
             {
-                var baseSkillNode = tvNPCInfo.Nodes.Add("Base Skill");
+                var baseSkillNode = tvNPCInfo.Nodes.Add("基础技能");
                 baseSkillNode.ImageIndex = 2;
                 baseSkillNode.SelectedImageIndex = 2;
                 AddCustomPropertyNode("skill_id", npc.BaseSkillId.ToString(), false, baseSkillNode);
@@ -1231,7 +1231,7 @@ public partial class MainForm
             }
 
             // NP Skills
-            var npSkillsNode = tvNPCInfo.Nodes.Add("NP Skills");
+            var npSkillsNode = tvNPCInfo.Nodes.Add("NP 技能");
             npSkillsNode.ImageIndex = 2;
             npSkillsNode.SelectedImageIndex = 2;
             var npSkills = AaDb.DbNpSkills.Values.Where(x => x.OwnerId == npc.Id && x.OwnerType == "Npc").ToList();
@@ -1247,7 +1247,7 @@ public partial class MainForm
             #endregion
 
             #region initial_buffs
-            var initialBuffsNode = tvNPCInfo.Nodes.Add("Initial Buffs");
+            var initialBuffsNode = tvNPCInfo.Nodes.Add("初始增益");
             initialBuffsNode.ImageIndex = 2;
             initialBuffsNode.SelectedImageIndex = 2;
             var initialBuffs = AaDb.DbNpcInitialBuffs.Values.Where(x => x.NpcId == npc.Id).ToList();
@@ -1262,7 +1262,7 @@ public partial class MainForm
             #endregion
 
             #region passive_buffs
-            var passiveBuffsNode = tvNPCInfo.Nodes.Add("Passive Buffs");
+            var passiveBuffsNode = tvNPCInfo.Nodes.Add("被动增益");
             passiveBuffsNode.ImageIndex = 2;
             passiveBuffsNode.SelectedImageIndex = 2;
 
@@ -1316,7 +1316,7 @@ public partial class MainForm
             var allQuestsStartersActsForNpcs = AaDb.DbQuestActConAcceptNpc.Values.Where(x => x.NpcId == npc.Id).ToList();
             if (allQuestsStartersActsForNpcs.Any())
             {
-                var questNode = tvNPCInfo.Nodes.Add("Quests");
+                var questNode = tvNPCInfo.Nodes.Add("任务");
                 questNode.ImageIndex = 2;
                 questNode.SelectedImageIndex = 2;
                 foreach (var actConAcceptNpc in allQuestsStartersActsForNpcs)
@@ -1352,7 +1352,7 @@ public partial class MainForm
             btnShowNpcLoot.Enabled = AaDb.DbLootPackDroppingNpc.Any(pl => pl.Value.NpcId == npc.Id);
             if (btnShowNpcLoot.Enabled)
             {
-                var lootNode = tvNPCInfo.Nodes.Add("Loot");
+                var lootNode = tvNPCInfo.Nodes.Add("掉落");
                 lootNode.ImageIndex = 2;
                 lootNode.SelectedImageIndex = 2;
 
@@ -1381,7 +1381,7 @@ public partial class MainForm
                     if (!lootPacks.Any())
                     {
                         // Pack does not exist
-                        lootNode.Nodes.Add($"Missing loot_pack_id {pack.LootPackId}");
+                        lootNode.Nodes.Add($"缺少 loot_pack_id：{pack.LootPackId}");
                         continue;
                     }
 
@@ -1422,7 +1422,7 @@ public partial class MainForm
                     if (totalWeight <= 0)
                         totalWeight = 1;
 
-                    groupNode.Text += $@" (Weight {totalWeight})";
+                    groupNode.Text += $@"（权重 {totalWeight}）";
 
                     foreach (var loot in lootGroup.Value)
                     {
@@ -1468,10 +1468,10 @@ public partial class MainForm
             var eventMainSpawns = AaDb.DbTowerDefs.Values.Where(x => spawners.Select(s => s.NpcSpawnerId).Contains(x.TargetNpcSpawnerId)).ToList();
             if (eventSpawns.Any() || eventMainSpawns.Any())
             {
-                var eventNode = tvNPCInfo.Nodes.Add("Event Spawns");
+                var eventNode = tvNPCInfo.Nodes.Add("活动刷新");
                 foreach (var eventMainSpawn in eventMainSpawns)
                 {
-                    eventNode.Nodes.Add($"Spawner: {eventMainSpawn.TargetNpcSpawnerId}, Event: {eventMainSpawn.TitleMsgLocalized}");
+                    eventNode.Nodes.Add($"刷新点：{eventMainSpawn.TargetNpcSpawnerId}，活动：{eventMainSpawn.TitleMsgLocalized}");
                 }
 
                 foreach (var eventSpawn in eventSpawns)
@@ -1484,12 +1484,12 @@ public partial class MainForm
                         }
                         else
                         {
-                            eventNode.Nodes.Add($"Unknown TowerDef: {eventProg.TowerDefId}, Prog: {eventSpawn.TowerDefProgId}");
+                            eventNode.Nodes.Add($"未知塔防：{eventProg.TowerDefId}，进度：{eventSpawn.TowerDefProgId}");
                         }
                     }
                     else
                     {
-                        eventNode.Nodes.Add($"Unknown TowerDefProg: {eventSpawn.TowerDefProgId}");
+                        eventNode.Nodes.Add($"未知塔防进度：{eventSpawn.TowerDefProgId}");
                     }
 
                 }
@@ -1499,7 +1499,7 @@ public partial class MainForm
             var eventMainKills = AaDb.DbTowerDefs.Values.Where(x => x.KillNpcId == npc.Id).ToList();
             if (eventKills.Any() || eventMainKills.Any())
             {
-                var killNode = tvNPCInfo.Nodes.Add("Event Kills");
+                var killNode = tvNPCInfo.Nodes.Add("活动击杀");
                 foreach (var eventMainKill in eventMainKills)
                 {
                     killNode.Nodes.Add($"{eventMainKill.KillNpcCount} x {eventMainKill.TitleMsgLocalized}");
@@ -1515,12 +1515,12 @@ public partial class MainForm
                         }
                         else
                         {
-                            killNode.Nodes.Add($"Unknown TowerDef: {eventProg.TowerDefId}, Prog: {eventKill.TowerDefProgId}");
+                            killNode.Nodes.Add($"未知塔防：{eventProg.TowerDefId}，进度：{eventKill.TowerDefProgId}");
                         }
                     }
                     else
                     {
-                        killNode.Nodes.Add($"Unknown TowerDefProg: {eventKill.TowerDefProgId}");
+                        killNode.Nodes.Add($"未知塔防进度：{eventKill.TowerDefProgId}");
                     }
 
                 }
@@ -1531,14 +1531,14 @@ public partial class MainForm
 
             if (npc.TotalCustomId > 0 && npc.NoApplyTotalCustom == false)
             {
-                var looksNode = tvNPCInfo.Nodes.Add($"Total Custom: {npc.TotalCustomId}");
+                var looksNode = tvNPCInfo.Nodes.Add($"自定义外观总数：{npc.TotalCustomId}");
                 if (AaDb.DbTotalCharacterCustoms.TryGetValue(npc.TotalCustomId, out var tcc))
                 {
                     AddCustomPropertyNode("name", tcc.Name, false, looksNode);
                 }
                 else
                 {
-                    looksNode.Nodes.Add($"Id not found");
+                    looksNode.Nodes.Add("未找到 ID");
                 }
             }
             #endregion
@@ -1626,8 +1626,8 @@ public partial class MainForm
                 if (c >= 250)
                 {
                     MessageBox.Show(
-                        "The results were cut off at " + c.ToString() + " doodads, please refine your search !",
-                        "Too many entries", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "搜索结果已截断（仅显示 " + c.ToString() + " 个装饰物），请优化搜索条件！",
+                        "条目过多", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 }
             }
@@ -1711,7 +1711,7 @@ public partial class MainForm
             }
             else
             {
-                lDoodadGroupName.Text = @"<none>";
+                lDoodadGroupName.Text = @"<无>";
                 lDoodadGroupIsExport.Text = string.Empty;
                 lDoodadGroupGuardOnFieldTime.Text = string.Empty;
                 lDoodadGroupRemovedByHouse.Text = string.Empty;
@@ -1766,7 +1766,7 @@ public partial class MainForm
                     foreach (var dpf in AaDb.DbDoodadPhaseFuncs)
                         if (dpf.Value.DoodadFuncGroupId == dFuncGroup.Id)
                         {
-                            var phaseNode = groupNode.Nodes.Add("PhaseFuncs: " + dpf.Value.ActualFuncType +
+                            var phaseNode = groupNode.Nodes.Add("阶段函数：" + dpf.Value.ActualFuncType +
                                                                 " ( " +
                                                                 dpf.Value.ActualFuncId + " )");
                             phaseNode.ForeColor = Color.Yellow;
@@ -1825,7 +1825,7 @@ public partial class MainForm
                             */
                         }
 
-                        funcsNode.Nodes.Add("<=== details ===>").ForeColor = Color.Gray;
+                        funcsNode.Nodes.Add("<=== 详细信息 ===>").ForeColor = Color.Gray;
                         foreach (var fields in fieldsList)
                         {
                             foreach (var fl in fields)
@@ -1860,8 +1860,8 @@ public partial class MainForm
         {
             // blank
             lDoodadID.Text = @"0";
-            lDoodadName.Text = @"<none>";
-            lDoodadModel.Text = @"<none>";
+            lDoodadName.Text = @"<无>";
+            lDoodadModel.Text = @"<无>";
             lDoodadOnceOneMan.Text = string.Empty;
             lDoodadOnceOneInteraction.Text = string.Empty;
             lDoodadShowName.Text = string.Empty;
@@ -1895,7 +1895,7 @@ public partial class MainForm
             lDoodadNoCollision.Text = string.Empty;
             lDoodadRestrictZoneID.Text = string.Empty;
 
-            lDoodadGroupName.Text = @"<none>";
+            lDoodadGroupName.Text = @"<无>";
             lDoodadGroupIsExport.Text = string.Empty;
             lDoodadGroupGuardOnFieldTime.Text = string.Empty;
             lDoodadGroupRemovedByHouse.Text = string.Empty;
@@ -1942,7 +1942,7 @@ public partial class MainForm
         {
             // blank
             lDoodadFuncGroupID.Text = @"0";
-            lDoodadFuncGroupModel.Text = @"<none>";
+            lDoodadFuncGroupModel.Text = @"<无>";
             lDoodadFuncGroupKindID.Text = string.Empty;
             lDoodadFuncGroupPhaseMsg.Text = string.Empty;
             lDoodadFuncGroupSoundID.Text = string.Empty;
@@ -2019,8 +2019,8 @@ public partial class MainForm
                 if (c >= 250)
                 {
                     MessageBox.Show(
-                        "The results were cut off at " + c.ToString() + " items, please refine your search !",
-                        "Too many entries", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "搜索结果已截断（仅显示 " + c.ToString() + " 个物品），请优化搜索条件！",
+                        "条目过多", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
                 }
             }
@@ -2045,7 +2045,7 @@ public partial class MainForm
             var slavePassiveBuff = AaDb.DbSlavePassiveBuffs.Values.FirstOrDefault(x => x.OwnerType == "Slave" && x.OwnerId == slave.Id);
             if ((slavePassiveBuff != null) && AaDb.DbPassiveBuffs.TryGetValue(slavePassiveBuff.PassiveBuffId, out var passiveBuff))
             {
-                var passiveNode = tvSlaveInfo.Nodes.Add("Passive Buffs");
+                var passiveNode = tvSlaveInfo.Nodes.Add("被动增益");
                 AddCustomPropertyNode("buff_id", passiveBuff.BuffId.ToString(), false, passiveNode);
             }
 
@@ -2053,7 +2053,7 @@ public partial class MainForm
             var slaveInitialBuffs = AaDb.DbSlaveInitialBuffs.Values.Where(x => x.SlaveId == slave.Id).ToList();
             if (slaveInitialBuffs.Count > 0)
             {
-                var initialNode = tvSlaveInfo.Nodes.Add("Initial Buffs");
+                var initialNode = tvSlaveInfo.Nodes.Add("初始增益");
                 foreach (var initialBuff in slaveInitialBuffs)
                 {
                     AddCustomPropertyNode("buff_id", initialBuff.BuffId.ToString(), false, initialNode);
@@ -2064,7 +2064,7 @@ public partial class MainForm
             var slaveMountSkills = AaDb.DbSlaveMountSkills.Values.Where(x => x.SlaveId == slave.Id).ToList();
             if (slaveMountSkills.Count > 0)
             {
-                var skillNode = tvSlaveInfo.Nodes.Add("Skills");
+                var skillNode = tvSlaveInfo.Nodes.Add("技能");
                 foreach (var slaveMountSkill in slaveMountSkills)
                 {
                     if (!AaDb.DbMountSkills.TryGetValue(slaveMountSkill.MountSkillId, out var mountSkill))
@@ -2078,7 +2078,7 @@ public partial class MainForm
             var slaveDoodadBindings = AaDb.DbSlaveDoodadBindings.Values.Where(x => x.OwnerType == "Slave" && x.OwnerId == slave.Id).ToList();
             if ((slaveBindings.Count > 0) || (slaveDoodadBindings.Count > 0))
             {
-                var bindingNode = tvSlaveInfo.Nodes.Add("Bindings");
+                var bindingNode = tvSlaveInfo.Nodes.Add("绑定");
                 foreach (var slaveBinding in slaveBindings)
                 {
                     var n = AddCustomPropertyNode("slave_id", slaveBinding.SlaveId.ToString(), false, bindingNode);

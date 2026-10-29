@@ -1,0 +1,8 @@
+root = true
+
+# 源文件统一使用带 BOM 的 UTF-8，避免 Visual Studio / 旧工具把中文按 ANSI 读取。
+[*.cs]
+charset = utf-8-bom
+
+[*.resx]
+charset = utf-8-bom

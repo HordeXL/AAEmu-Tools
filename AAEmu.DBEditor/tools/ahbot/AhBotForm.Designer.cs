@@ -102,7 +102,7 @@
             lAhBotName.Name = "lAhBotName";
             lAhBotName.Size = new System.Drawing.Size(135, 15);
             lAhBotName.TabIndex = 2;
-            lAhBotName.Text = "<no character selected>";
+            lAhBotName.Text = "<未选择角色>";
             // 
             // btnPickAhCharacter
             // 
@@ -121,7 +121,7 @@
             lAhBotAccount.Name = "lAhBotAccount";
             lAhBotAccount.Size = new System.Drawing.Size(129, 15);
             lAhBotAccount.TabIndex = 4;
-            lAhBotAccount.Text = "<no account selected>";
+            lAhBotAccount.Text = "<未选择账户>";
             // 
             // label2
             // 
@@ -366,7 +366,7 @@
             lItemName.Name = "lItemName";
             lItemName.Size = new System.Drawing.Size(80, 15);
             lItemName.TabIndex = 2;
-            lItemName.Text = "<item name>";
+            lItemName.Text = "<物品名称>";
             // 
             // lItemId
             // 
@@ -375,7 +375,7 @@
             lItemId.Name = "lItemId";
             lItemId.Size = new System.Drawing.Size(60, 15);
             lItemId.TabIndex = 3;
-            lItemId.Text = "<item id>";
+            lItemId.Text = "<物品ID>";
             lItemId.TextChanged += lItemId_TextChanged;
             // 
             // lGrade
@@ -604,7 +604,7 @@
             ClientSize = new System.Drawing.Size(800, 422);
             Controls.Add(tcAhBot);
             Name = "AhBotForm";
-            Text = "Auction House Bot";
+            Text = "拍卖行机器人";
             FormClosing += AhBotForm_FormClosing;
             FormClosed += AhBotForm_FormClosed;
             Load += AhBotForm_Load;

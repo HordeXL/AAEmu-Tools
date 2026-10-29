@@ -24,7 +24,7 @@
       <Value Profile="(Default)">aaemu_login</Value>
     </Setting>
     <Setting Name="ClientLanguage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">en_us</Value>
+      <Value Profile="(Default)">zh_cn</Value>
     </Setting>
     <Setting Name="IsUpdated" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

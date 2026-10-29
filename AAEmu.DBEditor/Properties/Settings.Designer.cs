@@ -109,7 +109,7 @@ namespace AAEmu.DBEditor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en_us")]
+        [global::System.Configuration.DefaultSettingValueAttribute("zh_cn")]
         public string ClientLanguage {
             get {
                 return ((string)(this["ClientLanguage"]));

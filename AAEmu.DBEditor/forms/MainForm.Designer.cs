@@ -449,6 +449,7 @@ namespace AAEmu.DBEditor
             rbLocaleFr.Name = "rbLocaleFr";
             rbLocaleFr.Size = new System.Drawing.Size(50, 21);
             rbLocaleFr.TabIndex = 7;
+            rbLocaleFr.Tag = "fr";
             rbLocaleFr.Text = "法语";
             rbLocaleFr.UseVisualStyleBackColor = true;
             rbLocaleFr.CheckedChanged += rbLocale_CheckedChanged;
@@ -461,6 +462,7 @@ namespace AAEmu.DBEditor
             rbLocaleDe.Name = "rbLocaleDe";
             rbLocaleDe.Size = new System.Drawing.Size(50, 21);
             rbLocaleDe.TabIndex = 6;
+            rbLocaleDe.Tag = "de";
             rbLocaleDe.Text = "德语";
             rbLocaleDe.UseVisualStyleBackColor = true;
             rbLocaleDe.CheckedChanged += rbLocale_CheckedChanged;
@@ -473,6 +475,7 @@ namespace AAEmu.DBEditor
             rbLocaleJa.Name = "rbLocaleJa";
             rbLocaleJa.Size = new System.Drawing.Size(50, 21);
             rbLocaleJa.TabIndex = 5;
+            rbLocaleJa.Tag = "ja";
             rbLocaleJa.Text = "日语";
             rbLocaleJa.UseVisualStyleBackColor = true;
             rbLocaleJa.CheckedChanged += rbLocale_CheckedChanged;
@@ -485,6 +488,7 @@ namespace AAEmu.DBEditor
             rbLocaleZhTw.Name = "rbLocaleZhTw";
             rbLocaleZhTw.Size = new System.Drawing.Size(50, 21);
             rbLocaleZhTw.TabIndex = 4;
+            rbLocaleZhTw.Tag = "zh_tw";
             rbLocaleZhTw.Text = "繁中";
             rbLocaleZhTw.UseVisualStyleBackColor = true;
             rbLocaleZhTw.CheckedChanged += rbLocale_CheckedChanged;
@@ -497,6 +501,7 @@ namespace AAEmu.DBEditor
             rbLocaleZhCn.Name = "rbLocaleZhCn";
             rbLocaleZhCn.Size = new System.Drawing.Size(50, 21);
             rbLocaleZhCn.TabIndex = 3;
+            rbLocaleZhCn.Tag = "zh_cn";
             rbLocaleZhCn.Text = "简中";
             rbLocaleZhCn.UseVisualStyleBackColor = true;
             rbLocaleZhCn.CheckedChanged += rbLocale_CheckedChanged;
@@ -509,6 +514,7 @@ namespace AAEmu.DBEditor
             rbLocaleRu.Name = "rbLocaleRu";
             rbLocaleRu.Size = new System.Drawing.Size(50, 21);
             rbLocaleRu.TabIndex = 2;
+            rbLocaleRu.Tag = "ru";
             rbLocaleRu.Text = "俄语";
             rbLocaleRu.UseVisualStyleBackColor = true;
             rbLocaleRu.CheckedChanged += rbLocale_CheckedChanged;
@@ -520,6 +526,7 @@ namespace AAEmu.DBEditor
             rbLocaleKo.Name = "rbLocaleKo";
             rbLocaleKo.Size = new System.Drawing.Size(50, 21);
             rbLocaleKo.TabIndex = 1;
+            rbLocaleKo.Tag = "ko";
             rbLocaleKo.Text = "韩语";
             rbLocaleKo.UseVisualStyleBackColor = true;
             rbLocaleKo.CheckedChanged += rbLocale_CheckedChanged;
@@ -534,6 +541,7 @@ namespace AAEmu.DBEditor
             rbLocaleEnUs.Size = new System.Drawing.Size(50, 21);
             rbLocaleEnUs.TabIndex = 0;
             rbLocaleEnUs.TabStop = true;
+            rbLocaleEnUs.Tag = "en_us";
             rbLocaleEnUs.Text = "英语";
             rbLocaleEnUs.UseVisualStyleBackColor = true;
             rbLocaleEnUs.CheckedChanged += rbLocale_CheckedChanged;
